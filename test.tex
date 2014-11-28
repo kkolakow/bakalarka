@@ -623,7 +623,7 @@ Celkové množství běžících úloh ve stromu je zaznamenáno v \verb#r->cfs.
 
 \subsection{Aktualizace doby běhu úlohy (vruntime)}
 
-Vstupní funkci k aktualizaci vruntime je \verb#task_tick_fair()# volána z funkce \verb#scheduler_tick# (přes odkaz \verb#task\_tick()# z \verb#kernel/sched/core.c#). 
+Vstupní funkci k aktualizaci vruntime je \verb#task_tick_fair()# volána z funkce \verb#scheduler_tick# přes odkaz \verb#task_tick()# (z \verb#kernel/sched/core.c#). 
 
 %\begin{lstlisting} 
 %
