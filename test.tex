@@ -53,7 +53,7 @@ Normální úlohy, které známe z desktopů, žádné časové omezení nemají
 Z hlediska plánování procesů rozdělujeme na úlohy závislé na vstupně výstupních zařízeních (IO závislé) a na úlohy závislé na CPU. Některé úlohy tráví většinu času na CPU, na kterém dělají výpočty, jiné úlohy tráví hodně času tím, že čekají než se dokončí vstupní či výstupní operace, které jsou obvykle velmi pomalé. Operace I/O mohou čekat na vstup z klávesnice, disku nebo sítě. 
 Záleží na tom na co je systém určen. Na desktopových systémech se často setkáváme s úlohami, které jsou I/O závislé na výpočetních serverech jsou to nejčastěji úlohy CPU závislé. 
 
-Jelikož je Linux navržen tak, aby běžel na různých systémech, musí se umět vypořádat se všemi těmito úlohami. Úlohy, které běží dlouhou dobu, dokončí více práce na úkor odezvy systému. Jestliže naopak úloha běží krátkou dobu, systém může odpovědět rychleji na I/O požadavek, propustnost systému je nižší, protože v systému rostou režie plánovače na výměnu úloh. Plánovač proto musí hledat rovnováhu mezi odezvou a celkovou propustností systému. 
+Jelikož je Linux navržen tak, aby běžel na různých systémech, musí se umět vypořádat se všemi těmito úlohami. Úlohy, které běží dlouhou dobu, dokončí více práce na úkor odezvy systému. Jestliže naopak úloha běží krátkou dobu, systém může odpovědět rychleji na I/O požadavek, propustnost systému je nižší, protože v systému rostou režie plánovače na výměnu úloh. Plánovač musí proto hledat rovnováhu mezi odezvou a celkovou propustností systému. 
 
 V této práci se zaměříme pouze na úlohy závisle na CPU.
 
@@ -193,7 +193,7 @@ Dále voláme pick\_next\_task k výběru další vhodné úlohy, která bude sp
 \begin{verbatim}
 next = pick_next_task(rq, prev);
 \end{verbatim}
-Poté dojde k vyčištění dvou příznaků (proměnných) sloužícím k vyvolání funkce schedule(). Tyto příznaky jsou součástí task\_struct a jsou pravidelně kernelem kontrolovány. 
+Poté dojde k vyčištění dvou příznaků (proměnných) sloužícím k vyvolání funkce schedule(). Tyto příznaky jsou součástí \verb#task_struct# a jsou pravidelně kernelem kontrolovány. 
 \begin{verbatim}
 clear_tsk_need_resched(prev);
 clear_preempt_need_resched();
@@ -242,16 +242,16 @@ Funkce \verb#pick_next_task# je také implementována v \verb#kernel/sched/core.
 for_each_class(class) {
    p = class->pick_next_task(rq, prev);
 \end{verbatim}
-Jelikož je většina úloh obsluhována pomocí třídy fair\_sched\_class, je zkratka do této třídy implementována na hned začátku funkce pick\_next\_task().
+Jelikož je většina úloh obsluhována pomocí třídy \verb#fair_sched_class#, je zkratka do této třídy implementována na hned začátku funkce \verb#pick_next_task()#.
 \begin{verbatim}
 if (likely(prev->sched_class == class &&
    rq->nr_running == rq->cfs.h_nr_running)) {
 \end{verbatim}
-Takže schedule() zkontroluje jestli pick\_next\_task() našla novou úlohu nebo vzala úlohu, která již běžela předtím (z schedule()).
+Takže schedule() zkontroluje jestli \verb#pick_next_task()# našla novou úlohu nebo vzala úlohu, která již běžela předtím.
 \begin{verbatim}
 if (likely(prev != next)) {
 \end{verbatim}
-Jestliže našla úlohu, která běžela předtím nechá ji běžet dál. Jestliže plánovač vybere úlohu, která předtím neběžela, je volána volána funkce s samovysvětlujícím názvem context\_switch. V rámci context switche dochází k výměně stavu registrů, zásobníku a je přemapována paměť.
+Jestliže našla úlohu, která běžela předtím nechá ji běžet dál. Jestliže plánovač vybere úlohu, která předtím neběžela, je volána volána funkce s samovysvětlujícím názvem \verb#context_switch#. V rámci context switche dochází k výměně stavu registrů, zásobníku a je přemapována paměť.
 \begin{verbatim}
 context_switch(rq, prev, next); /* unlocks the rq */
 \end{verbatim}
@@ -532,7 +532,7 @@ CFS je postaven na myšlenkách ideálního mnoho úlohového procesoru. Ideáln
 \begin{figure}[ht]
 \includegraphics[scale=1.0]{obrazky/idealProcessor.jpg}
 \caption{Schéma ideálního procesoru}
-\label{ideální procesor}
+\label{idealni procesor}
 \end{figure}
 
 
