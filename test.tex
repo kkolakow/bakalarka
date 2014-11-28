@@ -602,9 +602,15 @@ CFS nepoužívá fronty úloh pro každou prioritu jak to dělali předchůdci C
 
 \subsection{Datové struktury v CFS}
 
-Všechny úlohy jsou v Linuxu reprezentovány strukturou \verb#task_struct#. Tato struktura (spolu s dalšími ze kterých je samotná \verb#task_struct# složená) plně popisují úlohu a zahrnují aktuální stav úlohy, její zásobník, příznaky procesu, prioritu (statickou i dynamickou). Tyto informace a mnohem více podobných struktur lze najít v \verb#include/linux/sched.h#. Z důvodu aby bylo možno plánovat úlohy podle různých jiných pravidel, nenalezneme CFS závislé informace v \verb#task_struct#. Místo toho byla vytvořená nová struktura pojmenovaná \verb#sched_entity# (také z \verb#include/linux/sched.h#) k uchovávání informací o plánování.
+Všechny úlohy jsou v Linuxu reprezentovány strukturou \verb#task_struct#. Tato struktura (spolu s dalšími ze kterých je samotná \verb#task_struct# složená) plně popisují úlohu a zahrnují aktuální stav úlohy, její zásobník, příznaky procesu, prioritu (statickou i dynamickou). Tyto informace a mnohem více podobných struktur lze najít v \verb#include/linux/sched.h#. Z důvodu aby bylo možno plánovat úlohy podle různých pravidel (plánovacích tříd), nenalezneme CFS závislé informace v \verb#task_struct#. Místo toho byla vytvořená nová struktura pojmenovaná \verb#sched_entity# (také z \verb#include/linux/sched.h#) k uchovávání informací o plánování.
 
+
+\begin{figure}[ht]
 \includegraphics[scale=1]{obrazky/schedulerStructures.png}
+\caption{Schéma složení struktur plánovače}
+\label{idealni procesor}
+\end{figure}
+
 
 Na kořen stromu je odkazováno pomocí \verb#rb_root# (z \verb#/include/linux/rbtree.h#) struktury z \verb#cfs_rq# struktury (v \verb#kernel/sched/sched.h#).
 \verb#cfs_rq# obsahuje také ukazatel na nejvíce levý prvek ve stromu (který má nejmenší hodnotu vruntime), \verb#min_vruntime#, ukazatele na předchozí a současně běžící úlohu a další informace týkající se skupin a SMP plánování a vyvažování. Samotná priorita procesu je uchována v datové struktuře \verb#load_weight#. 
