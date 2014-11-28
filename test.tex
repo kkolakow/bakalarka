@@ -264,11 +264,11 @@ Plánování třída definuje sadu funkcí prostřednictvím \verb#sched_class# 
 Každá třída plánování poskytuje funkce jako:
 \begin{itemize}
 \item \verb#enqueue_task# (...) 
-Je volána když se úloha stává spustitelnou. Vkládá plánovací entitu (úlohu) do fronty běžících úloh (ve fair třídě do červeno-černého stromu) a zvýší proměnnou \verb#nr_running# o 1.
+Je volána, když se úloha stává spustitelnou. Vkládá plánovací entitu (úlohu) do fronty běžících úloh (ve fair třídě do červeno-černého stromu) a zvýší hodnotu proměnnou \verb#nr_running# o 1.
 \item \verb#dequeue_task# (...) 
-Pokud úloha není dále spustitelná, je volána tato funkce, aby vyjmula danou plánovací entitu (úlohu) z fronty běžících úloh (v fair plánovací třídě z červeno-černého stromu). Sníží proměnnou \verb#nr_running# o 1.
+Pokud úloha není dále spustitelná, je volána tato funkce, aby vyjmula danou plánovací entitu (úlohu) z fronty běžících úloh (v fair plánovací třídě z červeno-černého stromu). Sníží se hodnota proměnné \verb#nr_running# o 1.
 \item \verb#yield_task# (...) 
-Tato funkce je v podstatě stejná jako předchozí, jen vyjme poté a následně zařadí, není-li \verb#compat_yield# sysctl zapnutý. V tomto případě umístí plánovací entitu (úlohu) do fronty běžících úloh (ve fair třídě nejvíce napravo do červeno-černém stromu).
+Tato funkce je v podstatě stejná jako předchozí. Vyjme úlohu a následně ji zařadí, není-li \verb#compat_yield# sysctl zapnutý. V tomto případě umístí plánovací entitu (úlohu) do fronty běžících úloh (ve fair třídě nejvíce napravo do červeno-černém stromu).
 \item \verb#check_preempt_curr# (...) 
 Tato funkce kontroluje, zda úkol, který se dostal do spustitelného stavu, může odebrat současně běžící úlohu.
 \item \verb#pick_next_task# (...) 
@@ -288,7 +288,7 @@ $$
 stop\_class \rightarrow dl\_class \rightarrow rt\_class \rightarrow fair\_class \rightarrow idle\_class \rightarrow NULL 
 $$
 
-\verb#Stop# a \verb#idle# jsou speciální třídy plánování. \verb#Stop# slouží k naplánování úlohy pro zastavení úlohy běžící na CPU, který odebírá všechno a nemůže být odebrán ničím. \verb#idle# slouží k naplánování nečinné úlohy na CPU, která je naplánovaná pouze v případě, že neexistuje jiná úloha k běhu. Třída \verb#dl# je pro plánování úloh s určeným termínem ukončení, třída \verb#rt# je pro plánování úloh reálného času a \verb#fair# slouží pro plánování běžných úloh.
+\verb#Stop# a \verb#idle# jsou speciální třídy plánování. \verb#Stop# slouží k naplánování úlohy pro zastavení úlohy běžící na CPU, který odebírá všechno a nemůže být odebrán ničím. \verb#idle# slouží k naplánování nečinné úlohy na CPU, která je naplánovaná pouze v případě, že neexistuje jiná úloha k běhu. Třída \verb#dl(deadline)# je pro plánování úloh s určeným termínem ukončení, třída \verb#rt(real-time)# je pro plánování úloh reálného času a \verb#fair# slouží pro plánování běžných úloh.
 
 Úloze lze specifikovat třídu plánování pomocí systémové utility \verb#chrt# nebo pomocí api, které je popsáno podrobně na manuálových stránkách \verb#man sched#.
 
@@ -304,7 +304,7 @@ V kódu funkce \verb#scheduler_tick()# je aktualizace realizována voláním
 \begin{verbatim}
 curr->sched_class->task_tick(rq, curr, 0);
 \end{verbatim}
-Takto volaná aktualizace nám zaručuje aktualizaci údajů dle pravidel dané třídy, ve které byla úloha spuštěna. Ve fuknci \verb#scheduler_tick()# jsou volání 
+Takto volaná aktualizace nám zaručuje aktualizaci údajů dle pravidel dané třídy, ve které byla úloha spuštěna. Ve funkci \verb#scheduler_tick()# jsou volání 
 \begin{verbatim}
 rq->idle_balance = idle_cpu(cpu);
 trigger_load_balance(rq);
@@ -368,7 +368,7 @@ while (!condition) /* waiting for event */
 finish_wait(&q, &wait);
 \end{verbatim} 
 Úloha vytvoří čekací frontu a přidá se do ní. 
-
+\nopagebreak
 \begin{verbatim}
 DEFINE_WAIT(wait);
 add_wait_queue(q, &wait);
