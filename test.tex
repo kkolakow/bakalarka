@@ -612,8 +612,8 @@ Všechny úlohy jsou v Linuxu reprezentovány strukturou \verb#task_struct#. Tat
 \end{figure}
 
 
-Na kořen stromu je odkazováno pomocí \verb#rb_root# (z \verb#/include/linux/rbtree.h#) struktury z \verb#cfs_rq# struktury (v \verb#kernel/sched/sched.h#).
-\verb#cfs_rq# obsahuje také ukazatel na nejvíce levý prvek ve stromu (který má nejmenší hodnotu vruntime), \verb#min_vruntime#, ukazatele na předchozí a současně běžící úlohu a další informace týkající se skupin a SMP plánování a vyvažování. Samotná priorita procesu je uchována v datové struktuře \verb#load_weight#. 
+Na kořen stromu je odkazováno pomocí \verb#rb_root# struktury \linebreak (z \verb#/include/linux/rbtree.h#) z \verb#cfs_rq# struktury (v \verb#kernel/sched/sched.h#).
+\verb#cfs_rq# obsahuje také ukazatel na nejvíce levý prvek ve stromu \verb#min_vruntime# (který má nejmenší hodnotu vruntime), ukazatele na předchozí a současně běžící úlohu a další informace týkající se skupin a SMP plánování a vyvažování. Samotná priorita procesu je uchována v datové struktuře \verb#load_weight#. 
 
 Uzly RB stromu představují jednu nebo více úloh, které jsou spustitelné. Každý uzel stromu je reprezentován \verb#rb_node# (z \verb#/include/linux/rbtree.h#) strukturou, která neobsahuje nic víc než odkaz na potomka a barvu předka. Entita \verb#rb_node# je součástí \verb#sched_entity# struktury, která zahrnuje \verb#rb_node# odkaz a mnoho různých statistických dat. Nejdůležitější položkou \verb#sched_entity# je vruntime (64bit políčko), která znázorňuje dobu, po kterou proces běžel, a slouží jako index pro červeno-černý strom. Struktura \verb#task_struct# leží na vrcholu hierarchie a plně popisuje úlohu a zahrnuje \verb#sched_entity# strukturu. 
 
