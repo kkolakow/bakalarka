@@ -842,7 +842,7 @@ if (delta > ideal_runtime)
 %
 %\end{lstlisting} 
 
-V kostře plánovače jsme mohli vidět, jak byly úlohy deaktivovány a vyjmuty z fronty běžících úloh, nebo aktivovaných když se probudily v \verb#try_to_wake_up()#. Ve fair plánovací třídě jsou volány \verb#equeue_task_fair()# a \verb#dequeue_task_fair()# ve funkcích \verb#enqueue_entity()# a \verb#dequeue_entity()# pro aktualizování uzlů v červeno-černém stromu.
+V kostře plánovače jsme se dočetli, jak byly úlohy deaktivovány a vyjmuty z fronty běžících úloh, nebo aktivovaných když se probudily v \verb#try_to_wake_up()#. Ve fair plánovací třídě jsou volány \verb#equeue_task_fair()# a \verb#dequeue_task_fair()# ve funkcích \verb#enqueue_entity()# a \verb#dequeue_entity()# pro aktualizování uzlů v červeno-černém stromu.
 
 %\begin{lstlisting} 
 %static void enqueue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
@@ -1141,7 +1141,7 @@ Větší část CFS návrhu už je mimo tento jednoduchý koncept, přibyly zde 
 
 UMA – uniform memory access. Znamená, že přístup jakéhokoli procesoru do jakéhokoli segmentu paměti je vždy stejně rychlý.
 
-Vyvažování na SMP systémech bylo implementováno s cílem zlepšit výkonnost tím, že odebereme úlohy od nejvíce vytížených CPU a přesuneme je na CPU volné nebo méně vytížené. Linuxový plánovač kontroluje pravidelně jak jsou rozmístěné úlohy na systému a když vidí, že systém není vyvážen spustí vyvažování.
+Vyvažování na SMP systémech bylo implementováno s cílem zlepšit výkonnost tím, že odebereme úlohy od nejvíce vytížených CPU a přesuneme je na CPU volné nebo méně vytížené. Linuxový plánovač kontroluje pravidelně, jak jsou rozmístěné úlohy na systému a když vidí, že systém není vyvážen, spustí vyvažování.
 
 Důležitým bodem je správné chápání topologie systému plánovačem. Můžeme zde mít systémy s několika jádry, kde mohou úlohy trpět více vyprázdněním vyrovnávacích pamětí v důsledku přesunu úloh, než v důsledku běhu úlohy na vytíženém CPU. Jiné systémy zas mohou být více flexibilní vůči migraci úloh a to díky sdíleným vyrovnávacím pamětem (například systémy podporující hyperthreading). 
 
