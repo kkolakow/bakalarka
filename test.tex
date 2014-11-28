@@ -67,7 +67,7 @@ V této práci se zaměříme pouze na úlohy závisle na CPU.
 
 \item Jádro 2.4 (rok 2001) má jednoduchý plánovač operující s O(N) časem. Plánovač rozdělil čas do epoch a v rámci této epochy bylo úloze povoleno běžet její časové kvantum. Jestliže úloha nepoužila celé své časové kvantum, pak polovina zbývajícího času byla přičtena do k novému časovému kvanta, aby mohla úloha běžet déle v další časové epoše. Plánovač přes všechny úlohy aplikoval funkci goodness k zjištění jakou úlohu má spustit jako další. Ačkoli toho lze dosáhnout snadno, byl příliš neefektivní, postrádal škálovatelnost a byl špatný na úlohy reálného času. Jeho další slabinou bylo postrádání podpory pro nové hardwarové architektury jako jsou třeba více jádrové procesory. 
 
-\item Prvním plánovačem na jádrech verze 2.6 (rok 2003) byl plánovač zvaný O(1), který byl navržen k řešení mnoha problémů 2.4 plánovače. Nejdůležitější změnou bylo, že plánovač již nezahrnoval identifikaci další úlohy pro spuštění (a nutnost opakovaně procházet všechny úlohy, aby zjistil, kterou má spustit nejdřív), z čehož plynulo i jeho jméno O(1), což znamená, že pracoval v konstatním čase a byl více škálovatelný. O(1) plánovač uchovával záznamy o běžících úlohách ve frontách běžících úloh (front bylo více pro každou úroveň priorit dvě – jedna pro aktivní úlohy, druhou pro expirované úlohy), které používal pro výběr, jakou úlohu bude provádět jako další. Plánovač také zahrnoval měření interaktivity s množstvím heuristiky, která způsobila, že byl plánovač těžkopádný. Plánovač zvýhodňoval interaktivní úlohy před dávkovými (batch) úlohami.
+\item Prvním plánovačem na jádrech verze 2.6 (rok 2003) byl plánovač zvaný O(1), který byl navržen k řešení mnoha problémů 2.4 plánovače. \linebreak Nejdůležitější změnou bylo, že plánovač již nezahrnoval identifikaci další úlohy pro spuštění (a nutnost opakovaně procházet všechny úlohy, aby zjistil, kterou má spustit nejdřív), z čehož plynulo i jeho jméno O(1), což znamená, že pracoval v konstatním čase a byl více škálovatelný. O(1) plánovač uchovával záznamy o běžících úlohách ve frontách běžících úloh (front bylo více pro každou úroveň priorit dvě – jedna pro aktivní úlohy, druhou pro expirované úlohy), které používal pro výběr, jakou úlohu bude provádět jako další. Plánovač také zahrnoval měření interaktivity s množstvím heuristiky, která způsobila, že byl plánovač těžkopádný. Plánovač zvýhodňoval interaktivní úlohy před dávkovými (batch) úlohami.
 
 \end{itemize}
 
@@ -185,15 +185,15 @@ Jestliže úloha přijala neblokovaný signál, pak je její stav nastaven na b�
 if (unlikely(signal_pending_state(prev->state, prev))) {
    prev->state = TASK_RUNNING;
 \end{verbatim}
-K odebrání úlohy z fronty úloh voláme funkci deactivate\_task, která interně volá dequeue\_task() pro danou plánovací třídu.
+K odebrání úlohy z fronty úloh voláme funkci \verb#deactivate_task#, která interně volá \verb#dequeue_task()# pro danou plánovací třídu.
 \begin{verbatim}
 deactivate_task(rq, prev, DEQUEUE_SLEEP);
 \end{verbatim}
-Dále voláme pick\_next\_task k výběru další vhodné úlohy, která bude spuštěna na CPU. 
+Dále voláme \verb#pick_next_task# k výběru další vhodné úlohy, která bude spuštěna na CPU. 
 \begin{verbatim}
 next = pick_next_task(rq, prev);
 \end{verbatim}
-Poté dojde k vyčištění dvou příznaků (proměnných) sloužícím k vyvolání funkce schedule(). Tyto příznaky jsou součástí \verb#task_struct# a jsou pravidelně kernelem kontrolovány. 
+Poté dojde k vyčištění dvou příznaků (proměnných) sloužících k vyvolání funkce \verb#schedule()#. Tyto příznaky jsou součástí \verb#task_struct# a jsou pravidelně kernelem kontrolovány. 
 \begin{verbatim}
 clear_tsk_need_resched(prev);
 clear_preempt_need_resched();
@@ -258,9 +258,9 @@ context_switch(rq, prev, next); /* unlocks the rq */
 
 \subsection{Plánovací třídy}
 Každá úloha patří do určité třídy plánování, která určuje, jakým způsobem bude úloha naplánována. 
-Nový plánovač byl navržen tak, aby bylo možno používat rozšířenou hierarchii modulů. Jednotlivé moduly jsou zapouzdřením plánovacích pravidel, které používá kostra plánovače. 
+Současný plánovač byl navržen tak, aby bylo možno používat rozšířenou hierarchii modulů. Jednotlivé moduly jsou zapouzdřením plánovacích pravidel, které používá kostra plánovače. 
 Plánování třída definuje sadu funkcí prostřednictvím \verb#sched_class# (v \verb#kernel/sched/sched.h#), které definují chování plánovače. 
-
+\newpage
 Každá třída plánování poskytuje funkce jako:
 \begin{itemize}
 \item \verb#enqueue_task# (...) 
