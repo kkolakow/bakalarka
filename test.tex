@@ -1319,7 +1319,7 @@ static void run_rebalance_domains(struct softirq_action *h)
 
 \end{verbatim} 
 
-Funkce \verb#rebalance_domains()# poté prochází doménovou hierarchii a volá \verb#load_balance()#, jestliže má daná doména nastavenou proměnnou \verb#SD_LOAD_BALANCE# a vypršel již interval indikující stav vyvážení. Vyvažovací interval domény je ve vteřinách a je aktualizován po každém běhu vyvažování.
+Funkce \verb#rebalance_domains()# poté prochází doménovou hierarchii a volá \verb#load_balance()#, jestliže má daná doména nastavenou proměnnou \linebreak \verb#SD_LOAD_BALANCE# a vypršel již interval indikující stav vyvážení. Vyvažovací interval domény je ve vteřinách a je aktualizován po každém běhu vyvažování.
 
 Aktivní vyvažování je o přetažení jedné nebo více úloh z přetíženého CPU na jiné méně vytížené CPU. Nedochází k výměně úloh, ale pouze k přesunu úlohy. Funkce, která provádí přesun úlohy na jiné CPU, se nazývá \verb#load_balance()#. Jestliže najde nevyváženou skupinu, přesouvá jednu nebo více úloh na současné CPU a vrací hodnotu větší než 0.
 
@@ -1425,7 +1425,7 @@ Funkce \verb#load_balance()# volá funkci \verb#find_busiest_group()#, která hl
 
 Jestliže funkce \verb#find_busiest_group# vrátila nejvytíženější skupinu, pak ta je předána do funkce \verb#find_busiest_queue()# a výstupem z funkce je fronta úloh nejvíce zatíženého logického procesoru ve skupině.
 
-\verb#load_balance()# poté hledá úlohu v běžící frontě úloh, kterou přesune na frontu současného procesoru voláním \verb#move_tasks()#. Množství úloh, které mají být přesunuty jsou specifikovány jako parametr ve funkci \verb#find_busiest_group()#. Běžně se stává, že všechny úlohy jsou „přišpendleny“ k frontě běžících úloh kvůli vyrovnávací paměti na daném CPU. V tomto případě funkce \verb#load_balance# pokračuje v hledání, ale vynechá předchozí nalezené CPU.
+\verb#load_balance()# poté hledá úlohu v běžící frontě úloh, kterou přesune na frontu současného procesoru voláním \verb#move_tasks()#. Množství úloh, které mají být přesunuty jsou specifikovány jako parametr ve funkci \newline \verb#find_busiest_group()#. Běžně se stává, že všechny úlohy jsou „přišpendleny“ k frontě běžících úloh kvůli vyrovnávací paměti na daném CPU. V tomto případě funkce \verb#load_balance# pokračuje v hledání, ale vynechá předchozí nalezené CPU.
 
 Pokud je proměnná \verb#SD_POWERSAVINGS_BALANCE# nastavena v doménových pravidlech a není-li nalezena nejrušnější skupina, \verb#find_busiest_group()# hledá nejméně vytíženou skupinu v \verb#sched_domain#. Procesory v této skupině jsou poté uvedeny do klidového stavu. 
 
@@ -1660,7 +1660,7 @@ Dále je třeba dělat vyvažování, když se úloha probudí, nebo je vytvoře
 
 \subsection{NUMA vyvažování}
 
-Non uniform memory access. Numa znamená, že přístup do různých segmentů paměti je různě rychlý. Architektura je rozšířením SMP (symetrický multi processing). Když se začaly objevovat počítače se stovkami jader v jednom systému pak začaly mít systémy problémy s propustností mezi CPU a pamětí, jelikož každé jádro komunikovalo stejnou sběrnicí s pamětí. Toto se podařilo vyřešit shlukováním jader a pamětí do takzvaných NUMA uzlů. Každý procesor (několik jader) má k dispozici svou lokální paměť, na kterou má rychlý přístup, ale má také přístup na vzdálenou paměť, kde je přístup pomalejší.
+Non uniform memory access. Numa znamená, že přístup do různých segmentů paměti je různě rychlý. Architektura je rozšířením SMP (symetrický multi processing). Počítače začaly mít problémy s propustností mezi pamětí a procesorem v době, kdy se začaly objevovat systémy se stovkami jader, jelikož každé jádro komunikovalo stejnou sběrnicí s pamětí. Toto se podařilo vyřešit shlukováním jader a pamětí do takzvaných NUMA uzlů. Každý procesor (několik jader) má k dispozici svou lokální paměť, na kterou má rychlý přístup, ale má také přístup na vzdálenou paměť, kde je přístup pomalejší.
 
 K propojování uzlů je použita sběrnice, které se obecně říká INTERCONNECT. Každý z výrobců NUMA systémů pojmenovává tyto sběrnice jinak INTEL používá Intel Quick Path (QPI), dříve taky používal název Common system interface (CSI), AMD používá název Hypertransport.
 
