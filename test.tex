@@ -1152,10 +1152,10 @@ Kvůli rozdílům v topologiích systémů, byly zavedeny od jádra 2.6 plánova
 
 Plánovací doména je množina procesorů, které sdílejí vlastnosti a plánování pravidla, která mohou být vyvažovány proti sobě. Každá doména může obsahovat jednu nebo více plánovacích skupin, které se považují za jednotku v doméně. Takže když se plánovač snaží vyvážit zatížení v rámci domény, pokusí se vyvážit zatížení každé plánovací skupiny, bez ohledu na to co se děje ve skupině.
 
-Představme si, že máme systém dvou fyzických procesorů, na kterých je hyperthreading, tak dostaneme celkem čtyři logické procesory. Při spuštění systému, jádro rozdělí logické jádra do doménové hierarchie druhé úrovně viz obrázek.
+Představme si, že máme systém dvou fyzických procesorů, na kterých je hyperthreading, tak dostaneme celkem čtyři logické procesory. Při spuštění systému, jádro rozdělí logické jádra do doménové hierarchie druhé úrovně viz Obrázek \ref{domeny a skupiny}.
 
 \begin{figure}[ht]
-\includegraphics[scale=0.5]{obrazky/domenyAskupiny.jpeg}
+\includegraphics[scale=0.53]{obrazky/domenyAskupiny.jpeg}
 \caption{Schéma skupin a domén}
 \label{domeny a skupiny}
 \end{figure}
@@ -1173,9 +1173,10 @@ Existují také příznaky, které nám signalizují změny v zatížení systé
 
 Aktivní vyvažování zátěže je spouštěno pravidelně. Dochází k procházení hierarchie domén nahoru a zjišťuje se, zdali jsou všechny skupiny po cestě vyvážené. Když se narazí na nějakou nevyváženou, provádí vyvažování podle pravidel dané domény.
 
+\newpage
 \subsubsection{Implementace vyvažování}
 
-Ve sched.h najdeme dvě struktury, které byly přidány do kódu za účelem vyvažování. Jedná se o \verb#sched_domain# (\verb#include/linux/sched.h#) a pak \verb#sched_group# (\verb#kernel/sched/sched.h#).
+Ve \verb#sched.h# najdeme dvě struktury, které byly přidány do kódu za účelem vyvažování. Jedná se o \verb#sched_domain# (\verb#include/linux/sched.h#) a pak \verb#sched_group# (\verb#kernel/sched/sched.h#).
 
 \begin{verbatim} 
 
@@ -1200,7 +1201,7 @@ struct sched_domain {
         int flags;                      /* See SD_* */
         int level;
 
-	...
+                	...
 
 \end{verbatim} 
 
