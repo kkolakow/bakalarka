@@ -1664,7 +1664,7 @@ Non uniform memory access. Numa znamená, že přístup do různých segmentů p
 
 K propojování uzlů je použita sběrnice, které se obecně říká INTERCONNECT. Každý z výrobců NUMA systémů pojmenovává tyto sběrnice jinak INTEL používá Intel Quick Path (QPI), dříve taky používal název Common system interface (CSI), AMD používá název Hypertransport.
 
-Výrobci systémů si sami navrhují, které numa uzly budou propojeny pomoci interconnect sběrnice na přímo, některé další jsou propojeny pře několik dalších NUMA uzlů. 
+Výrobci systémů si sami navrhují, které numa uzly budou propojeny pomoci interconnect sběrnice na přímo, některé další jsou propojeny přes několik dalších NUMA uzlů. 
 
 %h v místě výskytu (here)
 %t na začátku stránky (top)
@@ -1677,8 +1677,7 @@ Výrobci systémů si sami navrhují, které numa uzly budou propojeny pomoci in
 \label{NUMA scheme1}
 \end{figure}
 
-Příklad zapojení HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor.
-Je to nejjednodušší způsob zapojení NUMA počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším NUMA uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální ty bude jako vždy nejrychlejší, dále vzdálenou, která je pomalejší, ale na každém jiném numa uzlu vždy stejnou.
+Obrázek \ref{NUMA scheme1} ukazuje numa topologii HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor. Je to nejjednodušší způsob zapojení NUMA počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším NUMA uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální ty budou vždy nejrychlejší, dále vzdálenou, která je pomalejší, ale na každém jiném numa uzlu vždy stejnou.
 
 Zde je výpis numactl ukazující jak máme shlukovány jádra a paměť do numa uzlů.
 
@@ -1716,7 +1715,7 @@ node 0 1 2 3
 
 Na diagonále je vidět čas lokálního přístupu do paměti. Na zbylé uzly přistupujeme vždy stejně kvalitní a dlouhou linkou QPI, takže časy jsou stejné.
 
-Takto symetrický přístup k vzdáleným NUMA pamětem je méně častý. Většina velkých systému má topologii složitější, kde jsou propojovány uzly přes kontroléry a ty jsou pak přes další kontrolér propojené s dalšími uzlů. Dochází tak k přístupům k vzdálené paměti přes více NUMA uzlů a tím pádem dochází také k pomalejšímu přístupu do vzdálené paměti.
+Takto symetrický přístup k vzdáleným NUMA pamětem je méně častý. Většina velkých systému má topologii složitější, kde jsou propojovány uzly přes kontroléry a ty jsou pak přes další kontrolér propojené s dalšími uzlů. Dochází tak k přístupům k vzdálené paměti přes více NUMA uzlů a tím pádem dochází k pomalejšímu přístupu do vzdálené paměti.
 
 \begin{figure}[ht]
 \includegraphics[scale=0.7]{obrazky/numa-scheme-big-system.jpeg}
@@ -1724,7 +1723,7 @@ Takto symetrický přístup k vzdáleným NUMA pamětem je méně častý. Vět�
 \label{NUMA scheme2}
 \end{figure}
 
-Teď se podívejme na příklad\ref{NUMA scheme2} systému, který má numa zapojení složitější.
+Teď se podívejme na Obrázek \ref{NUMA scheme2} systému, který má numa zapojení složitější.
 
 Jedná se o systém s 80 logickými jádry (40 fyzických) se zapnutou podporou hypertheading. Každý procesor této generace obsahuje 10 logických jader (5 fyzických). Každý procesor se svou lokální pamětí tvoří jeden NUMA uzel. CPU jsou po čtyřech spojené s jedním CPU kontrolérem. Ten je spojuje se zbylými 4 CPU přes další CPU kontrolér. Ze samotného obrázku je vidět, že nyní nebudou přístupy do pamětí dvojího druhu lokální a vzdálené, ale vzdálené se nám dále budou lišit podle toho přes kolik kontrolérů bude uzel přistupovat k paměti (1 nebo 2). Takže vidíme, že přístupy do pamětí budou dle doloženého schématu 4 druhů. První je lokální, druhý vzdálený je mezi uzly vedle sebe (bez využití kontroléru), třetí je vzdálený komunikující přes jeden kontrolér, čtvrtý je vzdálený komunikující přes 2 kontroléry. Z obrázku je patrné, že je cesta mezi NUMA uzly, které jdou přes 2 kontroléry zdvojená tj. existuje zde alternativní cesta pro případ, že bude daná cesta přetížená. To která cesta bude vybrána v případě přístupu do vzdálené paměti přes dva kontroléry rozhoduje firmware kontroléru, takže tímto se dále nemusíme zabývat a bereme to, že je vždy vybrána méně zatížená cesta.
 
