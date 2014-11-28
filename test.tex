@@ -551,10 +551,16 @@ Když se zjistí, že některá úloha z fronty běžících úloh strávila na 
 
 Úlohy (representovanými \verb#sched_entity# objekty) jsou na stromu seřazeny dle hodnot ve vruntime. Úlohy s nejvyšší potřebou běhu na CPU jsou uloženy na nejvíce levé části stromu a úlohy s nejnižší potřebou běhu na CPU jsou uloženy ve stromě nejvíc napravo.
 
+\begin{figure}[ht]
 \includegraphics[scale=1]{obrazky/RBT_virtual_runtime.png}
+\caption{Červeno-černý strom úloh setřízený pomocí vruntime}
+\label{RB vruntime}
+\end{figure}
+
 
 Aby byl plánovač férový, vezme pro spuštění první úlohu zleva. Čas po který běžela současná úloha, vynásobený koeficientem priority, se přičte k virtuálnímu času běhu a pokud je úloha běžící je vložena zpět do červeno-černého stromu. Úlohám na levé straně stromu je dán čas na procesoru (postupně vždy po jedné úloze) a obsah stromu přebíhá zprava doleva k udržení férovosti. Jednoduše řečeno, všem úlohám je postupně přidělován čas na procesoru (dle pořadí ve stromu zleva doprava) a neustále dochází k vyvažování stromu všech běžících úloh.
 
+\newpage
 \subsection{Plánování skupin úloh}
 
 Další velice zajímavou vlastností CFS je koncept plánování skupin úloh. Poprvé implementováno v jádrech 2.6.24. 
