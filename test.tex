@@ -1839,7 +1839,7 @@ Pro každou úlohu A testuje NUMA uzel N
 
 \newpage
 \noindent
-\textit{Příklad 1} na umístění úlohy na CPU a NUMA uzel na kterém neběží žádné jiné úlohy
+\textit{Příklad 1} na umístění úlohy na CPU a NUMA uzlu na kterém neběží žádné jiné úlohy
 
 \begin{table}[h]
 \centering
@@ -1877,7 +1877,7 @@ Uzel 1 & 70\% & 40\% \\
 
 Z tabulky \ref{table2} a tabulky \ref{table3} je jasné, že přesun úlohy A na uzel 1 přinese zlepšení rychlosti přístupu k datům v operační paměti (kdežto přesun úlohy B na uzel 1 by vedl k opačnému výsledku).
 
-Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén to znamená po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy (kdyby šlo o závislé úlohy například vlákna, přístupy do segmentů pamětí by mohly mít stejné obě vlákna).
+Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén, to znamená, po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy. Kdyby šlo o závislé úlohy, přístupy do segmentů pamětí by mohly mít stejné obě úlohy.
 
 \newpage
 \noindent
@@ -1917,13 +1917,16 @@ Uzel 1 & 70\% & 60\% \\
 \label{table5}
 \end{table}
 
-Úlohy jsou na úrovni domén NUMA uzlů vyváženy. To znamená, že na každém NUMA uzlu běží jedna úloha. Dále zjišťuje plánovač zdali jsou úlohy a data jsou na stejném NUMA uzlu čili prověřuje, zdali úloha nemusí zbytečně přistupovat do vzdálených segmentů pamětí.  Tady vidíme, že ačkoli úloha A běží na uzlu 0 většinu přístupů 70\% dělá do vzdálené paměti. Nyní se podíváme kde běží a kde přistupuje úloha B. Ta běží na uzlu 1 a přistupuje nejvíce (60\% přístupů) do uzlu 1. Nyní abychom zjistili zdali má smysl výměna úloh musíme zjistit co by nám přineslo přehození úloh A a B mezi sebou.
+Úlohy jsou na úrovni domén NUMA uzlů vyváženy. To znamená, že na každém NUMA uzlu běží jedna úloha. Dále plánovač zjišťuje, zdali jsou úlohy a data na stejném NUMA uzlu, čili prověřuje, zdali úloha nemusí zbytečně přistupovat do vzdálených segmentů pamětí.  Tady vidíme, že ačkoli úloha A běží na uzlu 0 většinu přístupů (70\%) dělá do vzdálené paměti. Nyní se podíváme kde běží a kde přistupuje úloha B. Ta běží na uzlu 1 a přistupuje nejvíce (60\% přístupů) do uzlu 1. Nyní abychom zjistili zdali má smysl výměna úloh musíme zjistit co by nám přineslo přehození úloh A a B mezi sebou.
 
+\noindent
 Sumarizací lokálních přístupu zjistíme jak jsme na tom před přehozením úloh.
 
+\noindent
 Úloha A = 30
 Úloha B = 60
 
+\noindent
 Celkově tedy do lokální paměti máme 90/200.
 
 \noindent
@@ -1944,11 +1947,13 @@ Uzel 1 & 70\% (lokální) & 60\% \\
 \label{table6}
 \end{table}
 
+\noindent
 Úloha A = 70
 Úloha B = 40
 
+\noindent
 Celkově tedy přístup do lokální paměti máme 110/200.
-
+\noindent
 Jelikož nám vyšlo lépe přehození úloh a vyvážení na úrovni domén bude zachováno plánovač se rozhodne k záměně úloh. 
 
 U vyvažování na úrovni NUMA uzlů se dále řeší grupování za účelem plánování celé skupiny úloh, které například sdílí stejné knihovny a ty jsou v paměti na NUMA uzlu, kde běží tato skupina úloh. 
