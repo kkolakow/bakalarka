@@ -1428,7 +1428,7 @@ Jestliže funkce \verb#find_busiest_group# vrátila nejvytíženější skupinu,
 
 \verb#load_balance()# poté hledá úlohu v běžící frontě úloh, kterou přesune na frontu současného procesoru voláním \verb#move_tasks()#. Množství úloh, které mají být přesunuty jsou specifikovány jako parametr ve funkci \newline \verb#find_busiest_group()#. Běžně se stává, že jsou všechny úlohy „přišpendleny“ k frontě běžících úloh na daném CPU kvůli vyrovnávací paměti. V tomto případě funkce \verb#load_balance# pokračuje v hledání, ale vynechá předchozí nalezené CPU.
 
-Pokud je proměnná \verb#SD_POWERSAVINGS_BALANCE# nastavena v doménových pravidlech a není-li nalezena nejrušnější skupina, \verb#find_busiest_group()# hledá nejméně vytíženou skupinu v \verb#sched_domain#. Procesory v této skupině jsou poté uvedeny do klidového stavu. 
+Pokud je proměnná \verb#SD_POWERSAVINGS_BALANCE# nastavena v doménových pravidlech a není-li nalezena nejrušnější skupina, \verb#find_busiest_group()# hledá nejméně vytíženou skupinu v \verb#sched_domain#. Procesory z této skupiny jsou poté uvedeny do klidového stavu. 
 
 %\begin{lstlisting} 
 %
