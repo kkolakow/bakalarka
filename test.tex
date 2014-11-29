@@ -1106,7 +1106,7 @@ Z funkce \verb#pick_next_task()# je volána funkce \verb#pick_next_entity()#, kt
 %                }
 %
 %                if (second && wakeup_preempt_entity(second, left) < 1)
-%                        se = second;
+
 %        }
 %
 %        /*
@@ -1803,8 +1803,11 @@ Plánovač si vede informace o přístupech úlohy do různých segmentů pamět
 
 \begin{table}[h]
 \centering
+\label{Pristupy na NUMA NODE}
+\caption{Přístupy na stránky jednotlivých NUMA uzlů}
 
 \begin{tabular}{|l|r|r|}
+
 \hline
 %Přístupy na stránku NUMA uzlu & Úloha A & Úloha B \\
 Přístupy & Úloha A & Úloha B \\
@@ -1837,7 +1840,7 @@ Pro každou úlohu A testuje NUMA uzel N
 
 Příklad umístění úlohy na CPU na kterém neběží žádné jiné úlohy
 
-\begin{table}
+\begin{table}[h]
 \centering
 
 \begin{tabular}{|c|c|c|}
@@ -1857,7 +1860,7 @@ Uzel 1 & 3 & žádná \\
 
 Statistiky přístupu do paměti
 
-\begin{table}
+\begin{table}[h]
 \centering
 
 \begin{tabular}{|c|c|c|}
@@ -1877,7 +1880,7 @@ Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyv
 
 Příklad na výměnu úloh na NUMA uzlech
 
-\begin{table}
+\begin{table}[h]
 \centering
 
 \begin{tabular}{|c|c|c|}
@@ -1897,7 +1900,7 @@ Příklad na výměnu úloh na NUMA uzlech
 
 Statistiky přístupu do paměti
 
-\begin{table}
+\begin{table}[h]
 \centering
 
 \begin{tabular}{|c|r|r|}
@@ -1922,7 +1925,7 @@ Celkově tedy do lokální paměti máme 90/200.
 
 Nyní stejný případ s prohozením úloh
 
-\begin{table}
+\begin{table}[h]
 \centering
 
 \begin{tabular}{|c|r|r|}
