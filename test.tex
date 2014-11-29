@@ -2141,9 +2141,9 @@ Jelikož jsou algoritmy pro výběr a zátěže úloh značně rozdílné je tř
 
 Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modifikovaný benchmark linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na generování statistiky běhu. Benchmark linpack dělá aritmetické operace (násobí matice) a výsledkem je množství floating point operací za vteřinu. 
 
-Testování plánovače úloh budeme na OS Linux rozdělovat do 3 úrovní:
+\subsection{Úrovně testování plánovače}
 
-\subsection{Testování plánování fronty úloh na jednom CPU}
+\subsubsection{Testování plánování fronty úloh na jednom CPU}
 
 Testování na jednom CPU provádíme tak, že spustíme v jeden okamžik na jednom CPU řadu úloh, a na konci se podíváme, jak dlouho jednotlivé úlohy běžely a jakých výsledků jsme dosáhli. Pokud bude plánovač spravedlivě přidělovat čas úlohám budou běžet stejně dlouho, množství výměn obsahu na CPU bude přibližně stejné pro každou úlohu, dosažená hodnota operací za sekundu bude také přibližně stejná. Jelikož jsme úlohy spouštěli na CPU se specifikovanou CPU afinitou, prověříme také, zdali úlohy běžely jen na CPU námi specifikovaném.
 
@@ -2243,7 +2243,7 @@ Výsledek testování plánování fronty úloh
 
 Jelikož byly splněny všechny naše předpoklady říkáme, že plánovač plánuje férově úlohy z fronty úloh na jednom CPU.
 
-\subsection{Testování plánování úloh na SMP UMA systémech}
+\subsubsection{Testování plánování úloh na SMP UMA systémech}
 
 Na SMP systémech testovací zátěž spouštíme dvěma různými způsoby.
 \begin{enumerate}
@@ -2253,7 +2253,7 @@ Na SMP systémech testovací zátěž spouštíme dvěma různými způsoby.
 
 Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů. Podíváme se zdali plánovač, zbytečně nepřehazoval úlohy mezi CPU, zjišťujeme časy běhů úloh.
 
-\subsection{Testování plánování úloh na NUMA systémech}
+\subsubsection{Testování plánování úloh na NUMA systémech}
 
 Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou NUMA afinitou. NUMA afinitu úloh specifikujeme za pomocí systémové utility numactl.
 
@@ -2364,7 +2364,7 @@ Tento příklad ukazuje nevhodné kopírování paměti mezi NUMA uzly. Na prvn�
 \label{PerfBenchResult}
 \end{figure}
 
-\subsection{Závěr}
+\section{Závěr}
 Při bližším obeznámením se s plánovačem úloh jsem došel k přesvědčení, že návrh plánovače byl precizně navrhnut a implementován po NUMA vyvažování. Připadá mi, že NUMA vyvažování nebylo přidáno do kódu v duchu návrhu celého plánovače, hlavně tedy třídy pro plánování fair. Kód NUMA vyvažování je dlouhý, postrádám v něm jakýsi koncept a vadí mi tam heuristika. Překvapilo mě, že při NUMA vyvažování se kalkuluje s jakými si konstantami jako např. výpočetní síla skupiny procesorů jsou konstanty, historie přístupu na stránky se bere jako dosavadní přístupy děleno dvěma a asi nejhorší co mi přišlo bylo to, že NUMA vyvažování se volá ze dvou míst a používá pokaždé se k tomu používá jiný algoritmus. To očividně vede k neustálému migrování úloh a jejich dat z jednoho NUMA uzlu do druhého. Od vývojáře NUMA plánovače jsem byl informován, že toto je slabina současného plánovače a že se nyní vymýšlí jak tuto slabinu odstranit. Myslím si, že koncept zabudování NUMA vyvažování je třeba předělat, jelikož v množství  kódu, které obsahuje má problém se vyznat i vývojář, který ho napsal.
 
 
