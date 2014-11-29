@@ -1958,17 +1958,17 @@ Jelikož nám vyšlo lépe přehození úloh a vyvážení na úrovni domén bud
 
 U vyvažování na úrovni NUMA uzlů se dále řeší grupování za účelem plánování celé skupiny úloh, které například sdílí stejné knihovny a ty jsou v paměti na NUMA uzlu, kde běží tato skupina úloh. 
 
-%\subsection{NUMA vyvažování}
+%\subsection{Spuštění NUMA vyvažování}
 
-	Vyvažování na NUMA systému se spouští při 2 různých událostech
+Vyvažování na NUMA systému se spouští při dvou událostech
 
-\subsubsection*{Souštěné periodicky při obsluze časovače přerušení}
-Tento způsob vyvažování NUMA systému je implementováno přesně tak jak je popsáno v kapitole o vyvažování UMA SMP systému. Funkce scheduler\_tick volá funkci trigger\_load\_balance. Ta vyvolá softwarové přerušení, které vyvolá obsluhu přerušení run\_rebalance\_domains. run\_rebalance\_domains volá funkci rebalance\_domains, která prochází hierarchicky domény a vyvažuje skupiny v doméně pomocí volání funkce load\_balance. Veškeré tyto funkce lze najít v předchozím textu v kapitole věnované vyvažování UMA SMP systémů. 
+\subsubsection{Souštěné periodicky při obsluze časovače přerušení}
+Tento způsob vyvažování NUMA systému je implementováno přesně tak, jak je popsáno v kapitole o vyvažování UMA SMP systému. Funkce \verb#scheduler_tick# volá funkci \verb#trigger_load_balance#. Ta vyvolá softwarové přerušení, které vyvolá obsluhu přerušení \verb#run_rebalance_domains#. \verb#run_rebalance_domains# volá funkci \verb#rebalance_domains#, která prochází hierarchicky domény a vyvažuje skupiny v doméně pomocí volání funkce \verb#load_balance#. Veškeré tyto funkce lze najít v předchozím textu v kapitole věnované vyvažování UMA SMP systémů. 
 
-Důležité je si uvědomit, že vyvažování je zde realizováno podle algoritmu, kterou obsahuje funkce load\_balance.
+Důležité je si uvědomit, že vyvažování je zde realizováno podle algoritmu, kterou obsahuje funkce \verb#load_balance#.
 
-\subsubsection*{Spouštěné jako ošetření page fault vyjímky}
-Aby vyvažovací algoritmus mohl rozhodnout, kde je vhodné umístit úlohu určenou k běhu, vede si statistiky přístupů na NUMA uzly každé úlohy. To se realizuje tak, že se znepřístupní určité stránky a při přístupu úlohy do znepřístupněné paměti je vyvolána page fault vyjímka. Jako ošetření vyjímky je volána funkce do\_numa\_page. 
+\subsubsection{Spouštěné jako ošetření page fault vyjímky}
+Aby vyvažovací algoritmus mohl rozhodnout, kde je vhodné umístit úlohu určenou k běhu, vede si statistiky přístupů na NUMA uzly každé úlohy. To se realizuje tak, že se znepřístupní určité stránky a při přístupu úlohy do znepřístupněné paměti je vyvolána page fault vyjímka. Jako ošetření vyjímky je volána funkce \verb#do_numa_page#. 
 
 %\begin{lstlisting}
 %static int do_numa_page(struct mm_struct *mm, struct vm_area_struct *vma,
@@ -2129,13 +2129,13 @@ Aby vyvažovací algoritmus mohl rozhodnout, kde je vhodné umístit úlohu urč
 %}
 %\end{lstlisting}
 
-Tato funkce volá funkci task\_numa\_placement, která má za úkol procházet statistiky přístupů do jednotlivých uzlů a vybere uzel do kterého měla úloha nejvíce přístupů. Ve funkci task\_numa\_placement je volána funkce numa\_migrate\_preferred, která uloží vybraný uzel do proměnné numa\_preferred\_nid (ze struktury task\_struct).
-Na základě znalosti preferovaného numa uzlu je volána funkce task\_numa\_find\_cpu, která vybere nejvhodnější CPU k běhu na vybraném uzlu (numa\_preferred\_nid).
-Funkce numa\_migrate\_preferred pak volá funkci task\_numa\_migrate, která zajistí přesun úlohy na vybrané CPU.
+Tato funkce volá funkci \verb#task_numa_placement#, která má za úkol procházet statistiky přístupů do jednotlivých uzlů a vybere uzel do kterého měla úloha nejvíce přístupů. Ve funkci \verb#task_numa_placement# je volána funkce \newline \verb#numa_migrate_preferred#, která uloží vybraný uzel do proměnné \newline \verb#numa_preferred_nid# (ze struktury \verb#task_struct#).
+Na základě znalosti preferovaného numa uzlu je volána funkce \verb#task_numa_find_cpu#, která vybere nejvhodnější CPU k běhu na vybraném uzlu (\verb#numa_preferred_nid#).
+Funkce \verb#numa_migrate_preferred# pak volá funkci \verb#task_numa_migrate#, která zajistí přesun úlohy na vybrané CPU.
 
-V této kapitole jsme si vysvětlili, že plánovač umisťuje úlohy a vyvažuje zatížení na NUMA systémy dle různých algoritmů (v prvním případě podle funkce load\_balance ve druhém dle logiky v task\_numa\_placement a task\_numa\_find\_cpu).
+V této kapitole jsme si vysvětlili, že plánovač umisťuje úlohy a vyvažuje zatížení na NUMA systémy dle různých algoritmů (v prvním případě podle funkce \verb#load_balance# ve druhém dle logiky v \verb#task_numa_placement# a \newline \verb#task_numa_find_cpu#).
 
-Jelikož jsou algoritmy pro výběr a zátěže úloh značně rozdílné je třeba testovat, zdali nenastane situace, že je dle algoritmu z task\_numa\_find\_cpu a task\_numa\_placement úloha umístěna na nějaké CPU, která je následně přesunuta algoritmem load\_balance při periodickém spuštění na jiné CPU. Přesuny úloh způsobují nedostupnost dat ve vyrovnávacích paměti, výměnu obsahu registrů, nebo dokonce kopírování pamětí mezi NUMA uzly. Pokud tato situace nastane dochází k značnému poklesu propustnosti daného systému. 
+Jelikož jsou algoritmy pro výběr a zátěže úloh značně rozdílné je třeba testovat, zdali nenastane situace, že je dle algoritmu z \verb#task_numa_find_cpu# a \verb#task_numa_placement# úloha umístěna na nějaké CPU, která je následně přesunuta algoritmem \verb#load_balance# při periodickém spuštění na jiné CPU. Přesuny úloh způsobují nedostupnost dat ve vyrovnávacích paměti, výměnu obsahu registrů, nebo dokonce kopírování pamětí mezi NUMA uzly. Pokud tato situace nastane dochází k značnému poklesu propustnosti daného systému. 
 
 \section{Testování}
 
