@@ -1651,16 +1651,17 @@ Tak jako aktivní vyvažování je i vyvažování nečinnosti \verb#idle_balanc
 
 \subsubsection{Výběr fronty pro novou úlohu}
 
-Dále je třeba dělat vyvažování, když se úloha probudí, nebo je vytvořená nová a potřebuje být umístěná ve frontě běžících úloh. Tato fronta musí být vybrána s ohledem na vyvážení úlohami celého systému. Každá plánovací třída implementuje svojí vlastní strategii na nakládání se svými úlohami a poskytuje fukce \verb#select_task_rq()#, která je volána plánovačem během spuštění úlohy. Je volána ze třech různých důvodů, které jsou vyznačeny pomocí návěští odpovídající domény.
+Dále je třeba dělat vyvažování, když se úloha probudí, nebo je vytvořená nová a potřebuje být umístěná ve frontě běžících úloh. Tato fronta musí být vybrána s ohledem na vyvážení úlohami celého systému. Každá plánovací třída implementuje svojí vlastní strategii na nakládání se svými úlohami a poskytuje funkce \verb#select_task_rq()#, která je volána plánovačem během spuštění úlohy. Je volána ze třech různých důvodů, které jsou vyznačeny pomocí návěští odpovídající domény.
 
 \begin{enumerate}
 
-\item \verb#SD_BALANCE_EXEC# je návěští používané \verb#sched_exec()#. Tato funkce je volána, jestliže úloha startuje jako nová systémovým voláním exec(). Nová úloha je jednoduchá pro vyvažování (neřešíme afinitu vyrovnávací paměti apod).
-\item \verb#SD_BALANCE_FORK# je návěští používané v \verb#wake_up_new_task()#. Tato funkce je volána, když je vytvořená úloha probuzena první krát.
-\item \verb#SD_BALANCE_WAKE# je návěští užívané v \verb#try_to_wake_up()#. Toto je nejsložitější případ, jelikož úloha, která běžela předtím má určitou afinitu vyrovnávací paměti. Proto je třeba vybrat frontu na které budeme mít dostupnou vyrovnávací paměť.
+\item \verb#SD_BALANCE_EXEC# je návěští používané funkci \verb#sched_exec()#. Tato funkce je volána, jestliže úloha startuje jako nová systémovým voláním exec(). Nová úloha je jednoduchá pro vyvažování (neřešíme afinitu vyrovnávací paměti apod).
+\item \verb#SD_BALANCE_FORK# je návěští používané ve funkci \verb#wake_up_new_task()#. Tato funkce je volána, když je vytvořená úloha probuzena první krát.
+\item \verb#SD_BALANCE_WAKE# je návěští používané ve funkci  \verb#try_to_wake_up()#. Toto je nejsložitější případ, jelikož úloha která běžela předtím, má určitou afinitu vyrovnávací paměti. Proto je třeba vybrat frontu na které budeme mít dostupnou vyrovnávací paměť.
 
 \end{enumerate}
 
+\newpage
 \subsection{NUMA vyvažování}
 
 Non uniform memory access. Numa znamená, že přístup do různých segmentů paměti je různě rychlý. Architektura je rozšířením SMP (symetrický multi processing). Počítače začaly mít problémy s propustností mezi pamětí a procesorem v době, kdy se začaly objevovat systémy se stovkami jader, jelikož každé jádro komunikovalo stejnou sběrnicí s pamětí. Toto se podařilo vyřešit shlukováním jader a pamětí do takzvaných NUMA uzlů. Každý procesor (několik jader) má k dispozici svou lokální paměť, na kterou má rychlý přístup, ale má také přístup na vzdálenou paměť, kde je přístup pomalejší.
@@ -1676,11 +1677,11 @@ Výrobci systémů si sami navrhují, které numa uzly budou propojeny pomoci in
 
 \begin{figure}[ht]
 \includegraphics[scale=0.78]{obrazky/numa-scheme.jpeg}
-\caption{NUMA topologie HP Proliant DL580 Gen8 4 socket Ivy Bridge EX processor}
+\caption{Jednoduchá NUMA topologie}
 \label{NUMA scheme1}
 \end{figure}
 
-Obrázek \ref{NUMA scheme1} ukazuje numa topologii HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor. Je to nejjednodušší způsob zapojení NUMA počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším NUMA uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální ty budou vždy nejrychlejší, dále vzdálenou, která je pomalejší, ale na každém jiném numa uzlu vždy stejnou.
+Obrázek \ref{NUMA scheme1} ukazuje NUMA topologii systému HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor. Je to nejjednodušší způsob zapojení NUMA počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším NUMA uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální ty budou vždy nejrychlejší, dále vzdálenou, která je pomalejší, ale na každém jiném numa uzlu vždy stejnou.
 
 Zde je výpis numactl ukazující jak máme shlukovány jádra a paměť do numa uzlů.
 
