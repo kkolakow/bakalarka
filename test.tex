@@ -1765,6 +1765,7 @@ node 7 free: 255232 MB
 \end{verbatim}
 
 \newpage
+\noindent
 A nyní se podíváme na přístupy do paměti mezi jednotlivými numa uzly. 
 \begin{verbatim}
 
@@ -1780,7 +1781,7 @@ node 0 1 2 3 4 5 6 7
 7: 19 19 19 19 17 17 12 10
 
 \end{verbatim}
-
+\noindent
 Nyní přístupy do paměti nabývají těchto hodnot:
 \begin{enumerate}
 \item Hodnoty 10 nejlepšího tedy nejnižšího času jsme dosáhli na přístupu do lokální paměti.
@@ -1791,6 +1792,7 @@ Nyní přístupy do paměti nabývají těchto hodnot:
 
 Při vyvažování u NUMA systému je nutné mít na paměti, že ne všechny procesory mají přístupy do všech pamětí stejně rychlé.
 
+\noindent
 NUMA vyvažování používá tři principy přesunu pro docílení vyváženosti:
 
 \begin{enumerate}
@@ -1838,6 +1840,7 @@ Pro každou úlohu A testuje NUMA uzel N
 \end{itemize}
 \end{enumerate}
 
+\noindent
 Příklad umístění úlohy na CPU na kterém neběží žádné jiné úlohy
 
 \begin{table}[h]
@@ -1880,6 +1883,7 @@ Z tohoto případu je jasné, že přesun úlohy A na uzel 1 přinese zlepšení
 
 Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby úlohy byly rozmístěné rovnoměrně na každé úrovni domén to znamená po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy (kdyby šlo o závislé úlohy například vlákna, přístupy do segmentů pamětí by mohly mít stejné obě vlákna).
 
+\noindent
 Příklad na výměnu úloh na NUMA uzlech
 
 \begin{table}[h]
@@ -1902,10 +1906,10 @@ Uzel & CPU & Úloha \\
 \end{tabular}
 \end{table}
 
-Statistiky přístupu do paměti
-
 \begin{table}[h]
 \centering
+\label{statistiky pristupu do pameti2}
+\caption{Statistiky přístupu do paměti}
 
 \begin{tabular}{|c|r|r|}
 \hline
@@ -1927,10 +1931,13 @@ Sumarizací lokálních přístupu zjistíme jak jsme na tom před přehozením 
 
 Celkově tedy do lokální paměti máme 90/200.
 
+\noindent
 Nyní stejný případ s prohozením úloh
 
 \begin{table}[h]
 \centering
+\label{statistiky pristupu do pameti3}
+\caption{Statistiky přístupu do paměti}
 
 \begin{tabular}{|c|r|r|}
 \hline
