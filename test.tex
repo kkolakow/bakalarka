@@ -570,8 +570,8 @@ Plánování skupin je nový způsob jak obstarat férovost v plánování, kdy�
 
 Rozdělování úloh do skupin je v současném kernelu automatické. Lze ho zapnou a vypnout v \verb#/proc/sys/kernel/sched_autogroup_enabled#.
 
+\newpage
 Příklad vytváření skupin multimedia a browser pomocí cgroups.
-
 \begin{verbatim} 
 
 # mount -t tmpfs cgroup_root /sys/fs/cgroup
@@ -594,7 +594,8 @@ Příklad vytváření skupin multimedia a browser pomocí cgroups.
 # #spustime gmplayer
 # echo <movie_player_pid> > multimedia/tasks
 
-\end{verbatim} 
+\end{verbatim}
+
 
 \subsection{Priority úloh}
 
@@ -1145,7 +1146,7 @@ Vyvažování na SMP systémech bylo implementováno s cílem zlepšit výkonnos
 
 Důležitým bodem je správné chápání topologie systému plánovačem. Můžeme mít systémy s několika jádry, kde mohou úlohy trpět více vyprázdněním vyrovnávacích pamětí v důsledku přesunu úloh, než v důsledku běhu úlohy na vytíženém CPU. Jiné systémy zase mohou být více flexibilní vůči migraci úloh a to díky sdíleným vyrovnávacím pamětem (například systémy podporující hyperthreading).
 
-Kvůli rozdílům v topologiích systémů, byly zavedeny od jádra 2.6 plánovací domény. Plánovací domény vytváří hierarchické skupiny procesorů v systému, které poskytují jádru OS přehled o topologii systému.
+Kvůli rozdílům v topologiích systémů, byly zavedeny od jádra 2.6 plánovací domény. Plánovací domény vytváří hierarchické skupiny procesorů v systému, které poskytují jádru OS přehled o topologii systému a usnadňují vyvažování.
 
 \newpage
 \subsubsection{Plánovací domény a skupiny}
@@ -1530,10 +1531,12 @@ Pokud je proměnná \verb#SD_POWERSAVINGS_BALANCE# nastavena v doménových prav
 %\end{lstlisting} 
 
 \subsubsection{Vyvažování nečinnosti}
+\vbox{%
 
 Vyvažování nečinnosti začíná, když se CPU stává nečinným. Je volána funkce schedule() na CPU vykonávající současnou úlohu, jestliže se jeho fronta běžících úloh vyprázdnila.
 
-Tak jako aktivní vyvažování je i vyvažování nečinnosti \verb#idle_balance()# implementováno v souboru fair.c. Kontroluje se zdali je průměrná doba čekání ve frontě nečinnosti větší než je cena migrace úlohy na tuto frontu. To znamená, že se kontroluje zdali má cenu vzít úlohu odjinud, nebo jestli je lepší jen počkat, jelikož je pravděpodobné, že se další úloha brzy probudí. Pokud migrace úlohy dává smysl, \verb#idle_balance()# funguje téměř jako \verb#rebalance_domains()#. To projde doménovou hierarchii a volá \verb#idle_balance()# pro domény, které mají v doméně nataveny příznaky \verb#SD_LOAD_BALANCE# a \verb#SD_BALANCE_NEWIDLE#.
+Tak jako aktivní vyvažování je i vyvažování nečinnosti \verb#idle_balance()# implementováno v souboru fair.c. Kontroluje se zdali je průměrná doba čekání ve frontě nečinnosti větší než je cena migrace úlohy na tuto frontu. To znamená, že se kontroluje zdali má cenu vzít úlohu odjinud, nebo jestli je lepší jen počkat, jelikož je pravděpodobné, že se další úloha brzy probudí. Pokud migrace úlohy dává smysl, \verb#idle_balance()# funguje téměř jako \verb#rebalance_domains()#. To projde doménovou hierarchii a volá \verb#idle_balance()# pro domény, které mají v doméně nataveny příznaky \verb#SD_LOAD_BALANCE# a \verb#SD_BALANCE_NEWIDLE#.}
+
 
 %\begin{lstlisting} 
 %
