@@ -1319,7 +1319,7 @@ static void run_rebalance_domains(struct softirq_action *h)
 
 \end{verbatim} 
 
-Funkce \verb#rebalance_domains()# poté prochází doménovou hierarchii a volá \verb#load_balance()#, jestliže má daná doména nastavenou proměnnou \linebreak \verb#SD_LOAD_BALANCE# a vypršel již interval indikující stav vyvážení. Vyvažovací interval domény je ve vteřinách a je aktualizován po každém běhu vyvažování.
+Funkce \verb#rebalance_domains()# poté prochází doménovou hierarchii a volá \verb#load_balance()#, pokud má daná doména nastavenou proměnnou \linebreak \verb#SD_LOAD_BALANCE# a vypršel již interval indikující stav vyvážení. Vyvažovací interval domény je ve vteřinách a je aktualizován po každém běhu vyvažování.
 
 Aktivní vyvažování je o přetažení jedné nebo více úloh z přetíženého CPU na jiné méně vytížené CPU. Nedochází k výměně úloh, ale pouze k přesunu úlohy. Funkce, která provádí přesun úlohy na jiné CPU, se nazývá \verb#load_balance()#. Jestliže najde nevyváženou skupinu, přesouvá jednu nebo více úloh na současné CPU a vrací hodnotu větší než 0.
 
@@ -1425,7 +1425,7 @@ Funkce \verb#load_balance()# volá funkci \verb#find_busiest_group()#, která hl
 
 Jestliže funkce \verb#find_busiest_group# vrátila nejvytíženější skupinu, pak ta je předána do funkce \verb#find_busiest_queue()# a výstupem z funkce je fronta úloh nejvíce zatíženého logického procesoru ve skupině.
 
-\verb#load_balance()# poté hledá úlohu v běžící frontě úloh, kterou přesune na frontu současného procesoru voláním \verb#move_tasks()#. Množství úloh, které mají být přesunuty jsou specifikovány jako parametr ve funkci \newline \verb#find_busiest_group()#. Běžně se stává, že všechny úlohy jsou „přišpendleny“ k frontě běžících úloh kvůli vyrovnávací paměti na daném CPU. V tomto případě funkce \verb#load_balance# pokračuje v hledání, ale vynechá předchozí nalezené CPU.
+\verb#load_balance()# poté hledá úlohu v běžící frontě úloh, kterou přesune na frontu současného procesoru voláním \verb#move_tasks()#. Množství úloh, které mají být přesunuty jsou specifikovány jako parametr ve funkci \newline \verb#find_busiest_group()#. Běžně se stává, že jsou všechny úlohy „přišpendleny“ k frontě běžících úloh na daném CPU kvůli vyrovnávací paměti. V tomto případě funkce \verb#load_balance# pokračuje v hledání, ale vynechá předchozí nalezené CPU.
 
 Pokud je proměnná \verb#SD_POWERSAVINGS_BALANCE# nastavena v doménových pravidlech a není-li nalezena nejrušnější skupina, \verb#find_busiest_group()# hledá nejméně vytíženou skupinu v \verb#sched_domain#. Procesory v této skupině jsou poté uvedeny do klidového stavu. 
 
