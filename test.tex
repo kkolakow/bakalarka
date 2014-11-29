@@ -1837,8 +1837,9 @@ Pro každou úlohu A testuje NUMA uzel N
 \end{itemize}
 \end{enumerate}
 
+\newpage
 \noindent
-Příklad umístění úlohy na CPU na kterém neběží žádné jiné úlohy
+\textit{Příklad 1} na umístění úlohy na CPU a NUMA uzel na kterém neběží žádné jiné úlohy
 
 \begin{table}[h]
 \centering
@@ -1870,16 +1871,17 @@ Uzel 0 & 30\% & 60\% \\
 Uzel 1 & 70\% & 40\% \\
 \hline
 \end{tabular}
-\caption{Statistiky přístupu do paměti}
+\caption{Statistiky přístupů do paměti}
 \label{table3}
 \end{table}
 
 Z tabulky \ref{table2} a tabulky \ref{table3} je jasné, že přesun úlohy A na uzel 1 přinese zlepšení rychlosti přístupu k datům v operační paměti (kdežto přesun úlohy B na uzel 1 by vedl k opačnému výsledku).
 
-Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby úlohy byly rozmístěné rovnoměrně na každé úrovni domén to znamená po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy (kdyby šlo o závislé úlohy například vlákna, přístupy do segmentů pamětí by mohly mít stejné obě vlákna).
+Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén to znamená po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy (kdyby šlo o závislé úlohy například vlákna, přístupy do segmentů pamětí by mohly mít stejné obě vlákna).
 
+\newpage
 \noindent
-Příklad na výměnu úloh na NUMA uzlech
+\textit{Příklad 2} na výměnu úloh na NUMA uzlech
 
 \begin{table}[h]
 \centering
