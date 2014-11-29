@@ -1801,7 +1801,7 @@ NUMA vyvažování používá tři principy přesunu pro docílení vyváženost
 \item Kombinace předchozích metod. Kód plánovače (v tomhle případě spíše mluvíme o funkcích na vyvažování jako o vyvažovači) zváží zdali je výhodnější přesouvat paměť nebo přesouvat proces.
 \end{enumerate}
 
-Plánovač si vede informace o přístupech úlohy do různých segmentů paměti (na různé NUMA uzly). Jsou registrovány přístupy do segmentů do kterých se přistupuje opakovaně, o implementaci statistik přístupů si povíme později.
+Plánovač si vede informace o přístupech úlohy do různých segmentů paměti (na různé NUMA uzly). Jsou registrovány přístupy do segmentů do kterých se přistupuje opakovaně, o implementaci sběru statistik přístupů si povíme později.
 
 \begin{table}[h]
 \centering
@@ -1826,13 +1826,13 @@ Uzel 3 & 14 & 44 \\
 
 \end{table}
 
-Úloha umístit úlohu na nejvhodnější pozici, nemusí být zcela tak jednoduchá. Vše komplikují sdílené data (třeba knihovna glibc), kterou obvykle v systému užívá více úloh. 
+Úloha umístit úlohu na nejvhodnější pozici, nemusí být zcela tak jednoduchá. Vše komplikují sdílené data (třeba knihovna glibc), na které obvykle přistupuje více úloh. 
 
 Výběr kde umístit úlohu probíhá dle následujícího algoritmu. 
 Pro každou úlohu A testuje NUMA uzel N
 \begin{enumerate}
 \item kontroluje zdali je uzel N lepší než uzel současně běžící úlohy (C). Úloha má větší množství svých dat na uzlu N než na současném uzlu C
-\item estliže platí bod 1. pak pro každé CPU na uzlu N zjišťujeme 
+\item jestliže platí bod 1. pak pro každé CPU na uzlu N zjišťujeme 
 \begin{itemize}
 \item zdali je CPU bez přidělené úlohy a můžeme tam umístit úlohu
 \item když není CPU bez přidělené úlohy,  zdali je lepší současnou úlohu odebrat z uzlu C
@@ -1879,7 +1879,7 @@ Uzel 1 & 70\% & 40\% \\
 \end{tabular}
 \end{table}
 
-Z tohoto případu je jasné, že přesun úlohy A na uzel 1 přinese zlepšení rychlosti přístupu k datům v operační paměti úlohy o 40\% (kdežto přesun úlohy B na uzel 1 by k opačnému jevu a zhoršení rychlosti přístupu k datům v operační paměti o 20\%).
+Z tabulky \ref{Pristupy na NUMA uzly1} a tabulky \ref{tabulka lokaci bezicich uloh1} je jasné, že přesun úlohy A na uzel 1 přinese zlepšení rychlosti přístupu k datům v operační paměti úlohy o 40\% (kdežto přesun úlohy B na uzel 1 by k opačnému jevu a zhoršení rychlosti přístupu k datům v operační paměti o 20\%).
 
 Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby úlohy byly rozmístěné rovnoměrně na každé úrovni domén to znamená po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy (kdyby šlo o závislé úlohy například vlákna, přístupy do segmentů pamětí by mohly mít stejné obě vlákna).
 
