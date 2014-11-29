@@ -1819,8 +1819,8 @@ Uzel 2 & 994 & 14 \\
 Uzel 3 & 14 & 44 \\
 \hline
 \end{tabular}
-\label{table1}
 \caption{Přístupy na NUMA uzly}
+\label{table1}
 \end{table}
 
 Úloha umístit úlohu na nejvhodnější pozici, nemusí být zcela tak jednoduchá. Vše komplikují sdílené data (třeba knihovna glibc), na které obvykle přistupuje více úloh. 
@@ -1855,8 +1855,8 @@ Uzel 1 & 2 & žádná \\
 Uzel 1 & 3 & žádná \\
 \hline
 \end{tabular}
-\label{table2}
 \caption{Tabulka lokací běžících úloh}
+\label{table2}
 \end{table}
 
 \begin{table}[h]
@@ -1870,8 +1870,8 @@ Uzel 0 & 30\% & 60\% \\
 Uzel 1 & 70\% & 40\% \\
 \hline
 \end{tabular}
-\label{table3}
 \caption{Statistiky přístupu do paměti}
+\label{table3}
 \end{table}
 
 Z Tabulka \ref{table1} a tabulky \ref{table2} je jasné, že přesun úlohy A na uzel 1 přinese zlepšení rychlosti přístupu k datům v operační paměti úlohy o 40\% (kdežto přesun úlohy B na uzel 1 by k opačnému jevu a zhoršení rychlosti přístupu k datům v operační paměti o 20\%).
@@ -1896,8 +1896,8 @@ Uzel & CPU & Úloha \\
 1 & 3 & žádná \\
 \hline
 \end{tabular}
-\label{table4}
 \caption{Tabulka lokací běžících úloh}
+\label{table4}
 \end{table}
 
 \begin{table}[h]
@@ -1911,8 +1911,8 @@ Uzel 0 & 30\% & 40\% \\
 Uzel 1 & 70\% & 60\% \\
 \hline
 \end{tabular}
-\label{table5}
 \caption{Statistiky přístupu do paměti}
+\label{table5}
 \end{table}
 
 Úlohy jsou na úrovni domén NUMA uzlů vyváženy. To znamená, že na každém NUMA uzlu běží jedna úloha. Dále zjišťuje plánovač zdali jsou úlohy a data jsou na stejném NUMA uzlu čili prověřuje, zdali úloha nemusí zbytečně přistupovat do vzdálených segmentů pamětí.  Tady vidíme, že ačkoli úloha A běží na uzlu 0 většinu přístupů 70\% dělá do vzdálené paměti. Nyní se podíváme kde běží a kde přistupuje úloha B. Ta běží na uzlu 1 a přistupuje nejvíce (60\% přístupů) do uzlu 1. Nyní abychom zjistili zdali má smysl výměna úloh musíme zjistit co by nám přineslo přehození úloh A a B mezi sebou.
@@ -1938,8 +1938,8 @@ Uzel 0 & 30\% & 40\% (lokální)\\
 Uzel 1 & 70\% (lokální) & 60\% \\
 \hline
 \end{tabular}
-\label{table6}
 \caption{Statistiky přístupu do paměti}
+\label{table6}
 \end{table}
 
 Úloha A = 70
