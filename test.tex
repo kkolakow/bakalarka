@@ -1968,7 +1968,7 @@ Tento způsob vyvažování NUMA systému je implementováno přesně tak, jak j
 Důležité je si uvědomit, že vyvažování je zde realizováno podle algoritmu, kterou obsahuje funkce \verb#load_balance#.
 
 \subsubsection{Spouštěné jako ošetření page fault vyjímky}
-Aby vyvažovací algoritmus mohl rozhodnout, kde je vhodné umístit úlohu určenou k běhu, vede si statistiky přístupů na NUMA uzly každé úlohy. To se realizuje tak, že se znepřístupní určité stránky a při přístupu úlohy do znepřístupněné paměti je vyvolána page fault vyjímka. Jako ošetření vyjímky je volána funkce \verb#do_numa_page#. 
+Aby mohl vyvažovací algoritmus rozhodnout, kde je vhodné umístit úlohu určenou k běhu, vede si statistiky přístupů na NUMA uzly každé úlohy. Sběr statistik je realizován tak, že jsou znepřístupněné určité stránky paměti a při přístupu úlohy do znepřístupněné paměti je vyvolána page fault vyjímka. Jako ošetření vyjímky je volána funkce \verb#do_numa_page#. 
 
 %\begin{lstlisting}
 %static int do_numa_page(struct mm_struct *mm, struct vm_area_struct *vma,
@@ -2139,7 +2139,7 @@ Jelikož jsou algoritmy pro výběr a zátěže úloh značně rozdílné je tř
 
 \section{Testování}
 
-Pro vytvoření úloh, kterými zatížíme testovaný systém používáme modifikovaný benchmarku linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na generování statistiky běhu.
+Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modifikovaný benchmark linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na generování statistiky běhu. Benchmark linpack dělá aritmetické operace (násobí matice) a výsledkem je množství floating point operací za vteřinu. 
 
 Testování plánovače úloh budeme na OS Linux rozdělovat do 3 úrovní:
 
@@ -2147,9 +2147,7 @@ Testování plánovače úloh budeme na OS Linux rozdělovat do 3 úrovní:
 
 Testování na jednom CPU provádíme tak, že spustíme v jeden okamžik na jednom CPU řadu úloh, a na konci se podíváme, jak dlouho jednotlivé úlohy běžely a jakých výsledků jsme dosáhli. Pokud bude plánovač spravedlivě přidělovat čas úlohám budou běžet stejně dlouho, množství výměn obsahu na CPU bude přibližně stejné pro každou úlohu, dosažená hodnota operací za sekundu bude také přibližně stejná. Jelikož jsme úlohy spouštěli na CPU se specifikovanou CPU afinitou, prověříme také, zdali úlohy běžely jen na CPU námi specifikovaném.
 
-Pro vytvoření úloh použijeme linpack do kterého byl přidán kód na výpis konečných statistik běhu a také semafory, aby bylo možno v jeden okamžik spustit větší množství nově vytvořených úloh. Benchmark linpack dělá interně aritmetické operace (násobení matic) a výsledkem je množství floating point operací za vteřinu. 
-
-Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném CPU) pomocí systémové utility taskset.
+Pro vytvoření úloh použijeme linpack do kterého byl přidán kód na výpis konečných statistik běhu a také semafory, aby bylo možno v jeden okamžik spustit větší množství nově vytvořených úloh. Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném CPU) pomocí systémové utility taskset.
 
 Poté zkontrolujeme ve výstupu benchmarku následující:
 \begin{itemize}
