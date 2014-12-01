@@ -2161,14 +2161,14 @@ Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh
 
 Poté zkontrolujeme ve výstupu benchmarku následující:
 \begin{itemize}
-\item Zdali úlohy opravdu běžely na CPU námi specifikovaném při startu úloh
+\item Zdali úlohy opravdu běžely na jádru námi specifikovaném při startu úloh (v našem příkladu jádro s číslem 38)
 \item Zdali všechny úlohy běžely přibližně stejně dlouho, zdali počet výměn obsahu na CPU je přibližně stejný  a zdali jsme dosáhli přibližně stejné hodnoty operací na plovoucí řádce (kflops) pro každou instanci benchmarku.
-\item V mpstat logu kontrolujeme zdali byl procesor s frontou úloh neustále plně vytížen (viz mpstat sumarizační log)\\
+\item V mpstat výstupu zkontrolujeme zdali byl procesor s frontou úloh neustále plně vytížen (viz mpstat zkrácený sumarizační výstup)\\
 \end{itemize}
 
 \newpage
 \noindent
-\textit{Výpis běhu benchmarku linpack}
+\textit{Výpis běhu benchmarku linpack} \\
 \begingroup
 \fontsize{10pt}{12pt}\selectfont
 \begin{verbatim}
@@ -2224,8 +2224,12 @@ NUMA nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 \end{verbatim}
 \endgroup
 
-MPSTAT sumarizovaný výpis. První číslice na každém řádku označuje číslo PU (logická jednotka) další čísla znamenají procentuální vytížení daného PU aktualizované po pěti vteřinách (celkem 12číslic to znamená, že vytížení sledujeme jednu minutu). Dvě hvězdičky znamenají 100\% vytížení. 
+\noindent
+\textit{MPSTAT zkrácený sumarizovaný výpis} \\ 
 
+První číslice na každém řádku označuje číslo PU (logická jednotka) další čísla znamenají procentuální vytížení daného PU aktualizované po pěti vteřinách (celkem 12číslic to znamená, že vytížení sledujeme jednu minutu). Dvě hvězdičky znamenají 100\% vytížení. 
+
+\begin{center}
 \begin{verbatim}
 
   0  0  0  0  0  0  0  0  0  0  0  0  0
@@ -2245,7 +2249,8 @@ MPSTAT sumarizovaný výpis. První číslice na každém řádku označuje čí
  47  0  0  0  0  0  0  0  0  0  0  0  0
 
 \end{verbatim}
-
+\end{center}
+\noindent
 Výsledek testování plánování fronty úloh
 \begin{itemize}
 \item Úlohy běžely na PU číslo 38, které jsme specifikovali při startu úloh.
@@ -2253,17 +2258,18 @@ Výsledek testování plánování fronty úloh
 \item Z mpstat výstupu vidíme, že PU 38 bylo po celou dobu běhu úloh maximálně vytížené.
 \end{itemize}
 
-Jelikož byly splněny všechny naše předpoklady říkáme, že plánovač plánuje férově úlohy z fronty úloh na jednom CPU.
+Jelikož byly splněny všechny naše předpoklady říkáme, že plánovač plánuje férově úlohy z fronty úloh na jednom jádru.
 
 \subsubsection{Testování plánování úloh na SMP UMA systémech}
 
-Na SMP systémech testovací zátěž spouštíme dvěma různými způsoby.
+\noindent
+Na SMP systémech testovací zátěž spouštíme dvěma způsoby:
 \begin{enumerate}
 \item Spouštíme úlohy se specifikovanou CPU afinitou. Nejprve analýzou topologie zjistíme optimální rozložení zátěže pro jednotlivá CPU. Za pomocí systémové utility taskset pak specifikujeme každé jedné úloze CPU afinitu.  
-\item Vyvažování úloh řízené plánovačem. V tomto případě nespecifikujeme afinitu úlohám vše necháme na plánovači úloh.
+\item Spuštění a vyvažování úloh řízené plánovačem. V tomto případě nespecifikujeme afinitu úlohám vše necháme na plánovači úloh.
 \end{enumerate}
 
-Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů. Podíváme se zdali plánovač, zbytečně nepřehazoval úlohy mezi CPU, zjišťujeme časy běhů úloh.
+Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů. Podíváme se zdali plánovač, zbytečně nepřehazoval úlohy mezi jádry, porovnáváme časy běhů úloh, porovnáváme jakou hodnotu Kflops jsme dosáhli..
 
 \subsubsection{Testování plánování úloh na NUMA systémech}
 
