@@ -2279,29 +2279,31 @@ Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spou�
 
 Během testování porovnáme sadu tří výsledků (plánovačem řízené, se specifikovanou CPU afinitou a se specifikovanou NUMA afinitou) s další sadou tří výsledků spuštěných na jiné verzi jádra. Záměrně volíme verzi jader, mezi kterými probíhal vývoj algoritmu pro NUMA vyvažování.
 
-\begin{figure}[ht]
+\begin{figure}[p]
 \includegraphics[scale=0.2]{obrazky/lsTOPO-brickland.png}
-\caption{Systém s čtyřmi NUMA uzly a 120 HT jádry}
+\caption{Testovaný systém s čtyřmi NUMA uzly a 120 HT jádry}
 \label{4 NUMA NODE system scheme}
 \end{figure}
 
-Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního systému a to pro všechny 3 typy běhu (plánovačem řízené, s CPU afinitou, s NUMA afinitou). Pro každý typ běhu běžíme nejdřív 1 instanci linpacku, poté dvě zároveň, čtyři až nakonec 120 (což je celkový počet logických jader v systému) instancí najednou. Každý bod, který vynášíme do grafu získáme sečtením dosažených hodnot kflops každé instance.
+Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního systému a to pro všechny 3 typy běhu (plánovačem řízené, s CPU afinitou, s NUMA afinitou). Pro každý typ běhu běžíme nejdřív 1 instanci linpacku, poté dvě zároveň, čtyři až nakonec 120 (což je celkový počet logických jader v systému viz. Obrázek \ref{4 NUMA NODE system scheme}) instancí najednou. Každý bod, který vynášíme do grafu získáme sečtením dosažených hodnot kflops každé instance.
 
 \begin{figure}[ht]
-\includegraphics[scale=0.2]{obrazky/LinpackBaseChart.png}
+\center
+\includegraphics[scale=0.16]{obrazky/LinpackBaseChart.png}
 \caption{Výsledky linpacku na starším jádru}
 \label{older kernel linpack results}
 \end{figure}
 
-Z toho grafu je na první pohled zřejmé, že plánovačem dosažené hodnoty (zelená křivka) kflops se výrazně liší od běhů, kde jsme sami specifikovali afinitu (CPU a NUMA). Nyní seběhneme identický test pro pozdější jádro
+Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi kernelu. Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a NUMA). Nyní seběhneme identický test pro novější jádro operačního systému.
 
 \begin{figure}[ht]
-\includegraphics[scale=0.2]{obrazky/LinpackTargetChart.png}
+\center
+\includegraphics[scale=0.16]{obrazky/LinpackTargetChart.png}
 \caption{Výsledky linpacku na novějším jádru}
 \label{newer kernel linpack results}
 \end{figure}
 
-Druhý graf nám ukazuje, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
+Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře operačního systému,  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
 
 \begin{figure}[ht]
 \includegraphics[scale=0.2]{obrazky/LinpackSumChart.png}
