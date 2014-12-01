@@ -2335,7 +2335,12 @@ Další graf (obrázek \ref{both kernels linpack results}) který se nám bude h
 
 Další zajímavou informací může být zatížení jednotlivých CPU zjišťovaných utilitou mpstat.
 
-Vybereme si plánovačem řízený běh, výsledky prvního testovaného jádra a počtu instancí 72. Zde totiž vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 32 PU. Je zde vidět, že dochází k přesunům úloh na jiná PU, některé úlohy jsou spuštěné později, nebo dokonce je jedna úloha spuštěna, až je druhá dokončena. Toto samozřejmě úloze nechá celou vyrovnávací paměť a úloha pak seběhne rychleji. Toto řešení nemá nicméně nic společného s férovostí (jedna úloha běží další čeká).
+Vybereme si plánovačem řízený běh, výsledky prvního testovaného jádra a počtu instancí 72. Zde totiž vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 20 PU. Je zde vidět, že dochází k přesunům úloh na jiná PU, některé úlohy jsou spuštěné později, nebo dokonce je jedna úloha spuštěna, až je druhá dokončena. Toto samozřejmě úloze nechá celou vyrovnávací paměť a úloha pak seběhne rychleji. Toto řešení nemá nicméně nic společného s férovostí (jedna úloha běží další čeká).
+
+\begin{figure}
+\label{mpstat zkrácený sumarizovaný výpis}
+\center
+\label{mpstat2}
 
 \begin{verbatim}
 
@@ -2360,20 +2365,9 @@ Vybereme si plánovačem řízený běh, výsledky prvního testovaného jádra 
  18  1 ** ** ** ** ** ** ** 99 82 ** ** ** 18  0 
  19  0 ** ** ** ** ** ** ** 86 80 ** ** ** 23  0 
  20  1 ** ** ** ** ** ** ** 82  0  0  0  0  0  0 
- 21  0 ** ** ** ** ** ** ** 93  0  0  1  0  0  0 
- 22  1 ** ** ** ** ** ** ** 59  0  0  0  0  0  0 
- 23  0  1  0  0  0  0  1  0  0  0  0  0  0  0  0 
- 24  0 ** ** ** ** ** ** ** 83  0  0  0  0  0  0 
- 25  0 ** ** ** ** ** ** ** 54  0  0  0  0  1  0 
- 26  0 ** ** ** ** ** ** ** ** 14  0  0  0  0  0 
- 27  0 ** ** ** ** ** ** ** 97  0  0  0  0  0  0 
- 28  0 ** ** ** ** ** ** ** 87  0  0  0  0  0  0 
- 29  0 ** ** ** ** ** ** ** ** 13  0  0  0  0  0 
- 30  2  6  0  0  1  0  0  0  0  0  1 57 ** ** 96 
- 31  1  1  0  0  0  0  0  0  0  0  0 53 ** ** 92 
- 32  1  6  0  0  0  0  0  0  0  0  0 50 ** ** ** 
 
 \end{verbatim}
+\end{figure}
 
 Dalším zajímavým příkladem může být pozorování, kde plánovač umisťuje paměť procesu a kde samotný proces. K tomu účelu použijeme perf bench benchmark.
 Tento příklad ukazuje nevhodné kopírování paměti mezi NUMA uzly. Na prvním obrázku je paměť na druhém jsou úlohy. V tomto příkladu jsou spuštěny 2 vlákna celkem mají 8GB paměti a běží 20 min. Až po 6ti minutách dochází k rozdělení dat a procesů na 2 NUMA uzly. 
