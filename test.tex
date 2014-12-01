@@ -2153,20 +2153,22 @@ Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modif
 
 \subsection{Úrovně testování plánovače}
 
-\subsubsection{Testování plánování fronty úloh na jednom CPU}
+\subsubsection{Testování plánování fronty úloh na jednom jádru}
 
-Testování na jednom CPU provádíme tak, že spustíme v jeden okamžik na jednom CPU řadu úloh, a na konci se podíváme, jak dlouho jednotlivé úlohy běžely a jakých výsledků jsme dosáhli. Pokud bude plánovač spravedlivě přidělovat čas úlohám budou běžet stejně dlouho, množství výměn obsahu na CPU bude přibližně stejné pro každou úlohu, dosažená hodnota operací za sekundu bude také přibližně stejná. Jelikož jsme úlohy spouštěli na CPU se specifikovanou CPU afinitou, prověříme také, zdali úlohy běžely jen na CPU námi specifikovaném.
+Testování na jednom jádru provádíme tak, že spustíme v jeden okamžik na jednom jádru řadu úloh, a na konci se podíváme, jak dlouho jednotlivé úlohy běžely a jakých výsledků jsme dosáhli. Pokud bude plánovač spravedlivě přidělovat čas úlohám budou běžet stejně dlouho, množství výměn obsahu bude přibližně stejné pro každou úlohu, dosažená hodnota operací za sekundu bude také přibližně stejná. Jelikož jsme úlohy spouštěli na jádru se specifikovanou CPU afinitou, prověříme také, zdali úlohy běžely jen na jádru námi specifikovaném.
 
-Pro vytvoření úloh použijeme linpack do kterého byl přidán kód na výpis konečných statistik běhu a také semafory, aby bylo možno v jeden okamžik spustit větší množství nově vytvořených úloh. Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném CPU) pomocí systémové utility taskset.
+Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset.
 
 Poté zkontrolujeme ve výstupu benchmarku následující:
 \begin{itemize}
 \item Zdali úlohy opravdu běžely na CPU námi specifikovaném při startu úloh
 \item Zdali všechny úlohy běžely přibližně stejně dlouho, zdali počet výměn obsahu na CPU je přibližně stejný  a zdali jsme dosáhli přibližně stejné hodnoty operací na plovoucí řádce (kflops) pro každou instanci benchmarku.
-\item V mpstat logu kontrolujeme zdali byl procesor s frontou úloh neustále plně vytížen (viz mpstat sumarizační log)
+\item V mpstat logu kontrolujeme zdali byl procesor s frontou úloh neustále plně vytížen (viz mpstat sumarizační log)\\
 \end{itemize}
 
-Výpis běhu benchmarku linpack
+\newpage
+\noindent
+\textit{Výpis běhu benchmarku linpack}
 \begingroup
 \fontsize{10pt}{12pt}\selectfont
 \begin{verbatim}
