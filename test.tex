@@ -1955,10 +1955,10 @@ Uzel 1 & 70\% (lokální) & 60\% \\
 Úloha B = 40
 
 \noindent
-Celkově tedy přístup do lokální paměti máme 110/200. Jelikož je po přehození úloh NUMA doména vyvážená a přístupy jsou většinou do lokální paměti může dojít k přehození úloh. Před přehozením úloh se spočítá zdali cena přesunu je nižší než cena ponechání úlohy a přistupování úlohy do vzdálené paměti.
-\newpage
+Celkově tedy přístup do lokální paměti máme 110/200. Jelikož je po přehození úloh NUMA doména vyvážená a přístupy jsou většinou do lokální paměti může dojít k přehození úloh. Před přehozením úloh se spočítá zdali cena přesunu je nižší než cena ponechání úlohy a přistupování úlohy do vzdálené paměti. \\
+
 \noindent
-\textbf{Souhr vyvažování na numa uzlech}
+\textbf{Kroky algoritmu při vyvažování na numa uzlech}
 \begin{enumerate}
 \item Plánovač zjišťuje, zdali je systém v NUMA doméně vyvážený (tj. každá skupina v doméně má přibližně stejné množství běžících úloh).
 \item Poté plánovač sleduje, jestli jsou přístupy úloh do paměti lokální. V případě, že úlohy přistupují většinou do lokální paměti a množství procesů na doméně vyvážené, algoritmus skončí. 
@@ -1972,16 +1972,14 @@ Jelikož nám vyšlo lépe přehození úloh a vyvážení na úrovni NUMA domé
 
 U vyvažování na úrovni NUMA uzlů se dále řeší grupování za účelem plánování celé skupiny úloh, které například sdílí stejné knihovny a ty jsou v paměti na NUMA uzlu, kde běží tato skupina úloh. 
 
-%\subsection{Spuštění NUMA vyvažování}
+\subsection{Spuštění NUMA vyvažování}
 
-Vyvažování na NUMA systému se spouští při dvou událostech
-
-\subsubsection{Souštěné periodicky při obsluze časovače přerušení}
+\subsubsection{Periodické spouštění vyvažování při obsluze časovače přerušení}
 Tento způsob vyvažování NUMA systému je implementováno přesně tak, jak je popsáno v kapitole o vyvažování UMA SMP systému. Funkce \verb#scheduler_tick# volá funkci \verb#trigger_load_balance#. Ta vyvolá softwarové přerušení, které vyvolá obsluhu přerušení \verb#run_rebalance_domains#. \verb#run_rebalance_domains# volá funkci \verb#rebalance_domains#, která prochází hierarchicky domény a vyvažuje skupiny v doméně pomocí volání funkce \verb#load_balance#. Veškeré tyto funkce lze najít v předchozím textu v kapitole věnované vyvažování UMA SMP systémů. 
 
 Důležité je si uvědomit, že vyvažování je zde realizováno podle algoritmu, kterou obsahuje funkce \verb#load_balance#.
 
-\subsubsection{Spouštěné jako ošetření page fault vyjímky}
+\subsubsection{Vyvažování spouštěné jako ošetření page fault vyjímky}
 Aby mohl vyvažovací algoritmus rozhodnout, kde je vhodné umístit úlohu určenou k běhu, vede si statistiky přístupů na NUMA uzly každé úlohy. Sběr statistik je realizován tak, že jsou znepřístupněné určité stránky paměti a při přístupu úlohy do znepřístupněné paměti je vyvolána page fault vyjímka. Jako ošetření vyjímky je volána funkce \verb#do_numa_page#. 
 
 %\begin{lstlisting}
