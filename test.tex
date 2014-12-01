@@ -1917,7 +1917,7 @@ Uzel 1 & 70\% & 60\% \\
 \label{table5}
 \end{table}
 
-Úlohy jsou na úrovni domén NUMA uzlů vyváženy. To znamená, že na každém NUMA uzlu běží jedna úloha. Dále plánovač zjišťuje, zdali jsou úlohy a data na stejném NUMA uzlu, čili prověřuje, zdali úloha nemusí zbytečně přistupovat do vzdálených segmentů pamětí.  Tady vidíme, že ačkoli úloha A běží na uzlu 0 většinu přístupů (70\%) dělá do vzdálené paměti. Nyní se podíváme kde běží a kde přistupuje úloha B. Ta běží na uzlu 1 a přistupuje nejvíce (60\% přístupů) do uzlu 1. Nyní abychom zjistili zdali má smysl výměna úloh musíme zjistit co by nám přineslo přehození úloh A a B mezi sebou.
+Úlohy jsou na úrovni domén NUMA uzlů vyváženy. To znamená, že v tomto příkladě běží na každém NUMA uzlu právě jedna úloha. Dále plánovač zjišťuje, zdali jsou úlohy a data na stejném NUMA uzlu, čili prověřuje, zdali úloha nemusí zbytečně přistupovat do vzdálených segmentů pamětí.  Tady vidíme, že ačkoli úloha A běží na uzlu 0 většinu přístupů (70\%) dělá do vzdálené paměti (na uzel 1). Nyní se podíváme, kde běží a kde přistupuje úloha B. Ta běží na uzlu 1 a přistupuje nejvíce (60\% přístupů) do uzlu 1. Nyní abychom zjistili zdali má smysl výměna úloh musíme zjistit co by nám přineslo přehození úloh A a B mezi sebou (jelikož víme, že úlohy jsou rovnoměrně rozmístěny na doméně NUMA uzlů).
 
 \noindent
 Sumarizací lokálních přístupu zjistíme jak jsme na tom před přehozením úloh.
@@ -1954,7 +1954,13 @@ Uzel 1 & 70\% (lokální) & 60\% \\
 \noindent
 Celkově tedy přístup do lokální paměti máme 110/200.
 \noindent
-Jelikož nám vyšlo lépe přehození úloh a vyvážení na úrovni domén bude zachováno plánovač se rozhodne k záměně úloh. 
+Plánovač poté postupuje podle následujícího algoritmu:
+\begin{itemize}
+i
+
+Když plánovač shledá přehození úloh za výhodnější vzhledem p přístupu k lokální paměti a systém je na úrovni NUMA domén vyvážen, plánovač kalkuluje zdali je cena migrace menší než benefit z přesunu úloh.
+
+Jelikož nám vyšlo lépe přehození úloh a vyvážení na úrovni NUMA domén bude zachováno plánovač se rozhodne k záměně úloh (pokud cena migrace úlohy bude . 
 
 U vyvažování na úrovni NUMA uzlů se dále řeší grupování za účelem plánování celé skupiny úloh, které například sdílí stejné knihovny a ty jsou v paměti na NUMA uzlu, kde běží tato skupina úloh. 
 
