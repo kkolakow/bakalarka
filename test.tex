@@ -1790,7 +1790,7 @@ Nyní přístupy do paměti nabývají těchto hodnot:
 \item Nejhorší možný čas přístupu do paměti jsme dosáhli v případě, že komunikují dva NUMA uzly, které jsou propojeny pomocí dvou kontrolérů.
 \end{enumerate}
 
-Při vyvažování u NUMA systému je nutné mít na paměti, že ne všechny procesory mají přístupy do všech pamětí stejně rychlé.
+Při vyvažování u NUMA systému je nutné mít na paměti, že ne všechny procesory mají přístupy do všech segmentů pamětí stejně rychlé.
 
 \noindent
 NUMA vyvažování používá tři principy přesunu pro docílení vyváženosti:
@@ -1836,126 +1836,6 @@ Pro každou úlohu A testuje NUMA uzel N
 \item je přínos přesunu úlohy na uzel N větší než nevýhody přesunu.
 \end{itemize}
 \end{enumerate}
-
-\newpage
-\subsection{Logika vyvažování na NUMA systémech v příkladech}
-Vyvažovací algoritmus na NUMA systémech je lepší si demonstrovat na příkladech. Plánovač sbírá statistiky přístupů jednotlivých úloh na NUMA uzly a ví také z front běžících úloh, kde je úloha umístěná. Na základě těchto informací dochází k rozmístění úloh na systému, tak jak je to demonstrováno v následujících příkladech. \\
-
-\noindent
-\textit{Příklad 1} na umístění úlohy na CPU a NUMA uzlu na kterém neběží žádné jiné úlohy
-
-\begin{table}[h]
-\centering
-\begin{tabular}{|c|c|c|}
-\hline
-Uzel & CPU číslo & Úloha \\
-\hline
-Uzel 0 & 0 & A \\
-\hline
-Uzel 0 & 1 & B \\
-\hline
-Uzel 1 & 2 & žádná \\
-\hline
-Uzel 1 & 3 & žádná \\
-\hline
-\end{tabular}
-\caption{Tabulka lokací běžících úloh}
-\label{table2}
-\end{table}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{|c|c|c|}
-\hline
-Uzel & Úloha A & Úloha B \\
-\hline
-Uzel 0 & 30\% & 60\% \\
-\hline
-Uzel 1 & 70\% & 40\% \\
-\hline
-\end{tabular}
-\caption{Statistiky přístupů do paměti}
-\label{table3}
-\end{table}
-
-Z tabulky \ref{table2} a tabulky \ref{table3} je jasné, že přesun úlohy A na uzel 1 přinese zlepšení rychlosti přístupu k datům v operační paměti (kdežto přesun úlohy B na uzel 1 by vedl k opačnému výsledku).
-
-Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén, to znamená, po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy. Kdyby šlo o závislé úlohy, přístupy do segmentů pamětí by mohly mít stejné obě úlohy.
-
-\newpage
-\noindent
-\textit{Příklad 2} na výměnu úloh na NUMA uzlech
-
-\begin{table}[h]
-\centering
-\begin{tabular}{|c|c|c|}
-\hline
-Uzel & CPU & Úloha \\
-\hline
-0 & 0 & A \\
-\hline
-0 & 1 & žádná  \\
-\hline
-1 & 2 & B \\
-\hline
-1 & 3 & žádná \\
-\hline
-\end{tabular}
-\caption{Tabulka lokací běžících úloh}
-\label{table4}
-\end{table}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{|c|r|r|}
-\hline
-Uzel & Úloha A & Úloha B \\
-\hline
-Uzel 0 & 30\% & 40\% \\
-\hline
-Uzel 1 & 70\% & 60\% \\
-\hline
-\end{tabular}
-\caption{Statistiky přístupu do paměti}
-\label{table5}
-\end{table}
-
-Úlohy jsou na úrovni domén NUMA uzlů vyváženy. To znamená, že v tomto příkladě běží na každém NUMA uzlu právě jedna úloha. Dále plánovač zjišťuje, zdali jsou úlohy a data na stejném NUMA uzlu, čili prověřuje, zdali úloha nemusí zbytečně přistupovat do vzdálených segmentů pamětí.  Tady vidíme, že ačkoli úloha A běží na uzlu 0 většinu přístupů (70\%) dělá do vzdálené paměti (na uzel 1). Nyní se podíváme, kde běží a kde přistupuje úloha B. Ta běží na uzlu 1 a přistupuje nejvíce (60\% přístupů) do uzlu 1. Nyní abychom zjistili zdali má smysl výměna úloh musíme zjistit co by nám přineslo přehození úloh A a B mezi sebou (jelikož víme, že úlohy jsou rovnoměrně rozmístěny na doméně NUMA uzlů).
-
-\noindent
-Sumarizací lokálních přístupu zjistíme jak jsme na tom před přehozením úloh.
-
-\noindent
-Úloha A = 30
-Úloha B = 60
-
-\noindent
-Celkově tedy do lokální paměti máme 90/200.
-
-\noindent
-Nyní stejný případ s prohozením úloh
-
-\begin{table}[h]
-\centering
-\begin{tabular}{|c|r|r|}
-\hline
-Uzel & Úloha A & Úloha B \\
-\hline
-Uzel 0 & 30\% & 40\% (lokální)\\
-\hline
-Uzel 1 & 70\% (lokální) & 60\% \\
-\hline
-\end{tabular}
-\caption{Statistiky přístupu do paměti}
-\label{table6}
-\end{table}
-
-\noindent
-Úloha A = 70
-Úloha B = 40
-
-\noindent
-Celkově tedy přístup do lokální paměti máme 110/200. Jelikož je po přehození úloh NUMA doména vyvážená a přístupy jsou většinou do lokální paměti může dojít k přehození úloh. Před přehozením úloh se spočítá zdali cena přesunu je nižší než cena ponechání úlohy a přistupování úlohy do vzdálené paměti. \\
 
 \subsection{Spuštění NUMA vyvažování}
 
@@ -2132,6 +2012,127 @@ V této kapitole jsme si vysvětlili, že plánovač umisťuje úlohy a vyvažuj
 
 Jelikož jsou algoritmy pro výběr a zátěže úloh značně rozdílné je třeba testovat, zdali nenastane situace, že je dle algoritmu z \verb#task_numa_find_cpu# a \verb#task_numa_placement# úloha umístěna na nějaké CPU, která je následně přesunuta algoritmem \verb#load_balance# při periodickém spuštění na jiné CPU. Přesuny úloh způsobují nedostupnost dat ve vyrovnávacích paměti, výměnu obsahu registrů, nebo dokonce kopírování pamětí mezi NUMA uzly. Pokud tato situace nastane dochází k značnému poklesu propustnosti daného systému. \\ 
 
+\newpage
+\subsection{Logika vyvažování na NUMA systémech v příkladech}
+Vyvažovací algoritmus na NUMA systémech je lepší si demonstrovat na příkladech. Plánovač sbírá statistiky přístupů jednotlivých úloh na NUMA uzly a ví také z front běžících úloh, kde je úloha umístěná. Na základě těchto informací dochází k rozmístění úloh na systému, tak jak je to demonstrováno v následujících příkladech. \\
+
+\noindent
+\textit{Příklad 1} na umístění úlohy na CPU a NUMA uzlu na kterém neběží žádné jiné úlohy
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Uzel & CPU číslo & Úloha \\
+\hline
+Uzel 0 & 0 & A \\
+\hline
+Uzel 0 & 1 & B \\
+\hline
+Uzel 1 & 2 & žádná \\
+\hline
+Uzel 1 & 3 & žádná \\
+\hline
+\end{tabular}
+\caption{Tabulka lokací běžících úloh}
+\label{table2}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Uzel & Úloha A & Úloha B \\
+\hline
+Uzel 0 & 30\% & 60\% \\
+\hline
+Uzel 1 & 70\% & 40\% \\
+\hline
+\end{tabular}
+\caption{Statistiky přístupů do paměti}
+\label{table3}
+\end{table}
+
+Z tabulky \ref{table2} a tabulky \ref{table3} je jasné, že přesun úlohy A na uzel 1 přinese zlepšení rychlosti přístupu k datům v operační paměti (kdežto přesun úlohy B na uzel 1 by vedl k opačnému výsledku).
+
+Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén, v tomto příkladě to znamená, po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy. Kdyby šlo o závislé úlohy, přístupy do segmentů pamětí by mohly mít stejné obě úlohy.
+
+\newpage
+\noindent
+\textit{Příklad 2} na výměnu úloh na NUMA uzlech
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Uzel & CPU & Úloha \\
+\hline
+0 & 0 & A \\
+\hline
+0 & 1 & žádná  \\
+\hline
+1 & 2 & B \\
+\hline
+1 & 3 & žádná \\
+\hline
+\end{tabular}
+\caption{Tabulka lokací běžících úloh}
+\label{table4}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|r|r|}
+\hline
+Uzel & Úloha A & Úloha B \\
+\hline
+Uzel 0 & 30\% & 40\% \\
+\hline
+Uzel 1 & 70\% & 60\% \\
+\hline
+\end{tabular}
+\caption{Statistiky přístupu do paměti}
+\label{table5}
+\end{table}
+
+Úlohy jsou na úrovni domén NUMA uzlů vyváženy. To znamená, že v tomto příkladě běží na každém NUMA uzlu právě jedna úloha. Dále plánovač zjišťuje, zdali jsou úlohy a data na stejném NUMA uzlu, čili prověřuje, zdali úloha nemusí zbytečně přistupovat do vzdálených segmentů pamětí.  Tady vidíme, že ačkoli úloha A běží na uzlu 0 většinu přístupů (70\%) dělá do vzdálené paměti (na uzel 1). Nyní se podíváme, kde běží a kde přistupuje úloha B. Ta běží na uzlu 1 a přistupuje nejvíce (60\% přístupů) do uzlu 1. Nyní abychom zjistili zdali má smysl výměna úloh musíme zjistit co by nám přineslo přehození úloh A a B mezi sebou (jelikož víme, že úlohy jsou rovnoměrně rozmístěny na doméně NUMA uzlů).
+
+\noindent
+Sumarizací lokálních přístupu zjistíme jak jsme na tom před přehozením úloh.
+
+\noindent
+Úloha A = 30
+Úloha B = 60
+
+\noindent
+Celkově tedy do lokální paměti máme 90/200.
+
+\noindent
+Nyní stejný případ s prohozením úloh
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|r|r|}
+\hline
+Uzel & Úloha A & Úloha B \\
+\hline
+Uzel 0 & 30\% & 40\% (lokální)\\
+\hline
+Uzel 1 & 70\% (lokální) & 60\% \\
+\hline
+\end{tabular}
+\caption{Statistiky přístupu do paměti}
+\label{table6}
+\end{table}
+
+\noindent
+Úloha A = 70
+Úloha B = 40
+
+\noindent
+Celkově tedy přístup do lokální paměti máme 110/200. Jelikož je po přehození úloh NUMA doména vyvážená a přístupy jsou většinou do lokální paměti může dojít k přehození úloh. Před přehozením úloh se spočítá zdali cena přesunu je nižší než cena ponechání úlohy a přistupování úlohy do vzdálené paměti. \\
+
+
 \noindent
 \textbf{Kroky algoritmu při vyvažování na numa uzlech}
 \begin{enumerate}
@@ -2147,7 +2148,8 @@ U vyvažování na úrovni NUMA uzlů se dále řeší grupování za účelem p
 
 \section{Testování}
 
-Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modifikovaný benchmark linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na generování statistiky běhu. Benchmark linpack dělá aritmetické operace (násobí matice) a výsledkem je množství floating point operací za vteřinu. 
+\subsection{Testovací úloha}
+Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modifikovaný benchmark linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na sběr statistiky běhu benchmarku. Benchmark linpack dělá aritmetické operace (násobí matice) a výsledkem je množství floating point operací za vteřinu. 
 
 \subsection{Úrovně testování plánovače}
 
