@@ -2281,7 +2281,7 @@ Během testování porovnáme sadu tří výsledků (plánovačem řízené, se 
 
 \begin{figure}[p]
 \includegraphics[scale=0.2]{obrazky/lsTOPO-brickland.png}
-\caption{Testovaný systém s čtyřmi NUMA uzly a 120 HT jádry}
+\caption{Testovaný systém se čtyřmi NUMA uzly a 120 HT jádry}
 \label{4 NUMA NODE system scheme}
 \end{figure}
 
@@ -2306,27 +2306,29 @@ Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops do
 Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře operačního systému,  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
 
 \begin{figure}[ht]
+\center
 \includegraphics[scale=0.2]{obrazky/LinpackSumChart.png}
-\caption{Výsledky na obou kernelech v jednom grafu}
+\caption{Výsledky ze dvou kernelu v jednom grafu}
 \label{both kernels linpack results}
 \end{figure}
 
-Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované NUMA afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové PU/NUMA uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
-
-Nyní se podíváme na další grafy, které nám odhalí co se při testování stalo.
-
-Prvním grafem je graf kolik času jednotlivé úlohy strávily mimo běh na CPU.
+Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované NUMA afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové CPU a NUMA uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
 
 \begin{figure}[ht]
-\includegraphics[scale=0.4]{obrazky/timeWaitingOutOfCPU.png}
+\center
+\includegraphics[scale=0.32]{obrazky/timeWaitingOutOfCPU.png}
 \caption{Čas strávený úlohami mimo CPU}
 \label{timeWaitingOutOfCPU}
 \end{figure}
 
-Dalším grafem, který se nám bude hodit k analýze je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
+Nyní se podíváme na další grafy, které nám odhalí co se při testování stalo. Další graf (z obrázku \ref{timeWaitingOutOfCPU}) znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU.
+
+\newpage
+Další graf (obrázek \ref{both kernels linpack results}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
 
 \begin{figure}[ht]
-\includegraphics[scale=0.4]{obrazky/totalTime.png}
+\center
+\includegraphics[scale=0.32]{obrazky/totalTime.png}
 \caption{Celkový čas běhu úloh}
 \label{both kernels linpack results}
 \end{figure}
