@@ -2275,9 +2275,7 @@ Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů
 
 Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou NUMA afinitou. NUMA afinitu úloh specifikujeme za pomocí systémové utility numactl.
 
-Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh kolik máme PU v systému (kvůli úspoře času při běhu testu zvolíme si vhodné krokování například po 4 úlohách). Jelikož je systém vybaven HT a každá dvě PU mají jen jedno ALU, dá se předpokládat, že se výsledky budou zhoršovat od běhu kdy budeme mít PU/2 úloh spuštěných najednou. Jelikož v praxi běží na CPU ještě často některé systémové úlohy, je pravděpodobné, že uvidíme propad už dříve než u PU/2 úloh spuštěných současně. Očekáváme, že plánovač rozmístí na každou PU maximálně jednu úlohu a že všechny úlohy budou běžet paralelně. Pro prezentaci výsledků použijeme tentokráte grafy.
-
-Úroveň 2 a 3 testování budeme testovat najednou a budeme porovnávat výsledky dosažené plánovačem (bez specifikované afinity) s výsledky kde budeme specifikovat CPU respektive NUMA afinitu.
+Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh kolik máme logických jader v systému (kvůli úspoře času při běhu testu zvolíme si vhodné krokování například po 4 úlohách). Jelikož je systém vybaven HT a každá dvě jádra mají jen jedno ALU, dá se předpokládat, že se výsledky budou zhoršovat přibližně od běhu, kdy budeme mít počet jader / 2 úloh spuštěných najednou. Jelikož v praxi běží ještě na procesoru některé systémové úlohy, je pravděpodobné, že uvidíme propad už dříve než u počet jader / 2 úloh spuštěných současně. Očekáváme, že plánovač rozmístí na každou logické jádro maximálně jednu úlohu a že všechny úlohy budou běžet paralelně. Pro prezentaci výsledků použijeme tentokráte grafy.
 
 Během testování porovnáme sadu tří výsledků (plánovačem řízené, se specifikovanou CPU afinitou a se specifikovanou NUMA afinitou) s další sadou tří výsledků spuštěných na jiné verzi jádra. Záměrně volíme verzi jader, mezi kterými probíhal vývoj algoritmu pro NUMA vyvažování.
 
@@ -2287,7 +2285,7 @@ Během testování porovnáme sadu tří výsledků (plánovačem řízené, se 
 \label{4 NUMA NODE system scheme}
 \end{figure}
 
-Nejdříve seběhneme linpack benchmark na prvním jádru a to pro všechny 3 typy běhu (plánovačem řízené, s CPU afinitou, s NUMA afinitou). Pro každý typ běhu běžíme nejdřív 1 instanci linpacku, poté dvě zároveň, čtyři až nakonec 120 (což je celkový počet PU v systému) instancí najednou. Každý bod, který vynášíme do grafu získáme sečtením dosažených hodnot kflops každé instance.
+Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního systému a to pro všechny 3 typy běhu (plánovačem řízené, s CPU afinitou, s NUMA afinitou). Pro každý typ běhu běžíme nejdřív 1 instanci linpacku, poté dvě zároveň, čtyři až nakonec 120 (což je celkový počet logických jader v systému) instancí najednou. Každý bod, který vynášíme do grafu získáme sečtením dosažených hodnot kflops každé instance.
 
 \begin{figure}[ht]
 \includegraphics[scale=0.2]{obrazky/LinpackBaseChart.png}
