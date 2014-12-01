@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{verbatim}
 \usepackage{titlesec}
+\usepackage{fancyvrb}
 
 \newcommand{\sectionbreak}{\clearpage}
 
@@ -2229,27 +2230,32 @@ NUMA nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 První číslice na každém řádku označuje číslo PU (logická jednotka) další čísla znamenají procentuální vytížení daného PU aktualizované po pěti vteřinách (celkem 12číslic to znamená, že vytížení sledujeme jednu minutu). Dvě hvězdičky znamenají 100\% vytížení. 
 
-\begin{center}
-\begin{verbatim}
+\begin{figure}[ht]
+\caption{mpstat zkrácený sumarizovaný výpis}
+\center
+\label{mpstat1}
 
-  0  0  0  0  0  0  0  0  0  0  0  0  0
-  1  0  1  0  0  0  0  0  0  0  0  0  0
- 
-               .   .   .
+\begin{Verbatim}[frame=single]
 
- 36  0  0  0  0  0  0  0  0  0  0  0  0
- 37  1  1  0  1  0  0  0  0  0  0  0  0
- 38  99 ** ** ** ** ** ** 99 ** ** ** 78
- 39  0  0  0  0  0  0  0  0  0  0  0  0
- 40  0  0  0  0  0  0  0  0  0  0  0  0
+             0  0  0  0  0  0  0  0  0  0  0  0  0
+             1  0  1  0  0  0  0  0  0  0  0  0  0
+            
+                          .   .   .
+           
+            36  0  0  0  0  0  0  0  0  0  0  0  0
+            37  1  1  0  1  0  0  0  0  0  0  0  0
+            38  99 ** ** ** ** ** ** 99 ** ** ** 78
+            39  0  0  0  0  0  0  0  0  0  0  0  0
+            40  0  0  0  0  0  0  0  0  0  0  0  0
+           
+                          .   .   .
+           
+            46  0  0  0  0  0  0  0  0  0  0  0  0
+            47  0  0  0  0  0  0  0  0  0  0  0  0
+           
+\end{Verbatim}
+\end{figure}
 
-               .   .   .
-
- 46  0  0  0  0  0  0  0  0  0  0  0  0
- 47  0  0  0  0  0  0  0  0  0  0  0  0
-
-\end{verbatim}
-\end{center}
 \noindent
 Výsledek testování plánování fronty úloh
 \begin{itemize}
@@ -2337,40 +2343,40 @@ Další zajímavou informací může být zatížení jednotlivých CPU zjišťo
 
 Vybereme si plánovačem řízený běh, výsledky prvního testovaného jádra a počtu instancí 72. Zde totiž vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 20 PU. Je zde vidět, že dochází k přesunům úloh na jiná PU, některé úlohy jsou spuštěné později, nebo dokonce je jedna úloha spuštěna, až je druhá dokončena. Toto samozřejmě úloze nechá celou vyrovnávací paměť a úloha pak seběhne rychleji. Toto řešení nemá nicméně nic společného s férovostí (jedna úloha běží další čeká).
 
-\begin{figure}
-\label{mpstat zkrácený sumarizovaný výpis}
+\begin{figure}[ht]
+\caption{mpstat zkrácený sumarizovaný výpis}
 \center
 \label{mpstat2}
 
-\begin{verbatim}
+\begin{Verbatim}[frame=single]
 
-  0  1  0  1  0  0  0 49 ** 85  0 19 ** ** ** 85 
-  1  1  0  0  0  0  0 47 ** ** ** 90 ** ** ** 56 
-  2  0  0  0  0  0  0 37 ** ** ** 79 ** ** ** 79 
-  3  0  0  0  0  0  0 50 ** ** ** 86 76 ** ** ** 
-  4  0  0  0  0  0  0 30 ** ** ** 92  0  0  0  0 
-  5  0  0  0  1  0  0  4 ** ** ** ** 16  0  0  0 
-  6  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-  7  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-  8  1 ** ** ** ** ** 52  0  0  0  0  0  0  0  0 
-  9  1 ** ** ** ** ** 54  0  0  0  0  0  0  0  0 
- 10  0 ** ** ** ** ** 48  0  0  0  0  0  0  0  0 
- 11  0 ** ** ** ** ** 35  0  0  0  0  0  0  0  0 
- 12  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
- 13  0 ** ** ** ** ** 46  0  0  0  0  0  0  0  0 
- 14  0 ** ** ** ** ** 27  0  0  0  0  0  0  0  0 
- 15  1  1  1  0  0  1  0  0  3 ** ** ** ** 89 ** 
- 16  1 ** ** ** ** ** ** ** 97 ** ** ** 95 78 ** 
- 17  1  1  0  0  0  0  1  0  0 96 ** ** ** 81 ** 
- 18  1 ** ** ** ** ** ** ** 99 82 ** ** ** 18  0 
- 19  0 ** ** ** ** ** ** ** 86 80 ** ** ** 23  0 
- 20  1 ** ** ** ** ** ** ** 82  0  0  0  0  0  0 
-
-\end{verbatim}
+        0  1  0  1  0  0  0 49 ** 85  0 19 ** ** ** 85 
+        1  1  0  0  0  0  0 47 ** ** ** 90 ** ** ** 56 
+        2  0  0  0  0  0  0 37 ** ** ** 79 ** ** ** 79 
+        3  0  0  0  0  0  0 50 ** ** ** 86 76 ** ** ** 
+        4  0  0  0  0  0  0 30 ** ** ** 92  0  0  0  0 
+        5  0  0  0  1  0  0  4 ** ** ** ** 16  0  0  0 
+        6  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+        7  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+        8  1 ** ** ** ** ** 52  0  0  0  0  0  0  0  0 
+        9  1 ** ** ** ** ** 54  0  0  0  0  0  0  0  0 
+       10  0 ** ** ** ** ** 48  0  0  0  0  0  0  0  0 
+       11  0 ** ** ** ** ** 35  0  0  0  0  0  0  0  0 
+       12  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+       13  0 ** ** ** ** ** 46  0  0  0  0  0  0  0  0 
+       14  0 ** ** ** ** ** 27  0  0  0  0  0  0  0  0 
+       15  1  1  1  0  0  1  0  0  3 ** ** ** ** 89 ** 
+       16  1 ** ** ** ** ** ** ** 97 ** ** ** 95 78 ** 
+       17  1  1  0  0  0  0  1  0  0 96 ** ** ** 81 ** 
+       18  1 ** ** ** ** ** ** ** 99 82 ** ** ** 18  0 
+       19  0 ** ** ** ** ** ** ** 86 80 ** ** ** 23  0 
+       20  1 ** ** ** ** ** ** ** 82  0  0  0  0  0  0 
+      
+\end{Verbatim}
 \end{figure}
+\newpage
 
-Dalším zajímavým příkladem může být pozorování, kde plánovač umisťuje paměť procesu a kde samotný proces. K tomu účelu použijeme perf bench benchmark.
-Tento příklad ukazuje nevhodné kopírování paměti mezi NUMA uzly. Na prvním obrázku je paměť na druhém jsou úlohy. V tomto příkladu jsou spuštěny 2 vlákna celkem mají 8GB paměti a běží 20 min. Až po 6ti minutách dochází k rozdělení dat a procesů na 2 NUMA uzly. 
+Dále nás zajímá kde plánovač umisťuje paměť procesu a kde samotný proces. K tomu účelu použijeme perf bench benchmark. Tento příklad ukazuje nevhodné kopírování paměti mezi NUMA uzly. Napravo na obrázku 15 je paměť úloh nalevo pak jsou zobrazeny úlohy na NUMA uzlech. V tomto příkladu jsou spuštěny 2 vlákna celkem mají 8GB paměti a běží 20 min. Až po 6ti minutách dochází k rozdělení dat a procesů na 2 NUMA uzly. 
 
 \begin{figure}[ht]
 \includegraphics[scale=0.35]{obrazky/PerfBenchResult.png}
