@@ -1952,14 +1952,15 @@ Uzel 1 & 70\% (lokální) & 60\% \\
 Úloha B = 40
 
 \noindent
-Celkově tedy přístup do lokální paměti máme 110/200.
+Celkově tedy přístup do lokální paměti máme 110/200. Jelikož je po přehození úloh NUMA doména vyvážená a přístupy jsou většinou do lokální paměti může dojít k přehození úloh. Před přehozením úloh se spočítá zdali cena přesunu je nižší než cena ponechání úlohy a přistupování úlohy do vzdálené paměti.
+\newpage
 \noindent
-Plánovač poté postupuje podle následujícího algoritmu:
+\textbf{Souhr vyvažování na numa uzlech}
 \begin{enumerate}
-\item Zjištuje zdali je systém v NUMA doméně vyvážený (tj. každá skupina v doméně má přibližně stejné množství běžících úloh).
-\item Zjišťuje zdali jsou přístupy úloh do paměti lokální. V případě, že úlohy přistupují většinou do lokální paměti a v případě, že je množství procesů na doméně vyvážené, algoritmus skončí. 
-\item Plánovač zjištuje kombinace rozmístění úloh, které jsou na doméně vyvážené a většinu přístupů do paměti je lokálních.
-\item Pro nejlépe ohodnocenou kombinaci rozmístění úloh, zjišťujeme zdali bude cena migrace nižší než cena ponechání úloh na současném místě a běhu úloh s vzdálenou pamětí. 
+\item Plánovač zjišťuje, zdali je systém v NUMA doméně vyvážený (tj. každá skupina v doméně má přibližně stejné množství běžících úloh).
+\item Poté plánovač sleduje, jestli jsou přístupy úloh do paměti lokální. V případě, že úlohy přistupují většinou do lokální paměti a množství procesů na doméně vyvážené, algoritmus skončí. 
+\item Dále plánovač hledá takové kombinace rozmístění úloh, které jsou na doméně vyvážené a většinu přístupů do paměti je lokálních.
+\item Pro nejlépe ohodnocené kombinace rozmístění úloh, zjišťuje, zdali budou ceny migrace nižší než cena ponechání úloh na současném místě a běhu úloh s vzdálenou pamětí.
 \item Nakonec dochází k samotnému přesunu úloh nebo pamětí dle nejvýhodnějšího ohodnocení z předchozího bodu
 \end{enumerate}
 
