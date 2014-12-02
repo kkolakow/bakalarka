@@ -269,6 +269,8 @@ Každá úloha patří do určité třídy plánování, která určuje, jakým 
 Současný plánovač byl navržen tak, aby bylo možno používat rozšířenou hierarchii modulů. Jednotlivé moduly jsou zapouzdřením plánovacích pravidel, které používá kostra plánovače. 
 Plánování třída definuje sadu funkcí prostřednictvím \verb#sched_class# (v \verb#kernel/sched/sched.h#), které definují chování plánovače. 
 
+\newpage
+\noindent
 Každá třída plánování poskytuje funkce jako:
 \begin{itemize}
 \item \verb#enqueue_task# (...) 
@@ -601,7 +603,8 @@ Rozdělování úloh do skupin je v současném kernelu automatické. Lze ho zap
 # echo 2048 > multimedia/cpu.shares
 # echo 1024 > browser/cpu.shares
 
-# firefox &  # Spustime firefox presuneme jej do skupiny "browser"
+# firefox &  # Spustime firefox presuneme ho
+#            # do skupiny "browser"
 # echo <firefox_pid> > browser/tasks
 
 # #spustime gmplayer
