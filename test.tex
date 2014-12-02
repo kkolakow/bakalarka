@@ -9,9 +9,9 @@
 
 \newcommand{\sectionbreak}{\clearpage}
 
-
 \begin{document}
 
+\nocite{*}
 \title{Implementace a testování linuxového plánovače úloh}
 \author{Kamil Kolakowski}
 \date{Listopad 2014}
@@ -2403,6 +2403,10 @@ Dále nás zajímá kde plánovač umisťuje paměť procesu a kde samotný proc
 \section{Závěr}
 Po bližším obeznámení se s plánovačem úloh jsem došel k přesvědčení, že návrh plánovače byl precizně navrhnut a implementován po numa vyvažování. Připadá mi, že numa vyvažování nebylo přidáno do kódu v duchu návrhu celého plánovače, hlavně tedy třídy pro plánování obyčejných úloh. Kód numa vyvažování je dlouhý, postrádám v něm jakýsi koncept, vadí mi heuristika. Překvapilo mě, že se při numa vyvažování kalkuluje s pomocí konstant jako například výpočetní síla skupiny procesorů, nebo jak získává historii přístupu na stránky. Tu určí tak, že dosavadní přístupy vydělí dvěma. Jsem přesvědčen, že tvůrci numa vyvažování udělali chybu v tom, že se numa vyvažování realizuje dvěmi různými funkcemi, které si nejsou vůbec podobné a spouštějí při dvou událostech (jedna periodicky, druhá při přístupu na uzamčené stránky paměti). To očividně vede k neustálému migrování úloh a jejich dat z jednoho numa uzlu na druhý. Od vývojáře numa plánovače jsem byl informován, že toto je slabina současného plánovače a že se nyní vymýšlí, jak tuto slabinu odstranit. 
 
+
+\bibliographystyle{plain}
+%\bibliography{references}
+\bibliography{/home/kkolakow/Documents/BC/mybib.bib}  % list here all the bibliographies that
 
 
 \end{document}
