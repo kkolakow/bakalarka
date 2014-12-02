@@ -257,6 +257,17 @@ Jestliže našla úlohu, která běžela předtím nechá ji běžet dál. Jestl
 context_switch(rq, prev, next); /* unlocks the rq */
 \end{verbatim}
 
+\noindent
+\textit{Diagram kostry plánovače}
+
+\begin{figure}[ht]
+\includegraphics[scale=1.0]{obrazky/kostraPlanovace.png}
+\caption{Diagram algoritmu kostry plánovače}
+\label{kostra plánovače}
+\end{figure}
+
+
+
 \subsection{Plánovací třídy}
 Každá úloha patří do určité třídy plánování, která určuje, jakým způsobem bude úloha naplánována. 
 Současný plánovač byl navržen tak, aby bylo možno používat rozšířenou hierarchii modulů. Jednotlivé moduly jsou zapouzdřením plánovacích pravidel, které používá kostra plánovače. 
