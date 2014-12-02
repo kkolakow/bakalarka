@@ -1159,7 +1159,7 @@ Kvůli rozdílům v topologiích systémů, byly zavedeny od jádra 2.6 plánova
 
 Plánovací doména je množina procesorů, které sdílejí vlastnosti a plánování pravidla, která mohou být vyvažovány proti sobě. Každá doména může obsahovat jednu nebo více plánovacích skupin, které se považují za jednotku v doméně. Takže když se plánovač snaží vyvážit zatížení v rámci domény, pokusí se vyvážit zatížení každé plánovací skupiny, bez ohledu na to co se děje ve skupině.
 
-Představme si, že máme systém dvou fyzických procesorů, na kterých je hyperthreading, tak dostaneme celkem čtyři logické procesory. Při spuštění systému, jádro rozdělí logické jádra do doménové hierarchie druhé úrovně viz Obrázek \ref{domeny a skupiny}.
+Představme si, že máme systém dvou fyzických procesorů, na kterých je hyperthreading, tak dostaneme celkem čtyři logické procesory. Při spuštění systému, jádro rozdělí logické jádra do doménové hierarchie druhé úrovně viz obrázek \ref{domeny a skupiny}.
 
 \begin{figure}[ht]
 \includegraphics[scale=0.53]{obrazky/domenyAskupiny.jpeg}
@@ -1668,7 +1668,7 @@ Dále je třeba dělat vyvažování, když se úloha probudí, nebo je vytvoře
 \end{enumerate}
 
 \newpage
-\subsection{numa vyvažování}
+\subsection{Numa vyvažování}
 
 Non uniform memory access. Numa znamená, že přístup do různých segmentů paměti je různě rychlý. Architektura je rozšířením SMP (symetrický multi processing). Počítače začaly mít problémy s propustností mezi pamětí a procesorem v době, kdy se začaly objevovat systémy se stovkami jader, jelikož každé jádro komunikovalo stejnou sběrnicí s pamětí. Toto se podařilo vyřešit shlukováním jader a pamětí do takzvaných numa uzlů. Každý procesor (několik jader) má k dispozici svou lokální paměť, na kterou má rychlý přístup, ale má také přístup na vzdálenou paměť, kde je přístup pomalejší.
 
@@ -1687,7 +1687,7 @@ Výrobci systémů si sami navrhují, které numa uzly budou propojeny pomoci in
 \label{numa scheme1}
 \end{figure}
 
-Obrázek \ref{numa scheme1} ukazuje numa topologii systému HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor. Je to nejjednodušší způsob zapojení numa počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším numa uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální ty budou vždy nejrychlejší, dále vzdálenou, která je pomalejší, ale na každém jiném numa uzlu vždy stejnou.
+obrázek \ref{numa scheme1} ukazuje numa topologii systému HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor. Je to nejjednodušší způsob zapojení numa počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším numa uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální ty budou vždy nejrychlejší, dále vzdálenou, která je pomalejší, ale na každém jiném numa uzlu vždy stejnou.
 
 Zde je výpis numactl ukazující jak máme shlukovány jádra a paměť do numa uzlů.
 
@@ -1725,7 +1725,7 @@ node 0 1 2 3
 
 Na diagonále je vidět čas lokálního přístupu do paměti. Na zbylé uzly přistupujeme vždy stejně kvalitní a dlouhou linkou QPI, takže časy jsou stejné.
 
-Takto symetrický přístup k vzdáleným numa pamětem je méně častý. Většina velkých systému má topologii složitější, kde jsou propojovány uzly přes kontroléry a ty jsou pak přes další kontrolér propojené s dalšími uzlů. Dochází tak k přístupům k vzdálené paměti přes více numa uzlů a tím pádem dochází k pomalejšímu přístupu do vzdálené paměti. Teď se podívejme na Obrázek \ref{numa scheme2} na kterém je systém, který má numa topologii složitější. Jde o systém se čtyřmi Westmere procesory HP Proliant DL980 G78.
+Takto symetrický přístup k vzdáleným numa pamětem je méně častý. Většina velkých systému má topologii složitější, kde jsou propojovány uzly přes kontroléry a ty jsou pak přes další kontrolér propojené s dalšími uzlů. Dochází tak k přístupům k vzdálené paměti přes více numa uzlů a tím pádem dochází k pomalejšímu přístupu do vzdálené paměti. Teď se podívejme na obrázek \ref{numa scheme2} na kterém je systém, který má numa topologii složitější. Jde o systém se čtyřmi Westmere procesory HP Proliant DL980 G78.
 
 \begin{figure}[ht]
 \includegraphics[scale=0.7]{obrazky/numa-scheme-big-system.jpeg}
@@ -1799,7 +1799,7 @@ Nyní přístupy do paměti nabývají těchto hodnot:
 Při vyvažování u numa systému je nutné mít na paměti, že ne všechny procesory mají přístupy do všech segmentů pamětí stejně rychlé.
 
 \noindent
-numa vyvažování používá tři principy přesunu pro docílení vyváženosti:
+Numa vyvažování používá tři principy přesunu pro docílení vyváženosti:
 
 \begin{enumerate}
 \item Proces následuje svou paměť přesouvá se pouze proces – malé přesuny dat, obvykle levnější.
@@ -2297,7 +2297,7 @@ Během testování porovnáme sadu tří výsledků (plánovačem řízené, se 
 \label{4 numa NODE system scheme}
 \end{figure}
 
-Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního systému a to pro všechny 3 typy běhu (plánovačem řízené, s CPU afinitou, s numa afinitou). Pro každý typ běhu běžíme nejdřív 1 instanci linpacku, poté dvě zároveň, čtyři až nakonec 120 (což je celkový počet logických jader v systému viz. Obrázek \ref{4 numa NODE system scheme}) instancí najednou. Každý bod, který vynášíme do grafu získáme sečtením dosažených hodnot kflops každé instance.
+Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního systému a to pro všechny 3 typy běhu (plánovačem řízené, s CPU afinitou, s numa afinitou). Pro každý typ běhu běžíme nejdřív 1 instanci linpacku, poté dvě zároveň, čtyři až nakonec 120 (což je celkový počet logických jader v systému viz. obrázek \ref{4 numa NODE system scheme}) instancí najednou. Každý bod, který vynášíme do grafu získáme sečtením dosažených hodnot kflops každé instance.
 
 \begin{figure}[ht]
 \center
