@@ -1147,7 +1147,7 @@ Z funkce \verb#pick_next_task()# je volána funkce \verb#pick_next_entity()#, kt
 
 \subsection{Shrnutí}
 
-CFS je volán v době když dojde k vytvoření nové úlohy či probuzení stávající úlohy, usnutí úlohy, nebo když je vyvoláno jako obsluha časovače přerušení. Spočítá čas právě strávený úlohou na CPU vynásobí ho koeficientem priority úlohy a přičte jej do \verb#p->se.vruntime#. Jestliže \verb#p->se.vruntime# poroste dostatečně a současně běžící úloha již není úlohou s nejmenší hodnotou vruntime, pak je spuštěna úloha, která je nejvíce nalevo v červeno-černého stromu. Úloha která právě běžela se vrátí zpátky do stromu. Toto není úplně přesné, jelikož CFS má nastavenou hodnotu granularity, o kterou maximálně může být větší vruntime běžící úlohy než vruntime úlohy úplně nalevo ve stromu. S granuralitou se počítá proto, aby z důvodu velmi malého rozdílu v hodnotě vruntime mezi úlohami nedocházelo k výměně obsahu a s tím souvisejícím negativním jevům jako zahozením dat ve vyrovnávací paměti atd.
+CFS je volán v době když dojde k vytvoření nové úlohy či probuzení stávající úlohy, usnutí úlohy, nebo když je vyvoláno jako obsluha časovače přerušení. Spočítá čas právě strávený úlohou na CPU, vynásobí ho koeficientem priority úlohy a přičte jej do \verb#p->se.vruntime#. Jestliže \verb#p->se.vruntime# poroste dostatečně a současně běžící úloha již není úlohou s nejmenší hodnotou vruntime, pak je spuštěna úloha, která je nejvíce nalevo v červeno-černého stromu. Úloha která právě běžela se vrátí zpátky do stromu. Toto není úplně přesné, jelikož CFS má nastavenou hodnotu granularity, o kterou maximálně může být větší vruntime běžící úlohy než vruntime úlohy úplně nalevo ve stromu. S granuralitou se počítá proto, aby z důvodu velmi malého rozdílu v hodnotě vruntime mezi úlohami nedocházelo k výměně obsahu a s tím souvisejícím negativním jevům jako zahozením dat ve vyrovnávací paměti atd.
 V systému jde granularitu konfigurovat v \verb#/proc/sys/kernel/sched_min_granularity_ns#. Zvýšení hodnoty bude vést k větší propustnosti, ale bude mít pomalejší odezvu na interaktivní procesy (vhodné pro servery). Zmenšením hodnoty  v \verb#sched_min_granularity_ns# docílíme k rychlejší odezvě a k menší propustnosti (z důvodu častější výměny obsahu).
 
 Větší část CFS návrhu už je mimo tento jednoduchý koncept, přibyly zde rozšíření pro vyvažování úloh na numa systémech a dalších algoritmy například na rozpoznávání spících procesů.
@@ -1303,7 +1303,7 @@ V \verb#include/linux/topology.h# najdeme nastavení pro příznaky a pro pláno
 
 Během aktivního vyvažování kernel prochází doménovou hierarchií. Začíná se na CPU doméně a postupuje výše. Když na určité doméně zjistí, že je nevyvážená, spustí vyvažovací operace.
 
-Během inicializace plánovače, je vytvořena obsluha přerušení, ze které jsou volány funkce, které provádí vyvažování zátěže. Vyvažování je spuštěno ve funkci \verb#scheduler_tick()# (\verb#kernel/sched/core.c#) voláním \linebreak \verb#trigger_load_balance()# (\verb#kernel/sched/fair.c#). \verb#trigger_load_balance()# zkontroluje časovač a jestli je vyvažování potřeba vyhodí „vyjímku“ s parametrem \verb#SCHED_SOFTIRQ#.
+Během inicializace plánovače je vytvořena obsluha přerušení, ze které jsou volány funkce, které provádí vyvažování zátěže. Vyvažování je spuštěno ve funkci \verb#scheduler_tick()# (\verb#kernel/sched/core.c#) voláním \linebreak \verb#trigger_load_balance()# (\verb#kernel/sched/fair.c#). \verb#trigger_load_balance()# zkontroluje časovač a jestli je vyvažování potřeba vyhodí „vyjímku“ s parametrem \verb#SCHED_SOFTIRQ#.
 
 \begin{verbatim} 
 void trigger_load_balance(struct rq *rq)
@@ -1438,7 +1438,7 @@ Aktivní vyvažování je o přetažení jedné nebo více úloh z přetížené
 %
 %\end{lstlisting} 
 
-Funkce \verb#load_balance()# volá funkci \verb#find_busiest_group()#, která hledá nevyváženost v dané \verb#sched_domain# a vrací nejvíce zatíženou skupinu pokud taková existuje. Jestliže je systém vyvážený a žádná skupina nebyla nalezena funkce \verb#load_balance()# skončí.
+Funkce \verb#load_balance()# volá funkci \verb#find_busiest_group()#, která hledá nevyváženost v dané \verb#sched_domain# a vrací nejvíce zatíženou skupinu pokud taková existuje. Jestliže je systém vyvážený a žádná skupina nebyla nalezena, funkce \verb#load_balance()# skončí.
 
 Jestliže funkce \verb#find_busiest_group# vrátila nejvytíženější skupinu, pak ta je předána do funkce \verb#find_busiest_queue()# a výstupem z funkce je fronta úloh nejvíce zatíženého logického procesoru ve skupině.
 
@@ -1551,7 +1551,7 @@ Pokud je proměnná \verb#SD_POWERSAVINGS_BALANCE# nastavena v doménových prav
 
 Vyvažování nečinnosti začíná, když se CPU stává nečinným. Je volána funkce schedule() na CPU vykonávající současnou úlohu, jestliže se jeho fronta běžících úloh vyprázdnila.
 
-Tak jako aktivní vyvažování je i vyvažování nečinnosti \verb#idle_balance()# implementováno v souboru fair.c. Kontroluje se zdali je průměrná doba čekání ve frontě nečinnosti větší než je cena migrace úlohy na tuto frontu. To znamená, že se kontroluje zdali má cenu vzít úlohu odjinud, nebo jestli je lepší jen počkat, jelikož je pravděpodobné, že se další úloha brzy probudí. Pokud migrace úlohy dává smysl, \verb#idle_balance()# funguje téměř jako \verb#rebalance_domains()#. To projde doménovou hierarchii a volá \verb#idle_balance()# pro domény, které mají v doméně nataveny příznaky \verb#SD_LOAD_BALANCE# a \verb#SD_BALANCE_NEWIDLE#.}
+Tak jako aktivní vyvažování je i vyvažování nečinnosti \verb#idle_balance()# implementováno v souboru fair.c. Kontroluje se, zdali je průměrná doba čekání ve frontě nečinnosti větší než je cena migrace úlohy na tuto frontu. To znamená, že se kontroluje zdali má cenu vzít úlohu odjinud, nebo jestli je lepší jen počkat, jelikož je pravděpodobné, že se další úloha brzy probudí. Pokud migrace úlohy dává smysl, \verb#idle_balance()# funguje téměř jako \verb#rebalance_domains()#. To projde doménovou hierarchii a volá \verb#idle_balance()# pro domény, které mají v doméně nastaveny příznaky \verb#SD_LOAD_BALANCE# a \verb#SD_BALANCE_NEWIDLE#.}
 
 
 %\begin{lstlisting} 
@@ -1697,7 +1697,7 @@ Výrobci systémů si sami navrhují, které numa uzly budou propojeny pomoci in
 \label{numa scheme1}
 \end{figure}
 
-obrázek \ref{numa scheme1} ukazuje numa topologii systému HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor. Je to nejjednodušší způsob zapojení numa počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším numa uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální ty budou vždy nejrychlejší, dále vzdálenou, která je pomalejší, ale na každém jiném numa uzlu vždy stejnou.
+obrázek \ref{numa scheme1} ukazuje numa topologii systému HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor. Je to nejjednodušší způsob zapojení numa počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším numa uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální které jsou nejrychlejší a vzdálené, které jsou pomalejší, ale mezi každými dvěmi uzly vždy stejné.
 
 Zde je výpis numactl ukazující jak máme shlukovány jádra a paměť do numa uzlů.
 
