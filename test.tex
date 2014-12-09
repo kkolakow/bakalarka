@@ -45,7 +45,7 @@ následujícím textu budeme věnovat jen jednomu typu úloh.
 
 Systém plánující úlohy reálného času (real time system) je takový systém, který garantuje doby odezvy systému na události, což znamená, že každá oparace by měla být dokončena v daném časovém období. Systém je klasifikován jako hard real time, pokud zmeškání lhůty může způsobit selhání systému a systém nazýváme soft real time v případě, že systém může tolerovat několik zmeškaných časových omezení. V běžném linuxovém kernelu je podpora pouze pro soft real time úlohy (systém je soft real time). Real time úlohy mají v linuxovém plánovači svoji vlastní třídu pravidel (\verb#kernel/sched/rt.c#).
 
-Ačkoli současný linuxový plánovač obsahuje i pravidla pro plánování úloh reálného času, nebudu se jim v této práci věnovat. Mnohem důležitější a v běžném praxi více používané jsou úlohy normální v rámci terminologie linuxového plánovače others úlohy.
+Ačkoli současný linuxový plánovač obsahuje i pravidla pro plánování úloh reálného času, nebudu se jim v této práci věnovat. Mnohem důležitější a v běžné praxi více používané jsou úlohy normální v rámci terminologie linuxového plánovače \verb#others tasks#.
 
 Normální úlohy, které známe z desktopů, žádné časové omezení nemají.
 
