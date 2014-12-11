@@ -181,7 +181,7 @@ Potom funkce schedule() zjišťuje stav úlohy, která běžela jako předchozí
 \begin{verbatim}
 if (prev->state && !(preempt_count() & PREEMPT_ACTIVE)) {
 \end{verbatim}
-Jestliže úloha přijala neblokovaný signál, pak je její stav nastaven na běžící a úloha je ponechána ve frontě běžících úloh. Takže voláním \verb#prev# má šanci být naplánována znova. 
+Jestliže úloha přijala neblokovaný signál, pak je její stav nastaven na běžící a úloha je ponechána ve frontě běžících úloh. Takže současná úloha má šanci být naplánována znova. 
 \begin{verbatim}
 if (unlikely(signal_pending_state(prev->state, prev))) {
    prev->state = TASK_RUNNING;
@@ -366,35 +366,37 @@ která zajištují vyvážení zátěže v případě, že máme je systém s v�
 
 Úloha která je uspávána, čeká na specifickou událost, je implementována podobně jako následující ukázka, kterou lze najít v různých částech linuxového jádra.
 
-\begin{verbatim} 
-DEFINE_WAIT(wait); 
-
-add_wait_queue(q, &wait); 
-while (!condition) /* waiting for event */
-{ 
-     prepare_to_wait(&q, &wait, TASK_INTERRUPTIBLE); 
-     schedule(); 
-} 
-finish_wait(&q, &wait);
-\end{verbatim}
-\pagebreak 
+%\begin{verbatim} 
+%DEFINE_WAIT(wait); 
+%
+%add_wait_queue(q, &wait); 
+%while (!condition) /* waiting for event */
+%{ 
+%     prepare_to_wait(&q, &wait, TASK_INTERRUPTIBLE); 
+%     schedule(); 
+%} 
+%finish_wait(&q, &wait);
+%\end{verbatim}
+%\pagebreak 
 Úloha vytvoří čekací frontu a přidá se do ní. 
 \nopagebreak
 \begin{verbatim}
 DEFINE_WAIT(wait);
 add_wait_queue(q, &wait);
 \end{verbatim}
-Ve smyčce pak čeká, než je splněna podmínka. Jestliže nenastala potřebná událost, zavolá se plánovač a úloha se uspí. Ve smyčce dále dojde k nastavení statusu úlohy na TASK\_INTERRUPTIBLE nebo TASK\_UNITERRUPTIBLE.  
+Ve smyčce pak čeká, než je splněna podmínka. Ve smyčce dojde k nastavení statusu úlohy na TASK\_INTERRUPTIBLE nebo TASK\_UNITERRUPTIBLE. Poté dojde k zavolání plánovače a úloha se uspí. Plánovač odstraní úlohu z běžící fronty. Úloha čeká na jinou úlohu, která zavolá funkci \verb#wake_up(&wait)#.
+ 
 \begin{verbatim}
 while (!condition) /* waiting for event */
 { 
      prepare_to_wait(&q, &wait, TASK_INTERRUPTIBLE); 
      schedule(); 
 } 
+
+finish_wait(&q, &wait);
 \end{verbatim}
 
-Plánovač odstraní úlohu z běžící fronty. Nastane-li potřebná událost \linebreak (podmínka condition), je ukončena smyčka a úloha je odstraněna z čekací fronty. Tyto činnosti jsou prováděny ve funkci \verb#schedule()#.
-Úloha čeká na jinou úlohu, která zavolá funkci \verb#wake_up(&wait)#
+Nastane-li potřebná událost \linebreak (podmínka condition), je ukončena smyčka a úloha je odstraněna z čekací fronty. 
 
 \subsubsection{Při probuzení spící úlohy}
 
