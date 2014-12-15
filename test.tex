@@ -18,7 +18,10 @@
 \maketitle
 
 \section*{Úvod}
-Tento text vzniknul jako studijní materiál pro techniky testující plánovač úloh. Důraz je zde kladen na rozšíření povědomí o implementaci současného plánovače úloh. Součástí textu je vysvětlení co na současném plánovači úloh testujeme a jakých výsledků dosahujeme.  
+Tento text vzniknul jako studijní materiál pro techniky testující plánovač úloh. Důraz je kladen na rozšíření povědomí o implementaci současného plánovače úloh. Součástí textu je vysvětlení co na současném plánovači úloh testujeme a jakých výsledků dosahujeme.  
+
+\section*{Poděkování}
+Děkuji vedoucímu práce Mgr. Jan Outratovi, Ph.D. za možnost vypracovat bakalářskou práci na toto téma, za jeho konzultace a různá doporučení. Dále bych rád poděkoval Ing. Radimu Krčmářovi za konzultace ohledně implementace plánovače a algoritmů vyvažování, Mgr. Jiřímu Horníčkovi za kontrolu gramatiky, Rik Van Riel za konzultování numa vyvažování a Volker Seeker, Dr. za poskytnutí materiálů věnovaných plánování na OS/Linux.
 
 \tableofcontents
 \listoffigures
@@ -396,7 +399,7 @@ while (!condition) /* waiting for event */
 finish_wait(&q, &wait);
 \end{verbatim}
 
-Nastane-li potřebná událost \linebreak (podmínka condition), je ukončena smyčka a úloha je odstraněna z čekací fronty. 
+Nastane-li potřebná událost (podmínka condition), je ukončena smyčka a úloha je odstraněna z čekací fronty. 
 
 \subsubsection{Při probuzení spící úlohy}
 
