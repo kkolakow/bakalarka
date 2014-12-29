@@ -22,6 +22,7 @@
 
 \newcommand{\sectionbreak}{\clearpage}
 
+\begin{document}
 
 \title{Implementace a testování linuxového plánovače úloh}
 \title[english]{Task scheduler implementation and testing}
@@ -41,7 +42,6 @@
 %\tableofcontents
 %\listoffigures
 
-\begin{document}
 \maketitle
 
 \section{Linuxové jádro, úloha plánovače, druhy úloh}
@@ -648,7 +648,7 @@ Všechny úlohy jsou v Linuxu reprezentovány strukturou \verb#task_struct#. Tat
 \begin{figure}[ht]
 \includegraphics[scale=1]{obrazky/schedulerStructures.png}
 \caption{Schéma složení struktur plánovače}
-\label{idealni procesor}
+\label{scheduler structures}
 \end{figure}
 
 
@@ -2361,7 +2361,7 @@ Další graf (obrázek \ref{both kernels linpack results}) který se nám bude h
 \center
 \includegraphics[scale=0.32]{obrazky/totalTime.png}
 \caption{Celkový čas běhu úloh}
-\label{both kernels linpack results}
+\label{total time}
 \end{figure}
 
 Další zajímavou informací může být zatížení jednotlivých CPU zjišťovaných utilitou mpstat.
