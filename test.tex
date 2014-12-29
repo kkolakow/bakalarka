@@ -1,4 +1,17 @@
-\documentclass[a4paper,12pt]{article}
+%\documentclass[a4paper,12pt]{article}
+
+\documentclass[
+%  master,
+%  field=inf,
+%  printversion,
+  biblatex,
+%  language=english,
+%  font=sans,
+  glossaries,
+  index
+]{kidiplom}
+
+
 \usepackage[utf8]{inputenc}
 \usepackage[czech]{babel}
 \usepackage{listings}
@@ -13,18 +26,22 @@
 \begin{document}
 
 \title{Implementace a testování linuxového plánovače úloh}
+\title[english]{Linux scheduler implementation and testing}
+
 \author{Kamil Kolakowski}
-\date{Listopad 2014}
+\supervisor{Mgr. Jan Outrata, Ph.D.}
 \maketitle
 
-\section*{Úvod}
-Tento text vzniknul jako studijní materiál pro techniky testující plánovač úloh. Důraz je kladen na rozšíření povědomí o implementaci současného plánovače úloh. Součástí textu je vysvětlení co na současném plánovači úloh testujeme a jakých výsledků dosahujeme.  
+\annotation{Tento text vzniknul jako studijní materiál pro techniky testující plánovač úloh. Důraz je kladen na rozšíření povědomí o implementaci současného plánovače úloh. Součástí textu je vysvětlení co na současném plánovači úloh testujeme a jakých výsledků dosahujeme.}
 
-\section*{Poděkování}
-Děkuji vedoucímu práce Mgr. Janu Outratovi, Ph.D. za možnost vypracovat bakalářskou práci na toto téma, za jeho konzultace a různá doporučení. Dále bych rád poděkoval Ing. Radimu Krčmářovi za konzultace ohledně implementace plánovače a algoritmů vyvažování, Mgr. Jiřímu Horníčkovi za kontrolu gramatiky, Riku Van Rielovi za konzultování numa vyvažování a Volkeru Seekerovi, Dr. za poskytnutí materiálů věnovaných plánování na OS/Linux.
+\annotation[english]{This text was create as studing material for engineers who are testing task scheduler. Main purpose of this text is extend awareness about implementation of present task scheduler. In this article are section wich explain what we testing on present scheduler and what results we see.
 
-\tableofcontents
-\listoffigures
+\thanks{Děkuji vedoucímu práce Mgr. Janu Outratovi, Ph.D. za možnost vypracovat bakalářskou práci na toto téma, za jeho konzultace a různá doporučení. Dále bych rád poděkoval Ing. Radimu Krčmářovi za konzultace ohledně implementace plánovače a algoritmů vyvažování, Mgr. Jiřímu Horníčkovi za kontrolu gramatiky, Riku Van Rielovi za konzultování numa vyvažování a Volkeru Seekerovi, Dr. za poskytnutí materiálů věnovaných plánování na OS/Linux.}
+
+\bibliography{bibliografie.bib}
+
+%\tableofcontents
+%\listoffigures
 
 \section{Linuxové jádro, úloha plánovače, druhy úloh}
 
