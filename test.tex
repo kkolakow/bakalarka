@@ -1837,9 +1837,9 @@ Numa vyvažování používá tři principy přesunu pro docílení vyváženost
 
 Plánovač si vede informace o přístupech úlohy do různých segmentů paměti (na různé numa uzly). Jsou registrovány přístupy do segmentů do kterých se přistupuje opakovaně, o implementaci sběru statistik přístupů bude vysvětlen v pozdější kapitole \ref{page fault}.
 
-\begin{table}[h]
+\begin{table}[c]
 \centering
-\begin{tabular}{|l|r|r|}
+\begin{tabular}{|c|r|r|}
 \hline
 %Přístupy na stránku numa uzlu & Úloha A & Úloha B \\
 Přístupy & Úloha A & Úloha B \\
@@ -1875,7 +1875,9 @@ Pro každou úlohu A testuje numa uzel N
 \subsection{Spuštění numa vyvažování}
 
 \subsubsection{Periodické spouštění vyvažování při obsluze časovače přerušení}
-Tento způsob spuštění vyvažování úloh je implementován přesně tak, jak je popsáno v kapitole o vyvažování UMA SMP systému. Funkce \verb#scheduler_tick# volá funkci \verb#trigger_load_balance#. Ta vyvolá softwarové přerušení, které vyvolá obsluhu přerušení \verb#run_rebalance_domains#. \verb#run_rebalance_domains# volá funkci \verb#rebalance_domains#, která prochází hierarchicky domény a vyvažuje skupiny v doméně pomocí volání funkce \verb#load_balance#. Podrobněji se tomu věnujeme v kapitole 4.1.3 o aktivním vyvažování.
+Tento způsob spuštění vyvažování úloh je implementován přesně tak, jak je popsáno v kapitole o vyvažování UMA SMP systému. Funkce \verb#scheduler_tick# volá funkci \verb#trigger_load_balance#. Ta vyvolá softwarové přerušení, které vyvolá obsluhu přerušení \verb#run_rebalance_domains#. 
+\noindent
+\verb#run_rebalance_domains# volá funkci \verb#rebalance_domains#, která prochází hierarchicky domény a vyvažuje skupiny v doméně pomocí volání funkce \verb#load_balance#. Podrobněji se tomu věnujeme v kapitole 4.1.3 o aktivním vyvažování.
 
 \subsubsection{Vyvažování spouštěné jako ošetření page fault výjimky}
 \label{page fault}
