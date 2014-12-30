@@ -33,9 +33,12 @@
 \author{Kamil Kolakowski}
 \supervisor{Mgr. Jan Outrata, Ph.D.}
 
-\annotation{Tento text vzniknul jako studijní materiál pro techniky testující plánovač úloh. Důraz je kladen na rozšíření povědomí o implementaci současného plánovače úloh. Součástí textu je vysvětlení co na současném plánovači úloh testujeme a jakých výsledků dosahujeme.}
+\annotation{Tento text vzniknul jako studijní materiál pro techniky testující plánovač úloh ve firmě RedHat. Tento dokument obsahuje seznámení s plánovačem úloh jako komponentou jádra operačního systému, rozdělení úloh, seznámí nás s historií vývoje plánovačů na operačním systému Linux. Hlavní část tohoto dokumentu je tvořena popisem implementace současného plánovače úloh z jádra 3.18. Závěr tohoto textu je věnován popisu toho co na plánovači úloh testujeme a v úplném závěru jsou popsány výsledky jakých dosahujeme.}
 
-\annotation[english]{This text was create as studing material for engineers who are testing task scheduler. Main purpose of this text is extend awareness about implementation of present task scheduler. In this article are section wich explain what we testing on present scheduler and what results we see.}
+\annotation[english]{This text was create as studing material for engineers of Redhat company who are testing task scheduler. This document includes introduction into task scheduler as component of operation system kernel, division tasks, explain us history of development of task scheduler on operation system Linux. Main part of this document includes implementation of present task scheduler from kernel version 3.18. Conclusion of this document is dedicated to explain what we are testing on task scheduler and in very end of this document is description what test results we achieve.}
+
+\keywords{plánovač úloh; jádro; CFS; testování; vyvažování}
+\keywords[english]{task scheduler; kernel; CFS; testing; balance}
 
 \thanks{Děkuji vedoucímu práce Mgr. Janu Outratovi, Ph.D. za možnost vypracovat bakalářskou práci na toto téma, za jeho konzultace a různá doporučení. Dále bych rád poděkoval Ing. Radimu Krčmářovi za konzultace ohledně implementace plánovače a algoritmů vyvažování, Mgr. Jiřímu Horníčkovi za kontrolu gramatiky, Riku Van Rielovi za konzultování numa vyvažování a Volkeru Seekerovi, Dr. za poskytnutí materiálů věnovaných plánování na OS/Linux.}
 
@@ -45,6 +48,7 @@
 %\listoffigures
 
 \maketitle
+
 
 \section{Linuxové jádro, úloha plánovače, druhy úloh}
 
@@ -79,7 +83,7 @@ Záleží na tom na co je systém určen. Na desktopových systémech se často 
 
 Jelikož je Linux navržen tak, aby běžel na různých systémech, musí se umět vypořádat se všemi těmito úlohami. Úlohy, které běží dlouhou dobu, dokončí více práce na úkor odezvy systému. Jestliže naopak úloha běží krátkou dobu, systém může odpovědět rychleji na I/O požadavek, propustnost systému je nižší, protože v systému rostou režie plánovače na výměnu úloh. Plánovač musí proto hledat rovnováhu mezi odezvou a celkovou propustností systému. 
 
-V této práci se zaměříme pouze na úlohy závisle na CPU.
+V této práci se zaměříme pouze na úlohy závislé na CPU.
 
 \section{Předchůdci CFS}
 
