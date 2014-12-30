@@ -291,12 +291,12 @@ context_switch(rq, prev, next); /* unlocks the rq */
 \label{kostra planovace}
 \end{figure}
 
+\newpage
 \subsection{Plánovací třídy}
 Každá úloha patří do určité třídy plánování, která určuje, jakým způsobem bude úloha naplánována. 
 Současný plánovač byl navržen tak, aby bylo možno používat rozšířenou hierarchii modulů. Jednotlivé moduly jsou zapouzdřením plánovacích pravidel, které používá kostra plánovače. 
-Plánovací třída definuje sadu funkcí prostřednictvím \verb#sched_class# (v \verb#kernel/sched/sched.h#), které definují chování plánovače. 
+Plánovací třída definuje sadu funkcí prostřednictvím \verb#sched_class# (v \verb#kernel/sched/sched.h#), které definují chování plánovače.\newline 
 
-\newpage
 \noindent
 Každá třída plánování poskytuje funkce jako:
 \begin{itemize}
@@ -313,7 +313,7 @@ Tato funkce vybírá nejvhodnější úlohu způsobilou ke spuštění jako dal�
 \item \verb#set_curr_task# (...) 
 Tato funkce je volána, jestliže se změní plánovací třída úlohy, nebo změní-li se skupina úlohy.
 \item \verb#task_tick# (...) 
-Tato funkce je většinou volána z \verb#time_tick()# funkce a může vést k výměně úloh. Řídí běh preempce. 
+Tato funkce je většinou volána z \verb#time_tick()# funkce a může vést k výměně úloh. Řídí běh preempce. \newline
 \end{itemize}
 
 Všechny existující plánovací třídy jsou v linuxovém jádru seřazeny v seznamu podle priorit plánovacích tříd. První proměnná ve struktuře \verb#sched_task# se nazývá \verb#next# a je ukazatelem na plánovací třídu s nižší prioritou. Seznam je užíván k preferenci úloh jednoho typu před druhým. V současnosti vypadá seznam tříd následovně
@@ -562,7 +562,7 @@ Postupně dochází k následujícím činnostem
 %
 %\end{lstlisting} 
 
-
+\newpage
 \subsection{Fair plánovací třída}
 
 Zcela férový plánovač, je nejčastěji používaný pro kategorii normálních (v terminologii CFS others) úloh. Užívá plánovací pravidla z třídy fair (kterou lze najít v \verb#kernel/sched/fair.c#).
