@@ -609,8 +609,6 @@ Plánování skupin je nový způsob jak obstarat férovost v plánování, kdy�
 
 Rozdělování úloh do skupin je v současném kernelu automatické. Lze ho zapnou a vypnout v \verb#/proc/sys/kernel/sched_autogroup_enabled#.
 
-\newpage
-
 \begin{figure}[ht]
 \caption{Příklad vytváření skupin multimedia a browser pomocí cgroups}
 \center
@@ -623,8 +621,8 @@ Rozdělování úloh do skupin je v současném kernelu automatické. Lze ho zap
 # mount -t cgroup -ocpu none /sys/fs/cgroup/cpu
 # cd /sys/fs/cgroup/cpu
 
-# mkdir multimedia  # timto vytvorime skupinu uloh multimedia 
-# mkdir browser     # timto vytvorime skupinu uloh multimedia 
+# mkdir multimedia  # vytvorime skupinu uloh multimedia 
+# mkdir browser     # vytvorime skupinu uloh multimedia 
 
 # Timto zajistime, ze multimedia budou dostavat 
 # 2x vice procesoroveho casu nez skupina browser
@@ -642,6 +640,7 @@ Rozdělování úloh do skupin je v současném kernelu automatické. Lze ho zap
 \end{Verbatim}
 \end{figure}
 
+\newpage
 \subsection{Priority úloh}
 
 CFS nepoužívá fronty úloh pro každou prioritu jak to dělali předchůdci CFS, ale priority jsou řešeny tak, že úlohám s nižší prioritou roste hodnota vruntime rychleji a naopak úlohám s prioritou vyšší roste hodnota vruntime pomaleji.
@@ -658,7 +657,7 @@ Všechny úlohy jsou v Linuxu reprezentovány strukturou \verb#task_struct#. Tat
 \end{figure}
 
 
-Na kořen stromu je odkazováno pomocí \verb#rb_root# struktury \linebreak (z \verb#/include/linux/rbtree.h#) z \verb#cfs_rq# struktury (v \verb#kernel/sched/sched.h#).
+Na kořen stromu je odkazováno pomocí \verb#rb_root# struktury (z \verb#rbtree.h#) ze \verb#cfs_rq# struktury (v \verb#sched.h#).
 \verb#cfs_rq# obsahuje také ukazatel na nejvíce levý prvek ve stromu \verb#min_vruntime# (který má nejmenší hodnotu vruntime), ukazatele na předchozí a současně běžící úlohu a další informace týkající se skupin a SMP plánování a vyvažování. Samotná priorita procesu je uchována v datové struktuře \verb#load_weight#. 
 
 Uzly RB stromu představují jednu nebo více úloh, které jsou spustitelné. Každý uzel stromu je reprezentován \verb#rb_node# (z \verb#/include/linux/rbtree.h#) strukturou, která neobsahuje nic víc než odkaz na potomka a barvu předka. Entita \verb#rb_node# je součástí \verb#sched_entity# struktury, která zahrnuje \verb#rb_node# odkaz a mnoho různých statistických dat. Nejdůležitější položkou \verb#sched_entity# je vruntime (64bit políčko), která znázorňuje dobu, po kterou proces běžel, a slouží jako index pro červeno-černý strom. Struktura \verb#task_struct# leží na vrcholu hierarchie a plně popisuje úlohu a zahrnuje \verb#sched_entity# strukturu. 
