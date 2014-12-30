@@ -2330,7 +2330,12 @@ Během testování porovnáme sadu tří výsledků (plánovačem řízené, se 
 \label{4 numa NODE system scheme}
 \end{figure}
 
+
 Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního systému a to pro všechny 3 typy běhu (plánovačem řízené, s CPU afinitou, s numa afinitou). Pro každý typ běhu běžíme nejdřív 1 instanci linpacku, poté dvě zároveň, čtyři až nakonec 120 (což je celkový počet logických jader v systému viz. obrázek \ref{4 numa NODE system scheme}) instancí najednou. Každý bod, který vynášíme do grafu získáme sečtením dosažených hodnot kflops každé instance.
+
+\newpage
+
+Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi kernelu. Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a numa). Nyní seběhneme identický test pro novější jádro operačního systému.
 
 \begin{figure}[ht]
 \center
@@ -2339,7 +2344,7 @@ Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního sy
 \label{older kernel linpack results}
 \end{figure}
 
-Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi kernelu. Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a numa). Nyní seběhneme identický test pro novější jádro operačního systému.
+Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře operačního systému,  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
 
 \begin{figure}[ht]
 \center
@@ -2348,7 +2353,7 @@ Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops do
 \label{newer kernel linpack results}
 \end{figure}
 
-Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře operačního systému,  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
+Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované numa afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové CPU a numa uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
 
 \begin{figure}[ht]
 \center
@@ -2356,9 +2361,6 @@ Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsled
 \caption{Výsledky ze dvou kernelu v jednom grafu}
 \label{both kernels linpack results}
 \end{figure}
-
-Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované numa afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové CPU a numa uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
-
 
 Nyní se podíváme na další grafy, které nám odhalí co se při testování stalo. Další graf (z obrázku \ref{timeWaitingOutOfCPU}) znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU.
 
@@ -2371,7 +2373,7 @@ Nyní se podíváme na další grafy, které nám odhalí co se při testování
 
 
 \newpage
-Další graf (obrázek \ref{both kernels linpack results}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
+Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
 
 \begin{figure}[ht]
 \center
