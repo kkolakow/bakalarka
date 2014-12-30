@@ -1,0 +1,39 @@
+\BOOKMARK [1][-]{section.1}{Linuxov\351 j\341dro, \372loha pl\341novace, druhy \372loh}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Linuxov\351 j\341dro a pl\341novac \372loh}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Procesy a vl\341kna}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Clenen\355 \372loh}{section.1}% 4
+\BOOKMARK [3][-]{subsubsection.1.3.1}{Norm\341ln\355 a \372lohy re\341ln\351ho casu}{subsection.1.3}% 5
+\BOOKMARK [3][-]{subsubsection.1.3.2}{\332lohy CPU a I/O z\341visl\351}{subsection.1.3}% 6
+\BOOKMARK [1][-]{section.2}{Predchudci CFS}{}% 7
+\BOOKMARK [1][-]{section.3}{Completely fair scheduler - \372plne f\351rov\375 pl\341novac}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Kostra pl\341novace}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Pl\341novac\355 tr\355dy}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.3}{Vol\341n\355 pl\341novace}{section.3}% 11
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Pravideln\351 vol\341n\355 k aktualizaci vruntime u pr\341ve be\236\355c\355 \372lohy}{subsection.3.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Kdy\236 soucasne be\236\355c\355 \372loha usne}{subsection.3.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Pri probuzen\355 sp\355c\355 \372lohy}{subsection.3.3}% 14
+\BOOKMARK [2][-]{subsection.3.4}{Fair pl\341novac\355 tr\355da}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.5}{Pl\341nov\341n\355 skupin \372loh}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.6}{Priority \372loh}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.7}{Datov\351 struktury v CFS}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.8}{Aktualizace doby behu \372lohy \(vruntime\)}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.9}{Shrnut\355}{section.3}% 20
+\BOOKMARK [1][-]{section.4}{Vyva\236ov\341n\355}{}% 21
+\BOOKMARK [2][-]{subsection.4.1}{Vyva\236ov\341n\355 na UMA SMP syst\351mech}{section.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Pl\341novac\355 dom\351ny a skupiny}{subsection.4.1}% 23
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Implementace vyva\236ov\341n\355}{subsection.4.1}% 24
+\BOOKMARK [3][-]{subsubsection.4.1.3}{Aktivn\355 vyva\236ov\341n\355}{subsection.4.1}% 25
+\BOOKMARK [3][-]{subsubsection.4.1.4}{Vyva\236ov\341n\355 necinnosti}{subsection.4.1}% 26
+\BOOKMARK [3][-]{subsubsection.4.1.5}{V\375ber fronty pro novou \372lohu}{subsection.4.1}% 27
+\BOOKMARK [2][-]{subsection.4.2}{Numa vyva\236ov\341n\355}{section.4}% 28
+\BOOKMARK [2][-]{subsection.4.3}{Spu\235ten\355 numa vyva\236ov\341n\355}{section.4}% 29
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Periodick\351 spou\235ten\355 vyva\236ov\341n\355 pri obsluze casovace preru\235en\355}{subsection.4.3}% 30
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Vyva\236ov\341n\355 spou\235ten\351 jako o\235etren\355 page fault v\375jimky}{subsection.4.3}% 31
+\BOOKMARK [2][-]{subsection.4.4}{Logika vyva\236ov\341n\355 na numa syst\351mech v pr\355kladech}{section.4}% 32
+\BOOKMARK [1][-]{section.5}{Testov\341n\355}{}% 33
+\BOOKMARK [2][-]{subsection.5.1}{Testovac\355 \372loha}{section.5}% 34
+\BOOKMARK [2][-]{subsection.5.2}{\332rovne testov\341n\355 pl\341novace}{section.5}% 35
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Testov\341n\355 pl\341nov\341n\355 fronty \372loh na jednom j\341dru}{subsection.5.2}% 36
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Testov\341n\355 pl\341nov\341n\355 \372loh na SMP UMA syst\351mech}{subsection.5.2}% 37
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Testov\341n\355 pl\341nov\341n\355 \372loh na numa syst\351mech}{subsection.5.2}% 38
+\BOOKMARK [1][-]{section.6}{Z\341ver}{}% 39

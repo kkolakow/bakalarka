@@ -2339,7 +2339,7 @@ Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops do
 
 \begin{figure}[ht]
 \center
-\includegraphics[scale=0.16]{obrazky/LinpackBaseChart.png}
+\includegraphics[scale=0.174]{obrazky/LinpackBaseChart.png}
 \caption{Výsledky linpacku na starším jádru}
 \label{older kernel linpack results}
 \end{figure}
@@ -2348,7 +2348,7 @@ Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsled
 
 \begin{figure}[ht]
 \center
-\includegraphics[scale=0.16]{obrazky/LinpackTargetChart.png}
+\includegraphics[scale=0.174]{obrazky/LinpackTargetChart.png}
 \caption{Výsledky linpacku na novějším jádru}
 \label{newer kernel linpack results}
 \end{figure}
@@ -2357,7 +2357,7 @@ Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy speci
 
 \begin{figure}[ht]
 \center
-\includegraphics[scale=0.2]{obrazky/LinpackSumChart.png}
+\includegraphics[scale=0.165]{obrazky/LinpackSumChart.png}
 \caption{Výsledky ze dvou kernelu v jednom grafu}
 \label{both kernels linpack results}
 \end{figure}
@@ -2382,9 +2382,7 @@ Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, j
 \label{total time}
 \end{figure}
 
-Další zajímavou informací může být zatížení jednotlivých CPU zjišťovaných utilitou mpstat.
-
-Vybereme si plánovačem řízený běh, výsledky prvního testovaného jádra a počtu instancí 72. Zde totiž vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 20 PU. Je zde vidět, že dochází k přesunům úloh na jiná PU, některé úlohy jsou spuštěné později, nebo dokonce je jedna úloha spuštěna, až je druhá dokončena. Toto samozřejmě úloze nechá celou vyrovnávací paměť a úloha pak seběhne rychleji. Toto řešení nemá nicméně nic společného s férovostí (jedna úloha běží další čeká).
+Další zajímavou informací může být zatížení jednotlivých CPU zjišťovaných utilitou mpstat (obrázek \ref{mpstat2}). Zde vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 10 PU. Je zde vidět, že dochází k přesunům úloh na jiná PU, některé úlohy jsou spuštěné později, nebo dokonce je jedna úloha spuštěna, až je druhá dokončena. Toto samozřejmě úloze nechá celou vyrovnávací paměť a úloha pak seběhne rychleji. Toto řešení nemá nicméně nic společného s férovostí. 
 
 \begin{figure}[ht]
 \caption{mpstat zkrácený sumarizovaný výpis}
@@ -2394,26 +2392,16 @@ Vybereme si plánovačem řízený běh, výsledky prvního testovaného jádra 
 \begin{Verbatim}[frame=single]
 
         0  1  0  1  0  0  0 49 ** 85  0 19 ** ** ** 85 
-        1  1  0  0  0  0  0 47 ** ** ** 90 ** ** ** 56 
-        2  0  0  0  0  0  0 37 ** ** ** 79 ** ** ** 79 
-        3  0  0  0  0  0  0 50 ** ** ** 86 76 ** ** ** 
-        4  0  0  0  0  0  0 30 ** ** ** 92  0  0  0  0 
-        5  0  0  0  1  0  0  4 ** ** ** ** 16  0  0  0 
-        6  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-        7  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-        8  1 ** ** ** ** ** 52  0  0  0  0  0  0  0  0 
-        9  1 ** ** ** ** ** 54  0  0  0  0  0  0  0  0 
-       10  0 ** ** ** ** ** 48  0  0  0  0  0  0  0  0 
-       11  0 ** ** ** ** ** 35  0  0  0  0  0  0  0  0 
-       12  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-       13  0 ** ** ** ** ** 46  0  0  0  0  0  0  0  0 
-       14  0 ** ** ** ** ** 27  0  0  0  0  0  0  0  0 
-       15  1  1  1  0  0  1  0  0  3 ** ** ** ** 89 ** 
-       16  1 ** ** ** ** ** ** ** 97 ** ** ** 95 78 ** 
-       17  1  1  0  0  0  0  1  0  0 96 ** ** ** 81 ** 
-       18  1 ** ** ** ** ** ** ** 99 82 ** ** ** 18  0 
-       19  0 ** ** ** ** ** ** ** 86 80 ** ** ** 23  0 
-       20  1 ** ** ** ** ** ** ** 82  0  0  0  0  0  0 
+        1  0  0  0  0  0  0 37 ** ** ** 79 ** ** ** 79
+        2  0  0  0  0  0  0 50 ** ** ** 86 76 ** ** ** 
+        3  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+        4  1 ** ** ** ** ** 52  0  0  0  0  0  0  0  0
+        5  1 ** ** ** ** ** 54  0  0  0  0  0  0  0  0
+        6  1  1  1  0  0  1  0  0  3 ** ** ** ** 89 **
+        7  1 ** ** ** ** ** ** ** 97 ** ** ** 95 78 **
+        8  1  1  0  0  0  0  1  0  0 96 ** ** ** 81 **
+        9  1 ** ** ** ** ** ** ** 99 82 ** ** ** 18  0
+       10  1 ** ** ** ** ** ** ** 82  0  0  0  0  0  0
       
 \end{Verbatim}
 \end{figure}
