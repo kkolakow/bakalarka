@@ -1301,7 +1301,7 @@ struct sched_domain {
 \begin{verbatim} 
 
 struct sched_group {
-        struct sched_group *next;       /* Must be a circular list */
+        struct sched_group *next;
         atomic_t ref;
 
         unsigned int group_weight;
@@ -1318,8 +1318,11 @@ V \verb#include/linux/topology.h# najdeme nastavení pro příznaky a pro pláno
 
 Během aktivního vyvažování kernel prochází doménovou hierarchií. Začíná se na CPU doméně a postupuje výše. Když na určité doméně zjistí, že je nevyvážená, spustí vyvažovací operace.
 
-Během inicializace plánovače je vytvořena obsluha pravidelného přerušení, ze které jsou volány funkce, které provádí vyvažování zátěže. Vyvažování je spuštěno ve funkci \verb#scheduler_tick()# (\verb#kernel/sched/core.c#) voláním \linebreak \verb#trigger_load_balance()# (\verb#kernel/sched/fair.c#). \verb#trigger_load_balance()# zkontroluje časovač a jestli je vyvažování potřeba spustí obsluhu softwarového přerušení \verb#SCHED_SOFTIRQ#.
+Během inicializace plánovače je vytvořena obsluha pravidelného přerušení, ze které jsou volány funkce, které provádí vyvažování zátěže. Vyvažování je spuštěno ve funkci \verb#scheduler_tick()# (\verb#kernel/sched/core.c#) voláním \linebreak \verb#trigger_load_balance()# (\verb#kernel/sched/fair.c#). 
 
+\verb#trigger_load_balance()# zkontroluje časovač a jestli je vyvažování potřeba spustí obsluhu softwarového přerušení \verb#SCHED_SOFTIRQ#.
+
+\newpage
 \begin{verbatim} 
 void trigger_load_balance(struct rq *rq)
 {
@@ -1343,7 +1346,7 @@ static void run_rebalance_domains(struct softirq_action *h)
 {
    struct rq *this_rq = this_rq();
    enum cpu_idle_type idle = this_rq->idle_balance ?
-                                           CPU_IDLE : CPU_NOT_IDLE;
+                              CPU_IDLE : CPU_NOT_IDLE;
 
    rebalance_domains(this_rq, idle);
    nohz_idle_balance(this_rq, idle);
