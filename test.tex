@@ -2249,24 +2249,25 @@ Page faults:    0
 Voluntary context switches:     0
 Involuntary context switches:   5912
 -------------------------------------------------------------
-PUs, ABSOLUTE_COREs, RELATIVE_COREs (CORE number inside SOCKET), SOCKETs 
-and numa nodes on which Benchmark-utils/linpackd was running.
+PUs, ABSOLUTE_COREs, RELATIVE_COREs (CORE number inside SOCKET), 
+SOCKETs and numa nodes on which linpack was running.
 ABSOLUTE_COREs represent logical numbering of COREs. It's horizontal
-index in the whole list of COREs.  -1 means that the object could not be identified.
+index in the whole list of COREs.
 -------------------------------------------------------------
-PUs:            38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38
+PUs:            38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 
 ABSOLUTE_COREs: 14 14 14 14 14 14 14 14 14 14 
-RELATIVE_COREs: 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-SOCKETs:        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-numa nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+RELATIVE_COREs: 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+SOCKETs:        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+numa nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 
 \end{verbatim}
 \endgroup
 
+\newpage
 \noindent
 \textit{MPSTAT zkrácený sumarizovaný výpis} \\ 
 
-První číslice na každém řádku označuje číslo PU (logická jednotka) další čísla znamenají procentuální vytížení daného PU aktualizované po pěti vteřinách (celkem 12číslic to znamená, že vytížení sledujeme jednu minutu). Dvě hvězdičky znamenají 100\% vytížení. 
+První číslice na každém řádku obrázku \ref{mpstat1} označuje číslo PU (logická jednotka) další čísla znamenají procentuální vytížení daného PU aktualizované po pěti vteřinách (celkem 12 číslic to znamená, že vytížení sledujeme jednu minutu). Dvě hvězdičky znamenají 100\% vytížení. 
 
 \begin{figure}[ht]
 \caption{mpstat zkrácený sumarizovaný výpis}
