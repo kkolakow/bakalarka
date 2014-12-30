@@ -1176,7 +1176,9 @@ Z funkce \verb#pick_next_task()# je volána funkce \verb#pick_next_entity()#, kt
 \subsection{Shrnutí}
 
 CFS je volán v době když dojde k vytvoření nové úlohy či probuzení stávající úlohy, usnutí úlohy, nebo když je vyvoláno jako obsluha časovače přerušení. Spočítá čas právě strávený úlohou na CPU, vynásobí ho koeficientem priority úlohy a přičte jej do \verb#p->se.vruntime#. Jestliže \verb#p->se.vruntime# poroste dostatečně a současně běžící úloha již není úlohou s nejmenší hodnotou vruntime, pak je spuštěna úloha, která je nejvíce nalevo v červeno-černého stromu. Úloha která právě běžela se vrátí zpátky do stromu. Toto není úplně přesné, jelikož CFS má nastavenou hodnotu granularity, o kterou maximálně může být větší vruntime běžící úlohy než vruntime úlohy úplně nalevo ve stromu. S granuralitou se počítá proto, aby z důvodu velmi malého rozdílu v hodnotě vruntime mezi úlohami nedocházelo k výměně obsahu a s tím souvisejícím negativním jevům jako zahozením dat ve vyrovnávací paměti atd.
-V systému jde granularitu konfigurovat v \verb#/proc/sys/kernel/sched_min_granularity_ns#. Zvýšení hodnoty bude vést k větší propustnosti, ale bude mít pomalejší odezvu na interaktivní procesy (vhodné pro servery). Zmenšením hodnoty  v \verb#sched_min_granularity_ns# docílíme k rychlejší odezvě a k menší propustnosti (z důvodu častější výměny obsahu).
+V systému jde granularitu konfigurovat \newline v \verb#/proc/sys/kernel/sched_min_granularity_ns#. 
+
+Zmenšením hodnoty v \verb#sched_min_granularity_ns# docílíme k rychlejší odezvě a k menší propustnosti (z důvodu častější výměny obsahu). Zvýšení hodnoty bude vést k větší propustnosti, ale bude mít pomalejší odezvu na interaktivní procesy (vhodné pro servery). 
 
 Větší část CFS návrhu už je mimo tento jednoduchý koncept, přibyly zde rozšíření pro vyvažování úloh na numa systémech a dalších algoritmy například na rozpoznávání spících procesů.
 
