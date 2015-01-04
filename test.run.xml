@@ -83,8 +83,5 @@
     <requires type="dynamic">
       <file>test.bcf</file>
     </requires>
-    <requires type="editable">
-      <file>bib.bib</file>
-    </requires>
   </external>
 </requests>

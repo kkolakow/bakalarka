@@ -22,8 +22,6 @@
   index
 ]{kidiplom}
 
-
-
 \usepackage[utf8]{inputenc}
 \usepackage[czech]{babel}
 \usepackage{listings}
@@ -35,13 +33,10 @@
 
 \newcommand{\sectionbreak}{\clearpage}
 
-\bibliography{bib.bib}
-%\bibliography{bibliografie.bib}
-
-\begin{document}
-
 \title{Implementace a testování linuxového plánovače úloh}
 \title[english]{Task scheduler implementation and testing}
+
+\begin{document}
 
 \author{Kamil Kolakowski}
 \supervisor{Mgr. Jan Outrata, Ph.D.}
@@ -54,7 +49,6 @@
 \keywords[english]{task scheduler; kernel; CFS; testing; balance}
 
 \thanks{Děkuji vedoucímu práce Mgr. Janu Outratovi, Ph.D. za možnost vypracovat bakalářskou práci na toto téma, za jeho konzultace a různá doporučení. Dále bych rád poděkoval Ing. Radimu Krčmářovi za konzultace ohledně implementace plánovače a algoritmů vyvažování, Mgr. Jiřímu Horníčkovi za kontrolu gramatiky, Riku Van Rielovi za konzultování NUMA vyvažování a Volkeru Seekerovi, Dr. za poskytnutí materiálů věnovaných plánování na OS/Linux.}
-
 
 
 %\tableofcontents
@@ -2441,33 +2435,35 @@ Po bližším obeznámení se s plánovačem úloh jsem došel k přesvědčení
 
 \nocite{*}
 
-\printbibliography
+%\printglossary
+%\printbibliography
+
+
 \printindex
 
 
-%\bibliography{references}
-%
-%\begin{thebibliography}{9}
-%  \bibitem{vseeker}{\em Volker Seeker:}
-%               {Process scheduling in Linux} \\ 
-%               University of Edinburgh 2013
-%%	\hyperref[name]{}
-%%	\href{http://criticalblue.com/news/wp-content/uploads/2013/12/linux\_scheduler\_notes\_final.pdf}{URL link to Process scheduling in Linux document}
-%  \bibitem{kernelorg}{\em Dokumentace na www.kernel.org 
-%               k linuxovému plánovači}\\
-%               \texttt{https://www.kernel.org/doc/Documentation/scheduler/}
-%  \bibitem{ibm}{\em IBM developerworks článek} \\
-%		\texttt{http://www.ibm.com/developerworks/library/l-completely-fair-scheduler/}
-%  \bibitem{linuxjournal}{\em Článek z linuxjournal} \\
-%		\texttt{http://www.linuxjournal.com/magazine/completely-fair-scheduler}
-%  \bibitem{kernel mailing lists}{\em Emaily věnované plánování z lwn.net a lkml.org} \\ 
-%		\texttt{https://lkml.org} \\
-%		\texttt{https://lwn.net}
-%  \bibitem{RRIEL}{\em Prezentace od Rika van Riela} \\
-%		Interní RedHat prezentace od jednoho z vývojářů vyvažovacího algoritmu v CFS plánovači
-%
-%\end{thebibliography}
-%
+\begin{thebibliography}{9}
+  \bibitem{vseeker}{\em Volker Seeker:}
+               {Process scheduling in Linux} \\ 
+               University of Edinburgh 2013
+%	\hyperref[name]{}
+%	\href{http://criticalblue.com/news/wp-content/uploads/2013/12/linux\_scheduler\_notes\_final.pdf}{URL link to Process scheduling in Linux document}
+  \bibitem{kernelorg}{\em Dokumentace na www.kernel.org 
+               k linuxovému plánovači}\\
+               \texttt{https://www.kernel.org/doc/Documentation/scheduler/}
+  \bibitem{ibm}{\em IBM developerworks článek} \\
+		\texttt{http://www.ibm.com/developerworks/library/} \\
+		\texttt{l-completely-fair-scheduler/}
+  \bibitem{linuxjournal}{\em Článek z linuxjournal} \\
+		\texttt{http://www.linuxjournal.com/magazine/completely-fair-scheduler}
+  \bibitem{kernel mailing lists}{\em Emaily věnované plánování z lwn.net a lkml.org} \\ 
+		\texttt{https://lkml.org} \\
+		\texttt{https://lwn.net}
+  \bibitem{RRIEL}{\em Prezentace od Rika van Riela} \\
+		Interní RedHat prezentace od jednoho z vývojářů vyvažovacího algoritmu v CFS plánovači
+
+\end{thebibliography}
+
 
 \end{document}
 
