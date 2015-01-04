@@ -84,7 +84,7 @@
       <file>test.bcf</file>
     </requires>
     <requires type="editable">
-      <file>bibliografie.bib</file>
+      <file>bib.bib</file>
     </requires>
   </external>
 </requests>
