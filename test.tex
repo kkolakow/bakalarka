@@ -357,8 +357,7 @@ K volání plánovače úloh dochází prostřednictvím funkce schedule() z tě
 
 \subsubsection{Pravidelné volání k aktualizaci vruntime u právě běžící úlohy}
 
-Přerušení od časovače pravidelně volá fuknci \verb#scheduler_tick()# \linebreak (z \verb#kernel/sched/core.c#). Dochází k aktualizaci hodnoty vruntime a také ke změnám na aktuální frontě úloh.
-V kódu funkce \verb#scheduler_tick()# je aktualizace realizována voláním 
+Přerušení od časovače pravidelně volá fuknci \verb#scheduler_tick()# \linebreak (z \verb#kernel/sched/core.c#). Dochází k aktualizaci hodnoty vruntime a také ke změnám na aktuální frontě úloh (vše 1000 krát za sekundu). V kódu funkce \newline \verb#scheduler_tick()# je aktualizace realizována voláním 
 \begin{verbatim}
 curr->sched_class->task_tick(rq, curr, 0);
 \end{verbatim}
@@ -457,7 +456,7 @@ Spící úloha obvykle očekává kód, který volá funkci \verb#wake_up# na pa
 Postupně dochází k následujícím činnostem
 \begin{enumerate}
 \item V případě, že úloha ještě není ve frontě běžících úloh, dojde k vrácení úlohy do této fronty. Toto je realizováno pomocí funkce \verb#tttwu_queue#, která zavře frontu běžících úloh a zavolá \verb#ttwu_do_activate()#.
-\item Probudí úlohu pomocí nastavení stavu na TASK\_RUNNING (ve funkci \verb#ttwu_do_wakeup()#).
+\item Probudí úlohu pomocí nastavení stavu na TASK\_RUNNING (ve funkci \newline \verb#ttwu_do_wakeup()#).
 \item Jestliže má probuzená úloha větší prioritu než úloha současně běžící, je nastaven \verb#need_resched# příznak pro vyvolání funkce \verb#schedule()#. Toto je také realizováno z funkce \verb#ttwu_do_wakeup()#.
 \end{enumerate}
 

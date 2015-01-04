@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  4 JAN 2015 20:28
+This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  4 JAN 2015 21:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1506,37 +1506,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 336--338
 
  []
 
+
+Overfull \hbox (11.44371pt too wide) in paragraph at lines 349--350
+\T1/iwonal/m/n/12 je na-plá-no-vaná pouze v p°í-pad¥, ºe ne-e-xis-tuje jiná úlo
+ha k b¥hu. T°ída []\T1/pcr/m/n/12 dl(deadline)
+ []
+
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 360--362
-\T1/iwonal/m/n/12 ƒasova£ p°e-ru-²ení pra-vi-deln¥ volá fuknci []\T1/pcr/m/n/12
- scheduler_tick()
+Underfull \hbox (badness 10000) in paragraph at lines 360--361
+\T1/iwonal/m/n/12 P°eru²ení od £a-so-va£e pra-vi-deln¥ volá fuknci []\T1/pcr/m/
+n/12 scheduler_tick()
  []
 
-[17]
-Overfull \hbox (80.16779pt too wide) in paragraph at lines 460--461
-[]\T1/iwonal/m/n/12 Probudí úlohu po-mocí na-sta-vení stavu na TASK_RUNNING (ve
- funkci []\T1/pcr/m/n/12 ttwu_do_wakeup()\T1/iwonal/m/n/12 ). 
- []
-
-[18] <obrazky/idealProcessor.jpg, id=236, 361.35pt x 252.945pt>
+[17] [18] <obrazky/idealProcessor.jpg, id=236, 361.35pt x 252.945pt>
 File: obrazky/idealProcessor.jpg Graphic file (type jpg)
 
 <use obrazky/idealProcessor.jpg>
-Package pdftex.def Info: obrazky/idealProcessor.jpg used on input line 594.
+Package pdftex.def Info: obrazky/idealProcessor.jpg used on input line 593.
 (pdftex.def)             Requested size: 361.34912pt x 252.94438pt.
 
 <obrazky/realProcessor.jpg, id=237, 416.30531pt x 283.0575pt>
 File: obrazky/realProcessor.jpg Graphic file (type jpg)
 
 <use obrazky/realProcessor.jpg>
-Package pdftex.def Info: obrazky/realProcessor.jpg used on input line 603.
+Package pdftex.def Info: obrazky/realProcessor.jpg used on input line 602.
 (pdftex.def)             Requested size: 353.86118pt x 240.59999pt.
  [19 <./obrazky/idealProcessor.jpg>]
 <obrazky/RBT_virtual_runtime.png, id=243, 338.48907pt x 216.07256pt>
 File: obrazky/RBT_virtual_runtime.png Graphic file (type png)
 
 <use obrazky/RBT_virtual_runtime.png>
-Package pdftex.def Info: obrazky/RBT_virtual_runtime.png used on input line 615
+Package pdftex.def Info: obrazky/RBT_virtual_runtime.png used on input line 614
 .
 (pdftex.def)             Requested size: 338.48825pt x 216.07202pt.
  [20 <./obrazky/realProcessor.jpg>]
@@ -1545,11 +1545,11 @@ Package pdftex.def Info: obrazky/RBT_virtual_runtime.png used on input line 615
 File: obrazky/schedulerStructures.png Graphic file (type png)
 
 <use obrazky/schedulerStructures.png>
-Package pdftex.def Info: obrazky/schedulerStructures.png used on input line 675
+Package pdftex.def Info: obrazky/schedulerStructures.png used on input line 674
 .
 (pdftex.def)             Requested size: 405.01212pt x 327.47264pt.
  [22]
-Overfull \hbox (5.17975pt too wide) in paragraph at lines 684--685
+Overfull \hbox (5.17975pt too wide) in paragraph at lines 683--684
 \T1/iwonal/m/n/12 tu-rou, která ne-ob-sa-huje nic víc neº od-kaz na po-tomka a 
 barvu p°edka. En-tita []\T1/pcr/m/n/12 rb_node
  []
@@ -1561,53 +1561,53 @@ barvu p°edka. En-tita []\T1/pcr/m/n/12 rb_node
 File: obrazky/domenyAskupiny.jpeg Graphic file (type jpg)
 
 <use obrazky/domenyAskupiny.jpeg>
-Package pdftex.def Info: obrazky/domenyAskupiny.jpeg used on input line 1226.
+Package pdftex.def Info: obrazky/domenyAskupiny.jpeg used on input line 1225.
 (pdftex.def)             Requested size: 386.62007pt x 193.90852pt.
  [28 <./obrazky/domenyAskupiny.jpeg>]
-Overfull \hbox (25.09851pt too wide) in paragraph at lines 1247--1248
+Overfull \hbox (25.09851pt too wide) in paragraph at lines 1246--1247
 \T1/iwonal/m/n/12 vání. Jedná se o []\T1/pcr/m/n/12 sched_domain \T1/iwonal/m/n
 /12 ([]\T1/pcr/m/n/12 include/linux/sched.h\T1/iwonal/m/n/12 ) a pak []\T1/pcr/
 m/n/12 sched_group
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1342--1343
+Underfull \hbox (badness 10000) in paragraph at lines 1341--1342
 \T1/iwonal/m/n/12 funkci []\T1/pcr/m/n/12 scheduler_tick() \T1/iwonal/m/n/12 ([
 ]\T1/pcr/m/n/12 kernel/sched/core.c\T1/iwonal/m/n/12 ) vo-lá-ním
  []
 
 [29]
-Overfull \hbox (15.29863pt too wide) in paragraph at lines 1366--1366
+Overfull \hbox (15.29863pt too wide) in paragraph at lines 1365--1365
 []\T1/pcr/m/n/12 static void run_rebalance_domains(struct softirq_action *h)[] 
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1378--1379
+Underfull \hbox (badness 10000) in paragraph at lines 1377--1378
 []\T1/pcr/m/n/12 load_balance()\T1/iwonal/m/n/12 , po-kud má daná do-ména na-st
 a-ve-nou pro-m¥n-nou
  []
 
 
-Overfull \hbox (6.30873pt too wide) in paragraph at lines 1480--1481
+Overfull \hbox (6.30873pt too wide) in paragraph at lines 1479--1480
 []\T1/iwonal/m/n/12 Funkce []\T1/pcr/m/n/12 load_balance() \T1/iwonal/m/n/12 vo
 lá funkci []\T1/pcr/m/n/12 find_busiest_group()\T1/iwonal/m/n/12 , která hledá
  []
 
 [30]
-Overfull \hbox (4.06778pt too wide) in paragraph at lines 1486--1487
+Overfull \hbox (4.06778pt too wide) in paragraph at lines 1485--1486
 \T1/iwonal/m/n/12 pra-vi-dlech a není-li na-le-zena nej-ru²-n¥j²í sku-pina, []\
 T1/pcr/m/n/12 find_busiest_group() \T1/iwonal/m/n/12 hledá
  []
 
 
-Overfull \hbox (6.41182pt too wide) in paragraph at lines 1713--1714
+Overfull \hbox (6.41182pt too wide) in paragraph at lines 1712--1713
 [][]\T1/pcr/m/n/12 SD_BALANCE_EXEC \T1/iwonal/m/n/12 je ná-v¥²tí po-u-ºí-vané f
 unkci []\T1/pcr/m/n/12 sched_exec()\T1/iwonal/m/n/12 . Tato funkce
  []
 
 
-Overfull \hbox (5.38391pt too wide) in paragraph at lines 1714--1715
+Overfull \hbox (5.38391pt too wide) in paragraph at lines 1713--1714
 [][]\T1/pcr/m/n/12 SD_BALANCE_FORK \T1/iwonal/m/n/12 je ná-v¥²tí po-u-ºí-vané v
 e funkci []\T1/pcr/m/n/12 wake_up_new_task()\T1/iwonal/m/n/12 .
  []
@@ -1616,20 +1616,20 @@ e funkci []\T1/pcr/m/n/12 wake_up_new_task()\T1/iwonal/m/n/12 .
 File: obrazky/numa-scheme.jpeg Graphic file (type jpg)
 
 <use obrazky/numa-scheme.jpeg>
-Package pdftex.def Info: obrazky/numa-scheme.jpeg used on input line 1734.
+Package pdftex.def Info: obrazky/numa-scheme.jpeg used on input line 1733.
 (pdftex.def)             Requested size: 388.7207pt x 264.23611pt.
  [32 <./obrazky/numa-scheme.jpeg>]
-Overfull \hbox (0.89864pt too wide) in paragraph at lines 1750--1750
+Overfull \hbox (0.89864pt too wide) in paragraph at lines 1749--1749
 []\T1/pcr/m/n/12 node 1 cpus: 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29[] 
  []
 
 
-Overfull \hbox (0.89864pt too wide) in paragraph at lines 1753--1753
+Overfull \hbox (0.89864pt too wide) in paragraph at lines 1752--1752
 []\T1/pcr/m/n/12 node 2 cpus: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44[] 
  []
 
 
-Overfull \hbox (0.89864pt too wide) in paragraph at lines 1756--1756
+Overfull \hbox (0.89864pt too wide) in paragraph at lines 1755--1755
 []\T1/pcr/m/n/12 node 3 cpus: 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59[] 
  []
 
@@ -1638,43 +1638,43 @@ File: obrazky/numa-scheme-big-system.jpeg Graphic file (type jpg)
 
 <use obrazky/numa-scheme-big-system.jpeg>
 Package pdftex.def Info: obrazky/numa-scheme-big-system.jpeg used on input line
- 1780.
+ 1779.
 (pdftex.def)             Requested size: 380.44733pt x 219.90578pt.
  [33] [34 <./obrazky/numa-scheme-big-system.jpeg>] [35] [36]
-Overfull \hbox (23.86641pt too wide) in paragraph at lines 1901--1903
+Overfull \hbox (23.86641pt too wide) in paragraph at lines 1900--1902
 \T1/iwonal/m/n/12 hi-e-rar-chicky do-mény a vy-va-ºuje sku-piny v do-mén¥ po-mo
 cí vo-lání funkce []\T1/pcr/m/n/12 load_balance\T1/iwonal/m/n/12 .
  []
 
 [37]
-Underfull \hbox (badness 10000) in paragraph at lines 2073--2074
+Underfull \hbox (badness 10000) in paragraph at lines 2072--2073
 
  []
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 2077--2078
+Underfull \hbox (badness 10000) in paragraph at lines 2076--2077
 
  []
 
 [39]
-Underfull \hbox (badness 10000) in paragraph at lines 2192--2194
+Underfull \hbox (badness 10000) in paragraph at lines 2191--2193
 
  []
 
 [40] [41]
-Underfull \hbox (badness 10000) in paragraph at lines 2226--2227
+Underfull \hbox (badness 10000) in paragraph at lines 2225--2226
 
  []
 
 [42
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 2230--2234
+Underfull \hbox (badness 10000) in paragraph at lines 2229--2233
 
  []
 
 [43]
-Underfull \hbox (badness 10000) in paragraph at lines 2288--2290
+Underfull \hbox (badness 10000) in paragraph at lines 2287--2289
 
  []
 
@@ -1682,10 +1682,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 2288--2290
 File: obrazky/lsTOPO-brickland.png Graphic file (type png)
 
 <use obrazky/lsTOPO-brickland.png>
-Package pdftex.def Info: obrazky/lsTOPO-brickland.png used on input line 2349.
+Package pdftex.def Info: obrazky/lsTOPO-brickland.png used on input line 2348.
 (pdftex.def)             Requested size: 425.58246pt x 466.93623pt.
 
-Overfull \hbox (16.08127pt too wide) in paragraph at lines 2349--2350
+Overfull \hbox (16.08127pt too wide) in paragraph at lines 2348--2349
 [][] 
  []
 
@@ -1694,14 +1694,14 @@ Overfull \hbox (16.08127pt too wide) in paragraph at lines 2349--2350
 File: obrazky/LinpackBaseChart.png Graphic file (type png)
 
 <use obrazky/LinpackBaseChart.png>
-Package pdftex.def Info: obrazky/LinpackBaseChart.png used on input line 2363.
+Package pdftex.def Info: obrazky/LinpackBaseChart.png used on input line 2362.
 (pdftex.def)             Requested size: 314.36646pt x 209.57764pt.
 
 <obrazky/LinpackTargetChart.png, id=399, 1806.75pt x 1204.5pt>
 File: obrazky/LinpackTargetChart.png Graphic file (type png)
 
 <use obrazky/LinpackTargetChart.png>
-Package pdftex.def Info: obrazky/LinpackTargetChart.png used on input line 2372
+Package pdftex.def Info: obrazky/LinpackTargetChart.png used on input line 2371
 .
 (pdftex.def)             Requested size: 314.36646pt x 209.57764pt.
  [47 <./obrazky/LinpackBaseChart.png> <./obrazky/LinpackTargetChart.png>]
@@ -1709,36 +1709,36 @@ Package pdftex.def Info: obrazky/LinpackTargetChart.png used on input line 2372
 File: obrazky/LinpackSumChart.png Graphic file (type png)
 
 <use obrazky/LinpackSumChart.png>
-Package pdftex.def Info: obrazky/LinpackSumChart.png used on input line 2381.
+Package pdftex.def Info: obrazky/LinpackSumChart.png used on input line 2380.
 (pdftex.def)             Requested size: 298.10089pt x 198.73392pt.
 
 <obrazky/timeWaitingOutOfCPU.png, id=408, 903.375pt x 602.25pt>
 File: obrazky/timeWaitingOutOfCPU.png Graphic file (type png)
 
 <use obrazky/timeWaitingOutOfCPU.png>
-Package pdftex.def Info: obrazky/timeWaitingOutOfCPU.png used on input line 239
-0.
+Package pdftex.def Info: obrazky/timeWaitingOutOfCPU.png used on input line 238
+9.
 (pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
  [48 <./obrazky/LinpackSumChart.png> <./obrazky/timeWaitingOutOfCPU.png>]
 <obrazky/totalTime.png, id=416, 903.375pt x 602.25pt>
 File: obrazky/totalTime.png Graphic file (type png)
 
 <use obrazky/totalTime.png>
-Package pdftex.def Info: obrazky/totalTime.png used on input line 2401.
+Package pdftex.def Info: obrazky/totalTime.png used on input line 2400.
 (pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
  [49 <./obrazky/totalTime.png>]
 <obrazky/PerfBenchResult.png, id=424, 1284.8pt x 722.7pt>
 File: obrazky/PerfBenchResult.png Graphic file (type png)
 
 <use obrazky/PerfBenchResult.png>
-Package pdftex.def Info: obrazky/PerfBenchResult.png used on input line 2434.
+Package pdftex.def Info: obrazky/PerfBenchResult.png used on input line 2433.
 (pdftex.def)             Requested size: 385.44298pt x 216.81166pt.
  [50 <./obrazky/PerfBenchResult.png>] [51
 
 ]
 No file test.ind.
 
-Overfull \hbox (36.89862pt too wide) in paragraph at lines 2463--2465
+Overfull \hbox (36.89862pt too wide) in paragraph at lines 2462--2464
 \T1/pcr/m/n/12 http://www.linuxjournal.com/magazine/completely-fair-scheduler 
  []
 
@@ -1753,11 +1753,11 @@ AED: lastpage setting LastPage
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2474.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 2474.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2473.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 2473.
  (./test.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2474.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2474.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2473.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2473.
 
 
 LaTeX Warning: There were undefined references.
@@ -1770,7 +1770,7 @@ Package biblatex Warning: Please (re)run Biber on the file:
 Package logreq Info: Writing requests to 'test.run.xml'.
 \openout1 = `test.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2474.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2473.
  ) 
 Here is how much of TeX's memory you used:
  23971 strings out of 495000
@@ -1787,7 +1787,7 @@ ps/iwona/ec-iwona.enc}</usr/share/texlive/texmf-dist/fonts/type1/nowacki/iwona/
 iwonal.pfb></usr/share/texlive/texmf-dist/fonts/type1/nowacki/iwona/iwonali.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/nowacki/iwona/iwonam.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on test.pdf (52 pages, 1180243 bytes).
+Output written on test.pdf (52 pages, 1180191 bytes).
 PDF statistics:
  641 PDF objects out of 1000 (max. 8388607)
  551 compressed objects within 6 object streams
