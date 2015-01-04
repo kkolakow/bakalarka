@@ -357,7 +357,7 @@ K volání plánovače úloh dochází prostřednictvím funkce schedule() z tě
 
 \subsubsection{Pravidelné volání k aktualizaci vruntime u právě běžící úlohy}
 
-Časovač přerušení pravidelně volá fuknci \verb#scheduler_tick()# \linebreak (z \verb#kernel/sched/core.c#). Dochází k aktualizaci hodnoty vruntime a také ke změnám na aktuální frontě úloh.
+Přerušení od časovače pravidelně volá fuknci \verb#scheduler_tick()# \linebreak (z \verb#kernel/sched/core.c#). Dochází k aktualizaci hodnoty vruntime a také ke změnám na aktuální frontě úloh.
 V kódu funkce \verb#scheduler_tick()# je aktualizace realizována voláním 
 \begin{verbatim}
 curr->sched_class->task_tick(rq, curr, 0);
