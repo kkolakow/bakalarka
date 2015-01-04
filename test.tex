@@ -57,12 +57,13 @@
 \maketitle
 
 \section{Úvod}
-Linuxový plánovač je jednou z nejdůležitějších komponent jádra každého operačního systému. Stará se o distribuci běžících úloh na systému, tak aby byly co nejlépe využity zdroje počítače. Paralelně s vývojem plánovače úloh dochází k vývoji technického vybavení počítačů. Práce na návhru současného plánovače úloh začala dříve, než se začaly prosazovat složitější architektury počítačů například s NUMA topologií. V tomto textu se proto podíváme, zda je koncept plánovače doplněn o vyvažovaní úloh na strojích s podporou NUMA topologie. Na závěr dokumentu se podíváme na příklady, které demonstrují testování plánovače úloh. Testování provádíme za účelem nalezení možných problémů s plánováním a identifikaci slabin plánovače. 
+Linuxový plánovač je jednou z nejdůležitějších komponent jádra každého operačního systému. Stará se o distribuci běžících úloh na systému, tak aby byly co nejlépe využity zdroje počítače. 
 
-Výstupy mého testování plánovače úloh používají ve firmě RedHat vývojáři plánovače úloh zejména pak Ing. Radim Krčmář a Rik van Riel. Testy které používají vývojáři plánovače úloh netestují komplexně všechny požadované vlastnosti plánovače. V současné době neexistuje jediný komplexní testovací nástroj, který by prověřil všechny požadované vlastnosti plánovače. K testování používáme zejména modifikované testy jako Linpack, STREAM, SPECjbb a Perf Bench.
+Paralelně s vývojem plánovače úloh dochází k vývoji technického vybavení počítačů. Práce na návhru současného plánovače úloh začala dříve, než se začaly prosazovat složitější architektury počítačů například s NUMA topologií. V tomto textu se proto podíváme, zda byl koncept plánovače doplněn o vyvažovaní úloh na strojích s podporou NUMA topologie. Na závěr dokumentu se podíváme na příklady, které demonstrují testování plánovače úloh. Testování provádíme za účelem nalezení možných problémů s plánováním a identifikaci slabin plánovače. 
 
-Všechny objevené problémy s plánovačem úloh jsou reportovány na www.bugzilla.redhat.com, kde na ně musí reagovat a chybu odstranit.
+Výstupy mého testování plánovače úloh používají ve firmě RedHat vývojáři plánovače úloh zejména pak Ing. Radim Krčmář a Rik van Riel. Testy, které používají vývojáři plánovače úloh, netestují komplexně všechny požadované vlastnosti plánovače. V současné době neexistuje jediný komplexní testovací nástroj, který by prověřil všechny požadované vlastnosti plánovače. K testování používáme zejména modifikované testy jako Linpack, Stream, SPECjbb a PerfBench.
 
+V textu popisuji plánovač, který je implementován do jader od verze 3.18.0. Poslední stabilní jádro s popisovanou implementací lze stáhout z adresy \linebreak https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.18.1.tar.xz. Kód plánovače je v adresáři \verb#./linux-3.18.1/kernel/sched/#. Hlavním souborem implementující kostru plánovače je sobor \verb#core.c#. Dalšími důležitými soubory jsou \verb#fair.c# (implementující fair pravidla pro obyčejné úlohy), poté \verb#rt.c# (pravidla pro realtime úlohy), \verb#deadline.c# (pravidla pro úlohy konečného času).
   
 
 \section{Linuxové jádro, úloha plánovače, druhy úloh}
