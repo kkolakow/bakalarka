@@ -40,7 +40,7 @@
 \keywords{plánovač úloh; jádro; CFS; testování; vyvažování}
 \keywords[english]{task scheduler; kernel; CFS; testing; balance}
 
-\thanks{Děkuji vedoucímu práce Mgr. Janu Outratovi, Ph.D. za možnost vypracovat bakalářskou práci na toto téma, za jeho konzultace a různá doporučení. Dále bych rád poděkoval Ing. Radimu Krčmářovi za konzultace ohledně implementace plánovače a algoritmů vyvažování, Mgr. Jiřímu Horníčkovi za kontrolu gramatiky, Riku Van Rielovi za konzultování numa vyvažování a Volkeru Seekerovi, Dr. za poskytnutí materiálů věnovaných plánování na OS/Linux.}
+\thanks{Děkuji vedoucímu práce Mgr. Janu Outratovi, Ph.D. za možnost vypracovat bakalářskou práci na toto téma, za jeho konzultace a různá doporučení. Dále bych rád poděkoval Ing. Radimu Krčmářovi za konzultace ohledně implementace plánovače a algoritmů vyvažování, Mgr. Jiřímu Horníčkovi za kontrolu gramatiky, Riku Van Rielovi za konzultování NUMA vyvažování a Volkeru Seekerovi, Dr. za poskytnutí materiálů věnovaných plánování na OS/Linux.}
 
 
 
@@ -57,7 +57,7 @@
 Současné linuxové jádro je více úlohové. Jelikož je úloh na víceúlohových systémech často více než množství procesorů v systému, musí se úlohy o čas na procesoru dělit.
 Plánovač úloh je algoritmus jádra systému, který se stará o co nejefektivněji využítí procesorového času.
 
-Ačkoli byl Linux původně vyvíjen jako desktopový operační systém, dnes jej můžeme najít na serverech, vestavěných zařízeních, mainframech a superpočítačích. Zatížení úlohami se na jednotlivých platformách velice liší. Z tohoto důvodu a z důvodu prosazování se nových technologií jako je například multiprocessing, symetrický multithreading, nerovnoměrný přístup do paměti (numa), dochází k přehodnocování strategie přidělování zdrojů procesům. 
+Ačkoli byl Linux původně vyvíjen jako desktopový operační systém, dnes jej můžeme najít na serverech, vestavěných zařízeních, mainframech a superpočítačích. Zatížení úlohami se na jednotlivých platformách velice liší. Z tohoto důvodu a z důvodu prosazování se nových technologií jako je například multiprocessing, symetrický multithreading, nerovnoměrný přístup do paměti (NUMA), dochází k přehodnocování strategie přidělování zdrojů procesům. 
 
 Každý plánovač také řeší rovnováhu mezi uživatelskou odezvou a obecnou férovostí. Po zamyšlení se nad výše jmenovanými vlastnosti a technologiemi je snadnější pochopit, jak složitý může být problém plánování úloh.
 
@@ -70,7 +70,7 @@ následujícím textu budeme věnovat jen jednomu typu úloh.
 
 \subsubsection{Normální a úlohy reálného času}
 
-Systém plánující úlohy reálného času (real time system) je takový systém, který garantuje doby odezvy systému na události, což znamená, že každá oparace by měla být dokončena v daném časovém období. Systém je klasifikován jako hard real time, pokud zmeškání lhůty může způsobit selhání systému a systém nazýváme soft real time v případě, že systém může tolerovat několik zmeškaných časových omezení. V běžném linuxovém kernelu je podpora pouze pro soft real time úlohy (systém je soft real time). Real time úlohy mají v linuxovém plánovači svoji vlastní třídu pravidel (\verb#kernel/sched/rt.c#).
+Systém plánující úlohy reálného času (real time system) je takový systém, který garantuje doby odezvy systému na události, což znamená, že každá oparace by měla být dokončena v daném časovém období. Systém je klasifikován jako hard real time, pokud zmeškání lhůty může způsobit selhání systému a systém nazýváme soft real time v případě, že systém může tolerovat několik zmeškaných časových omezení. V běžném linuxovém jádru je podpora pouze pro soft real time úlohy (systém je soft real time). Real time úlohy mají v linuxovém plánovači svoji vlastní třídu pravidel (\verb#kernel/sched/rt.c#).
 
 Ačkoli současný linuxový plánovač obsahuje i pravidla pro plánování úloh reálného času, nebudu se jim v této práci věnovat. Mnohem důležitější a v běžné praxi více používané jsou úlohy normální v rámci terminologie linuxového plánovače \verb#others tasks#.
 
@@ -104,7 +104,7 @@ V této práci se zaměříme pouze na úlohy závislé na CPU.
 Byl poprvé použit v jádrech 2.6.23 v roce 2008. Autorem je Ingo Molnár autor O(1) plánovače.
 
 \subsection{Kostra plánovače}
-Vstupní branou do linuxového plánovače úloh je funkce \verb#schedule()#, která je definovaná v \verb#kernel/sched/core.c# (v dřívějších kernelech v \verb#/kernel/sched.c#). Tuto funkci používá jádro k vyvolání procesu plánovače, který rozhoduje o tom, která úloha se má spustit a poté realizuje její spuštění. 
+Vstupní branou do linuxového plánovače úloh je funkce \verb#schedule()#, která je definovaná v \verb#kernel/sched/core.c# (v dřívějších jádrech v \verb#/kernel/sched.c#). Tuto funkci používá jádro k vyvolání procesu plánovače, který rozhoduje o tom, která úloha se má spustit a poté realizuje její spuštění. 
 
 %\begin{lstlisting}[language=c]
 %
@@ -221,7 +221,7 @@ Dále voláme \verb#pick_next_task# k výběru další vhodné úlohy, která bu
 \begin{verbatim}
 next = pick_next_task(rq, prev);
 \end{verbatim}
-Poté dojde k vyčištění dvou příznaků (proměnných) sloužících k vyvolání funkce \verb#schedule()#. Tyto příznaky jsou součástí \verb#task_struct# a jsou pravidelně kernelem kontrolovány. 
+Poté dojde k vyčištění dvou příznaků (proměnných) sloužících k vyvolání funkce \verb#schedule()#. Tyto příznaky jsou součástí \verb#task_struct# a jsou pravidelně jádrem kontrolovány. 
 \begin{verbatim}
 clear_tsk_need_resched(prev);
 clear_preempt_need_resched();
@@ -607,7 +607,7 @@ Další velice zajímavou vlastností CFS je koncept plánování skupin úloh. 
 
 Plánování skupin je nový způsob jak obstarat férovost v plánování, když se úloha rozvětví do více úloh. Příkladem tohoto může být HTTP server, který se rozvětví na mnoho úloh za účelem obsluhovat HTTP požadavky paralelně (což je typické pro HTTP servery). Místo aby byly brány všechny úlohy jako úlohy se stejnou váhou, CFS zavádí skupiny, aby takové chování ošetřil. Proces, který větví úlohy, sdílí jejich vruntime v rámci skupiny a to hierarchicky, zatímco každá další jednotlivá úloha udržuje svůj vlastní vruntime. Tímto způsobem každá další úloha dostává přibližně stejné množství plánovaného času jako skupina. V systému můžeme najít \verb#/proc# rozhraní, kterým řídíme hierarchii procesu a které nám dává plnou kontrolu nad tím jak jsou skupiny procesů tvořeny. Pomocí této konfigurace můžeme vytvořit férovost přes uživatele systému, přes procesy nebo jejich kombinace.
 
-Rozdělování úloh do skupin je v současném kernelu automatické. Lze ho zapnou a vypnout v \verb#/proc/sys/kernel/sched_autogroup_enabled#.
+Rozdělování úloh do skupin je v současném jádru automatické. Lze ho zapnou a vypnout v \verb#/proc/sys/kernel/sched_autogroup_enabled#.
 
 \begin{figure}[ht]
 \caption{Příklad vytváření skupin multimedia a browser pomocí cgroups}
@@ -1180,7 +1180,7 @@ V systému jde granularitu konfigurovat \newline v \verb#/proc/sys/kernel/sched_
 
 Zmenšením hodnoty v \verb#sched_min_granularity_ns# docílíme k rychlejší odezvě a k menší propustnosti (z důvodu častější výměny obsahu). Zvýšení hodnoty bude vést k větší propustnosti, ale bude mít pomalejší odezvu na interaktivní procesy (vhodné pro servery). 
 
-Větší část CFS návrhu už je mimo tento jednoduchý koncept, přibyly zde rozšíření pro vyvažování úloh na numa systémech a dalších algoritmy například na rozpoznávání spících procesů.
+Větší část CFS návrhu už je mimo tento jednoduchý koncept, přibyly zde rozšíření pro vyvažování úloh na NUMA systémech a dalších algoritmy například na rozpoznávání spících procesů.
 
 \section{Vyvažování}
 
@@ -1209,7 +1209,7 @@ Představme si, že máme systém dvou fyzických procesorů, na kterých je hyp
 
 Každý hyperthreadový procesor je vložen právě do jedné skupiny a obě skupiny jsou v téže doméně. Tyto dvě úrovně domén poté tvoří celý procesor. 
 
-Diagram pro numa systémy je stejný jako předchozí diagram. Jednotlivé domény pak reprezentují numa nody. 
+Diagram pro NUMA systémy je stejný jako předchozí diagram. Jednotlivé domény pak reprezentují NUMA nody. 
 
 %\subsection{Vyvažování zátěže}
 
@@ -1316,7 +1316,7 @@ V \verb#include/linux/topology.h# najdeme nastavení pro příznaky a pro pláno
 
 \subsubsection{Aktivní vyvažování}
 
-Během aktivního vyvažování kernel prochází doménovou hierarchií. Začíná se na CPU doméně a postupuje výše. Když na určité doméně zjistí, že je nevyvážená, spustí vyvažovací operace.
+Během aktivního vyvažování jádro prochází doménovou hierarchií. Začíná se na CPU doméně a postupuje výše. Když na určité doméně zjistí, že je nevyvážená, spustí vyvažovací operace.
 
 Během inicializace plánovače je vytvořena obsluha pravidelného přerušení, ze které jsou volány funkce, které provádí vyvažování zátěže. Vyvažování je spuštěno ve funkci \verb#scheduler_tick()# (\verb#kernel/sched/core.c#) voláním \linebreak \verb#trigger_load_balance()# (\verb#kernel/sched/fair.c#). 
 
@@ -1698,11 +1698,11 @@ Dále je třeba dělat vyvažování, když se úloha probudí, nebo je vytvoře
 \newpage
 \subsection{Numa vyvažování}
 
-Non uniform memory access. Numa znamená, že přístup do různých segmentů paměti je různě rychlý. Architektura je rozšířením SMP (symetrický multi processing). Počítače začaly mít problémy s propustností mezi pamětí a procesorem v době, kdy se začaly objevovat systémy se stovkami jader, jelikož každé jádro komunikovalo stejnou sběrnicí s pamětí. Toto se podařilo vyřešit shlukováním jader a pamětí do takzvaných numa uzlů. Každý procesor (několik jader) má k dispozici svou lokální paměť, na kterou má rychlý přístup, ale má také přístup na vzdálenou paměť, kde je přístup pomalejší.
+Non uniform memory access. Numa znamená, že přístup do různých segmentů paměti je různě rychlý. Architektura je rozšířením SMP (symetrický multi processing). Počítače začaly mít problémy s propustností mezi pamětí a procesorem v době, kdy se začaly objevovat systémy se stovkami jader, jelikož každé jádro komunikovalo stejnou sběrnicí s pamětí. Toto se podařilo vyřešit shlukováním jader a pamětí do takzvaných NUMA uzlů. Každý procesor (několik jader) má k dispozici svou lokální paměť, na kterou má rychlý přístup, ale má také přístup na vzdálenou paměť, kde je přístup pomalejší.
 
-K propojování uzlů je použita sběrnice, které se obecně říká INTERCONNECT. Každý z výrobců numa systémů pojmenovává tyto sběrnice jinak INTEL používá Intel Quick Path (QPI), dříve taky používal název Common system interface (CSI), AMD používá název Hypertransport.
+K propojování uzlů je použita sběrnice, které se obecně říká INTERCONNECT. Každý z výrobců NUMA systémů pojmenovává tyto sběrnice jinak INTEL používá Intel Quick Path (QPI), dříve taky používal název Common system interface (CSI), AMD používá název Hypertransport.
 
-Výrobci systémů si sami navrhují, které numa uzly budou propojeny pomoci interconnect sběrnice na přímo, některé další jsou propojeny přes několik dalších numa uzlů. 
+Výrobci systémů si sami navrhují, které NUMA uzly budou propojeny pomoci interconnect sběrnice na přímo, některé další jsou propojeny přes několik dalších NUMA uzlů. 
 
 %h v místě výskytu (here)
 %t na začátku stránky (top)
@@ -1711,13 +1711,13 @@ Výrobci systémů si sami navrhují, které numa uzly budou propojeny pomoci in
 
 \begin{figure}[ht]
 \includegraphics[scale=0.78]{obrazky/numa-scheme.jpeg}
-\caption{Jednoduchá numa topologie}
+\caption{Jednoduchá NUMA topologie}
 \label{numa scheme1}
 \end{figure}
 
-obrázek \ref{numa scheme1} ukazuje numa topologii systému HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor. Je to nejjednodušší způsob zapojení numa počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším numa uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální které jsou nejrychlejší a vzdálené, které jsou pomalejší, ale mezi každými dvěmi uzly vždy stejné.
+obrázek \ref{numa scheme1} ukazuje NUMA topologii systému HP PROLIANT DL580 GEN8 4 socket Ivy Bridge EX processor. Je to nejjednodušší způsob zapojení NUMA počítače. Všechny procesory mají přístup ke své lokální paměti (což je vždy stejné), ale navíc jsou propojeny pomocí QPI s každým dalším NUMA uzlem. Z čehož nám vyplývá, že systém bude mít pouze 2 různé doby přístupu do pamětí. Lokální které jsou nejrychlejší a vzdálené, které jsou pomalejší, ale mezi každými dvěmi uzly vždy stejné.
 
-Zde je výpis numactl ukazující jak máme shlukovány jádra a paměť do numa uzlů.
+Zde je výpis numactl ukazující jak máme shlukovány jádra a paměť do NUMA uzlů.
 
 \begin{verbatim} 
 
@@ -1753,16 +1753,16 @@ node 0 1 2 3
 
 Na diagonále je vidět čas lokálního přístupu do paměti. Na zbylé uzly přistupujeme vždy stejně kvalitní a dlouhou linkou QPI, takže časy jsou stejné.
 
-Takto symetrický přístup k vzdáleným numa pamětem je méně častý. Většina velkých systémů má topologii složitější, kde jsou propojovány uzly přes kontroléry a ty jsou pak přes další kontrolér propojené s dalšími uzly. Dochází tak k přístupům do vzdálené paměti přes více numa uzlů a tím pádem dochází k pomalejšímu přístupu do vzdálené paměti. Teď se podívejme na obrázek \ref{numa scheme2} na kterém je systém, který má numa topologii složitější. Jde o systém se čtyřmi Westmere procesory HP Proliant DL980 G78.
+Takto symetrický přístup k vzdáleným NUMA pamětem je méně častý. Většina velkých systémů má topologii složitější, kde jsou propojovány uzly přes kontroléry a ty jsou pak přes další kontrolér propojené s dalšími uzly. Dochází tak k přístupům do vzdálené paměti přes více NUMA uzlů a tím pádem dochází k pomalejšímu přístupu do vzdálené paměti. Teď se podívejme na obrázek \ref{numa scheme2} na kterém je systém, který má NUMA topologii složitější. Jde o systém se čtyřmi Westmere procesory HP Proliant DL980 G78.
 
 \begin{figure}[ht]
 \includegraphics[scale=0.7]{obrazky/numa-scheme-big-system.jpeg}
-\caption{Systém se složitější numa topologii}
+\caption{Systém se složitější NUMA topologii}
 \label{numa scheme2}
 \end{figure}
 
 
-Jedná se o systém s 80 logickými jádry (s 40 fyzickými) a se zapnutou podporou hypertheading. Každý procesor této generace obsahuje 10 logických jader (5 fyzických). Každý procesor se svou lokální pamětí tvoří jeden numa uzel. CPU jsou po čtyřech spojené s jedním CPU kontrolérem. Ten je spojuje se zbylými 4 CPU přes další CPU kontrolér. Ze samotného obrázku je vidět, že nyní nebudou přístupy do pamětí dvojího druhu lokální a vzdálené, ale vzdálené se nám dále budou lišit podle toho, přes kolik kontrolérů bude uzel přistupovat k paměti (1 nebo 2). Takže vidíme, že přístupy do pamětí budou dle Obrázku \ref{numa scheme2} čtyř druhů. První je lokální, druhý vzdálený jen mezi uzly vedle sebe (bez využití kontroléru), třetí je vzdálený komunikující přes jeden kontrolér, čtvrtý je vzdálený komunikující přes 2 kontroléry. Z Obrázku \ref{numa scheme2} je patrné, že je cesta mezi numa uzly, které jdou přes 2 kontroléry zdvojená tj. existuje zde alternativní cesta pro případ, že bude daná cesta přetížená. To která cesta bude vybrána v případě přístupu do vzdálené paměti přes dva kontroléry rozhoduje firmware kontroléru, takže tímto se dále nemusíme zabývat a bereme to, že je vždy vybrána méně zatížená cesta.
+Jedná se o systém s 80 logickými jádry (s 40 fyzickými) a se zapnutou podporou hypertheading. Každý procesor této generace obsahuje 10 logických jader (5 fyzických). Každý procesor se svou lokální pamětí tvoří jeden NUMA uzel. CPU jsou po čtyřech spojené s jedním CPU kontrolérem. Ten je spojuje se zbylými 4 CPU přes další CPU kontrolér. Ze samotného obrázku je vidět, že nyní nebudou přístupy do pamětí dvojího druhu lokální a vzdálené, ale vzdálené se nám dále budou lišit podle toho, přes kolik kontrolérů bude uzel přistupovat k paměti (1 nebo 2). Takže vidíme, že přístupy do pamětí budou dle Obrázku \ref{numa scheme2} čtyř druhů. První je lokální, druhý vzdálený jen mezi uzly vedle sebe (bez využití kontroléru), třetí je vzdálený komunikující přes jeden kontrolér, čtvrtý je vzdálený komunikující přes 2 kontroléry. Z Obrázku \ref{numa scheme2} je patrné, že je cesta mezi NUMA uzly, které jdou přes 2 kontroléry zdvojená tj. existuje zde alternativní cesta pro případ, že bude daná cesta přetížená. To která cesta bude vybrána v případě přístupu do vzdálené paměti přes dva kontroléry rozhoduje firmware kontroléru, takže tímto se dále nemusíme zabývat a bereme to, že je vždy vybrána méně zatížená cesta.
 
 \newpage
 Vypíšeme si nejdříve jak jsou jednotlivé jádra shlukovány do uzlů a poté se podíváme, jak se liší vzdálené přístupy do pamětí.
@@ -1800,7 +1800,7 @@ node 7 free: 255232 MB
 
 \newpage
 \noindent
-A nyní se podíváme na přístupy do paměti mezi jednotlivými numa uzly. 
+A nyní se podíváme na přístupy do paměti mezi jednotlivými NUMA uzly. 
 \begin{verbatim}
 
 node distances:
@@ -1819,12 +1819,12 @@ node 0 1 2 3 4 5 6 7
 Nyní přístupy do paměti nabývají těchto hodnot:
 \begin{enumerate}
 \item Hodnoty 10 nejlepšího tedy nejnižšího času jsme dosáhli při přístupu do lokální paměti.
-\item Hodnoty 12 druhého nejlepšího času přístupu jsme dosáhli při přístupu na vedlejší uzel, bez potřeby komunikovat přes numa kontrolér. 
+\item Hodnoty 12 druhého nejlepšího času přístupu jsme dosáhli při přístupu na vedlejší uzel, bez potřeby komunikovat přes NUMA kontrolér. 
 \item Třetí hodnoty jsme dosáhli při přístupu na vzdálený uzel, který komunikuje přes jeden kontrolér.
-\item Nejhorší možný čas přístupu do paměti jsme dosáhli v případě, že komunikují dva numa uzly, které jsou propojeny pomocí dvou kontrolérů.
+\item Nejhorší možný čas přístupu do paměti jsme dosáhli v případě, že komunikují dva NUMA uzly, které jsou propojeny pomocí dvou kontrolérů.
 \end{enumerate}
 
-Při vyvažování u numa systému je nutné mít na paměti, že ne všechny procesory mají přístupy do všech segmentů pamětí stejně rychlé.
+Při vyvažování u NUMA systému je nutné mít na paměti, že ne všechny procesory mají přístupy do všech segmentů pamětí stejně rychlé.
 
 \noindent
 Numa vyvažování používá tři principy přesunu pro docílení vyváženosti:
@@ -1835,7 +1835,7 @@ Numa vyvažování používá tři principy přesunu pro docílení vyváženost
 \item Kombinace předchozích metod. Kód plánovače (v tomhle případě spíše mluvíme o funkcích na vyvažování jako o vyvažovači) zváží zdali je výhodnější přesouvat paměť nebo přesouvat proces.
 \end{enumerate}
 
-Plánovač si vede informace o přístupech úlohy do různých segmentů paměti (na různé numa uzly). Jsou registrovány přístupy do segmentů do kterých se přistupuje opakovaně, o implementaci sběru statistik přístupů bude vysvětlen v pozdější kapitole \ref{page fault}.
+Plánovač si vede informace o přístupech úlohy do různých segmentů paměti (na různé NUMA uzly). Jsou registrovány přístupy do segmentů do kterých se přistupuje opakovaně, o implementaci sběru statistik přístupů bude vysvětlen v pozdější kapitole \ref{page fault}.
 
 \begin{table}[ht]
 \centering
@@ -1854,14 +1854,14 @@ Uzel 3 & 14 & 44 \\
 \hline
 \end{tabular}
 
-\caption{Přístupy na numa uzly}
+\caption{Přístupy na NUMA uzly}
 \label{table1}
 \end{table}
 
 Úloha umístit úlohu na nejvhodnější pozici, nemusí být zcela tak jednoduchá. Vše komplikují sdílená data (třeba knihovna glibc), na které obvykle přistupuje více úloh. 
 
 Výběr kde umístit úlohu probíhá dle následujícího algoritmu. 
-Pro každou úlohu A testuje numa uzel N
+Pro každou úlohu A testuje NUMA uzel N
 \begin{enumerate}
 \item kontroluje zdali je uzel N lepší než uzel současně běžící úlohy (C). Úloha má větší množství svých dat na uzlu N než na současném uzlu C
 \item jestliže platí bod 1. pak pro každé CPU na uzlu N zjišťujeme 
@@ -1872,7 +1872,7 @@ Pro každou úlohu A testuje numa uzel N
 \end{itemize}
 \end{enumerate}
 
-\subsection{Spuštění numa vyvažování}
+\subsection{Spuštění NUMA vyvažování}
 
 \subsubsection{Periodické spouštění vyvažování při obsluze časovače přerušení}
 Tento způsob spuštění vyvažování úloh je implementován přesně tak, jak je popsáno v kapitole o vyvažování UMA SMP systému. Funkce \verb#scheduler_tick# volá funkci \verb#trigger_load_balance#. Ta vyvolá softwarové přerušení, které vyvolá obsluhu přerušení \verb#run_rebalance_domains#. 
@@ -1882,7 +1882,7 @@ Tento způsob spuštění vyvažování úloh je implementován přesně tak, ja
 
 \subsubsection{Vyvažování spouštěné jako ošetření page fault výjimky}
 \label{page fault}
-Aby mohl vyvažovací algoritmus rozhodnout, kde je vhodné umístit úlohu určenou k běhu, vede si statistiky přístupů na numa uzly každé úlohy. Sběr statistik je realizován tak, že jsou znepřístupněné určité stránky paměti a při přístupu úlohy do znepřístupněné paměti je vyvolána page fault výjimka. Jako ošetření výjimky je volána funkce \verb#do_numa_page#. 
+Aby mohl vyvažovací algoritmus rozhodnout, kde je vhodné umístit úlohu určenou k běhu, vede si statistiky přístupů na NUMA uzly každé úlohy. Sběr statistik je realizován tak, že jsou znepřístupněné určité stránky paměti a při přístupu úlohy do znepřístupněné paměti je vyvolána page fault výjimka. Jako ošetření výjimky je volána funkce \verb#do_numa_page#. 
 
 %\begin{lstlisting}
 %static int do_numa_page(struct mm_struct *mm, struct vm_area_struct *vma,
@@ -2044,19 +2044,19 @@ Aby mohl vyvažovací algoritmus rozhodnout, kde je vhodné umístit úlohu urč
 %\end{lstlisting}
 
 Tato funkce volá funkci \verb#task_numa_placement#, která má za úkol procházet statistiky přístupů do jednotlivých uzlů a vybere uzel do kterého měla úloha nejvíce přístupů. Ve funkci \verb#task_numa_placement# je volána funkce \newline \verb#numa_migrate_preferred#, která uloží vybraný uzel do proměnné \newline \verb#numa_preferred_nid# (ze struktury \verb#task_struct#).
-Na základě znalosti preferovaného numa uzlu je volána funkce \verb#task_numa_find_cpu#, která vybere nejvhodnější CPU k běhu na vybraném uzlu (\verb#numa_preferred_nid#).
+Na základě znalosti preferovaného NUMA uzlu je volána funkce \verb#task_numa_find_cpu#, která vybere nejvhodnější CPU k běhu na vybraném uzlu (\verb#numa_preferred_nid#).
 Funkce \verb#numa_migrate_preferred# pak volá funkci \verb#task_numa_migrate#, která zajistí přesun úlohy na vybrané CPU.
 
-V této kapitole jsme si vysvětlili, že plánovač umisťuje úlohy a vyvažuje zatížení na numa systémy dle různých algoritmů (v prvním případě podle funkce \verb#load_balance# ve druhém dle logiky v \verb#task_numa_placement# a \newline \verb#task_numa_find_cpu#).
+V této kapitole jsme si vysvětlili, že plánovač umisťuje úlohy a vyvažuje zatížení na NUMA systémy dle různých algoritmů (v prvním případě podle funkce \verb#load_balance# ve druhém dle logiky v \verb#task_numa_placement# a \newline \verb#task_numa_find_cpu#).
 
-Jelikož jsou algoritmy pro výběr a zátěže úloh značně rozdílné je třeba testovat, zdali nenastane situace, že je dle algoritmu z \verb#task_numa_find_cpu# a \verb#task_numa_placement# úloha umístěna na nějaké CPU, která je následně přesunuta algoritmem \verb#load_balance# při periodickém spuštění na jiné CPU. Přesuny úloh způsobují nedostupnost dat ve vyrovnávacích paměti, výměnu obsahu registrů, nebo dokonce kopírování pamětí mezi numa uzly. Pokud tato situace nastane dochází k značnému poklesu propustnosti daného systému. \\ 
+Jelikož jsou algoritmy pro výběr a zátěže úloh značně rozdílné je třeba testovat, zdali nenastane situace, že je dle algoritmu z \verb#task_numa_find_cpu# a \verb#task_numa_placement# úloha umístěna na nějaké CPU, která je následně přesunuta algoritmem \verb#load_balance# při periodickém spuštění na jiné CPU. Přesuny úloh způsobují nedostupnost dat ve vyrovnávacích paměti, výměnu obsahu registrů, nebo dokonce kopírování pamětí mezi NUMA uzly. Pokud tato situace nastane dochází k značnému poklesu propustnosti daného systému. \\ 
 
 \newpage
-\subsection{Logika vyvažování na numa systémech v příkladech}
-Vyvažovací algoritmus na numa systémech je lepší si demonstrovat na příkladech. Plánovač sbírá statistiky přístupů jednotlivých úloh na numa uzly a ví také z front běžících úloh, kde je úloha umístěná. Na základě těchto informací dochází k rozmístění úloh na systému, tak jak je to demonstrováno v následujících příkladech. \\
+\subsection{Logika vyvažování na NUMA systémech v příkladech}
+Vyvažovací algoritmus na NUMA systémech je lepší si demonstrovat na příkladech. Plánovač sbírá statistiky přístupů jednotlivých úloh na NUMA uzly a ví také z front běžících úloh, kde je úloha umístěná. Na základě těchto informací dochází k rozmístění úloh na systému, tak jak je to demonstrováno v následujících příkladech. \\
 
 \noindent
-\textit{Příklad 1} na umístění úlohy na CPU a numa uzlu na kterém neběží žádné jiné úlohy
+\textit{Příklad 1} na umístění úlohy na CPU a NUMA uzlu na kterém neběží žádné jiné úlohy
 
 \begin{table}[h]
 \centering
@@ -2094,11 +2094,11 @@ Uzel 1 & 70\% & 40\% \\
 
 Z tabulky \ref{table2} a tabulky \ref{table3} je jasné, že přesun úlohy A na uzel 1 přinese zlepšení rychlosti přístupu k datům v operační paměti (kdežto přesun úlohy B na uzel 1 by vedl k opačnému výsledku).
 
-Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén, v tomto příkladě to znamená, po jedné na úrovni numa uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy. Kdyby šlo o závislé úlohy, přístupy do segmentů pamětí by mohly mít stejné obě úlohy.
+Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén, v tomto příkladě to znamená, po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy. Kdyby šlo o závislé úlohy, přístupy do segmentů pamětí by mohly mít stejné obě úlohy.
 
 \newpage
 \noindent
-\textit{Příklad 2} na výměnu úloh na numa uzlech
+\textit{Příklad 2} na výměnu úloh na NUMA uzlech
 
 \begin{table}[h]
 \centering
@@ -2134,7 +2134,7 @@ Uzel 1 & 70\% & 60\% \\
 \label{table5}
 \end{table}
 
-Úlohy jsou na úrovni domén numa uzlů vyváženy. To znamená, že v tomto příkladě běží na každém numa uzlu právě jedna úloha. Dále plánovač zjišťuje, zdali jsou úlohy a data na stejném numa uzlu, čili prověřuje, zdali úloha nemusí zbytečně přistupovat do vzdálených segmentů pamětí.  Tady vidíme, že ačkoli úloha A běží na uzlu 0 většinu přístupů (70\%) dělá do vzdálené paměti (na uzel 1). Nyní se podíváme, kde běží a kde přistupuje úloha B. Ta běží na uzlu 1 a přistupuje nejvíce (60\% přístupů) do uzlu 1. Nyní abychom zjistili zdali má smysl výměna úloh musíme zjistit co by nám přineslo přehození úloh A a B mezi sebou (jelikož víme, že úlohy jsou rovnoměrně rozmístěny na doméně numa uzlů).
+Úlohy jsou na úrovni domén NUMA uzlů vyváženy. To znamená, že v tomto příkladě běží na každém NUMA uzlu právě jedna úloha. Dále plánovač zjišťuje, zdali jsou úlohy a data na stejném NUMA uzlu, čili prověřuje, zdali úloha nemusí zbytečně přistupovat do vzdálených segmentů pamětí.  Tady vidíme, že ačkoli úloha A běží na uzlu 0 většinu přístupů (70\%) dělá do vzdálené paměti (na uzel 1). Nyní se podíváme, kde běží a kde přistupuje úloha B. Ta běží na uzlu 1 a přistupuje nejvíce (60\% přístupů) do uzlu 1. Nyní abychom zjistili zdali má smysl výměna úloh musíme zjistit co by nám přineslo přehození úloh A a B mezi sebou (jelikož víme, že úlohy jsou rovnoměrně rozmístěny na doméně NUMA uzlů).
 
 \noindent
 Sumarizací lokálních přístupu zjistíme jak jsme na tom před přehozením úloh.
@@ -2169,20 +2169,20 @@ Uzel 1 & 70\% (lokální) & 60\% \\
 Úloha B = 40
 
 \noindent
-Celkově tedy přístup do lokální paměti máme 110/200. Jelikož je po přehození úloh numa doména vyvážená a přístupy jsou většinou do lokální paměti může dojít k přehození úloh. Před přehozením úloh se spočítá zdali cena přesunu je nižší než cena ponechání úlohy a přistupování úlohy do vzdálené paměti. \\
+Celkově tedy přístup do lokální paměti máme 110/200. Jelikož je po přehození úloh NUMA doména vyvážená a přístupy jsou většinou do lokální paměti může dojít k přehození úloh. Před přehozením úloh se spočítá zdali cena přesunu je nižší než cena ponechání úlohy a přistupování úlohy do vzdálené paměti. \\
 
 \newpage
 \noindent
-\textbf{Kroky algoritmu při vyvažování na numa uzlech}
+\textbf{Kroky algoritmu při vyvažování na NUMA uzlech}
 \begin{enumerate}
-\item Plánovač zjišťuje, zdali je systém v numa doméně vyvážený (tj. každá skupina v doméně má přibližně stejné množství běžících úloh).
+\item Plánovač zjišťuje, zdali je systém v NUMA doméně vyvážený (tj. každá skupina v doméně má přibližně stejné množství běžících úloh).
 \item Poté plánovač sleduje, jestli jsou přístupy úloh do paměti lokální. V případě, že úlohy přistupují většinou do lokální paměti a množství procesů na doméně vyvážené, algoritmus skončí. 
 \item Dále plánovač hledá takové kombinace rozmístění úloh, které jsou na doméně vyvážené a většinu přístupů do paměti je lokálních.
 \item Pro nejlépe ohodnocené kombinace rozmístění úloh, zjišťuje, zdali budou ceny migrace nižší než cena ponechání úloh na současném místě a běhu úloh s vzdálenou pamětí.
 \item Nakonec dochází k samotnému přesunu úloh nebo pamětí dle nejvýhodnějšího ohodnocení z předchozího bodu
 \end{enumerate}
 
-U vyvažování na úrovni numa uzlů se dále řeší grupování za účelem plánování celé skupiny úloh, které například sdílí stejné knihovny a ty jsou v paměti na numa uzlu, kde běží tato skupina úloh. 
+U vyvažování na úrovni NUMA uzlů se dále řeší grupování za účelem plánování celé skupiny úloh, které například sdílí stejné knihovny a ty jsou v paměti na NUMA uzlu, kde běží tato skupina úloh. 
 
 
 \section{Testování}
@@ -2316,26 +2316,26 @@ Na SMP systémech testovací zátěž spouštíme dvěma způsoby:
 
 Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů. Podíváme se zdali plánovač, zbytečně nepřehazoval úlohy mezi jádry, porovnáváme časy běhů úloh, porovnáváme jakou hodnotu Kflops jsme dosáhli..
 
-\subsubsection{Testování plánování úloh na numa systémech}
+\subsubsection{Testování plánování úloh na NUMA systémech}
 
-Jelikož jsou numa systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou numa afinitou. Numa afinitu úloh specifikujeme za pomocí systémové utility numactl.
+Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou NUMA afinitou. Numa afinitu úloh specifikujeme za pomocí systémové utility numactl.
 
 Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh, kolik máme logických jader v systému (kvůli úspoře času při běhu testu zvolíme si vhodné krokování například po 4 úlohách). Jelikož je systém vybaven HT a každá dvě jádra mají jen jedno ALU, dá se předpokládat, že se výsledky budou zhoršovat přibližně od běhu, kdy budeme mít počet jader / 2 úloh spuštěných najednou. Jelikož v praxi běží ještě na procesoru některé systémové úlohy, je pravděpodobné, že uvidíme propad už dříve než u počet jader / 2 úloh spuštěných současně. Očekáváme, že plánovač rozmístí na každou logické jádro maximálně jednu úlohu a že všechny úlohy budou běžet paralelně. Pro prezentaci výsledků použijeme tentokráte grafy.
 
-Během testování porovnáme sadu tří výsledků (plánovačem řízené, se specifikovanou CPU afinitou a se specifikovanou numa afinitou) s další sadou tří výsledků spuštěných na jiné verzi jádra. Záměrně volíme verzi jader, mezi kterými probíhal vývoj algoritmu pro numa vyvažování.
+Během testování porovnáme sadu tří výsledků (plánovačem řízené, se specifikovanou CPU afinitou a se specifikovanou NUMA afinitou) s další sadou tří výsledků spuštěných na jiné verzi jádra. Záměrně volíme verzi jader, mezi kterými probíhal vývoj algoritmu pro NUMA vyvažování.
 
 \begin{figure}[p]
 \includegraphics[scale=0.2]{obrazky/lsTOPO-brickland.png}
-\caption{Testovaný systém se čtyřmi numa uzly a 120 HT jádry}
+\caption{Testovaný systém se čtyřmi NUMA uzly a 120 HT jádry}
 \label{4 numa NODE system scheme}
 \end{figure}
 
 
-Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního systému a to pro všechny 3 typy běhu (plánovačem řízené, s CPU afinitou, s numa afinitou). Pro každý typ běhu běžíme nejdřív 1 instanci linpacku, poté dvě zároveň, čtyři až nakonec 120 (což je celkový počet logických jader v systému viz. obrázek \ref{4 numa NODE system scheme}) instancí najednou. Každý bod, který vynášíme do grafu získáme sečtením dosažených hodnot kflops každé instance.
+Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního systému a to pro všechny 3 typy běhu (plánovačem řízené, s CPU afinitou, s NUMA afinitou). Pro každý typ běhu běžíme nejdřív 1 instanci linpacku, poté dvě zároveň, čtyři až nakonec 120 (což je celkový počet logických jader v systému viz. obrázek \ref{4 numa NODE system scheme}) instancí najednou. Každý bod, který vynášíme do grafu získáme sečtením dosažených hodnot kflops každé instance.
 
 \newpage
 
-Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi kernelu. Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a numa). Nyní seběhneme identický test pro novější jádro operačního systému.
+Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi jádra. Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a NUMA). Nyní seběhneme identický test pro novější jádro operačního systému.
 
 \begin{figure}[ht]
 \center
@@ -2353,12 +2353,12 @@ Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsled
 \label{newer kernel linpack results}
 \end{figure}
 
-Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované numa afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové CPU a numa uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
+Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované NUMA afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové CPU a NUMA uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
 
 \begin{figure}[ht]
 \center
 \includegraphics[scale=0.165]{obrazky/LinpackSumChart.png}
-\caption{Výsledky ze dvou kernelu v jednom grafu}
+\caption{Výsledky ze dvou jader v jednom grafu}
 \label{both kernels linpack results}
 \end{figure}
 
@@ -2407,7 +2407,7 @@ Další zajímavou informací může být zatížení jednotlivých CPU zjišťo
 \end{figure}
 \newpage
 
-Dále nás zajímá kde plánovač umisťuje paměť procesu a kde samotný proces. K tomu účelu použijeme perf bench benchmark. Tento příklad ukazuje nevhodné kopírování paměti mezi numa uzly. Napravo na obrázku 15 je paměť úloh, nalevo je zobrazeny rozmístění úloh na numa uzlech. V tomto příkladu jsou spuštěny 2 vlákna celkem mají 8GB paměti a běží 20 min. Až po 6ti minutách dochází k rozdělení dat a procesů na 2 numa uzly. 
+Dále nás zajímá kde plánovač umisťuje paměť procesu a kde samotný proces. K tomu účelu použijeme perf bench benchmark. Tento příklad ukazuje nevhodné kopírování paměti mezi NUMA uzly. Napravo na obrázku 15 je paměť úloh, nalevo je zobrazeny rozmístění úloh na NUMA uzlech. V tomto příkladu jsou spuštěny 2 vlákna celkem mají 8GB paměti a běží 20 min. Až po 6ti minutách dochází k rozdělení dat a procesů na 2 NUMA uzly. 
 
 \begin{figure}[ht]
 \includegraphics[scale=0.30]{obrazky/PerfBenchResult.png}
@@ -2416,7 +2416,7 @@ Dále nás zajímá kde plánovač umisťuje paměť procesu a kde samotný proc
 \end{figure}
 
 \section{Závěr}
-Po bližším obeznámení se s plánovačem úloh jsem došel k přesvědčení, že návrh plánovače byl precizně navrhnut a implementován po numa vyvažování. Připadá mi, že numa vyvažování nebylo přidáno do kódu v duchu návrhu celého plánovače, hlavně tedy třídy pro plánování obyčejných úloh. Kód numa vyvažování je dlouhý, postrádám v něm jakýsi koncept, vadí mi heuristika. Překvapilo mě, že se při numa vyvažování kalkuluje s pomocí konstant jako například výpočetní síla skupiny procesorů, nebo jak získává historii přístupu na stránky. Tu určí tak, že dosavadní přístupy vydělí dvěma. Jsem přesvědčen, že tvůrci numa vyvažování udělali chybu v tom, že se numa vyvažování realizuje dvěmi různými funkcemi, které si nejsou vůbec podobné a spouštějí při dvou událostech (jedna periodicky, druhá při přístupu na uzamčené stránky paměti). To očividně vede k neustálému migrování úloh a jejich dat z jednoho numa uzlu na druhý. Od vývojáře numa plánovače jsem byl informován, že toto je slabina současného plánovače a že se nyní vymýšlí, jak tuto slabinu odstranit. 
+Po bližším obeznámení se s plánovačem úloh jsem došel k přesvědčení, že návrh plánovače byl precizně navrhnut a implementován po NUMA vyvažování. Připadá mi, že NUMA vyvažování nebylo přidáno do kódu v duchu návrhu celého plánovače, hlavně tedy třídy pro plánování obyčejných úloh. Kód NUMA vyvažování je dlouhý, postrádám v něm jakýsi koncept, vadí mi heuristika. Překvapilo mě, že se při NUMA vyvažování kalkuluje s pomocí konstant jako například výpočetní síla skupiny procesorů, nebo jak získává historii přístupu na stránky. Tu určí tak, že dosavadní přístupy vydělí dvěma. Jsem přesvědčen, že tvůrci NUMA vyvažování udělali chybu v tom, že se NUMA vyvažování realizuje dvěmi různými funkcemi, které si nejsou vůbec podobné a spouštějí při dvou událostech (jedna periodicky, druhá při přístupu na uzamčené stránky paměti). To očividně vede k neustálému migrování úloh a jejich dat z jednoho NUMA uzlu na druhý. Od vývojáře NUMA plánovače jsem byl informován, že toto je slabina současného plánovače a že se nyní vymýšlí, jak tuto slabinu odstranit. 
 
 \nocite{*}
 
