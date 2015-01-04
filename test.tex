@@ -76,8 +76,7 @@ Plánovač úloh je algoritmus jádra systému, který se stará o co nejefektiv
 
 Ačkoli byl Linux původně vyvíjen jako desktopový operační systém, dnes jej můžeme najít na serverech, vestavěných zařízeních, mainframech a superpočítačích. Zatížení úlohami se na jednotlivých platformách velice liší. Z tohoto důvodu a z důvodu prosazování se nových technologií jako je například multiprocessing, symetrický multithreading, nerovnoměrný přístup do paměti (NUMA), dochází k přehodnocování strategie přidělování zdrojů procesům. 
 
-Každý plánovač také řeší rovnováhu mezi uživatelskou odezvou a obecnou férovostí. Po zamyšlení se nad výše jmenovanými vlastnosti a technologiemi je snadnější pochopit, jak složitý může být problém plánování úloh.
-
+Každý plánovač také řeší rovnováhu mezi uživatelskou odezvou a obecnou férovostí. Po zamyšlení se nad výše jmenovanými vlastnosti a technologiemi je snadnější pochopit, jak složitý může být problém plánování úloh. 
 \subsection{Procesy a vlákna}
 Procesy jsou v Linuxu v rámci plánování brány jako skupiny vláken, které sdílí skupinu vláken (TGID). Jádro systému plánuje vždy zvlášť jednotlivé vlákno a ne proces. V celém mém dokumentu budu používat pojem úloha namísto vlákna nebo procesu.
 
@@ -104,15 +103,20 @@ V této práci se zaměříme pouze na úlohy závislé na CPU.
 
 \section{Předchůdci CFS}
 
+\subsection{Vysvětlení pojmů}
+
+\noindent
+ 
+
 \begin{itemize}
 
-\item První plánovač (jádro verze 1.2, rok 1995) byl založený na round robin plánovací technice. Z jeho minimalistického návrhu plynula jednoduchost a rychlost, ale nebylo to komplexní řešení plánování, nebyl zaměřen na architektury s mnoha procesory ani na architektury s podporou více vláken.
+\item První plánovač (jádro verze 1.2, rok 1995) byl založený na round robin plánovací technice. \textbf{Round Robin} plánovací technika je založena na tom, že je úloze dané časové kvantum po které může běžet na procesoru. Až toto kvantum uplyne je úloze odebraný procesor a je spuštěna další úloha. Takto dokola se postupně střídají všechny úlohy ve frontě běžících úloh. Z tohoto minimalistického návrhu plynula jednoduchost a rychlost, ale nebylo to komplexní řešení plánování, nebyl zaměřen na architektury s mnoha procesory ani na architektury s podporou více vláken.
 
-\item U plánovače úloh od verze jádra 2.2 (rok 1999) došlo k implementaci tříd plánování, umožňující používat rozdílná pravidla pro real-time úlohy, non-preemtible úlohy a non-realtime úlohy.
+\item U plánovače úloh od verze jádra 2.2 (rok 1999) došlo k implementaci tříd plánování, umožňující používat rozdílná pravidla pro real-time úlohy, non-preemtable úlohy (úlohy které běžely dokud samy neskončily) a non-realtime úlohy (obyčejné úlohy, preempce).
 
 \item Jádro 2.4 (rok 2001) má jednoduchý plánovač operující s O(N) časem. Plánovač rozdělil čas do epoch a v rámci této epochy bylo úloze povoleno běžet její časové kvantum. Jestliže úloha nepoužila celé své časové kvantum, pak polovina zbývajícího času byla přičtena k novému časovému kvantu, aby mohla úloha běžet déle v další časové epoše. Plánovač přes všechny úlohy aplikoval funkci goodness k zjištění jakou úlohu má spustit jako další. Ačkoli toho lze dosáhnout snadno, byl příliš neefektivní, postrádal škálovatelnost a byl špatný na úlohy reálného času. Jeho další slabinou bylo postrádání podpory pro nové hardwarové architektury jako jsou třeba více jádrové procesory. 
 
-\item Prvním plánovačem na jádrech verze 2.6 (rok 2003) byl plánovač zvaný O(1), který byl navržen k řešení mnoha problémů 2.4 plánovače. \linebreak Nejdůležitější změnou bylo, že plánovač již nezahrnoval identifikaci další úlohy pro spuštění (a nutnost opakovaně procházet všechny úlohy, aby zjistil, kterou má spustit nejdřív), z čehož plynulo i jeho jméno O(1), což znamená, že pracoval v konstatním čase a byl více škálovatelný. O(1) plánovač uchovával záznamy o běžících úlohách ve frontách běžících úloh (front bylo více pro každou úroveň priorit dvě – jedna pro aktivní úlohy, druhou pro expirované úlohy), které používal pro výběr, jakou úlohu bude provádět jako další. Plánovač také zahrnoval měření interaktivity s množstvím heuristiky, která způsobila, že byl plánovač těžkopádný. Plánovač zvýhodňoval interaktivní úlohy před dávkovými (batch) úlohami.
+\item Prvním plánovačem na jádrech verze 2.6 (rok 2003) byl plánovač zvaný O(1), který byl navržen k řešení mnoha problémů 2.4 plánovače. \linebreak Nejdůležitější změnou bylo, že plánovač již nezahrnoval identifikaci další úlohy pro spuštění (a nutnost opakovaně procházet všechny úlohy, aby zjistil, kterou má spustit nejdřív), z čehož plynulo i jeho jméno O(1), což znamená, že pracoval v konstantním čase a byl více škálovatelný. O(1) plánovač uchovával záznamy o běžících úlohách ve frontách běžících úloh (front bylo více pro každou úroveň priorit dvě – jedna pro aktivní úlohy, druhou pro expirované úlohy), které používal pro výběr, jakou úlohu bude provádět jako další. Plánovač také zahrnoval měření interaktivity s množstvím heuristiky, která způsobila, že byl plánovač těžkopádný. Plánovač zvýhodňoval interaktivní úlohy před dávkovými (batch) úlohami.
 
 \end{itemize}
 
