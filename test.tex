@@ -624,8 +624,9 @@ Aby byl plánovač férový, vezme pro spuštění první úlohu zleva. Čas po 
 \subsection{Plánování skupin úloh}
 
 Další velice zajímavou vlastností CFS je koncept plánování skupin úloh. Poprvé implementováno v jádrech 2.6.24. 
+Pro přesnější formulaci v této kapitole začneme používat kromě pojmu úloha, která se používá v kontextu jádra, pojem proces a vlákno které jsou z uživatelské terminologie. 
 
-Plánování skupin je nový způsob jak obstarat férovost v plánování, když se úloha rozvětví do více úloh. Příkladem tohoto může být HTTP server, který se rozvětví na mnoho úloh za účelem obsluhovat HTTP požadavky paralelně (což je typické pro HTTP servery). Místo aby byly brány všechny úlohy jako úlohy se stejnou váhou, CFS zavádí skupiny, aby takové chování ošetřil. Proces, který větví úlohy, sdílí jejich vruntime v rámci skupiny a to hierarchicky, zatímco každá další jednotlivá úloha udržuje svůj vlastní vruntime. Tímto způsobem každá další úloha dostává přibližně stejné množství plánovaného času jako skupina. V systému můžeme najít \verb#/proc# rozhraní, kterým řídíme hierarchii procesu a které nám dává plnou kontrolu nad tím jak jsou skupiny procesů tvořeny. Pomocí této konfigurace můžeme vytvořit férovost přes uživatele systému, přes procesy nebo jejich kombinace.
+Plánování skupin je nový způsob jak obstarat férovost v plánování, když se proces rozvětví do více vláken. Příkladem tohoto může být HTTP server, který se rozvětví na mnoho vláken za účelem obsluhovat HTTP požadavky paralelně (což je typické pro HTTP servery). Místo aby byly brány všechny vlákna jako úlohy se stejnou váhou, CFS zavádí skupiny, aby takové chování ošetřil. Proces který se větví na vlákna, sdílí jejich vruntime v rámci skupiny a to hierarchicky, zatímco každý další jednotlivý proces (v terminologie jádra úloha) udržuje svůj vlastní vruntime. Tímto způsobem každý další proces dostává přibližně stejné množství plánovaného času jako skupina vláken. V systému můžeme najít \verb#/proc# rozhraní, kterým řídíme hierarchii úloh a které nám dává plnou kontrolu nad tím jak jsou skupiny úloh tvořeny. Pomocí této konfigurace můžeme vytvořit férovost přes uživatele systému, přes úlohy nebo jejich kombinace.
 
 Rozdělování úloh do skupin je v současném jádru automatické. Lze ho zapnou a vypnout v \verb#/proc/sys/kernel/sched_autogroup_enabled#.
 
@@ -678,11 +679,11 @@ Všechny úlohy jsou v Linuxu reprezentovány strukturou \verb#task_struct#. Tat
 
 
 Na kořen stromu je odkazováno pomocí \verb#rb_root# struktury (z \verb#rbtree.h#) ze \verb#cfs_rq# struktury (v \verb#sched.h#).
-\verb#cfs_rq# obsahuje také ukazatel na nejvíce levý prvek ve stromu \verb#min_vruntime# (který má nejmenší hodnotu vruntime), ukazatele na předchozí a současně běžící úlohu a další informace týkající se skupin a SMP plánování a vyvažování. Samotná priorita procesu je uchována v datové struktuře \verb#load_weight#. 
+\verb#cfs_rq# obsahuje také ukazatel na nejvíce levý prvek ve stromu, \verb#min_vruntime#, ukazatele na předchozí a současně běžící úlohu a další informace týkající se skupin a SMP plánování a vyvažování. Samotná priorita procesu je uchována v datové struktuře \verb#load_weight#. 
 
 Uzly RB stromu představují jednu nebo více úloh, které jsou spustitelné. Každý uzel stromu je reprezentován \verb#rb_node# (z \verb#/include/linux/rbtree.h#) strukturou, která neobsahuje nic víc než odkaz na potomka a barvu předka. Entita \verb#rb_node# je součástí \verb#sched_entity# struktury, která zahrnuje \verb#rb_node# odkaz a mnoho různých statistických dat. Nejdůležitější položkou \verb#sched_entity# je vruntime (64bit políčko), která znázorňuje dobu, po kterou proces běžel, a slouží jako index pro červeno-černý strom. Struktura \verb#task_struct# leží na vrcholu hierarchie a plně popisuje úlohu a zahrnuje \verb#sched_entity# strukturu. 
 
-CFS dále udržuje hodnotu \verb#rq->cfs.min_vruntime#, která je monotónně zvyšována na minimální hodnotu vruntime všech úloh ve stromu. Celkové množství vykonané práce v systému je sledováno pomocí \verb#min_vruntime#. Tato hodnota se používá pro umístění nově aktivovaných úloh z nejvíce levé strany stromu.
+CFS dále udržuje hodnotu \verb#rq->cfs.min_vruntime#, která je monotónně zvyšována na minimální hodnotu vruntime všech úloh ve stromu. Tato hodnota se používá pro umístění nově aktivovaných úloh z nejvíce levé strany stromu.
 
 Celkové množství běžících úloh ve stromu je zaznamenáno v \verb#r->cfs.load# hodnotě, což je suma priorit všech běžících úloh.
 
@@ -1217,7 +1218,7 @@ Kvůli rozdílům v topologiích systémů, byly zavedeny od jádra 2.6 plánova
 \newpage
 \subsubsection{Plánovací domény a skupiny}
 
-Plánovací doména je množina procesorů, které sdílejí vlastnosti a plánování pravidla, která mohou být vyvažovány proti sobě. Každá doména může obsahovat jednu nebo více plánovacích skupin, které se považují za jednotku v doméně. Takže když se plánovač snaží vyvážit zatížení v rámci domény, pokusí se vyvážit zatížení každé plánovací skupiny, bez ohledu na to co se děje ve skupině.
+Plánovací doména je množina procesorů, které sdílejí vlastnosti a plánování pravidla, která mohou být vyvažovány mezi sebou. Každá doména může obsahovat jednu nebo více plánovacích skupin, které se považují za jednotku v doméně. Takže když se plánovač snaží vyvážit zatížení v rámci domény, pokusí se vyvážit zatížení každé plánovací skupiny, bez ohledu na to co se děje ve skupině.
 
 Představme si, že máme systém dvou fyzických procesorů, na kterých je hyperthreading, tak dostaneme celkem čtyři logické procesory. Při spuštění systému, jádro rozdělí logické jádra do doménové hierarchie druhé úrovně viz obrázek \ref{domeny a skupiny}.
 
