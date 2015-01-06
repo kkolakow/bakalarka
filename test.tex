@@ -346,7 +346,7 @@ $$
 stop\_class \rightarrow dl\_class \rightarrow rt\_class \rightarrow fair\_class \rightarrow idle\_class \rightarrow NULL 
 $$
 
-\verb#Stop# a \verb#idle# jsou speciální třídy plánování. \verb#Stop# slouží k naplánování úlohy pro zastavení úlohy běžící na CPU, která odebírá CPU všem běžícím úlohám a nemůže být odebrána žádnou. \verb#idle# slouží k naplánování nečinné úlohy na CPU, která je naplánovaná pouze v případě, že neexistuje jiná úloha k běhu. Třída \verb#dl(deadline)# je pro plánování úloh s určeným termínem ukončení, třída \verb#rt(real-time)# je pro plánování úloh reálného času a \verb#fair# slouží pro plánování běžných úloh.
+\verb#Stop# a \verb#idle# jsou speciální třídy plánování. \verb#Stop# slouží k naplánování úlohy, která zastaví úlohu běžící na CPU a která a nemůže být přerušena žádnou jinou úlohou. Přerušená může být pouze obsluhou přerušení. \verb#idle# slouží k naplánování nečinné úlohy na CPU, která je naplánovaná pouze v případě, že neexistuje jiná úloha k běhu. Třída \verb#dl(deadline)# je pro plánování úloh s určeným termínem ukončení, třída \verb#rt(real-time)# je pro plánování úloh reálného času a \verb#fair# slouží pro plánování běžných úloh.
 
 Úloze lze specifikovat třídu plánování pomocí systémové utility \verb#chrt# nebo pomocí API, které je popsáno podrobně na manuálových stránkách \verb#man sched#.
 
