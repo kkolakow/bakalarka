@@ -1220,7 +1220,9 @@ Kvůli rozdílům v topologiích systémů, byly zavedeny od jádra 2.6 plánova
 
 Plánovací doména je množina procesorů, které sdílejí vlastnosti a plánování pravidla, která mohou být vyvažovány mezi sebou. Každá doména může obsahovat jednu nebo více plánovacích skupin, které se považují za jednotku v doméně. Takže když se plánovač snaží vyvážit zatížení v rámci domény, pokusí se vyvážit zatížení každé plánovací skupiny, bez ohledu na to co se děje ve skupině.
 
-Představme si, že máme systém dvou fyzických procesorů, na kterých je hyperthreading, tak dostaneme celkem čtyři logické procesory. Při spuštění systému, jádro rozdělí logické jádra do doménové hierarchie druhé úrovně viz obrázek \ref{domeny a skupiny}.
+
+
+Představme si, že máme systém dvou fyzických procesorů, na kterých je hyperthreading\footnote{Hyper Threading funguje na principu duplikace té části CPU, která obsahuje registry, což pro aplikace vyvolává dojem, že procesorů je vícero a zasílají pro zpracování procesorem víc instrukcí a příkazů naráz.}, tak dostaneme celkem čtyři logické procesory. Při spuštění systému, jádro rozdělí logické jádra do doménové hierarchie druhé úrovně viz obrázek \ref{domeny a skupiny}.
 
 \begin{figure}[ht]
 \includegraphics[scale=0.53]{obrazky/domenyAskupiny.jpeg}
@@ -1230,7 +1232,7 @@ Představme si, že máme systém dvou fyzických procesorů, na kterých je hyp
 
 Každý hyperthreadový procesor je vložen právě do jedné skupiny a obě skupiny jsou v téže doméně. Tyto dvě úrovně domén poté tvoří celý procesor. 
 
-Diagram pro NUMA systémy je stejný jako předchozí diagram. Jednotlivé domény pak reprezentují NUMA nody. 
+%Diagram pro NUMA systémy je stejný jako předchozí diagram. Jednotlivé domény pak reprezentují NUMA nody. 
 
 %\subsection{Vyvažování zátěže}
 
@@ -1375,7 +1377,7 @@ static void run_rebalance_domains(struct softirq_action *h)
 
 \end{verbatim} 
 
-Funkce \verb#rebalance_domains()# poté prochází doménovou hierarchii a volá \verb#load_balance()#, pokud má daná doména nastavenou proměnnou \linebreak \verb#SD_LOAD_BALANCE# a vypršel již interval indikující stav vyvážení. Vyvažovací interval domény je ve vteřinách a je aktualizován po každém běhu vyvažování.
+Funkce \verb#rebalance_domains()# poté prochází doménovou hierarchii a volá \verb#load_balance()#, pokud má daná doména nastavenou proměnnou \linebreak \verb#SD_LOAD_BALANCE# a vypršel již interval indikující stav vyvážení. Vyvažovací interval \footnote{počítadlo času počítající čas k dalšímu spuštění vyvažování domén} domény je ve vteřinách a je aktualizován po každém běhu vyvažování.
 
 Aktivní vyvažování je o přetažení jedné nebo více úloh z přetíženého CPU na jiné méně vytížené CPU. Nedochází k výměně úloh, ale pouze k přesunu úlohy. Funkce, která provádí přesun úlohy na jiné CPU, se nazývá \verb#load_balance()#. Jestliže najde nevyváženou skupinu, přesouvá jednu nebo více úloh na současné CPU a vrací hodnotu větší než 0.
 
@@ -1481,7 +1483,7 @@ Funkce \verb#load_balance()# volá funkci \verb#find_busiest_group()#, která hl
 
 Jestliže funkce \verb#find_busiest_group# vrátila nejvytíženější skupinu, pak ta je předána do funkce \verb#find_busiest_queue()# a výstupem z funkce je fronta úloh nejvíce zatíženého logického procesoru ve skupině.
 
-\verb#load_balance()# poté hledá úlohu v běžící frontě úloh, kterou přesune na frontu současného procesoru voláním \verb#move_tasks()#. Množství úloh, které mají být přesunuty jsou specifikovány jako parametr ve funkci \newline \verb#find_busiest_group()#. Běžně se stává, že jsou všechny úlohy „přišpendleny“ k frontě běžících úloh na daném CPU kvůli vyrovnávací paměti. V tomto případě funkce \verb#load_balance# pokračuje v hledání, ale vynechá předchozí nalezené CPU.
+\verb#load_balance()# poté hledá úlohu v běžící frontě úloh, kterou přesune na frontu současného procesoru voláním \verb#move_tasks()#. Množství úloh, které mají být přesunuty jsou specifikovány jako parametr ve funkci \newline \verb#find_busiest_group()#. Běžně se stává, že všechny úlohy není vhodné přesouvat na jiné CPU a to kvůli vyrovnávací paměti na CPU na kterém předtím běžely. V tomto případě funkce \verb#load_balance# pokračuje v hledání, ale vynechá předchozí nalezené CPU.
 
 Pokud je proměnná \verb#SD_POWERSAVINGS_BALANCE# nastavena v doménových pravidlech a není-li nalezena nejrušnější skupina, \verb#find_busiest_group()# hledá nejméně vytíženou skupinu v \verb#sched_domain#. Procesory z této skupiny jsou poté uvedeny do klidového stavu. 
 
