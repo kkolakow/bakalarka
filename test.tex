@@ -2206,13 +2206,15 @@ U vyvažování na úrovni NUMA uzlů se dále řeší seskupování za účelem
 
 \section{Testování}
 
+V našem testování se zaměřujeme hlavně na dvě vlastnosti. Zdali plánovaní úloh férově přiděluje CPU každé běžící úloze (v kapitole \ref{testovani jedno jadro})  a zdali jsou na systému úlohy rovnoměrně rozmístěny (v kapitole \ref{testovani NUMA}). 
+
 \subsection{Testovací úloha}
 Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modifikovaný benchmark linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na sběr statistiky běhu benchmarku. Benchmark linpack dělá aritmetické operace (násobí matice) a výsledkem je množství floating point operací za vteřinu. 
 
 \subsection{Úrovně testování plánovače}
 
 \subsubsection{Testování plánování fronty úloh na jednom jádru}
-
+\label{testovani jedno jadro}
 Testování na jednom jádru provádíme tak, že spustíme v jeden okamžik na jednom jádru řadu úloh, a na konci se podíváme, jak dlouho jednotlivé úlohy běžely a jakých výsledků jsme dosáhli. Pokud bude plánovač spravedlivě přidělovat čas úlohám, budou běžet stejně dlouho, množství výměn obsahu bude přibližně stejné pro každou úlohu, dosažená hodnota operací za sekundu bude také přibližně stejná. Jelikož jsme úlohy spouštěli na jádru se specifikovanou CPU afinitou, prověříme také, zdali úlohy běžely jen na jádru námi specifikovaném.
 
 Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset.
@@ -2325,6 +2327,7 @@ Výsledek testování plánování fronty úloh
 Jelikož byly splněny všechny naše předpoklady říkáme, že plánovač plánuje férově úlohy z fronty úloh na jednom jádru.
 
 \subsubsection{Testování plánování úloh na SMP UMA systémech}
+\label{testovani SMP UMA}
 
 \noindent
 Na SMP systémech testovací zátěž spouštíme dvěma způsoby:
@@ -2336,6 +2339,7 @@ Na SMP systémech testovací zátěž spouštíme dvěma způsoby:
 Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů. Podíváme se zdali plánovač, zbytečně nepřehazoval úlohy mezi jádry, porovnáváme časy běhů úloh, porovnáváme jakou hodnotu Kflops jsme dosáhli..
 
 \subsubsection{Testování plánování úloh na NUMA systémech}
+\label{testovani NUMA}
 
 Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou NUMA afinitou. Numa afinitu úloh specifikujeme za pomocí systémové utility numactl.
 
