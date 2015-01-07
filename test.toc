@@ -86,9 +86,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.2.3}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na NUMA syst\IeC {\'e}mech}{45}{subsubsection.6.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {6.2.3.1}P\IeC {\v r}\IeC {\'\i }klad na NUMA vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i }}{45}{paragraph.6.2.3.1}
+\contentsline {paragraph}{\numberline {6.2.3.1}P\IeC {\v r}\IeC {\'\i }klad na p\IeC {\v r}id\IeC {\v e}lov\IeC {\'a}n\IeC {\'\i } CPU \IeC {\v c}asu na NUMA syst\IeC {\'e}mu}{45}{paragraph.6.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad na pozorov\IeC {\'a}n\IeC {\'\i } um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy a jejich dat v r\IeC {\'a}mci NUMA topologie}{51}{paragraph.6.2.3.2}
+\contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad na pozorov\IeC {\'a}n\IeC {\'\i } um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy a jejich dat na NUMA syst\IeC {\'e}mu}{51}{paragraph.6.2.3.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.2.4}Sumarizov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{52}{subsubsection.6.2.4}
 \defcounter {refsection}{0}\relax 

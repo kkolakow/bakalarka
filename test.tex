@@ -356,6 +356,7 @@ $$
 K volání plánovače úloh dochází prostřednictvím funkce schedule() z těchto důvodů:
 
 \subsubsection{Pravidelné volání k aktualizaci vruntime u právě běžící úlohy}
+\label{tick}
 
 Přerušení od časovače pravidelně volá fuknci \verb#scheduler_tick()# \linebreak (z \verb#kernel/sched/core.c#). Dochází k aktualizaci hodnoty vruntime a také ke změnám na aktuální frontě úloh (vše 1000 krát za sekundu). V kódu funkce \newline \verb#scheduler_tick()# je aktualizace realizována voláním 
 \begin{verbatim}
@@ -370,9 +371,9 @@ která zajištují vyvážení zátěže v případě, že máme je systém s v�
 
 \subsubsection{Voláním funkce schedule() syscallem nebo obsluhou přerušení}
 
-Jedním z příkladu volání funkce schedule() obsluhou přerušení je z přerušení od časovače. Dále jsou vyvolány obsluhy přerušení různými části jádra jako například ovladači. 
+Funkce schedule() je volána obsluhou přerušení od časovače jak bylo vysvětleno v kapitole \ref{tick}. Dále je schedule() vyvolána v obsluze přerušení v různých částech jádra například v ovladačích.
 
-Také mnoho syscallu volá funkci schedule(). Volání schedule() je obsaženo také v syscallu fork a syscallu exit při ukončení běžící úlohy.
+Také mnoho syscallu volá funkci schedule(). Volání schedule() je obsaženo také v syscallu fork při vytvoření nové úlohy a syscallu exit při ukončení běžící úlohy.
 
 %Funkce scheduler\_tick() (z kernel/sched/core.c) je volána pomocí časovače přerušení. 
 %Aktualizuje u běžící úlohy vruntime a díky změně dojde k aktualizaci běžící fronty.
@@ -2232,7 +2233,8 @@ Pro testování plánování fronty úloh na jednom CPU vytvoříme pomocí benc
 \begin{itemize}
 \item Zdali úlohy opravdu běžely na jádru námi specifikovaném při startu úloh (v našem příkladu jádro s číslem 38)
 \item Zdali všechny úlohy běžely přibližně stejně dlouho, zdali počet výměn kontextu\footnote{Výměna kontextu znamená ukladání a načítání aktuálního stavu procesoru. Když k ní dochází málo často celková propustnost systému je větší, ale doba odezvy aplikace je pomalejší. V našem příkladě nás bude zajímat pouze zdali byla výměna kontextu provedena stejně často u každé úlohy, z čehož budeme usuzovat, že plánovač distribuje zdroje CPU férově.} na CPU je přibližně stejný  a zdali jsme dosáhli přibližně stejné hodnoty operací v plovoucí řádové čárce (kflops) pro každou instanci benchmarku.
-\item V mpstat výstupu zkontrolujeme, zdali byl procesor s frontou úloh neustále plně vytížen (viz mpstat zkrácený sumarizační výstup)\\
+\item V mpstat výstupu zkontrolujeme, zdali byl procesor s frontou úloh neustále plně vytížen (obrázek \ref{mpstat1} )\\
+
 \end{itemize}
 
 %\newpage
@@ -2310,7 +2312,7 @@ numa nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 První číslice na každém řádku obrázku \ref{mpstat1} označuje číslo PU (logická jednotka) další čísla znamenají procentuální vytížení daného PU aktualizované po pěti vteřinách (celkem 12 číslic to znamená, že vytížení sledujeme jednu minutu). Dvě hvězdičky znamenají 100\% vytížení. 
 
 \begin{figure}[ht]
-\caption{mpstat zkrácený sumarizovaný výpis}
+\caption{Mpstat zkrácený sumarizovaný výpis}
 \center
 \label{mpstat1}
 
@@ -2363,11 +2365,11 @@ Příklad UMA testování v mé práci demonstrovat nebudeme, jelikož je témě
 \subsubsection{Testování plánování úloh na NUMA systémech}
 \label{testovani NUMA}
 
-Motivací pro testování plánovače na NUMA systémech je to, že v době návrhu CFS plánovače nebyly NUMA systémy k dispozici a v návrhu CFS plánovače se s touto architekturou nepočítalo. Funkce umožnující NUMA vyvažování byly dodány do CFS plánovače později. V době kdy se NUMA algoritmy objevily v CFS plánovači, bylo reportováno několik problémů s výkonností NUMA systému.
+Motivací pro testování plánovače na NUMA systémech je to, že v době návrhu CFS plánovače nebyly NUMA systémy k dispozici a v návrhu CFS plánovače se s touto architekturou nepočítalo. Funkce umožnující NUMA vyvažování byly dodány do CFS plánovače později. V době kdy se NUMA algoritmy objevily v CFS plánovači, bylo reportováno několik problémů s výkonností NUMA systémů.
 
 Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou NUMA afinitou. Numa afinitu úloh specifikujeme za pomocí systémové utility numactl.
 
-\subsubsubsection{Příklad na NUMA vyvažování}
+\subsubsubsection{Příklad na přidělování CPU času na NUMA systému}
 
 Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh, kolik máme logických jader v systému (kvůli úspoře času při běhu testu si zvolíme vhodné krokování například po 4 úlohách). 
 
@@ -2440,7 +2442,7 @@ Graf z obrázku \ref{timeWaitingOutOfCPU} znázorňuje kolik času strávily jed
 Další zajímavou informací může být zatížení jednotlivých CPU zjišťovaných utilitou mpstat (obrázek \ref{mpstat2}). Zde vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 10 PU. 
 \begin{figure}[ht]
 \center
-\caption{mpstat zkrácený sumarizovaný výpis}
+\caption{Mpstat zkrácený sumarizovaný výpis}
 \center
 \label{mpstat2}
 \fontsize{10pt}{12pt}\selectfont
@@ -2478,7 +2480,7 @@ Plánovač v jádrech 3.10.x odstranil neférovost v přidělování zdrojů CPU
 
 \newpage
 \noindent
-\subsubsubsection{Příklad na pozorování umístění běžící úlohy a jejich dat v rámci NUMA topologie}
+\subsubsubsection{Příklad na pozorování umístění běžící úlohy a jejich dat na NUMA systému}
 \label{PerfBenchResultExample}
 
 \noindent
