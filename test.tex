@@ -1882,17 +1882,14 @@ Uzel 3 & 14 & 44 \\
 Úloha umístit úlohu na nejvhodnější pozici, nemusí být zcela tak jednoduchá. Vše komplikují sdílená data (třeba knihovna glibc), na které obvykle přistupuje více úloh. 
 \newpage
 
-Výběr kde umístit úlohu probíhá dle následujícího algoritmu. 
-Pro každou úlohu A testuje NUMA uzel N
-\begin{enumerate}
-\item kontroluje zdali je uzel N lepší než uzel současně běžící úlohy (C). Úloha má větší množství svých dat na uzlu N než na současném uzlu C
-\item jestliže platí bod 1. pak pro každé CPU na uzlu N zjišťujeme 
+Jestliže přistupuje současně běžící úloha do paměti NUMA uzlu na kterém v současnosti neběží, pak zjištuje algoritmus plánovače:
 \begin{itemize}
-\item zdali je CPU bez přidělené úlohy a můžeme tam umístit úlohu
-\item když není CPU bez přidělené úlohy,  zdali je lepší současnou úlohu odebrat z uzlu C
-\item je přínos přesunu úlohy na uzel N větší než nevýhody přesunu.
+\item zdali je na NUMA uzlu s nejvíce přístupy běžící úlohy CPU bez přidělené úlohy. V případě že existuje takové CPU na tomto NUMA uzlu umístí úlohu tam 
+\item když jsou všechny CPU na NUMA uzlu s nejvíce přístupy běžící úlohy zaneprázdněné, zjištuje zdali je výhodnější odebrat úlohu se současného uzlu (kvůli vytíženosti úlohami na NUMA uzlech)
+\item zdali bude přínos přesunu úlohy (přístup do lokální paměti) větší než nevýhody přesunu (ztráta vyrovnávacích pamětí, časová režie samotného přesunu) 
 \end{itemize}
-\end{enumerate}
+
+V případě že současná úloha přistupuje nejvíce do NUMA uzlu na kterém běží, dojde k přesunu úlohy (současně s daty úlohy) jen v případě, že je systém nevyvážený. Nevyvážený systém je takový, kdy se množství běžících úloh na jednotlivých NUMA uzlech (či CPU) výrazně liší.
 
 \subsection{Spuštění NUMA vyvažování}
 
@@ -2204,7 +2201,7 @@ Celkově tedy přístup do lokální paměti máme 110/200. Jelikož je po přeh
 \item Nakonec dochází k samotnému přesunu úloh nebo pamětí dle nejvýhodnějšího ohodnocení z předchozího bodu
 \end{enumerate}
 
-U vyvažování na úrovni NUMA uzlů se dále řeší grupování za účelem plánování celé skupiny úloh, které například sdílí stejné knihovny a ty jsou v paměti na NUMA uzlu, kde běží tato skupina úloh. 
+U vyvažování na úrovni NUMA uzlů se dále řeší seskupování za účelem plánování celé skupiny úloh, které například sdílí stejné knihovny a ty jsou v paměti na NUMA uzlu, kde běží tato skupina úloh. 
 
 
 \section{Testování}

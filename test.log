@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  7 JAN 2015 10:12
+This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  7 JAN 2015 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1635,104 +1635,104 @@ Package pdftex.def Info: obrazky/numa-scheme-big-system.jpeg used on input line
  1782.
 (pdftex.def)             Requested size: 380.44733pt x 219.90578pt.
  [33] [34 <./obrazky/numa-scheme-big-system.jpeg>] [35] [36]
-Overfull \hbox (23.86641pt too wide) in paragraph at lines 1902--1904
+Overfull \hbox (23.86641pt too wide) in paragraph at lines 1899--1901
 \T1/iwonal/m/n/12 hi-e-rar-chicky do-mény a vy-va-ºuje sku-piny v do-mén¥ po-mo
 cí vo-lání funkce []\T1/pcr/m/n/12 load_balance\T1/iwonal/m/n/12 .
  []
 
 [37]
-Underfull \hbox (badness 10000) in paragraph at lines 2074--2075
+Underfull \hbox (badness 10000) in paragraph at lines 2071--2072
 
  []
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 2078--2079
+Underfull \hbox (badness 10000) in paragraph at lines 2075--2076
 
  []
 
 [39]
-Underfull \hbox (badness 10000) in paragraph at lines 2193--2195
+Underfull \hbox (badness 10000) in paragraph at lines 2190--2192
 
  []
 
 [40] [41]
-Underfull \hbox (badness 10000) in paragraph at lines 2227--2228
+Underfull \hbox (badness 10000) in paragraph at lines 2224--2225
 
  []
 
 [42
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 2231--2235
+Underfull \hbox (badness 10000) in paragraph at lines 2228--2232
 
  []
 
 [43]
-Underfull \hbox (badness 10000) in paragraph at lines 2289--2291
+Underfull \hbox (badness 10000) in paragraph at lines 2286--2288
 
  []
 
-[44] <obrazky/lsTOPO-brickland.png, id=389, 2127.95pt x 2334.7225pt>
+[44] <obrazky/lsTOPO-brickland.png, id=386, 2127.95pt x 2334.7225pt>
 File: obrazky/lsTOPO-brickland.png Graphic file (type png)
 
 <use obrazky/lsTOPO-brickland.png>
-Package pdftex.def Info: obrazky/lsTOPO-brickland.png used on input line 2350.
+Package pdftex.def Info: obrazky/lsTOPO-brickland.png used on input line 2347.
 (pdftex.def)             Requested size: 425.58246pt x 466.93623pt.
 
-Overfull \hbox (16.08127pt too wide) in paragraph at lines 2350--2351
+Overfull \hbox (16.08127pt too wide) in paragraph at lines 2347--2348
 [][] 
  []
 
 [45] [46 <./obrazky/lsTOPO-brickland.png>]
-<obrazky/LinpackBaseChart.png, id=402, 1806.75pt x 1204.5pt>
+<obrazky/LinpackBaseChart.png, id=400, 1806.75pt x 1204.5pt>
 File: obrazky/LinpackBaseChart.png Graphic file (type png)
 
 <use obrazky/LinpackBaseChart.png>
-Package pdftex.def Info: obrazky/LinpackBaseChart.png used on input line 2364.
+Package pdftex.def Info: obrazky/LinpackBaseChart.png used on input line 2361.
 (pdftex.def)             Requested size: 314.36646pt x 209.57764pt.
 
-<obrazky/LinpackTargetChart.png, id=404, 1806.75pt x 1204.5pt>
+<obrazky/LinpackTargetChart.png, id=402, 1806.75pt x 1204.5pt>
 File: obrazky/LinpackTargetChart.png Graphic file (type png)
 
 <use obrazky/LinpackTargetChart.png>
-Package pdftex.def Info: obrazky/LinpackTargetChart.png used on input line 2373
+Package pdftex.def Info: obrazky/LinpackTargetChart.png used on input line 2370
 .
 (pdftex.def)             Requested size: 314.36646pt x 209.57764pt.
  [47 <./obrazky/LinpackBaseChart.png> <./obrazky/LinpackTargetChart.png>]
-<obrazky/LinpackSumChart.png, id=411, 1806.75pt x 1204.5pt>
+<obrazky/LinpackSumChart.png, id=409, 1806.75pt x 1204.5pt>
 File: obrazky/LinpackSumChart.png Graphic file (type png)
 
 <use obrazky/LinpackSumChart.png>
-Package pdftex.def Info: obrazky/LinpackSumChart.png used on input line 2382.
+Package pdftex.def Info: obrazky/LinpackSumChart.png used on input line 2379.
 (pdftex.def)             Requested size: 298.10089pt x 198.73392pt.
 
-<obrazky/timeWaitingOutOfCPU.png, id=413, 903.375pt x 602.25pt>
+<obrazky/timeWaitingOutOfCPU.png, id=411, 903.375pt x 602.25pt>
 File: obrazky/timeWaitingOutOfCPU.png Graphic file (type png)
 
 <use obrazky/timeWaitingOutOfCPU.png>
-Package pdftex.def Info: obrazky/timeWaitingOutOfCPU.png used on input line 239
-1.
+Package pdftex.def Info: obrazky/timeWaitingOutOfCPU.png used on input line 238
+8.
 (pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
  [48 <./obrazky/LinpackSumChart.png> <./obrazky/timeWaitingOutOfCPU.png>]
-<obrazky/totalTime.png, id=421, 903.375pt x 602.25pt>
+<obrazky/totalTime.png, id=419, 903.375pt x 602.25pt>
 File: obrazky/totalTime.png Graphic file (type png)
 
 <use obrazky/totalTime.png>
-Package pdftex.def Info: obrazky/totalTime.png used on input line 2402.
+Package pdftex.def Info: obrazky/totalTime.png used on input line 2399.
 (pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
  [49 <./obrazky/totalTime.png>]
-<obrazky/PerfBenchResult.png, id=429, 1284.8pt x 722.7pt>
+<obrazky/PerfBenchResult.png, id=427, 1284.8pt x 722.7pt>
 File: obrazky/PerfBenchResult.png Graphic file (type png)
 
 <use obrazky/PerfBenchResult.png>
-Package pdftex.def Info: obrazky/PerfBenchResult.png used on input line 2435.
+Package pdftex.def Info: obrazky/PerfBenchResult.png used on input line 2432.
 (pdftex.def)             Requested size: 385.44298pt x 216.81166pt.
  [50 <./obrazky/PerfBenchResult.png>] [51
 
 ]
 No file test.ind.
 
-Overfull \hbox (36.89862pt too wide) in paragraph at lines 2464--2466
+Overfull \hbox (36.89862pt too wide) in paragraph at lines 2461--2463
 \T1/pcr/m/n/12 http://www.linuxjournal.com/magazine/completely-fair-scheduler 
  []
 
@@ -1747,11 +1747,11 @@ AED: lastpage setting LastPage
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2475.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 2475.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2472.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 2472.
  (./test.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2475.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2475.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2472.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2472.
 
 
 LaTeX Warning: There were undefined references.
@@ -1764,11 +1764,11 @@ Package biblatex Warning: Please (re)run Biber on the file:
 Package logreq Info: Writing requests to 'test.run.xml'.
 \openout1 = `test.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2475.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2472.
  ) 
 Here is how much of TeX's memory you used:
- 23995 strings out of 495000
- 359385 string characters out of 6180380
+ 23993 strings out of 495000
+ 359371 string characters out of 6180380
  884515 words of memory out of 5000000
  26588 multiletter control sequences out of 15000+600000
  82770 words of font info for 76 fonts, out of 8000000 for 9000
@@ -1781,10 +1781,10 @@ ps/iwona/ec-iwona.enc}</usr/share/texlive/texmf-dist/fonts/type1/nowacki/iwona/
 iwonal.pfb></usr/share/texlive/texmf-dist/fonts/type1/nowacki/iwona/iwonali.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/nowacki/iwona/iwonam.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on test.pdf (52 pages, 1181214 bytes).
+Output written on test.pdf (52 pages, 1181418 bytes).
 PDF statistics:
- 646 PDF objects out of 1000 (max. 8388607)
- 556 compressed objects within 6 object streams
- 155 named destinations out of 1000 (max. 500000)
+ 644 PDF objects out of 1000 (max. 8388607)
+ 554 compressed objects within 6 object streams
+ 153 named destinations out of 1000 (max. 500000)
  454 words of extra memory for PDF output out of 10000 (max. 10000000)
 
