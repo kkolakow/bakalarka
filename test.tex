@@ -2350,14 +2350,20 @@ Na SMP systémech testovací zátěž spouštíme dvěma způsoby:
 \item Spuštění a vyvažování úloh řízené plánovačem. V tomto případě nespecifikujeme afinitu úlohám, vše necháme na plánovači úloh.
 \end{enumerate}
 
-Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů. Podíváme se zdali plánovač, zbytečně nepřehazoval úlohy mezi jádry, porovnáváme časy běhů úloh, porovnáváme jakou hodnotu Kflops jsme dosáhli..
+Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů. Podíváme se zdali plánovač, zbytečně nepřehazoval úlohy mezi jádry, porovnáváme časy běhů úloh, porovnáváme jakou hodnotu Kflops jsme dosáhli.\newline
+
+Příklad UMA testování v mé práci demonstrovat nebudeme, jelikož je téměř shodné s testováním na NUMA systémech. Jediný rozdíl je v tom, že u UMA systému nespouštíme zátěž se specifikovanou NUMA afinitou a ve výsledcích tohoto testování bychom také neřešili do jaké paměti zasahujeme (lokální či vzdálené), protože na UMA systémech máme časy přístupu do pamětí vždy stejné. 
 
 \subsubsection{Testování plánování úloh na NUMA systémech}
 \label{testovani NUMA}
 
 Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou NUMA afinitou. Numa afinitu úloh specifikujeme za pomocí systémové utility numactl.
 
-Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh, kolik máme logických jader v systému (kvůli úspoře času při běhu testu zvolíme si vhodné krokování například po 4 úlohách). Jelikož je systém vybaven HT a každá dvě jádra mají jen jedno ALU, dá se předpokládat, že se výsledky budou zhoršovat přibližně od běhu, kdy budeme mít počet jader / 2 úloh spuštěných najednou. Jelikož v praxi běží ještě na procesoru některé systémové úlohy, je pravděpodobné, že uvidíme propad už dříve než u počet jader / 2 úloh spuštěných současně. Očekáváme, že plánovač rozmístí na každou logické jádro maximálně jednu úlohu a že všechny úlohy budou běžet paralelně. Pro prezentaci výsledků použijeme tentokráte grafy.
+\subsubsubsection{Příklad na NUMA testování}
+
+Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh, kolik máme logických jader v systému (kvůli úspoře času při běhu testu si zvolíme vhodné krokování například po 4 úlohách). 
+
+Jelikož je systém vybaven HT a každá dvě jádra budou sdílejí stejné vyrovnávací paměti, dá se předpokládat, že se výsledky budou zhoršovat přibližně od běhu, kdy budeme mít spuštěných tolik úloh kolik je v systému fyzických jader (bez HT). A jelikož v praxi běží na procesoru ještě některé systémové úlohy, je pravděpodobné, že uvidíme propad už dříve než u počtu odpovídajícímu počtu fyzických jader v sytému. Očekáváme, že plánovač rozmístí na každou logické jádro maximálně jednu úlohu a že všechny úlohy budou běžet paralelně. Pro prezentaci výsledků použijeme tentokráte grafy.
 
 Během testování porovnáme sadu tří výsledků (plánovačem řízené, se specifikovanou CPU afinitou a se specifikovanou NUMA afinitou) s další sadou tří výsledků spuštěných na jiné verzi jádra. Záměrně volíme verzi jader, mezi kterými probíhal vývoj algoritmu pro NUMA vyvažování.
 

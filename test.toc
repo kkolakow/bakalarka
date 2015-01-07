@@ -84,8 +84,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.2.3}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na NUMA syst\IeC {\'e}mech}{45}{subsubsection.6.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {6.2.3.1}P\IeC {\v r}\IeC {\'\i }klad na um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } nov\IeC {\v e} vznikl\IeC {\'e}ho procesu a jeho dat na stejn\IeC {\'y} NUMA uzel}{50}{paragraph.6.2.3.1}
+\contentsline {paragraph}{\numberline {6.2.3.1}P\IeC {\v r}\IeC {\'\i }klad na NUMA testov\IeC {\'a}n\IeC {\'\i }}{45}{paragraph.6.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{51}{section.7}
+\contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad na um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } nov\IeC {\v e} vznikl\IeC {\'e}ho procesu a jeho dat na stejn\IeC {\'y} NUMA uzel}{51}{paragraph.6.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Bibliografie}{52}{section*.1}
+\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{52}{section.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Bibliografie}{53}{section*.1}
