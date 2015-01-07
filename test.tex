@@ -2465,7 +2465,7 @@ Další zajímavou informací může být zatížení jednotlivých CPU zjišťo
 Z grafu na obrázku \ref{both kernels linpack results} jsme se dozvěděli, že výsledky u plánovačem řízených běhů u jádra 2.6.32 mají značné rozptyly (tmavě zelený graf). Díky grafu z obrázku \ref{timeWaitingOutOfCPU} jsme se dozvěděli, že úlohy plánovačem řízených běhů u jádra 2.6.32 jsou často mimo CPU (tmavě zelené body). Díky dalším dvěma obrázkům přijdeme na to co se během testování stalo. Graf z obrázku \ref{total time} nám říká, že celkový čas běhu každé úlohy plánovačem řízené na jádru 2.6.32 (tmavě zelené body) je kratší v porovnáním s výsledky dosaženými na jádru 3.10.0 (modré body). Což může být velice matoucí a často to vede na následující otázku. Jak můžou mít úlohy, které jsou často mimo CPU (neběží) rychlejší celkový čas běhu než úlohy, které běží celou dobu? Vysvětlení nabízí obrázek \ref{mpstat2}. Na něm vidíme, že úlohy často nestartují hned po spuštění. Toto je typické chování pro původní plánovací strategii CFS plánovače. Nerozmístil úlohy zvlášť na každé volné jádro, ale část úloh spustil o něco později. Díky tomu, že úloh běžících bylo v daný okamžik méně, nedocházelo tak často k přepisovaním vyrovnávacích pamětí a úloha běžela díky tomu rychleji. Nicméně toto chování nemá nic společného s férovostí přidělování CPU zdrojů úlohám. Tato strategie plánování nicméně vykazovala dobré výsledky v celkové propustnosti systému, ale byla přepracována a nyní se chová plánovač více férově. Také čas který je úloha mimo CPU se zkrátil a všechny úlohy startují v přibližně ve stejnou dobu. \newline
 
 \noindent
-\textbf{Závěr}\newline
+\textbf{Zhodnocení výsledu}\newline
 
 \noindent
 Plánovač v jádrech 3.10.x odstranil neférovost v přidělování zdrojů CPU úlohám, které jsme mohli vidět v jádrech 2.6.x. Důsledkem toho úlohy běží od spuštění a jsou rovnoměrně rozmístěné na celém systému. Negativním důsledkem je to, že propustnost systému klesá s rostoucím množstvím najednou běžících úloh. 
@@ -2476,17 +2476,29 @@ Plánovač v jádrech 3.10.x odstranil neférovost v přidělování zdrojů CPU
 \label{PerfBenchResultExample}
 
 \noindent
-V dalším příkladu na testování NUMA plánování nás bude zajímat kde plánovač umistí paměť procesu a kde samotný proces. Vše necháme na plánovači, žádným způsobem nebudeme nebudeme specifikovat afinitu pro nově vzniklé úlohy. Vytvoříme 2 úlohy a každá z nich bude alokovat 4GB paměti. Necháme úlohy běžet 20 minut a budeme pozorovat, kde je umístěná paměť úlohy a kde běží úloha samotná.  Pro vytvoření úloh použijeme benchmark PerfBench. Výstupem z PerfBench bude graf (obrázek \ref{PerfBenchResult}) umístění dat úlohy na jednotlivých uzlech a graf zobrazující kolik úloh běží na jednom NUMA uzlu.\newline
-
-
-
-
+V dalším příkladu na testování NUMA plánování nás bude zajímat kde plánovač umistí paměť procesu a kde samotný proces. Vše necháme na plánovači, žádným způsobem nebudeme nebudeme specifikovat afinitu pro nově vzniklé úlohy. Vytvoříme 2 úlohy a každá z nich bude alokovat 4GB paměti. Necháme úlohy běžet 20 minut a budeme pozorovat, kde je umístěná paměť úlohy a kde běží úloha samotná.  Pro vytvoření úloh použijeme benchmark PerfBench. Výstupem z PerfBench bude graf (obrázek \ref{PerfBenchResult}) zobrazjící umístění dat úloh na jednotlivých uzlech a graf zobrazující kolik úloh běží na jednom NUMA uzlu. Test provádíme na jádru 3.10.0. \newline
 
 \begin{figure}[ht]
 \includegraphics[scale=0.30]{obrazky/PerfBenchResult.png}
 \caption{Graf znázorňující současný běh dvou úloh}
 \label{PerfBenchResult}
 \end{figure}
+
+\noindent
+\textbf{Analýza výsledku}\newline
+
+\noindent
+Z grafu zobrazujícím vyžití paměti na jednotlivých NUMA uzlech (nalevo) vidíme, že jsme měli na začátku přibližně 4GB paměti na dvou NUMA uzlech (na uzlech 1 a 2). Od přibližně 70té sekundy dochází ke kopírovaní paměti úlohy z uzlu 2 na uzel 1. Okolo 200 sekundy vidíme, že naše 2 úlohy mají 2GB na uzlu 3, přibližně 700MB na uzlu 2 a 5.5GB na uzlu 1. Kolem 350 sekundy je téměř celých 8GB paměti úloh na jednom uzlu (uzel 1). Přibližně od 400 sekundy plánovač zjistil, že vyvažuje dvě úlohy a dochází k postupnému rozdělení úloh a jejich pamětí na uzel 0 a uzel 1. Z grafu který zobrazuje kolik úloh na jednotlivých NUMA uzlech běží (graf napravo) vidíme, že několikrát došlo ke kopírování procesu na jiné uzly. \newline 
+
+\noindent
+\textbf{Zhodnocení výsledku}\newline
+
+\noindent
+Výsledek takto jednoduchého testu dopadl velice špatně. Místo toho aby plánovač umístil úlohy každou zvlášť na nějaký uzel a tam ho nechal po celou dobu běhu úlohy, neustále kopíruje data úlohy a migruje běžící úlohu z jednoho uzlu na druhý. Až v kolem 400 sekudny běhu dochází k rozdělení úloh a jejich dat na dva uzly. Tento příklad názorně ukazuje slabinu spučasného plánovače úloh a na tento konkrétní problém je reportován v reportovacím systému na hlášení chyb.
+
+\subsubsection{Sumarizování výsledků testování}
+
+asfdsfd
 
 \section{Závěr}
 Po bližším obeznámení se s plánovačem úloh jsem došel k přesvědčení, že návrh plánovače byl precizně navrhnut a implementován po NUMA vyvažování. Připadá mi, že NUMA vyvažování nebylo přidáno do kódu v duchu návrhu celého plánovače, hlavně tedy třídy pro plánování obyčejných úloh. Kód NUMA vyvažování je dlouhý, postrádám v něm jakýsi koncept, vadí mi heuristika. Překvapilo mě, že se při NUMA vyvažování kalkuluje s pomocí konstant jako například výpočetní síla skupiny procesorů, nebo jak získává historii přístupu na stránky. Tu určí tak, že dosavadní přístupy vydělí dvěma. Jsem přesvědčen, že tvůrci NUMA vyvažování udělali chybu v tom, že se NUMA vyvažování realizuje dvěmi různými funkcemi, které si nejsou vůbec podobné a spouštějí při dvou událostech (jedna periodicky, druhá při přístupu na uzamčené stránky paměti). To očividně vede k neustálému migrování úloh a jejich dat z jednoho NUMA uzlu na druhý. Od vývojáře NUMA plánovače jsem byl informován, že toto je slabina současného plánovače a že se nyní vymýšlí, jak tuto slabinu odstranit. 

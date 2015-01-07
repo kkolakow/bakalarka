@@ -88,6 +88,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad na pozorov\IeC {\'a}n\IeC {\'\i } um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy a jejich dat v r\IeC {\'a}mci NUMA topologie}{51}{paragraph.6.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{52}{section.7}
+\contentsline {subsubsection}{\numberline {6.2.4}Sumarizov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{52}{subsubsection.6.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Bibliografie}{53}{section*.1}
+\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{53}{section.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Bibliografie}{54}{section*.1}
