@@ -2476,9 +2476,10 @@ Plánovač v jádrech 3.10.x odstranil neférovost v přidělování zdrojů CPU
 \label{PerfBenchResultExample}
 
 \noindent
-Dále nás zajímá kde plánovač umisťuje paměť procesu a kde samotný proces. K tomu účelu použijeme perf bench benchmark. Tento příklad ukazuje nevhodné kopírování paměti mezi NUMA uzly. Napravo na obrázku \ref{PerfBenchResult} je paměť úloh, nalevo je zobrazeny rozmístění úloh na NUMA uzlech. V tomto příkladu jsou spuštěny 2 vlákna celkem mají 8GB paměti a běží 20 min. Až po 6ti minutách dochází k rozdělení dat a procesů na 2 NUMA uzly. 
+V dalším příkladu na testování NUMA plánování nás bude zajímat kde plánovač umistí paměť procesu a kde samotný proces. Vše necháme na plánovači, žádným způsobem nebudeme nebudeme specifikovat afinitu pro nově vzniklé úlohy. Vytvoříme 2 úlohy a každá z nich bude alokovat 4GB paměti. Necháme úlohy běžet 20 minut a budeme pozorovat, kde je umístěná paměť úlohy a kde běží úloha samotná.  Pro vytvoření úloh použijeme benchmark PerfBench. Výstupem z PerfBench bude graf (obrázek \ref{PerfBenchResult}) umístění dat úlohy na jednotlivých uzlech a graf zobrazující kolik úloh běží na jednom NUMA uzlu.\newline
 
-V této úloze půjde opět o zcela jednoduchý příklad. Vytvoříme 2 úlohy a každá bude z nich alokovat 4GB paměti. Necháme úlohy běžet 20 minut a budeme pozorovat, kde je umístěná paměť úlohy a kde běží samotná úloha. Pro vytvoření úloh použijeme benchmark PerfBench. Výstupem z PerfBench bude graf umístění dat úlohy a  
+
+
 
 
 \begin{figure}[ht]
