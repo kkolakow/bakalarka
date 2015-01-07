@@ -1856,10 +1856,12 @@ Na NUMA systému dochází k těmto přesunům a vyvažování za účelem rychl
 \item Kombinace předchozích metod. Kód plánovače (v tomhle případě spíše mluvíme o funkcích na vyvažování jako o vyvažovači) zváží zdali je výhodnější přesouvat paměť nebo přesouvat proces.
 \end{enumerate}
 
-Plánovač si vede informace o přístupech úlohy na různé NUMA uzly (viz tabulka \ref{tabulka pristupy1}). Jsou registrovány přístupy do segmentů do kterých se přistupuje opakovaně, o implementaci sběru statistik přístupů bude vysvětlen v pozdější kapitole \ref{page fault}.
+Plánovač si vede informace o přístupech úlohy na různé NUMA uzly (příklad naleznete v tabulce \ref{tab:tabulka pristupy1}). Jsou registrovány přístupy do segmentů do kterých se přistupuje opakovaně. Implementace sběru statistik přístupů bude vysvětlena v následující kapitole \ref{page fault}.
 
 \begin{table}[ht]
 \centering
+\caption{Přístupy na NUMA uzly}\label{tab:tabulka pristupy1}
+
 \begin{tabular}{|c|r|r|}
 \hline
 %Přístupy na stránku numa uzlu & Úloha A & Úloha B \\
@@ -1873,14 +1875,12 @@ Uzel 2 & 994 & 14 \\
 \hline
 Uzel 3 & 14 & 44 \\
 \hline
-\label{tabulka pristupy1}
 \end{tabular}
-
-\caption{Přístupy na NUMA uzly}
 \label{table1}
 \end{table}
 
 Úloha umístit úlohu na nejvhodnější pozici, nemusí být zcela tak jednoduchá. Vše komplikují sdílená data (třeba knihovna glibc), na které obvykle přistupuje více úloh. 
+\newpage
 
 Výběr kde umístit úlohu probíhá dle následujícího algoritmu. 
 Pro každou úlohu A testuje NUMA uzel N
