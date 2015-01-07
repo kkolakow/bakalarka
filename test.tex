@@ -2352,7 +2352,7 @@ Na SMP systémech testovací zátěž spouštíme dvěma způsoby:
 
 Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů. Podíváme se zdali plánovač, zbytečně nepřehazoval úlohy mezi jádry, porovnáváme časy běhů úloh, porovnáváme jakou hodnotu Kflops jsme dosáhli.\newline
 
-Příklad UMA testování v mé práci demonstrovat nebudeme, jelikož je téměř shodné s testováním na NUMA systémech. Jediný rozdíl je v tom, že u UMA systému nespouštíme zátěž se specifikovanou NUMA afinitou a ve výsledcích tohoto testování bychom také neřešili do jaké paměti zasahujeme (lokální či vzdálené), protože na UMA systémech máme časy přístupu do pamětí vždy stejné. 
+Příklad UMA testování v mé práci demonstrovat nebudeme, jelikož je téměř shodné s testováním na NUMA systémech. Jediný rozdíl je v tom, že u UMA systému nespouštíme zátěž se specifikovanou NUMA afinitou a ve výsledcích UMA testování bychom také neřešili do jaké paměti zasahujeme (lokální či vzdálené), protože na UMA systémech máme časy přístupu do pamětí vždy stejné. Raději si proto budeme demonstrovat příklad testování plánovače na NUMA systému.
 
 \subsubsection{Testování plánování úloh na NUMA systémech}
 \label{testovani NUMA}
@@ -2363,12 +2363,13 @@ Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit 
 
 Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh, kolik máme logických jader v systému (kvůli úspoře času při běhu testu si zvolíme vhodné krokování například po 4 úlohách). 
 
-Jelikož je systém vybaven HT a každá dvě jádra budou sdílejí stejné vyrovnávací paměti, dá se předpokládat, že se výsledky budou zhoršovat přibližně od běhu, kdy budeme mít spuštěných tolik úloh kolik je v systému fyzických jader (bez HT). A jelikož v praxi běží na procesoru ještě některé systémové úlohy, je pravděpodobné, že uvidíme propad už dříve než u počtu odpovídajícímu počtu fyzických jader v sytému. Očekáváme, že plánovač rozmístí na každou logické jádro maximálně jednu úlohu a že všechny úlohy budou běžet paralelně. Pro prezentaci výsledků použijeme tentokráte grafy.
+Jelikož je systém, na kterém provádíme testování (obrázek \ref{4 numa NODE system scheme}), vybaven HT a každá dvě jádra sdílejí stejné vyrovnávací paměti, dá se předpokládat, že se výsledky budou zhoršovat přibližně od testu, kdy budeme mít spuštěných tolik úloh, kolik je v systému fyzických jader (bez HT). A jelikož v praxi běží na procesoru ještě některé systémové úlohy, je pravděpodobné, že uvidíme propad už dříve než u testu se spuštěným množstvím instancí linpacku odpovídajícím počtu počtu fyzických jader v sytému. Očekáváme, že plánovač rozmístí na každou logické jádro maximálně jednu úlohu a že všechny úlohy budou běžet paralelně. Pro prezentaci výsledků použijeme tentokráte grafy.
 
 Během testování porovnáme sadu tří výsledků (plánovačem řízené, se specifikovanou CPU afinitou a se specifikovanou NUMA afinitou) s další sadou tří výsledků spuštěných na jiné verzi jádra. Záměrně volíme verzi jader, mezi kterými probíhal vývoj algoritmu pro NUMA vyvažování.
 
-\begin{figure}[p]
-\includegraphics[scale=0.2]{obrazky/lsTOPO-brickland.png}
+\begin{figure}[ht]
+\center
+\includegraphics[scale=0.18]{obrazky/lsTOPO-brickland.png}
 \caption{Testovaný systém se čtyřmi NUMA uzly a 120 HT jádry}
 \label{4 numa NODE system scheme}
 \end{figure}
