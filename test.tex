@@ -1721,7 +1721,7 @@ Dále je třeba dělat vyvažování, když se úloha probudí, nebo je vytvoře
 \newpage
 \subsection{Numa vyvažování}
 
-Non uniform memory access. Numa znamená, že přístup do různých segmentů paměti je různě rychlý. Architektura je rozšířením SMP (symetrický multi processing). Počítače začaly mít problémy s propustností mezi pamětí a procesorem v době, kdy se začaly objevovat systémy se stovkami jader, jelikož každé jádro komunikovalo stejnou sběrnicí s pamětí. Toto se podařilo vyřešit shlukováním jader a pamětí do takzvaných NUMA uzlů. Každý procesor (několik jader) má k dispozici svou lokální paměť, na kterou má rychlý přístup, ale má také přístup na vzdálenou paměť, kde je přístup pomalejší.
+NUMA je zkratka non uniform memory access. Systémy založené na této architektuře mají přístupy do různých segmentů paměti je různě rychlé. Architektura je rozšířením SMP (symetrický multi processing). V době kdy se začaly objevovat systémy se stovkami jader, začaly mít počítače problémy s propustností mezi pamětí a procesorem, jelikož každé jádro komunikovalo stejnou sběrnicí s pamětí. Toto se podařilo vyřešit shlukováním jader a pamětí do takzvaných NUMA uzlů. Každý procesor (několik jader) má k dispozici svou lokální paměť, na kterou má rychlý přístup, ale má také přístup na vzdálenou paměť, kde je přístup pomalejší. NUMA systémy lze nalézt na architekturách x86 a ppc. NUMA topologie se používá na serverových systémech s větším počtem CPU socketu v systému.
 
 K propojování uzlů je použita sběrnice, které se obecně říká INTERCONNECT. Každý z výrobců NUMA systémů pojmenovává tyto sběrnice jinak INTEL používá Intel Quick Path (QPI), dříve taky používal název Common system interface (CSI), AMD používá název Hypertransport.
 
@@ -1847,18 +1847,16 @@ Nyní přístupy do paměti nabývají těchto hodnot:
 \item Nejhorší možný čas přístupu do paměti jsme dosáhli v případě, že komunikují dva NUMA uzly, které jsou propojeny pomocí dvou kontrolérů.
 \end{enumerate}
 
-Při vyvažování u NUMA systému je nutné mít na paměti, že ne všechny procesory mají přístupy do všech segmentů pamětí stejně rychlé.
-
 \noindent
-Numa vyvažování používá tři principy přesunu pro docílení vyváženosti:
+Na NUMA systému dochází k těmto přesunům a vyvažování za účelem rychlejšího přístupu do paměti a docílení vyváženosti zatížení úlohami: 
 
 \begin{enumerate}
-\item Proces následuje svou paměť, přesouvá se pouze proces – malé přesuny dat, obvykle levnější.
-\item Paměť přesouváme za úlohou – kopírovaní obrovských bloků paměti může vést k časovým prodlevám.
+\item Proces přesouváme na NUMA uzel, na kterém jsou v paměti data do kterých proces nejvíce přistupuje. Přesouvá se pouze proces – malé přesuny dat, obvykle rychlejší. 
+\item Data běžící úlohy přesouváme na NUMA uzel kde běží daná úloha – kopírovaní často obrovských bloků paměti může vést k časovým prodlevám.
 \item Kombinace předchozích metod. Kód plánovače (v tomhle případě spíše mluvíme o funkcích na vyvažování jako o vyvažovači) zváží zdali je výhodnější přesouvat paměť nebo přesouvat proces.
 \end{enumerate}
 
-Plánovač si vede informace o přístupech úlohy do různých segmentů paměti (na různé NUMA uzly). Jsou registrovány přístupy do segmentů do kterých se přistupuje opakovaně, o implementaci sběru statistik přístupů bude vysvětlen v pozdější kapitole \ref{page fault}.
+Plánovač si vede informace o přístupech úlohy na různé NUMA uzly (viz tabulka \ref{tabulka pristupy1}). Jsou registrovány přístupy do segmentů do kterých se přistupuje opakovaně, o implementaci sběru statistik přístupů bude vysvětlen v pozdější kapitole \ref{page fault}.
 
 \begin{table}[ht]
 \centering
@@ -1875,6 +1873,7 @@ Uzel 2 & 994 & 14 \\
 \hline
 Uzel 3 & 14 & 44 \\
 \hline
+\label{tabulka pristupy1}
 \end{tabular}
 
 \caption{Přístupy na NUMA uzly}
