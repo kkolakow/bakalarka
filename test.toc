@@ -30,9 +30,11 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {4.3.1}Pravideln\IeC {\'e} vol\IeC {\'a}n\IeC {\'\i } k aktualizaci vruntime u pr\IeC {\'a}v\IeC {\v e} b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy}{17}{subsubsection.4.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.3.2}Kdy\IeC {\v z} sou\IeC {\v c}asn\IeC {\v e} b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}loha usne}{17}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.2}Vol\IeC {\'a}n\IeC {\'\i }m funkce schedule() syscallem nebo obsluhou p\IeC {\v r}eru\IeC {\v s}en\IeC {\'\i }}{17}{subsubsection.4.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.3.3}P\IeC {\v r}i probuzen\IeC {\'\i } sp\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy}{18}{subsubsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.3.3}Kdy\IeC {\v z} sou\IeC {\v c}asn\IeC {\v e} b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}loha usne}{17}{subsubsection.4.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.3.4}P\IeC {\v r}i probuzen\IeC {\'\i } sp\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy}{18}{subsubsection.4.3.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.4}Fair pl\IeC {\'a}novac\IeC {\'\i } t\IeC {\v r}\IeC {\'\i }da}{19}{subsection.4.4}
 \defcounter {refsection}{0}\relax 

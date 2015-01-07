@@ -353,7 +353,7 @@ $$
 %\subsection{Funkce schedule() je volána}
 \subsection{Volání plánovače}
 
-K volání plánovače úloh dochází prostřednictvím funkce schedule() z těchto tří důvodů:
+K volání plánovače úloh dochází prostřednictvím funkce schedule() z těchto důvodů:
 
 \subsubsection{Pravidelné volání k aktualizaci vruntime u právě běžící úlohy}
 
@@ -367,6 +367,12 @@ rq->idle_balance = idle_cpu(cpu);
 trigger_load_balance(rq);
 \end{verbatim}
 která zajištují vyvážení zátěže v případě, že máme je systém s více CPU.
+
+\subsubsection{Voláním funkce schedule() syscallem nebo obsluhou přerušení}
+
+Jedním z příkladu volání funkce schedule() obsluhou přerušení je z přerušení od časovače. Dále jsou vyvolány obsluhy přerušení různými části jádra jako například ovladači. 
+
+Také mnoho syscallu volá funkci schedule(). Volání schedule() je obsaženo také v syscallu fork a syscallu exit při ukončení běžící úlohy.
 
 %Funkce scheduler\_tick() (z kernel/sched/core.c) je volána pomocí časovače přerušení. 
 %Aktualizuje u běžící úlohy vruntime a díky změně dojde k aktualizaci běžící fronty.
