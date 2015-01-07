@@ -2219,7 +2219,7 @@ Testování na jednom jádru provádíme tak, že spustíme v jeden okamžik na 
 
 \subsubsubsection{Příklad na testování fronty úloh na jednom jádru}
 \label{testovani na jednom jadru}
-Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset.\newline
+Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset.
 
 \noindent
 Poté zkontrolujeme ve výstupu benchmarku následující:
@@ -2229,12 +2229,19 @@ Poté zkontrolujeme ve výstupu benchmarku následující:
 \item V mpstat výstupu zkontrolujeme, zdali byl procesor s frontou úloh neustále plně vytížen (viz mpstat zkrácený sumarizační výstup)\\
 \end{itemize}
 
-\noindent
-\textit{Výpis běhu benchmarku linpack} \\
-\begingroup
-\fontsize{10pt}{12pt}\selectfont
-\begin{verbatim}
+%\newpage
+%\noindent
+%\textit{Výpis běhu benchmarku linpack} \\
+%\begingroup
+%\fontsize{10pt}{12pt}\selectfont
+%\begin{verbatim}
 
+\begin{figure}[ht]
+\caption{Výpis běhu benchmarku linpack}
+\center
+\label{linpack1}
+\fontsize{7pt}{9pt}\selectfont
+\begin{Verbatim}[frame=single]
     times are reported for matrices of order  1000
       dgefa      dgesl      total       kflops     unit      ratio
  times for array with leading dimension of 1001
@@ -2283,9 +2290,14 @@ RELATIVE_COREs: 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 SOCKETs:        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 numa nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 
-\end{verbatim}
-\endgroup
+\end{Verbatim}
+\end{figure}
 
+
+%\end{verbatim}
+%\endgroup
+
+\newpage
 \noindent
 \textit{MPSTAT zkrácený sumarizovaný výpis} \\ 
 
@@ -2319,9 +2331,10 @@ První číslice na každém řádku obrázku \ref{mpstat1} označuje číslo PU
 
 \noindent
 Výsledek testování plánování fronty úloh
+
 \begin{itemize}
-\item Úlohy běžely na PU číslo 38, které jsme specifikovali při startu úloh.
-\item Všechny úlohy běžely přibližně 58 sekund, u všech úloh proběhlo přibližně 5900 výměn obsahu na CPU, hodnota dosažená benchmarkem byla u všech úloh přibližně 300,000 Kflops.
+\item Úlohy běžely na PU číslo 38 (jak vidíme na obrázku \ref{mpstat1} i na obrázku \ref{linpack1} na řádce začínající PUs:), které jsme specifikovali při startu úloh.
+\item Z obrázku \ref{linpack1} vidíme, že všechny úlohy běžely přibližně 58 sekund, u všech úloh proběhlo přibližně 5900 výměn obsahu na CPU, hodnota dosažená benchmarkem byla u všech úloh přibližně 300,000 Kflops.
 \item Z mpstat výstupu vidíme, že PU 38 bylo po celou dobu běhu úloh maximálně vytížené.
 \end{itemize}
 
