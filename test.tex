@@ -2361,7 +2361,7 @@ Motivací pro testování plánovače na NUMA systémech je to, že v době náv
 
 Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou NUMA afinitou. Numa afinitu úloh specifikujeme za pomocí systémové utility numactl.
 
-\subsubsubsection{Příklad na NUMA testování}
+\subsubsubsection{Příklad na NUMA vyvažování}
 
 Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh, kolik máme logických jader v systému (kvůli úspoře času při běhu testu si zvolíme vhodné krokování například po 4 úlohách). 
 
@@ -2422,10 +2422,7 @@ Nyní se podíváme na další grafy, které nám odhalí co se při testování
 \label{timeWaitingOutOfCPU}
 \end{figure}
 
-Graf z obrázku \ref{timeWaitingOutOfCPU} znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU.
-
-
-Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
+Graf z obrázku \ref{timeWaitingOutOfCPU} znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU. Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
 
 \begin{figure}[ht]
 \center
@@ -2465,15 +2462,24 @@ Další zajímavou informací může být zatížení jednotlivých CPU zjišťo
 \textbf{Analýza výsledků}\newline
 
 \noindent
-Z grafu na obrázku \ref{both kernels linpack results} jsme se dozvěděli, že výsledky u plánovačem řízených běhů u jádra 2.6.32 mají značné rozptyly (tmavě zelený graf). Díky grafu z obrázku \ref{timeWaitingOutOfCPU} jsme se dozvěděli, že úlohy plánovačem řízených běhů u jádra 2.6.32 jsou často mimo CPU (tmavě zelené body). Díky dalším dvěma obrázkům přijdeme na to co se během testování stalo. Graf z obrázku \ref{total time} nám říká, že celkový čas běhu každé úlohy plánovačem řízené na jádru 2.6.32 (tmavě zelené body) je kratší v porovnáním s výsledky dosaženými na jádru 3.10.0 (modré body). Což může být velice matoucí a často to vede na následující otázku. Jak můžou mít úlohy, které jsou často mimo CPU (neběží) rychlejší celkový čas běhu než úlohy, které běží celou dobu? Vysvětlení nabízí obrázek \ref{mpstat2}. Na něm vidíme, že úlohy často nestartují hned po spuštění. Toto je typické chování pro původní plánovací strategii CFS plánovače. Nerozmístil úlohy zvlášť na každé volné jádro, ale část úloh spustil o něco později. Díky tomu, že úloh běžících bylo v daný okamžik méně, nedocházelo tak často k přepisovaním vyrovnávacích pamětí a úloha běžela díky tomu rychleji. Nicméně toto chování nemá nic společného s férovostí přidělování CPU zdrojů úlohám. Tato strategie plánování nicméně vykazovala dobré výsledky v celkové propustnosti systému, ale byla přepracována a nyní se chová plánovač více férově. Také čas, který je úloha mimo CPU se zkrátil a všechny úlohy startují v přibližně ve stejnou dobu. 
-
+Z grafu na obrázku \ref{both kernels linpack results} jsme se dozvěděli, že výsledky u plánovačem řízených běhů u jádra 2.6.32 mají značné rozptyly (tmavě zelený graf). Díky grafu z obrázku \ref{timeWaitingOutOfCPU} jsme se dozvěděli, že úlohy plánovačem řízených běhů u jádra 2.6.32 jsou často mimo CPU (tmavě zelené body). Díky dalším dvěma obrázkům přijdeme na to co se během testování stalo. Graf z obrázku \ref{total time} nám říká, že celkový čas běhu každé úlohy plánovačem řízené na jádru 2.6.32 (tmavě zelené body) je kratší v porovnáním s výsledky dosaženými na jádru 3.10.0 (modré body). Což může být velice matoucí a často to vede na následující otázku. Jak můžou mít úlohy, které jsou často mimo CPU (neběží) rychlejší celkový čas běhu než úlohy, které běží celou dobu? Vysvětlení nabízí obrázek \ref{mpstat2}. Na něm vidíme, že úlohy často nestartují hned po spuštění. Toto je typické chování pro původní plánovací strategii CFS plánovače. Nerozmístil úlohy zvlášť na každé volné jádro, ale část úloh spustil o něco později. Díky tomu, že úloh běžících bylo v daný okamžik méně, nedocházelo tak často k přepisovaním vyrovnávacích pamětí a úloha běžela díky tomu rychleji. Nicméně toto chování nemá nic společného s férovostí přidělování CPU zdrojů úlohám. Tato strategie plánování nicméně vykazovala dobré výsledky v celkové propustnosti systému, ale byla přepracována a nyní se chová plánovač více férově. Také čas který je úloha mimo CPU se zkrátil a všechny úlohy startují v přibližně ve stejnou dobu. \newline
 
 \noindent
-\subsubsubsection{Příklad na umístění nově vzniklého procesu a jeho dat na stejný NUMA uzel}
+\textbf{Závěr}\newline
+
+\noindent
+Plánovač v jádrech 3.10.x odstranil neférovost v přidělování zdrojů CPU úlohám, které jsme mohli vidět v jádrech 2.6.x. Důsledkem toho úlohy běží od spuštění a jsou rovnoměrně rozmístěné na celém systému. Negativním důsledkem je to, že propustnost systému klesá s rostoucím množstvím najednou běžících úloh. 
+
+\newpage
+\noindent
+\subsubsubsection{Příklad na pozorování umístění běžící úlohy a jejich dat v rámci NUMA topologie}
 \label{PerfBenchResultExample}
 
 \noindent
 Dále nás zajímá kde plánovač umisťuje paměť procesu a kde samotný proces. K tomu účelu použijeme perf bench benchmark. Tento příklad ukazuje nevhodné kopírování paměti mezi NUMA uzly. Napravo na obrázku \ref{PerfBenchResult} je paměť úloh, nalevo je zobrazeny rozmístění úloh na NUMA uzlech. V tomto příkladu jsou spuštěny 2 vlákna celkem mají 8GB paměti a běží 20 min. Až po 6ti minutách dochází k rozdělení dat a procesů na 2 NUMA uzly. 
+
+V této úloze půjde opět o zcela jednoduchý příklad. Vytvoříme 2 úlohy a každá bude z nich alokovat 4GB paměti. Necháme úlohy běžet 20 minut a budeme pozorovat, kde je umístěná paměť úlohy a kde běží samotná úloha. Pro vytvoření úloh použijeme benchmark PerfBench. Výstupem z PerfBench bude graf umístění dat úlohy a  
+
 
 \begin{figure}[ht]
 \includegraphics[scale=0.30]{obrazky/PerfBenchResult.png}
