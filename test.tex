@@ -2490,6 +2490,7 @@ V dalším příkladu na testování NUMA plánování nás bude zajímat kde pl
 \noindent
 Z grafu zobrazujícím vyžití paměti na jednotlivých NUMA uzlech (nalevo) vidíme, že jsme měli na začátku přibližně 4GB paměti na dvou NUMA uzlech (na uzlech 1 a 2). Od přibližně 70té sekundy dochází ke kopírovaní paměti úlohy z uzlu 2 na uzel 1. Okolo 200 sekundy vidíme, že naše 2 úlohy mají 2GB na uzlu 3, přibližně 700MB na uzlu 2 a 5.5GB na uzlu 1. Kolem 350 sekundy je téměř celých 8GB paměti úloh na jednom uzlu (uzel 1). Přibližně od 400 sekundy plánovač zjistil, že vyvažuje dvě úlohy a dochází k postupnému rozdělení úloh a jejich pamětí na uzel 0 a uzel 1. Z grafu který zobrazuje kolik úloh na jednotlivých NUMA uzlech běží (graf napravo) vidíme, že několikrát došlo ke kopírování procesu na jiné uzly. \newline 
 
+\newpage
 \noindent
 \textbf{Zhodnocení výsledku}\newline
 
@@ -2498,7 +2499,12 @@ Výsledek takto jednoduchého testu dopadl velice špatně. Místo toho aby plá
 
 \subsubsection{Sumarizování výsledků testování}
 
-asfdsfd
+Plánování úloh na úrovni jedné fronty běžících úloh (na jednom CPU) funguje bez jakýchkoli problémů. Problémy s férovostí, se kterými jsme se setkali u CFS plánovače v jádrech 2.6.32, byly již v jádrech 3.10.0 odstraněny. Problém který není zatím vyřešen se týká vyvažování na NUMA systémech. Data úloh neustále migrují z jednoho uzlu na jiný, plánovači trvá dlouho než se rozhodne, kde jednotlivé úlohy umístí.
+
+\subsubsection{Doporučení na základě výsledků testování}
+
+V průběhu zkoumání implementace plánovače úloh jsem zjistil, že se vyvažování zátěže volá v kódu plánovače na dvou různých místech. Toto samotné by asi nebyl problém, kdyby na každém tomto místě nespouštěl plánovač pro vyvažování jinou logiku (jiné funkce, která každá dělá vyvažování jinak). Pak zřejmě dochází k tomu, že jeden kód vyvažování se snaží vyvážit systém po svém a druhý kód (který se mezitím spustí) mu vyvažování zhatí tím že začne s vyvažováním podle své logiky.
+ 
 
 \section{Závěr}
 Po bližším obeznámení se s plánovačem úloh jsem došel k přesvědčení, že návrh plánovače byl precizně navrhnut a implementován po NUMA vyvažování. Připadá mi, že NUMA vyvažování nebylo přidáno do kódu v duchu návrhu celého plánovače, hlavně tedy třídy pro plánování obyčejných úloh. Kód NUMA vyvažování je dlouhý, postrádám v něm jakýsi koncept, vadí mi heuristika. Překvapilo mě, že se při NUMA vyvažování kalkuluje s pomocí konstant jako například výpočetní síla skupiny procesorů, nebo jak získává historii přístupu na stránky. Tu určí tak, že dosavadní přístupy vydělí dvěma. Jsem přesvědčen, že tvůrci NUMA vyvažování udělali chybu v tom, že se NUMA vyvažování realizuje dvěmi různými funkcemi, které si nejsou vůbec podobné a spouštějí při dvou událostech (jedna periodicky, druhá při přístupu na uzamčené stránky paměti). To očividně vede k neustálému migrování úloh a jejich dat z jednoho NUMA uzlu na druhý. Od vývojáře NUMA plánovače jsem byl informován, že toto je slabina současného plánovače a že se nyní vymýšlí, jak tuto slabinu odstranit. 
