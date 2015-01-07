@@ -2363,9 +2363,10 @@ Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit 
 
 Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh, kolik máme logických jader v systému (kvůli úspoře času při běhu testu si zvolíme vhodné krokování například po 4 úlohách). 
 
-Jelikož je systém, na kterém provádíme testování (obrázek \ref{4 numa NODE system scheme}), vybaven HT a každá dvě jádra sdílejí stejné vyrovnávací paměti, dá se předpokládat, že se výsledky budou zhoršovat přibližně od testu, kdy budeme mít spuštěných tolik úloh, kolik je v systému fyzických jader (bez HT). A jelikož v praxi běží na procesoru ještě některé systémové úlohy, je pravděpodobné, že uvidíme propad už dříve než u testu se spuštěným množstvím instancí linpacku odpovídajícím počtu počtu fyzických jader v sytému. Očekáváme, že plánovač rozmístí na každou logické jádro maximálně jednu úlohu a že všechny úlohy budou běžet paralelně. Pro prezentaci výsledků použijeme tentokráte grafy.
+Jelikož je systém, na kterém provádíme testování (obrázek \ref{4 numa NODE system scheme}), vybaven HT a každá dvě jádra sdílejí stejné vyrovnávací paměti, dá se předpokládat, že se výsledky budou zhoršovat přibližně od testu, kdy budeme mít spuštěných tolik úloh, kolik je v systému fyzických jader (bez HT). A jelikož v praxi běží na procesoru ještě některé systémové úlohy, je pravděpodobné, že uvidíme propad už dříve než u testu se spuštěným množstvím instancí linpacku odpovídajícím počtu fyzických jader v sytému. Očekáváme, že plánovač rozmístí na každou logické jádro maximálně jednu úlohu a že všechny úlohy budou běžet paralelně. Pro prezentaci výsledků použijeme tentokráte grafy.
 
 Během testování porovnáme sadu tří výsledků (plánovačem řízené, se specifikovanou CPU afinitou a se specifikovanou NUMA afinitou) s další sadou tří výsledků spuštěných na jiné verzi jádra. Záměrně volíme verzi jader, mezi kterými probíhal vývoj algoritmu pro NUMA vyvažování.
+
 
 \begin{figure}[ht]
 \center
@@ -2379,23 +2380,27 @@ Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního sy
 
 \newpage
 
-Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi jádra. Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a NUMA). Nyní seběhneme identický test pro novější jádro operačního systému.
+\noindent 
+\textbf{Výstupy z testování a jejich interpretace} \newline
+
+\noindent
+Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi jádra (jádro 2.6.14). Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a NUMA). Nyní seběhneme identický test pro novější jádro operačního systému.
 
 \begin{figure}[ht]
 \center
 \includegraphics[scale=0.174]{obrazky/LinpackBaseChart.png}
-\caption{Výsledky linpacku na starším jádru}
+\caption{Výsledky linpacku na jádru 2.6.14}
 \label{older kernel linpack results}
 \end{figure}
-
-Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře operačního systému,  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
 
 \begin{figure}[ht]
 \center
 \includegraphics[scale=0.174]{obrazky/LinpackTargetChart.png}
-\caption{Výsledky linpacku na novějším jádru}
+\caption{Výsledky linpacku na jádru 3.1.18}
 \label{newer kernel linpack results}
 \end{figure}
+
+Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře operačního systému,  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
 
 Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované NUMA afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové CPU a NUMA uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
 
@@ -2406,7 +2411,10 @@ Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy speci
 \label{both kernels linpack results}
 \end{figure}
 
-Nyní se podíváme na další grafy, které nám odhalí co se při testování stalo. Další graf (z obrázku \ref{timeWaitingOutOfCPU}) znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU.
+Nyní se podíváme na další grafy, které nám odhalí co se při testování stalo. 
+\newpage
+
+Další graf (z obrázku \ref{timeWaitingOutOfCPU}) znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU.
 
 \begin{figure}[ht]
 \center
@@ -2416,7 +2424,6 @@ Nyní se podíváme na další grafy, které nám odhalí co se při testování
 \end{figure}
 
 
-\newpage
 Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
 
 \begin{figure}[ht]
