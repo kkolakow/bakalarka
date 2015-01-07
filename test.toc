@@ -78,9 +78,13 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.2.1}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } fronty \IeC {\'u}loh na jednom j\IeC {\'a}dru}{42}{subsubsection.6.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.2}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na SMP UMA syst\IeC {\'e}mech}{44}{subsubsection.6.2.2}
+\contentsline {paragraph}{\numberline {6.2.1.1}P\IeC {\v r}\IeC {\'\i }klad na testov\IeC {\'a}n\IeC {\'\i } fronty \IeC {\'u}loh na jednom j\IeC {\'a}dru}{42}{paragraph.6.2.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.2.2}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na SMP UMA syst\IeC {\'e}mech}{45}{subsubsection.6.2.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.2.3}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na NUMA syst\IeC {\'e}mech}{45}{subsubsection.6.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{\numberline {6.2.3.1}P\IeC {\v r}\IeC {\'\i }klad na um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } nov\IeC {\v e} vznikl\IeC {\'e}ho procesu a jeho dat na stejn\IeC {\'y} NUMA uzel}{50}{paragraph.6.2.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{51}{section.7}
 \defcounter {refsection}{0}\relax 

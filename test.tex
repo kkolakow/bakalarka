@@ -2206,7 +2206,7 @@ U vyvažování na úrovni NUMA uzlů se dále řeší seskupování za účelem
 
 \section{Testování}
 
-V našem testování se zaměřujeme hlavně na dvě vlastnosti. Zdali plánovaní úloh férově přiděluje CPU každé běžící úloze (v kapitole \ref{testovani jedno jadro})  a zdali jsou na systému úlohy rovnoměrně rozmístěny (v kapitole \ref{testovani NUMA}). K plánování a vyvažování (jak v systémech s jedním CPU, tak v systémech SMP UMA, tak i v NUMA systémech) se používá jeden a tentýž algoritmus (samozřejmě když není konfigurovaná NUMA a SMP neprovádí se vyvažování) popsaný v CFS ve třídě fair. Takže výsledek našeho testování považujeme jako výsledek plánování plánovače úloh (čili výsledek plánování CFS). 
+V našem testování se zaměřujeme hlavně na dvě vlastnosti. Zdali plánovaní úloh férově přiděluje CPU každé běžící úloze (v kapitole \ref{testovani jedno jadro})  a zdali jsou na systému úlohy rovnoměrně rozmístěny (v kapitole \ref{testovani NUMA} zdali je správně umístěna úloha na uzel s jejími daty se podíváme v příkladu \ref{PerfBenchResultExample}). K plánování a vyvažování (jak v systémech s jedním CPU, tak v systémech SMP UMA, tak i v NUMA systémech) se používá jeden a tentýž algoritmus (samozřejmě když není konfigurovaná NUMA a SMP neprovádí se vyvažování) popsaný v CFS v plánovací třídě fair. Takže výsledek našeho testování považujeme jako výsledek plánování plánovače úloh (čili výsledek plánování CFS). 
 
 \subsection{Testovací úloha}
 Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modifikovaný benchmark linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na sběr statistiky běhu benchmarku. Benchmark linpack dělá aritmetické operace (násobí matice) a výsledkem je množství floating point operací za vteřinu. 
@@ -2217,8 +2217,11 @@ Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modif
 \label{testovani jedno jadro}
 Testování na jednom jádru provádíme tak, že spustíme v jeden okamžik na jednom jádru řadu úloh, a na konci se podíváme, jak dlouho jednotlivé úlohy běžely a jakých výsledků jsme dosáhli. Pokud bude plánovač spravedlivě přidělovat čas úlohám, budou běžet stejně dlouho, množství výměn obsahu bude přibližně stejné pro každou úlohu, dosažená hodnota operací za sekundu bude také přibližně stejná. Jelikož jsme úlohy spouštěli na jádru se specifikovanou CPU afinitou, prověříme také, zdali úlohy běžely jen na jádru námi specifikovaném.
 
-Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset.
+\subsubsubsection{Příklad na testování fronty úloh na jednom jádru}
+\label{testovani na jednom jadru}
+Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset.\newline
 
+\noindent
 Poté zkontrolujeme ve výstupu benchmarku následující:
 \begin{itemize}
 \item Zdali úlohy opravdu běžely na jádru námi specifikovaném při startu úloh (v našem příkladu jádro s číslem 38)
@@ -2226,7 +2229,6 @@ Poté zkontrolujeme ve výstupu benchmarku následující:
 \item V mpstat výstupu zkontrolujeme, zdali byl procesor s frontou úloh neustále plně vytížen (viz mpstat zkrácený sumarizační výstup)\\
 \end{itemize}
 
-\newpage
 \noindent
 \textit{Výpis běhu benchmarku linpack} \\
 \begingroup
@@ -2284,7 +2286,6 @@ numa nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 \end{verbatim}
 \endgroup
 
-\newpage
 \noindent
 \textit{MPSTAT zkrácený sumarizovaný výpis} \\ 
 
@@ -2430,7 +2431,12 @@ Další zajímavou informací může být zatížení jednotlivých CPU zjišťo
 \end{figure}
 \newpage
 
-Dále nás zajímá kde plánovač umisťuje paměť procesu a kde samotný proces. K tomu účelu použijeme perf bench benchmark. Tento příklad ukazuje nevhodné kopírování paměti mezi NUMA uzly. Napravo na obrázku 15 je paměť úloh, nalevo je zobrazeny rozmístění úloh na NUMA uzlech. V tomto příkladu jsou spuštěny 2 vlákna celkem mají 8GB paměti a běží 20 min. Až po 6ti minutách dochází k rozdělení dat a procesů na 2 NUMA uzly. 
+\noindent
+\subsubsubsection{Příklad na umístění nově vzniklého procesu a jeho dat na stejný NUMA uzel}
+\label{PerfBenchResultExample}
+
+\noindent
+Dále nás zajímá kde plánovač umisťuje paměť procesu a kde samotný proces. K tomu účelu použijeme perf bench benchmark. Tento příklad ukazuje nevhodné kopírování paměti mezi NUMA uzly. Napravo na obrázku \ref{PerfBenchResult} je paměť úloh, nalevo je zobrazeny rozmístění úloh na NUMA uzlech. V tomto příkladu jsou spuštěny 2 vlákna celkem mají 8GB paměti a běží 20 min. Až po 6ti minutách dochází k rozdělení dat a procesů na 2 NUMA uzly. 
 
 \begin{figure}[ht]
 \includegraphics[scale=0.30]{obrazky/PerfBenchResult.png}
