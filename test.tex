@@ -2206,7 +2206,7 @@ U vyvažování na úrovni NUMA uzlů se dále řeší seskupování za účelem
 
 \section{Testování}
 
-V našem testování se zaměřujeme hlavně na dvě vlastnosti. Zdali plánovaní úloh férově přiděluje CPU každé běžící úloze (v kapitole \ref{testovani jedno jadro})  a zdali jsou na systému úlohy rovnoměrně rozmístěny (v kapitole \ref{testovani NUMA}). 
+V našem testování se zaměřujeme hlavně na dvě vlastnosti. Zdali plánovaní úloh férově přiděluje CPU každé běžící úloze (v kapitole \ref{testovani jedno jadro})  a zdali jsou na systému úlohy rovnoměrně rozmístěny (v kapitole \ref{testovani NUMA}). K plánování a vyvažování (jak v systémech s jedním CPU, tak v systémech SMP UMA, tak i v NUMA systémech) se používá jeden a tentýž algoritmus (samozřejmě když není konfigurovaná NUMA a SMP neprovádí se vyvažování) popsaný v CFS ve třídě fair. Takže výsledek našeho testování považujeme jako výsledek plánování plánovače úloh (čili výsledek plánování CFS). 
 
 \subsection{Testovací úloha}
 Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modifikovaný benchmark linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na sběr statistiky běhu benchmarku. Benchmark linpack dělá aritmetické operace (násobí matice) a výsledkem je množství floating point operací za vteřinu. 
