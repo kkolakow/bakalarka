@@ -2219,13 +2219,13 @@ Testování na jednom jádru provádíme tak, že spustíme v jeden okamžik na 
 
 \subsubsubsection{Příklad na testování fronty úloh na jednom jádru}
 \label{testovani na jednom jadru}
-Pro testování plánování fronty úloh na jednom CPU vytvoříme frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset.
+Pro testování plánování fronty úloh na jednom CPU vytvoříme pomocí benchmarku linpack frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset. Během běhu instancí linpacku sbíráme statistiky vytíženosti jednotlivých jader pomocí systémové utility mpstat.\newline
 
 \noindent
-Poté zkontrolujeme ve výstupu benchmarku následující:
+\textbf{Poté zkontrolujeme ve výstupu benchmarku následující:}
 \begin{itemize}
 \item Zdali úlohy opravdu běžely na jádru námi specifikovaném při startu úloh (v našem příkladu jádro s číslem 38)
-\item Zdali všechny úlohy běžely přibližně stejně dlouho, zdali počet výměn obsahu na CPU je přibližně stejný  a zdali jsme dosáhli přibližně stejné hodnoty operací na plovoucí řádce (kflops) pro každou instanci benchmarku.
+\item Zdali všechny úlohy běžely přibližně stejně dlouho, zdali počet výměn kontextu\footnote{Výměna kontextu znamená ukladání a načítání aktuálního stavu procesoru. Když k ní dochází málo často celková propustnost systému je větší, ale doba odezvy aplikace je pomalejší. V našem příkladě nás bude zajímat pouze zdali byla výměna kontextu provedena stejně často u každé úlohy, z čehož budeme usuzovat, že plánovač distribuje zdroje CPU férově.} na CPU je přibližně stejný  a zdali jsme dosáhli přibližně stejné hodnoty operací v plovoucí řádové čárce (kflops) pro každou instanci benchmarku.
 \item V mpstat výstupu zkontrolujeme, zdali byl procesor s frontou úloh neustále plně vytížen (viz mpstat zkrácený sumarizační výstup)\\
 \end{itemize}
 
@@ -2240,7 +2240,7 @@ Poté zkontrolujeme ve výstupu benchmarku následující:
 \caption{Výpis běhu benchmarku linpack}
 \center
 \label{linpack1}
-\fontsize{7pt}{9pt}\selectfont
+\fontsize{6.8pt}{8.5pt}\selectfont
 \begin{Verbatim}[frame=single]
     times are reported for matrices of order  1000
       dgefa      dgesl      total       kflops     unit      ratio
@@ -2330,12 +2330,12 @@ První číslice na každém řádku obrázku \ref{mpstat1} označuje číslo PU
 \end{figure}
 
 \noindent
-Výsledek testování plánování fronty úloh
+\textbf{Výsledek testování plánování fronty úloh}
 
 \begin{itemize}
-\item Úlohy běžely na PU číslo 38 (jak vidíme na obrázku \ref{mpstat1} i na obrázku \ref{linpack1} na řádce začínající PUs:), které jsme specifikovali při startu úloh.
-\item Z obrázku \ref{linpack1} vidíme, že všechny úlohy běžely přibližně 58 sekund, u všech úloh proběhlo přibližně 5900 výměn obsahu na CPU, hodnota dosažená benchmarkem byla u všech úloh přibližně 300,000 Kflops.
-\item Z mpstat výstupu vidíme, že PU 38 bylo po celou dobu běhu úloh maximálně vytížené.
+\item Úlohy běžely na PU číslo 38 (viz obrázek č. \ref{mpstat1} a také na obrázek \ref{linpack1} na řádce začínající PUs:), které jsme specifikovali při startu úloh.
+\item Z obrázku \ref{linpack1} vidíme, že všechny úlohy běžely přibližně 58 sekund, u všech úloh proběhlo přibližně 5900 výměn obsahu na CPU a hodnota dosažená benchmarkem byla u všech úloh přibližně 300,000 Kflops.
+\item Z obrázku \ref{mpstat1} vidíme, že PU 38 bylo po celou dobu běhu úloh maximálně vytížené.
 \end{itemize}
 
 Jelikož byly splněny všechny naše předpoklady říkáme, že plánovač plánuje férově úlohy z fronty úloh na jednom jádru.
