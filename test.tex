@@ -2357,6 +2357,8 @@ Příklad UMA testování v mé práci demonstrovat nebudeme, jelikož je témě
 \subsubsection{Testování plánování úloh na NUMA systémech}
 \label{testovani NUMA}
 
+Motivací pro testování plánovače na NUMA systémech je to, že v době návrhu CFS plánovače nebyly NUMA systémy k dispozici a v návrhu CFS plánovače se s touto architekturou nepočítalo. Funkce umožnující NUMA vyvažování byly dodány do CFS plánovače později. V době kdy se NUMA algoritmy objevily v CFS plánovači, bylo reportováno několik problémů s výkonností NUMA systému.
+
 Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou NUMA afinitou. Numa afinitu úloh specifikujeme za pomocí systémové utility numactl.
 
 \subsubsubsection{Příklad na NUMA testování}
@@ -2384,23 +2386,23 @@ Nejdříve seběhneme linpack benchmark na starší verzi jádra operačního sy
 \textbf{Výstupy z testování a jejich interpretace} \newline
 
 \noindent
-Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi jádra (jádro 2.6.14). Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a NUMA). Nyní seběhneme identický test pro novější jádro operačního systému.
+Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi jádra (jádro 2.6.32). Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a NUMA). Nyní seběhneme identický test pro novější jádro operačního systému.
 
 \begin{figure}[ht]
 \center
 \includegraphics[scale=0.174]{obrazky/LinpackBaseChart.png}
-\caption{Výsledky linpacku na jádru 2.6.14}
+\caption{Výsledky linpacku na jádru 2.6.32}
 \label{older kernel linpack results}
 \end{figure}
 
 \begin{figure}[ht]
 \center
 \includegraphics[scale=0.174]{obrazky/LinpackTargetChart.png}
-\caption{Výsledky linpacku na jádru 3.1.18}
+\caption{Výsledky linpacku na jádru 3.10.0}
 \label{newer kernel linpack results}
 \end{figure}
 
-Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře operačního systému,  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
+Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře (jádro 3.10.0),  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
 
 Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované NUMA afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové CPU a NUMA uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
 
@@ -2412,9 +2414,6 @@ Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy speci
 \end{figure}
 
 Nyní se podíváme na další grafy, které nám odhalí co se při testování stalo. 
-\newpage
-
-Další graf (z obrázku \ref{timeWaitingOutOfCPU}) znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU.
 
 \begin{figure}[ht]
 \center
@@ -2422,6 +2421,8 @@ Další graf (z obrázku \ref{timeWaitingOutOfCPU}) znázorňuje kolik času str
 \caption{Čas strávený mimo CPU}
 \label{timeWaitingOutOfCPU}
 \end{figure}
+
+Graf z obrázku \ref{timeWaitingOutOfCPU} znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU.
 
 
 Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
