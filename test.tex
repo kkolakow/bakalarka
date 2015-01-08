@@ -2389,6 +2389,8 @@ Motivací pro testování plánovače na NUMA systémech je to, že v době náv
 Jelikož jsou NUMA systémy variantou SMP systémů, bude se testování lišit jen tím, že úlohy budeme spouštět ještě třetím způsobem a to se specifikovanou NUMA afinitou. Numa afinitu úloh specifikujeme za pomocí systémové utility numactl.
 
 \subsubsubsection{Příklad na přidělování CPU času na NUMA systému}
+\label{testovani NUMA1}
+
 
 Pro naše testování vyvážení použijeme jednoduchý scénář. Budeme spouštět od jedné až po tolik na sobě nezávislých úloh, kolik máme logických jader v systému (kvůli úspoře času při běhu testu si zvolíme vhodné krokování například po 4 úlohách). 
 
@@ -2534,7 +2536,16 @@ V průběhu zkoumání implementace plánovače úloh jsem zjistil, že se vyva�
  
 
 \section{Závěr}
-Po bližším obeznámení se s plánovačem úloh jsem došel k přesvědčení, že návrh plánovače byl precizně navrhnut a implementován po NUMA vyvažování. Připadá mi, že NUMA vyvažování nebylo přidáno do kódu v duchu návrhu celého plánovače, hlavně tedy třídy pro plánování obyčejných úloh. Kód NUMA vyvažování je dlouhý, postrádám v něm jakýsi koncept, vadí mi heuristika. Překvapilo mě, že se při NUMA vyvažování kalkuluje s pomocí konstant jako například výpočetní síla skupiny procesorů, nebo jak získává historii přístupu na stránky. Tu určí tak, že dosavadní přístupy vydělí dvěma. Jsem přesvědčen, že tvůrci NUMA vyvažování udělali chybu v tom, že se NUMA vyvažování realizuje dvěmi různými funkcemi, které si nejsou vůbec podobné a spouštějí při dvou událostech (jedna periodicky, druhá při přístupu na uzamčené stránky paměti). To očividně vede k neustálému migrování úloh a jejich dat z jednoho NUMA uzlu na druhý. Od vývojáře NUMA plánovače jsem byl informován, že toto je slabina současného plánovače a že se nyní vymýšlí, jak tuto slabinu odstranit. 
+Prostudováním implementace plánovače a provedením experimentů složícím k zjištění případných problémů linuxového plánovače úloh jsem zjistil následující.
+
+Implementaci CFS plánovače lze rozdělit do dvou částí podle toho kdy jednotlivé algoritmy, ze kterých se CFS skládá, vznikly. Algoritmy vzniklé podle původního návrhu zabezpečovali plánování na systémech s jedním CPU a systémech SMP UMA. Algoritmy, které byly do CFS dopsány později, zajišťovaly plánování (a vyvažování) na NUMA systémech. Původní algoritmy nepoužívaly žádnou heuristiku, vypadají (i přes svou technickou náročnost) čitelně a čtením samotného kódu jsem rozuměl co kód dělá. Naopak implementace algoritmů přidaných v pozdějších jádrech zajištující plánování a vyvažování na NUMA systémech obsahují množství heuristiky (například pro zjištění statistik přístupů do paměti), zavádějí různé konstanty jako je například výpočetní síla skupiny procesorů. Jeden procesor bez HT má hodnotu 1. Procesor který má jádro s HT má hodnotu výpočetní síly 1.1. Což je samozřejmě jen odhad a reálně takovou sílu má jen u určitých typů úloh.
+
+Plánování na systémech s jedním CPU dle našeho experimentu dopadají vždy dobře, plánovač v rámci plánování úloh na jednom CPU spravedlivě rozděluje běžícím úlohám procesorový čas.
+
+V jádrech 3.10.0 bylo odstraněno chování, které jsme mohli vidět v kernelech 2.6.32 (viz příklad \ref{testovani NUMA}), které nám způsobovalo to, že si systém při zatížení systému mnoha úlohami vybral některé úlohy, které spustil dřív než ostatní. Tím že všechny úlohy neběžely zároveň, mohla být lépe využívaná vyrovnávací paměť. Nicméně toto chování způsobovalo jakousi neférovost. Ta neférovost se spočívá v tom, že některým úlohám bylo povoleno běžet na CPU a některé úlohy čekaly než běžící úlohy doběhnou, ačkoli některá jádra zůstávala nevyužita. Odstraněním této neférovosti došlo sice ke snížení propustnosti systému při vysokém vytížení, nicméně systém se začal chovat férově a spouští všechny aplikace ihned po spuštění a přiděluje jim stejné množství procesorového času.
+
+Ani v CFS plánovači na jádrech 3.10 však nebyl odstraněn problém s plánovám úloh na NUMA systémech. V našem experimentu na prověření vyvažování na NUMA systému jsme viděli problémy jaké způsobil zcela jednoduchý příklad. Plánovači tvrvalo přibližně 400 sekund než rozdělil dvě úlohy (včetně jejich dat) na dva NUMA uzly. Když uvážíme jak jednoduchý příklad CFS plánovač nebyl schopen zvládnout je snadné domyslet jak by dopadly experimenty složitější například u procesů sdílející nějaká data, či vyvažování systému s více spuštěnými úlohami.
+
 
 \nocite{*}
 
