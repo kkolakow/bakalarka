@@ -2493,7 +2493,7 @@ Další zajímavou informací může být zatížení jednotlivých CPU zjišťo
 \textbf{Analýza výstupů testu}\newline
 
 \noindent
-Z grafu na obrázku \ref{both kernels linpack results} jsme se dozvěděli, že výsledky běhů úloh plánovačem řízených mají u jádra 2.6.32 značné rozptyly (tmavě zelený graf). Díky grafu z obrázku \ref{timeWaitingOutOfCPU} jsme se dozvěděli, že běhy úloh plánovačem řízené, u jádra 2.6.32, často neběží a stojí (tmavě zelené body). Díky dalším dvěma grafům přijdeme na to co se během testování stalo. Graf z obrázku \ref{total time} nám říká, že celkový čas běhu úloh řízených plánovačem je na jádru 2.6.32 (tmavě zelené body) kratší v porovnáním s výsledky dosaženými na jádru 3.10.0 (modré body). Jak můžou mít úlohy, které jsou často mimo CPU (neběží) rychlejší celkový čas běhu (zahrnující i čas kdy úloha neběží na CPU) než úlohy, které běží celou dobu? Vysvětlení nabízí obrázek \ref{mpstat2}. Na něm vidíme, že úlohy často nestartují hned po spuštění. Toto je typické chování pro původní plánovací strategii CFS plánovače. Nerozmístil úlohy zvlášť na každé volné jádro, ale část úloh spustil o něco později. Díky tomu, že bylo běžících úloh v daný okamžik méně, nedocházelo tak často k přepisovaní vyrovnávacích pamětí a úloha běžela díky tomu rychleji. Nicméně toto chování nemá nic společného s férovostí přidělování CPU zdrojů úlohám. Tato strategie plánování nicméně vykazovala dobré výsledky v celkové propustnosti systému, ale byla přepracována a nyní se chová plánovač více férově. Také čas který je úloha mimo CPU se zkrátil a všechny úlohy startují v přibližně ve stejnou dobu.\newline
+Z grafu na obrázku \ref{both kernels linpack results} jsme se dozvěděli, že výsledky běhů úloh plánovačem řízených mají u jádra 2.6.32 značné rozptyly (tmavě zelený graf). Díky grafu z obrázku \ref{timeWaitingOutOfCPU} jsme se dozvěděli, že běhy úloh plánovačem řízené, u jádra 2.6.32, často neběží a stojí (tmavě zelené body). Díky dalším dvěma grafům přijdeme na to co se během testování stalo. Graf z obrázku \ref{total time} nám ukazuje, že celkový čas běhu úloh řízených plánovačem je na jádru 2.6.32 (tmavě zelené body) kratší v porovnáním s výsledky dosaženými na jádru 3.10.0 (modré body). Jak můžou mít úlohy, které jsou často mimo CPU (neběží) rychlejší celkový čas běhu (zahrnující i čas kdy úloha neběží na CPU) než úlohy, které běží celou dobu? Vysvětlení nabízí obrázek \ref{mpstat2}. Na něm vidíme, že úlohy často nestartují hned po spuštění. Toto je typické chování pro původní plánovací strategii CFS plánovače. Nerozmístil úlohy zvlášť na každé volné jádro, ale část úloh spustil o něco později. Díky tomu, že bylo běžících úloh v daný okamžik méně, nedocházelo tak často k přepisovaní vyrovnávacích pamětí a úloha běžela díky tomu rychleji. Nicméně toto chování nemá nic společného s férovostí přidělování CPU zdrojů úlohám. Tato strategie plánování nicméně vykazovala dobré výsledky v celkové propustnosti systému, ale byla přepracována a nyní se chová plánovač více férově. Také čas který je úloha mimo CPU se zkrátil a všechny úlohy startují v přibližně ve stejnou dobu.\newline
 
 \noindent
 \textbf{Výsledek}\newline
@@ -2579,7 +2579,21 @@ V úplném závěru bych chtěl zmínit to, že jsem byl velice nemile překvape
 		\texttt{https://lkml.org} \\
 		\texttt{https://lwn.net}
   \bibitem{RRIEL}{\em Prezentace od Rika van Riela} \\
-		Interní RedHat prezentace od jednoho z vývojářů vyvažovacího algoritmu v CFS plánovači
+		Interní RedHat prezentace od jednoho z vývojářů vyvažovacího algoritmu v CFS plánovači obsahující obrázky \ref{numa scheme1}, \ref{numa scheme2}, \ref{4 numa NODE system scheme}}
+
+
+
+
+%\bibitem{idealni procesor}
+%\bibitem{realny procesor}
+%\bibitem{RB vruntime}
+%\bibitem{scheduler structures}
+%\bibitem{domeny a skupiny}
+%\bibitem{numa scheme1}
+%\bibitem{numa scheme2}
+%\bibitem{4 numa NODE system scheme}
+%
+
 
 \end{thebibliography}
 
