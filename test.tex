@@ -2248,7 +2248,7 @@ Pro testování plánování fronty úloh na jednom CPU vytvoříme pomocí benc
 \textbf{Poté zkontrolujeme ve výstupu benchmarku následující:}
 \begin{itemize}
 \item Zdali úlohy opravdu běžely na jádru námi specifikovaném při startu úloh (v našem příkladu jádro s číslem 38)
-\item Zdali všechny úlohy běžely přibližně stejně dlouho, zdali počet výměn kontextu\footnote{Výměna kontextu znamená ukladání a načítání aktuálního stavu procesoru. Když k ní dochází málo často celková propustnost systému je větší, ale doba odezvy aplikace je pomalejší. V našem příkladě nás bude zajímat pouze zdali byla výměna kontextu provedena stejně často u každé úlohy, z čehož budeme usuzovat, že plánovač distribuje zdroje CPU férově.} na CPU je přibližně stejný  a zdali jsme dosáhli přibližně stejné hodnoty operací v plovoucí řádové čárce (kflops) pro každou instanci benchmarku.
+\item Zdali všechny úlohy běžely přibližně stejně dlouho, zdali počet výměn kontextu\footnote{Výměna kontextu znamená ukladání a načítání aktuálního stavu procesoru. Když k ní dochází málo často celková propustnost systému je větší, ale odezvy aplikací jsou pomalejší. V našem příkladě nás bude zajímat pouze zdali byla výměna kontextu provedena stejně často u každé úlohy, z čehož budeme usuzovat, že plánovač distribuje zdroje CPU férově.} na CPU je přibližně stejný a zdali jsme dosáhli přibližně stejné hodnoty operací v plovoucí řádové čárce (kflops) pro každou instanci benchmarku.
 \item V mpstat výstupu zkontrolujeme, zdali byl procesor s frontou úloh neustále plně vytížen (obrázek \ref{mpstat1} )\\
 
 \end{itemize}
@@ -2269,53 +2269,53 @@ Pro testování plánování fronty úloh na jednom CPU vytvoříme pomocí benc
 
 \fontsize{6pt}{8pt}\selectfont
 \begin{Verbatim}[frame=single]
-    times are reported for matrices of order  1000
-      dgefa      dgesl      total       kflops     unit      ratio
- times for array with leading dimension of 1001
-       2.89       0.01       2.90     230500       0.01      51.80
-       2.17       0.01       2.17     307678       0.01      38.81
-       2.82       0.01       2.83     236481       0.01      50.49
-       2.21       0.01       2.22     301454       0.01      39.61
- times for array with leading dimension of1000
-       2.04       0.01       2.04     327506       0.01      36.46
-       2.42       0.01       2.42     275854       0.01      43.29
-       2.14       0.01       2.14     311905       0.01      38.28
-       2.13       0.00       2.13     313553       0.01      38.08
-Unrolled Double  Precision 301454 Kflops ; 10 Reps 
-
-Nodename:       intel-canoepass-02.lab.eng.rdu.redhat.com
-Sysname:        Linux
-Release:        2.6.32-431.el6.x86_64
-Version:        #1 SMP Sun Nov 10 22:19:54 EST 2013
-Machine:        x86_64
--------------------------------------------------------------
-Started on CPU 38.
-Waiting for semaphore_id 9338882 to reach 0.
-Started at 05-27-2014  13:50:05.452249
-Unrolled Double Precision Linpack
-
-     norm. resid      resid           machep         x[0]-1     
-       9.5        4.22017976e-12  2.22044605e-16  1.09912079e-13
-Finished at 05-27-2014  13:51:03.855331
-Time elapsed:   58.403 seconds
-User time:      58.255 seconds
-System time:    0.013 seconds
--------------------------------------------------------------
-Page reclaims:  544
-Page faults:    0
-Voluntary context switches:     0
-Involuntary context switches:   5912
--------------------------------------------------------------
-PUs, ABSOLUTE_COREs, RELATIVE_COREs (CORE number inside SOCKET), 
-SOCKETs and numa nodes on which linpack was running.
-ABSOLUTE_COREs represent logical numbering of COREs. It's horizontal
-index in the whole list of COREs.
--------------------------------------------------------------
-PUs:            38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 
-ABSOLUTE_COREs: 14 14 14 14 14 14 14 14 14 14 
-RELATIVE_COREs: 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-SOCKETs:        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-numa nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                          times are reported for matrices of order  1000
+                            dgefa      dgesl      total       kflops     unit      ratio
+                       times for array with leading dimension of 1001
+                             2.89       0.01       2.90     230500       0.01      51.80
+                             2.17       0.01       2.17     307678       0.01      38.81
+                             2.82       0.01       2.83     236481       0.01      50.49
+                             2.21       0.01       2.22     301454       0.01      39.61
+                       times for array with leading dimension of1000
+                             2.04       0.01       2.04     327506       0.01      36.46
+                             2.42       0.01       2.42     275854       0.01      43.29
+                             2.14       0.01       2.14     311905       0.01      38.28
+                             2.13       0.00       2.13     313553       0.01      38.08
+                      Unrolled Double  Precision 301454 Kflops ; 10 Reps 
+                      
+                      Nodename:       intel-canoepass-02.lab.eng.rdu.redhat.com
+                      Sysname:        Linux
+                      Release:        2.6.32-431.el6.x86_64
+                      Version:        #1 SMP Sun Nov 10 22:19:54 EST 2013
+                      Machine:        x86_64
+                      -------------------------------------------------------------
+                      Started on CPU 38.
+                      Waiting for semaphore_id 9338882 to reach 0.
+                      Started at 05-27-2014  13:50:05.452249
+                      Unrolled Double Precision Linpack
+                      
+                           norm. resid      resid           machep         x[0]-1     
+                             9.5        4.22017976e-12  2.22044605e-16  1.09912079e-13
+                      Finished at 05-27-2014  13:51:03.855331
+                      Time elapsed:   58.403 seconds
+                      User time:      58.255 seconds
+                      System time:    0.013 seconds
+                      -------------------------------------------------------------
+                      Page reclaims:  544
+                      Page faults:    0
+                      Voluntary context switches:     0
+                      Involuntary context switches:   5912
+                      -------------------------------------------------------------
+                      PUs, ABSOLUTE_COREs, RELATIVE_COREs (CORE number inside SOCKET), 
+                      SOCKETs and numa nodes on which linpack was running.
+                      ABSOLUTE_COREs represent logical numbering of COREs. It's horizontal
+                      index in the whole list of COREs.
+                      -------------------------------------------------------------
+                      PUs:            38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 38 
+                      ABSOLUTE_COREs: 14 14 14 14 14 14 14 14 14 14 
+                      RELATIVE_COREs: 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+                      SOCKETs:        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                      numa nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 
 \end{Verbatim}
 \end{figure}
@@ -2337,27 +2337,27 @@ První číslice na každém řádku obrázku \ref{mpstat1} označuje číslo PU
 
 \begin{Verbatim}[frame=single]
 
-             0  0  0  0  0  0  0  0  0  0  0  0  0
-             1  0  1  0  0  0  0  0  0  0  0  0  0
-            
-                          .   .   .
-           
-            36  0  0  0  0  0  0  0  0  0  0  0  0
-            37  1  1  0  1  0  0  0  0  0  0  0  0
-            38  99 ** ** ** ** ** ** 99 ** ** ** 78
-            39  0  0  0  0  0  0  0  0  0  0  0  0
-            40  0  0  0  0  0  0  0  0  0  0  0  0
-           
-                          .   .   .
-           
-            46  0  0  0  0  0  0  0  0  0  0  0  0
-            47  0  0  0  0  0  0  0  0  0  0  0  0
+          0  0  0  0  0  0  0  0  0  0  0  0  0
+          1  0  1  0  0  0  0  0  0  0  0  0  0
+         
+                       .   .   .
+        
+         36  0  0  0  0  0  0  0  0  0  0  0  0
+         37  1  1  0  1  0  0  0  0  0  0  0  0
+         38  99 ** ** ** ** ** ** 99 ** ** ** 78
+         39  0  0  0  0  0  0  0  0  0  0  0  0
+         40  0  0  0  0  0  0  0  0  0  0  0  0
+        
+                       .   .   .
+        
+         46  0  0  0  0  0  0  0  0  0  0  0  0
+         47  0  0  0  0  0  0  0  0  0  0  0  0
            
 \end{Verbatim}
 \end{figure}
 
 \noindent
-\textbf{Výsledek testování plánování jedné fronty úloh}
+\textbf{Výsledek}
 
 \begin{itemize}
 \item Úlohy běžely na PU číslo 38 (viz obrázek č. \ref{mpstat1} a také na obrázek \ref{linpack1} na řádce začínající PUs:), které jsme specifikovali při startu úloh.
@@ -2379,7 +2379,7 @@ Na SMP systémech testovací zátěž spouštíme dvěma způsoby:
 
 Následně porovnáváme jakého výsledku jsme dosáhli u každého typu běhů. Podíváme se zdali plánovač, zbytečně nepřehazoval úlohy mezi jádry, porovnáváme časy běhů úloh, porovnáváme jakou hodnotu Kflops jsme dosáhli.\newline
 
-Příklad UMA testování v mé práci demonstrovat nebudeme, jelikož je téměř shodné s testováním na NUMA systémech. Jediný rozdíl je v tom, že u UMA systému nespouštíme zátěž se specifikovanou NUMA afinitou a ve výsledcích UMA testování bychom také neřešili do jaké paměti zasahujeme (lokální či vzdálené), protože na UMA systémech máme časy přístupu do pamětí vždy stejné. Raději si proto budeme demonstrovat příklad testování plánovače na NUMA systému.
+Příklad UMA testování v mé práci demonstrovat nebudeme, jelikož by byl téměř shodný s testováním na NUMA systémech. Jediný rozdíl by byl v tom, že u UMA systému nespouštíme zátěž se specifikovanou NUMA afinitou a ve výsledcích UMA testování bychom také neřešili do jaké paměti zasahujeme (lokální či vzdálené), protože na UMA systémech máme časy přístupu do pamětí vždy stejné. Raději proto budeme demonstrovat příklad testování plánovače na NUMA systému.
 
 \subsubsection{Testování plánování úloh na NUMA systémech}
 \label{testovani NUMA}
@@ -2412,7 +2412,7 @@ Nejdříve spustíme linpack benchmark na starší verzi jádra operačního sys
 \newpage
 
 \noindent 
-\textbf{Výstupy z testování a jejich interpretace} \newline
+\textbf{Analýza výstupů testu} \newline
 
 \noindent
 Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops dosažené během linpacku na starší verzi jádra (jádro 2.6.32). Je zřejmé, že plánovačem dosažené hodnoty (zelená křivka) se výrazně liší od běhů, kde jsme si sami specifikovali afinitu (CPU a NUMA). Nyní provedeme identický test pro novější jádro operačního systému.
@@ -2503,11 +2503,11 @@ Plánovač v jádrech 3.10.x odstranil neférovost v přidělování zdrojů CPU
 
 \newpage
 \noindent
-\subsubsubsection{Příklad na pozorování umístění běžící úlohy a jejich dat na NUMA systému}
+\subsubsubsection{Příklad demonstrující umístění běžících úloh a jejich dat na NUMA systému}
 \label{PerfBenchResultExample}
 
 \noindent
-V dalším příkladu na testování NUMA plánování nás bude zajímat kde plánovač umistí paměť procesu a kde samotný proces. Vše necháme na plánovači, žádným způsobem nebudeme nebudeme specifikovat afinitu pro nově vzniklé úlohy. Vytvoříme 2 úlohy a každá z nich bude alokovat 4GB paměti. Necháme úlohy běžet 20 minut a budeme pozorovat, kde je umístěná paměť úlohy a kde běží úloha samotná.  Pro vytvoření úloh použijeme benchmark PerfBench. Výstupem z PerfBench bude graf (obrázek \ref{PerfBenchResult}) zobrazjící umístění dat úloh na jednotlivých uzlech a graf zobrazující kolik úloh běží na jednom NUMA uzlu. Test provádíme na jádru 3.10.0. \newline
+V tomto příkladu nás bude zajímat, kde plánovač umístí paměť procesu a kde samotný proces. Vše necháme na plánovači, žádným způsobem nebudeme nebudeme specifikovat afinitu pro nově vzniklé úlohy. Vytvoříme 2 úlohy a každá z nich bude alokovat 4GB paměti. Necháme úlohy běžet 20 minut a budeme pozorovat, kde je umístěná paměť úlohy a kde běží úloha samotná.  Pro vytvoření úloh použijeme benchmark PerfBench. Výstupem z PerfBench bude graf (obrázek \ref{PerfBenchResult}) zobrazjící umístění dat úloh na jednotlivých uzlech a graf zobrazující kolik úloh běží na jednom NUMA uzlu. Test provádíme na jádru 3.10.0. \newline
 
 \begin{figure}[ht]
 \includegraphics[scale=0.30]{obrazky/PerfBenchResult.png}
@@ -2533,13 +2533,11 @@ Výsledek takto jednoduchého testu dopadl velice špatně. Místo toho aby plá
 Plánování úloh na úrovni jedné fronty běžících úloh (na jednom CPU) funguje bez jakýchkoli problémů. Problémy s férovostí, se kterými jsme se setkali u CFS plánovače v jádrech 2.6.32, byly již v jádrech 3.10.0 odstraněny. Problém který není zatím vyřešen se týká vyvažování na NUMA systémech. Data úloh neustále migrují z jednoho uzlu na jiný, plánovači trvá dlouho než se rozhodne, kde jednotlivé úlohy umístí.
 
 \subsubsection{Doporučení na základě výsledků testování}
-XXX
-V průběhu zkoumání implementace plánovače úloh jsem zjistil, že se vyvažování zátěže volá v kódu plánovače na dvou různých místech (jednou periodicky při obsluze přerušení vyvolaného časovačem (kapitola \ref{tick}), podruhé když dojde k vyvolání výjímky při přístupu na uzamčené stránky paměti. Toto samotné by asi nebyl problém, kdyby na každém tomto místě nespouštěl plánovač pro vyvažování jinou logiku (jiné funkce, která každá dělá vyvažování jinak). Pak zřejmě dochází k tomu, že se jeden kód vyvažování snaží vyvážit systém po svém a druhý kód (který se mezitím spustí) mu vyvažování zhatí tím, že začne s vyvažováním podle své logiky. Dle výsledků příkladů a znalosti implementace se domnívám, že musí dojít k přepsání algoritmů pro vyvažování na NUMA systémech. Při konzultaci s Ing. Radimem Krčmářem jsme došli k závěru, že stav kdy jsou volány dvě různé logiky vyvažování z dvou míst v algoritmu plánovače je nežádoucí. 
+
+V průběhu zkoumání implementace plánovače úloh jsem zjistil, že se vyvažování zátěže volá v kódu plánovače na dvou různých místech (jednou periodicky při obsluze přerušení vyvolaného časovačem (kapitola \ref{tick}), podruhé když dojde k vyvolání výjímky při přístupu na uzamčené stránky paměti. Toto samotné by asi nebyl problém, kdyby na každém tomto místě nespouštěl plánovač pro vyvažování jinou logiku (jiné funkce, která každá dělá vyvažování jinak). Pak zřejmě dochází k tomu, že se jeden kód vyvažování snaží vyvážit systém po svém a druhý kód (který se mezitím spustí) mu vyvažování zhatí tím, že začne s vyvažováním podle své logiky. Dle výsledků příkladů a znalosti implementace se domnívám, že musí dojít k přepsání algoritmů pro vyvažování na NUMA systémech. Při konzultaci s Ing. Radimem Krčmářem jsme došli k závěru, že je nežádoucí stav, kdy jsou volány dvě různé logiky vyvažování z dvou různých míst v algoritmu plánovače.
  
 
 \section{Závěr}
-Prostudováním implementace plánovače a provedením experimentů složícím k zjištění případných problémů linuxového plánovače úloh, jsem zjistil následující.
-
 Implementaci CFS plánovače lze rozdělit do dvou částí podle toho kdy jednotlivé algoritmy, ze kterých se CFS skládá, vznikly. Algoritmy vzniklé podle původního návrhu zabezpečovali plánování na systémech s jedním CPU a systémech SMP UMA. Algoritmy, které byly do CFS dopsány později, zajišťovaly plánování (a vyvažování) na NUMA systémech. Původní algoritmy nepoužívaly žádnou heuristiku, vypadají (i přes svou technickou náročnost) čitelně a čtením samotného kódu jsem rozuměl co kód dělá. Naopak implementace algoritmů přidaných do CFS v pozdějších jádrech, které zajištují plánování a vyvažování na NUMA systémech, obsahují množství heuristiky (například pro zjištění statistik přístupů do paměti), zavádějí různé konstanty (například symbolizující výpočetní sílu\footnote{Příklad výpočetní síly určené konstantami CFS. Jeden procesor bez HT má hodnotu 1. Procesor který má jádro s HT má hodnotu výpočetní síly 1.1. Což je samozřejmě jen odhad a reálně takovou sílu má jen u určitých typů úloh.} skupin procesorů), jsou velice složité a dle mého názoru těžko pochopitelné. Největší problém současného CFS plánovače vidím v tom, že jsou algoritmy pro NUMA vyvažování volány ze dvou míst k kódu a ty dokonce spouštejí vyvažovací logiku, která je rozílná. Z toho lze pochopit, proč docházelo k neustálé migraci dat úlohy, jak to vidíme v příkladu \ref{PerfBenchResult}.
 
 Plánování na systémech s jedním CPU dle našeho experimentu dopadají vždy dobře, plánovač v rámci plánování úloh na jednom CPU spravedlivě rozděluje běžícím úlohám procesorový čas.

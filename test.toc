@@ -88,12 +88,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{\numberline {6.2.3.1}P\IeC {\v r}\IeC {\'\i }klad na p\IeC {\v r}id\IeC {\v e}lov\IeC {\'a}n\IeC {\'\i } CPU \IeC {\v c}asu na NUMA syst\IeC {\'e}mu}{46}{paragraph.6.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad na pozorov\IeC {\'a}n\IeC {\'\i } um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy a jejich dat na NUMA syst\IeC {\'e}mu}{52}{paragraph.6.2.3.2}
+\contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad demonstruj\IeC {\'\i }c\IeC {\'\i } um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i }ch \IeC {\'u}loh a jejich dat na NUMA syst\IeC {\'e}mu}{53}{paragraph.6.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.4}Sumarizov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{53}{subsubsection.6.2.4}
+\contentsline {subsubsection}{\numberline {6.2.4}Sumarizov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{54}{subsubsection.6.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.5}Doporu\IeC {\v c}en\IeC {\'\i } na z\IeC {\'a}klad\IeC {\v e} v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{53}{subsubsection.6.2.5}
+\contentsline {subsubsection}{\numberline {6.2.5}Doporu\IeC {\v c}en\IeC {\'\i } na z\IeC {\'a}klad\IeC {\v e} v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{54}{subsubsection.6.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{54}{section.7}
+\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{55}{section.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Bibliografie}{56}{section*.1}
+\contentsline {section}{Bibliografie}{57}{section*.1}
