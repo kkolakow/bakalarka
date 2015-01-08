@@ -2098,7 +2098,7 @@ Jelikož jsou algoritmy pro výběr a zátěže úloh značně rozdílné je tř
 Vyvažovací algoritmus na NUMA systémech je lepší si demonstrovat na příkladech. Plánovač sbírá statistiky přístupů jednotlivých úloh na NUMA uzly a ví také z front běžících úloh, kde je úloha umístěná. Na základě těchto informací dochází k rozmístění úloh na systému, tak jak je to demonstrováno v následujících příkladech. \\
 
 \noindent
-\textbf{Příklad 1 na umístění úlohy na CPU a NUMA uzlu na kterém neběží žádné jiné úlohy}
+\textbf{Příklad 1 demonstrující umístění úlohy na CPU a NUMA uzlu}
 
 \begin{table}[h]
 \centering
@@ -2139,7 +2139,8 @@ Z tabulky \ref{table2} a tabulky \ref{table3} je jasné, že přesun úlohy A na
 Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén, v tomto příkladě to znamená, po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy. Kdyby šlo o závislé úlohy, přístupy do segmentů pamětí by mohly mít stejné obě úlohy.\newline
 
 \noindent
-\textbf{Příklad 2 na výměnu úloh na NUMA uzlech}
+\textbf{Příklad 2 demontrující výměnu úloh na NUMA uzlech}\newline
+
 
 \begin{table}[h]
 \centering
@@ -2231,7 +2232,7 @@ U vyvažování na úrovni NUMA uzlů se dále řeší seskupování za účelem
 V našem testování se zaměřujeme hlavně na dvě vlastnosti. Zdali plánovaní úloh férově přiděluje CPU každé běžící úloze (v kapitole \ref{testovani jedno jadro})  a zdali jsou na systému úlohy rovnoměrně rozmístěny (v kapitole \ref{testovani NUMA} zdali je správně umístěna úloha na uzel s jejími daty se podíváme v příkladu \ref{PerfBenchResultExample}). K plánování a vyvažování (jak v systémech s jedním CPU, tak v systémech SMP UMA, tak i v NUMA systémech) se používá jeden a tentýž algoritmus (samozřejmě když není konfigurovaná NUMA a SMP neprovádí se vyvažování) popsaný v CFS v plánovací třídě fair. Takže výsledek našeho testování považujeme jako výsledek plánování plánovače úloh (čili výsledek plánování CFS). 
 
 \subsection{Testovací úloha}
-Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modifikovaný benchmark linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na sběr statistiky běhu benchmarku. Benchmark linpack dělá aritmetické operace (násobí matice) a výsledkem je množství floating point operací za vteřinu. 
+Pro vytvoření úloh, kterými zatížíme testovaný systém, použijeme modifikovaný benchmark linpack. Do originální verze linpacku byly přidány semafory, aby bylo možno workload úloh spustit v jeden okamžik a funkce na sběr statistiky běhu benchmarku. Benchmark linpack dělá aritmetické operace (násobí matice) a výsledkem je množství floating point operací za vteřinu. V době kdy nám běží instance linpacku, sbíráme statistiky vytíženosti jednotlivých jader pomocí systémové utility mpstat.
 
 \subsection{Úrovně testování plánovače}
 
@@ -2241,7 +2242,7 @@ Testování na jednom jádru provádíme tak, že spustíme v jeden okamžik na 
 
 \subsubsubsection{Příklad na testování fronty úloh na jednom jádru}
 \label{testovani na jednom jadru}
-Pro testování plánování fronty úloh na jednom CPU vytvoříme pomocí benchmarku linpack frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset. Během běhu instancí linpacku sbíráme statistiky vytíženosti jednotlivých jader pomocí systémové utility mpstat.\newline
+Pro testování plánování fronty úloh na jednom CPU vytvoříme pomocí benchmarku linpack frontu úloh (například 20 úloh) a spustíme je se stejnou afinitou CPU (to znamená, že všechny úlohy poběží na námi specifikovaném jádru) pomocí systémové utility taskset. \newline
 
 \noindent
 \textbf{Poté zkontrolujeme ve výstupu benchmarku následující:}
@@ -2263,7 +2264,10 @@ Pro testování plánování fronty úloh na jednom CPU vytvoříme pomocí benc
 \caption{Výpis běhu benchmarku linpack}
 \center
 \label{linpack1}
-\fontsize{6.8pt}{8.5pt}\selectfont
+
+%\fontsize{6.8pt}{8.5pt}\selectfont
+
+\fontsize{6pt}{8pt}\selectfont
 \begin{Verbatim}[frame=single]
     times are reported for matrices of order  1000
       dgefa      dgesl      total       kflops     unit      ratio
@@ -2324,7 +2328,7 @@ numa nodes:     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 \noindent
 \textit{MPSTAT zkrácený sumarizovaný výpis} \\ 
 
-První číslice na každém řádku obrázku \ref{mpstat1} označuje číslo PU (logická jednotka) další čísla znamenají procentuální vytížení daného PU aktualizované po pěti vteřinách (celkem 12 číslic to znamená, že vytížení sledujeme jednu minutu). Dvě hvězdičky znamenají 100\% vytížení. 
+První číslice na každém řádku obrázku \ref{mpstat1} označuje číslo PU (logická jednotka) další čísla znamenají procentuální vytížení daného PU aktualizované po pěti vteřinách (celkem 12 číslic to znamená, že vytížení sledujeme jednu minutu). Dvě hvězdičky znamenají 100\% vytížení.\newline 
 
 \begin{figure}[ht]
 \caption{Mpstat zkrácený sumarizovaný výpis}
@@ -2353,7 +2357,7 @@ První číslice na každém řádku obrázku \ref{mpstat1} označuje číslo PU
 \end{figure}
 
 \noindent
-\textbf{Výsledek testování plánování fronty úloh}
+\textbf{Výsledek testování plánování jedné fronty úloh}
 
 \begin{itemize}
 \item Úlohy běžely na PU číslo 38 (viz obrázek č. \ref{mpstat1} a také na obrázek \ref{linpack1} na řádce začínající PUs:), které jsme specifikovali při startu úloh.
@@ -2361,7 +2365,7 @@ První číslice na každém řádku obrázku \ref{mpstat1} označuje číslo PU
 \item Z obrázku \ref{mpstat1} vidíme, že PU 38 bylo po celou dobu běhu úloh maximálně vytížené.
 \end{itemize}
 
-Jelikož byly splněny všechny naše předpoklady říkáme, že plánovač plánuje férově úlohy z fronty úloh na jednom jádru.
+Jelikož byly splněny všechny naše předpoklady říkáme, že plánovač plánuje férově úlohy na systému s jedním jádrem.
 
 \subsubsection{Testování plánování úloh na SMP UMA systémech}
 \label{testovani SMP UMA}

@@ -82,18 +82,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{\numberline {6.2.1.1}P\IeC {\v r}\IeC {\'\i }klad na testov\IeC {\'a}n\IeC {\'\i } fronty \IeC {\'u}loh na jednom j\IeC {\'a}dru}{43}{paragraph.6.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.2}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na SMP UMA syst\IeC {\'e}mech}{45}{subsubsection.6.2.2}
+\contentsline {subsubsection}{\numberline {6.2.2}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na SMP UMA syst\IeC {\'e}mech}{46}{subsubsection.6.2.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.2.3}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na NUMA syst\IeC {\'e}mech}{46}{subsubsection.6.2.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{\numberline {6.2.3.1}P\IeC {\v r}\IeC {\'\i }klad na p\IeC {\v r}id\IeC {\v e}lov\IeC {\'a}n\IeC {\'\i } CPU \IeC {\v c}asu na NUMA syst\IeC {\'e}mu}{46}{paragraph.6.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad na pozorov\IeC {\'a}n\IeC {\'\i } um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy a jejich dat na NUMA syst\IeC {\'e}mu}{49}{paragraph.6.2.3.2}
+\contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad na pozorov\IeC {\'a}n\IeC {\'\i } um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy a jejich dat na NUMA syst\IeC {\'e}mu}{51}{paragraph.6.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.4}Sumarizov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{50}{subsubsection.6.2.4}
+\contentsline {subsubsection}{\numberline {6.2.4}Sumarizov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{53}{subsubsection.6.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.5}Doporu\IeC {\v c}en\IeC {\'\i } na z\IeC {\'a}klad\IeC {\v e} v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{50}{subsubsection.6.2.5}
+\contentsline {subsubsection}{\numberline {6.2.5}Doporu\IeC {\v c}en\IeC {\'\i } na z\IeC {\'a}klad\IeC {\v e} v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{53}{subsubsection.6.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{58}{section.7}
+\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{54}{section.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Bibliografie}{59}{section*.1}
+\contentsline {section}{Bibliografie}{55}{section*.1}
