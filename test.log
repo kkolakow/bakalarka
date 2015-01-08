@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  8 JAN 2015 13:59
+This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  8 JAN 2015 14:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1748,29 +1748,34 @@ File: obrazky/LinpackTargetChart.png Graphic file (type png)
 Package pdftex.def Info: obrazky/LinpackTargetChart.png used on input line 2429
 .
 (pdftex.def)             Requested size: 314.36646pt x 209.57764pt.
- [48 <./obrazky/LinpackBaseChart.png> <./obrazky/LinpackTargetChart.png>]
-<obrazky/LinpackSumChart.png, id=444, 1806.75pt x 1204.5pt>
+
+<obrazky/LinpackSumChart.png, id=439, 1806.75pt x 1204.5pt>
 File: obrazky/LinpackSumChart.png Graphic file (type png)
 
 <use obrazky/LinpackSumChart.png>
-Package pdftex.def Info: obrazky/LinpackSumChart.png used on input line 2440.
+Package pdftex.def Info: obrazky/LinpackSumChart.png used on input line 2438.
 (pdftex.def)             Requested size: 298.10089pt x 198.73392pt.
-
-<obrazky/timeWaitingOutOfCPU.png, id=445, 903.375pt x 602.25pt>
+ [48 <./obrazky/LinpackBaseChart.png> <./obrazky/LinpackTargetChart.png>]
+<obrazky/timeWaitingOutOfCPU.png, id=446, 903.375pt x 602.25pt>
 File: obrazky/timeWaitingOutOfCPU.png Graphic file (type png)
 
 <use obrazky/timeWaitingOutOfCPU.png>
-Package pdftex.def Info: obrazky/timeWaitingOutOfCPU.png used on input line 244
-9.
-(pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
-
-<obrazky/totalTime.png, id=446, 903.375pt x 602.25pt>
+Package pdftex.def Info: obrazky/timeWaitingOutOfCPU.png used on input line 245
+0.
+(pdftex.def)             Requested size: 280.04335pt x 186.69556pt.
+ [49 <./obrazky/LinpackSumChart.png> <./obrazky/timeWaitingOutOfCPU.png>]
+<obrazky/totalTime.png, id=456, 903.375pt x 602.25pt>
 File: obrazky/totalTime.png Graphic file (type png)
 
 <use obrazky/totalTime.png>
-Package pdftex.def Info: obrazky/totalTime.png used on input line 2457.
+Package pdftex.def Info: obrazky/totalTime.png used on input line 2459.
 (pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
- [49 <./obrazky/LinpackSumChart.png>]
+ [50 <./obrazky/totalTime.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 2492--2494
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 2495--2497
 
  []
@@ -1780,34 +1785,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 2498--2500
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 2501--2503
-
- []
-
-[50 <./obrazky/timeWaitingOutOfCPU.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2512--2514
+[51]
+Underfull \hbox (badness 10000) in paragraph at lines 2509--2511
 
  []
 
-<obrazky/PerfBenchResult.png, id=466, 1284.8pt x 722.7pt>
+<obrazky/PerfBenchResult.png, id=472, 1284.8pt x 722.7pt>
 File: obrazky/PerfBenchResult.png Graphic file (type png)
 
 <use obrazky/PerfBenchResult.png>
-Package pdftex.def Info: obrazky/PerfBenchResult.png used on input line 2516.
+Package pdftex.def Info: obrazky/PerfBenchResult.png used on input line 2513.
 (pdftex.def)             Requested size: 385.44298pt x 216.81166pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2518--2520
+
+ []
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 2521--2523
 
  []
 
-[51 <./obrazky/totalTime.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2524--2526
-
- []
-
 [52 <./obrazky/PerfBenchResult.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2528--2530
+Underfull \hbox (badness 10000) in paragraph at lines 2525--2527
 
  []
 
@@ -1816,7 +1816,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2528--2530
 ] [55]
 No file test.ind.
 
-Overfull \hbox (36.89862pt too wide) in paragraph at lines 2579--2581
+Overfull \hbox (36.89862pt too wide) in paragraph at lines 2576--2578
 \T1/pcr/m/n/12 http://www.linuxjournal.com/magazine/completely-fair-scheduler 
  []
 
@@ -1831,11 +1831,11 @@ AED: lastpage setting LastPage
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2590.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 2590.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2587.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 2587.
  (./test.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2590.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2590.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2587.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2587.
 
 
 LaTeX Warning: There were undefined references.
@@ -1848,7 +1848,7 @@ Package biblatex Warning: Please (re)run Biber on the file:
 Package logreq Info: Writing requests to 'test.run.xml'.
 \openout1 = `test.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2590.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2587.
  ) 
 Here is how much of TeX's memory you used:
  23855 strings out of 495000
@@ -1871,10 +1871,10 @@ usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/share/texlive
 /type1/public/lm/lmri12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/l
 m/lmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
 
-Output written on test.pdf (56 pages, 1344061 bytes).
+Output written on test.pdf (56 pages, 1344096 bytes).
 PDF statistics:
- 742 PDF objects out of 1000 (max. 8388607)
- 640 compressed objects within 7 object streams
+ 743 PDF objects out of 1000 (max. 8388607)
+ 641 compressed objects within 7 object streams
  166 named destinations out of 1000 (max. 500000)
  502 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -2431,9 +2431,7 @@ Graf na obrázku \ref{older kernel linpack results} vykresluje hodnoty Kflops do
 \label{newer kernel linpack results}
 \end{figure}
 
-Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře (jádro 3.10.0),  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu, abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
-
-Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované NUMA afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové CPU a NUMA uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
+Z grafu na obrázku \ref{newer kernel linpack results}, který zobrazuje výsledky běhu linpacku na novějším jádře (jádro 3.10.0),  zjistíme, že se výsledky pro jednotlivé typy běhu moc neliší. Nyní si vyneseme všech šest křivek do jednoho grafu (obrázek \ref{both kernels linpack results}), abychom viděli, jak rozdílných výsledků dosáhneme u námi testovaných jader. 
 
 \begin{figure}[ht]
 \center
@@ -2442,15 +2440,19 @@ Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy speci
 \label{both kernels linpack results}
 \end{figure}
 
+Zjistíme, že běhy specifikované CPU afinitou se neliší vůbec, běhy specifikované NUMA afinitou se částečně liší a běhy řízené plánovačem se liší dost významně. Zjišťujeme, že kromě toho, že běhy na prvním jádru dosáhly vyšších hodnot kflops, tak mají také veliké rozptyly. Výsledek dosažený na prvním jádru plánovačem se může zdát velice dobrý, ale opak je pravdou. Jelikož jsme volili pro běhy se specifikovanou afinitou právě takové CPU a NUMA uzly, aby byl výsledek co nejlepší, je nemožné, aby plánovač rozmístil úlohy lépe a ty by dosáhly lepšího výsledku. 
+
+
 Nyní se podíváme na další grafy, které nám odhalí co se při testování stalo. 
 
 \begin{figure}[ht]
 \center
-\includegraphics[scale=0.32]{obrazky/timeWaitingOutOfCPU.png}
+\includegraphics[scale=0.31]{obrazky/timeWaitingOutOfCPU.png}
 \caption{Čas strávený mimo CPU}
 \label{timeWaitingOutOfCPU}
 \end{figure}
 
+Graf na obrázku \ref{timeWaitingOutOfCPU} znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU. Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
 
 \begin{figure}[ht]
 \center
@@ -2459,7 +2461,7 @@ Nyní se podíváme na další grafy, které nám odhalí co se při testování
 \label{total time}
 \end{figure}
 
-
+Další zajímavou informací může být zatížení jednotlivých CPU zjišťovaných utilitou mpstat (obrázek \ref{mpstat2}). Zde vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 10 PU. 
 
 \begin{figure}[ht]
 \center
@@ -2486,17 +2488,12 @@ Nyní se podíváme na další grafy, které nám odhalí co se při testování
 \end{figure}
 
 
-
-Graf z obrázku \ref{timeWaitingOutOfCPU} znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU. Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
-
-Další zajímavou informací může být zatížení jednotlivých CPU zjišťovaných utilitou mpstat (obrázek \ref{mpstat2}). Zde vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 10 PU. 
-
 \newpage
 \noindent
 \textbf{Analýza výstupů testu}\newline
 
 \noindent
-Z grafu na obrázku \ref{both kernels linpack results} jsme se dozvěděli, že výsledky u plánovačem řízených běhů u jádra 2.6.32 mají značné rozptyly (tmavě zelený graf). Díky grafu z obrázku \ref{timeWaitingOutOfCPU} jsme se dozvěděli, že úlohy plánovačem řízených běhů u jádra 2.6.32 jsou často mimo CPU (tmavě zelené body). Díky dalším dvěma obrázkům přijdeme na to co se během testování stalo. Graf z obrázku \ref{total time} nám říká, že celkový čas běhu každé úlohy plánovačem řízené na jádru 2.6.32 (tmavě zelené body) je kratší v porovnáním s výsledky dosaženými na jádru 3.10.0 (modré body). Což může být velice matoucí a často to vede na následující otázku. Jak můžou mít úlohy, které jsou často mimo CPU (neběží) rychlejší celkový čas běhu než úlohy, které běží celou dobu? Vysvětlení nabízí obrázek \ref{mpstat2}. Na něm vidíme, že úlohy často nestartují hned po spuštění. Toto je typické chování pro původní plánovací strategii CFS plánovače. Nerozmístil úlohy zvlášť na každé volné jádro, ale část úloh spustil o něco později. Díky tomu, že úloh běžících bylo v daný okamžik méně, nedocházelo tak často k přepisovaním vyrovnávacích pamětí a úloha běžela díky tomu rychleji. Nicméně toto chování nemá nic společného s férovostí přidělování CPU zdrojů úlohám. Tato strategie plánování nicméně vykazovala dobré výsledky v celkové propustnosti systému, ale byla přepracována a nyní se chová plánovač více férově. Také čas který je úloha mimo CPU se zkrátil a všechny úlohy startují v přibližně ve stejnou dobu. \newline
+Z grafu na obrázku \ref{both kernels linpack results} jsme se dozvěděli, že výsledky běhů úloh plánovačem řízených mají u jádra 2.6.32 značné rozptyly (tmavě zelený graf). Díky grafu z obrázku \ref{timeWaitingOutOfCPU} jsme se dozvěděli, že běhy úloh plánovačem řízené, u jádra 2.6.32, často neběží a stojí (tmavě zelené body). Díky dalším dvěma grafům přijdeme na to co se během testování stalo. Graf z obrázku \ref{total time} nám říká, že celkový čas běhu úloh řízených plánovačem je na jádru 2.6.32 (tmavě zelené body) kratší v porovnáním s výsledky dosaženými na jádru 3.10.0 (modré body). Jak můžou mít úlohy, které jsou často mimo CPU (neběží) rychlejší celkový čas běhu (zahrnující i čas kdy úloha neběží na CPU) než úlohy, které běží celou dobu? Vysvětlení nabízí obrázek \ref{mpstat2}. Na něm vidíme, že úlohy často nestartují hned po spuštění. Toto je typické chování pro původní plánovací strategii CFS plánovače. Nerozmístil úlohy zvlášť na každé volné jádro, ale část úloh spustil o něco později. Díky tomu, že bylo běžících úloh v daný okamžik méně, nedocházelo tak často k přepisovaní vyrovnávacích pamětí a úloha běžela díky tomu rychleji. Nicméně toto chování nemá nic společného s férovostí přidělování CPU zdrojů úlohám. Tato strategie plánování nicméně vykazovala dobré výsledky v celkové propustnosti systému, ale byla přepracována a nyní se chová plánovač více férově. Také čas který je úloha mimo CPU se zkrátil a všechny úlohy startují v přibližně ve stejnou dobu.\newline
 
 \noindent
 \textbf{Výsledek}\newline
