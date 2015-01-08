@@ -2451,7 +2451,6 @@ Nyní se podíváme na další grafy, které nám odhalí co se při testování
 \label{timeWaitingOutOfCPU}
 \end{figure}
 
-Graf z obrázku \ref{timeWaitingOutOfCPU} znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU. Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
 
 \begin{figure}[ht]
 \center
@@ -2460,7 +2459,8 @@ Graf z obrázku \ref{timeWaitingOutOfCPU} znázorňuje kolik času strávily jed
 \label{total time}
 \end{figure}
 
-Další zajímavou informací může být zatížení jednotlivých CPU zjišťovaných utilitou mpstat (obrázek \ref{mpstat2}). Zde vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 10 PU. 
+
+
 \begin{figure}[ht]
 \center
 \caption{Mpstat zkrácený sumarizovaný výpis}
@@ -2486,18 +2486,23 @@ Další zajímavou informací může být zatížení jednotlivých CPU zjišťo
 \end{figure}
 
 
+
+Graf z obrázku \ref{timeWaitingOutOfCPU} znázorňuje kolik času strávily jednotlivé úlohy mimo běh na CPU. Další graf (obrázek \ref{total time}) který se nám bude hodit k analýze, je celkový čas běhu jednotlivých úloh (zahrnující i čas strávený mimo CPU).
+
+Další zajímavou informací může být zatížení jednotlivých CPU zjišťovaných utilitou mpstat (obrázek \ref{mpstat2}). Zde vidíme značné rozdíly oproti výsledkům dosaženým u druhého testovaného jádra. Výstup je zkrácený ukazuje jen prvních 10 PU. 
+
 \newpage
 \noindent
-\textbf{Analýza výsledků}\newline
+\textbf{Analýza výstupů testu}\newline
 
 \noindent
 Z grafu na obrázku \ref{both kernels linpack results} jsme se dozvěděli, že výsledky u plánovačem řízených běhů u jádra 2.6.32 mají značné rozptyly (tmavě zelený graf). Díky grafu z obrázku \ref{timeWaitingOutOfCPU} jsme se dozvěděli, že úlohy plánovačem řízených běhů u jádra 2.6.32 jsou často mimo CPU (tmavě zelené body). Díky dalším dvěma obrázkům přijdeme na to co se během testování stalo. Graf z obrázku \ref{total time} nám říká, že celkový čas běhu každé úlohy plánovačem řízené na jádru 2.6.32 (tmavě zelené body) je kratší v porovnáním s výsledky dosaženými na jádru 3.10.0 (modré body). Což může být velice matoucí a často to vede na následující otázku. Jak můžou mít úlohy, které jsou často mimo CPU (neběží) rychlejší celkový čas běhu než úlohy, které běží celou dobu? Vysvětlení nabízí obrázek \ref{mpstat2}. Na něm vidíme, že úlohy často nestartují hned po spuštění. Toto je typické chování pro původní plánovací strategii CFS plánovače. Nerozmístil úlohy zvlášť na každé volné jádro, ale část úloh spustil o něco později. Díky tomu, že úloh běžících bylo v daný okamžik méně, nedocházelo tak často k přepisovaním vyrovnávacích pamětí a úloha běžela díky tomu rychleji. Nicméně toto chování nemá nic společného s férovostí přidělování CPU zdrojů úlohám. Tato strategie plánování nicméně vykazovala dobré výsledky v celkové propustnosti systému, ale byla přepracována a nyní se chová plánovač více férově. Také čas který je úloha mimo CPU se zkrátil a všechny úlohy startují v přibližně ve stejnou dobu. \newline
 
 \noindent
-\textbf{Zhodnocení výsledu}\newline
+\textbf{Výsledek}\newline
 
 \noindent
-Plánovač v jádrech 3.10.x odstranil neférovost v přidělování zdrojů CPU úlohám, které jsme mohli vidět v jádrech 2.6.x. Důsledkem toho úlohy běží od spuštění a jsou rovnoměrně rozmístěné na celém systému. Negativním důsledkem je to, že propustnost systému klesá s rostoucím množstvím najednou běžících úloh. 
+Plánovač v jádrech 3.10.x odstranil neférovost v přidělování zdrojů CPU úlohám, které jsme mohli vidět v jádrech 2.6.x. Důsledkem toho úlohy běží od spuštění a jsou rovnoměrně rozmístěné na celém systému. Negativním důsledkem je to, že propustnost systému klesá s rostoucím množstvím najednou běžících úloh.\newpage 
 
 \newpage
 \noindent
@@ -2514,14 +2519,14 @@ V dalším příkladu na testování NUMA plánování nás bude zajímat kde pl
 \end{figure}
 
 \noindent
-\textbf{Analýza výsledku}\newline
+\textbf{Analýza výstupů testu}\newline
 
 \noindent
 Z grafu zobrazujícím vyžití paměti na jednotlivých NUMA uzlech (nalevo) vidíme, že jsme měli na začátku přibližně 4GB paměti na dvou NUMA uzlech (na uzlech 1 a 2). Od přibližně 70té sekundy dochází ke kopírovaní paměti úlohy z uzlu 2 na uzel 1. Okolo 200 sekundy vidíme, že naše 2 úlohy mají 2GB na uzlu 3, přibližně 700MB na uzlu 2 a 5.5GB na uzlu 1. Kolem 350 sekundy je téměř celých 8GB paměti úloh na jednom uzlu (uzel 1). Přibližně od 400 sekundy plánovač zjistil, že vyvažuje dvě úlohy a dochází k postupnému rozdělení úloh a jejich pamětí na uzel 0 a uzel 1. Z grafu který zobrazuje kolik úloh na jednotlivých NUMA uzlech běží (graf napravo) vidíme, že několikrát došlo ke kopírování procesu na jiné uzly. \newline 
 
 \newpage
 \noindent
-\textbf{Zhodnocení výsledku}\newline
+\textbf{Výsledek}\newline
 
 \noindent
 Výsledek takto jednoduchého testu dopadl velice špatně. Místo toho aby plánovač umístil úlohy každou zvlášť na nějaký uzel a tam ho nechal po celou dobu běhu úlohy, neustále kopíruje data úlohy a migruje běžící úlohu z jednoho uzlu na druhý. Až v kolem 400 sekudny běhu dochází k rozdělení úloh a jejich dat na dva uzly. Tento příklad názorně ukazuje slabinu spučasného plánovače úloh a na tento konkrétní problém je reportován v reportovacím systému na hlášení chyb.
@@ -2538,7 +2543,7 @@ V průběhu zkoumání implementace plánovače úloh jsem zjistil, že se vyva�
 \section{Závěr}
 Prostudováním implementace plánovače a provedením experimentů složícím k zjištění případných problémů linuxového plánovače úloh, jsem zjistil následující.
 
-Implementaci CFS plánovače lze rozdělit do dvou částí podle toho kdy jednotlivé algoritmy, ze kterých se CFS skládá, vznikly. Algoritmy vzniklé podle původního návrhu zabezpečovali plánování na systémech s jedním CPU a systémech SMP UMA. Algoritmy, které byly do CFS dopsány později, zajišťovaly plánování (a vyvažování) na NUMA systémech. Původní algoritmy nepoužívaly žádnou heuristiku, vypadají (i přes svou technickou náročnost) čitelně a čtením samotného kódu jsem rozuměl co kód dělá. Naopak implementace algoritmů přidaných v pozdějších jádrech, které zajištují plánování a vyvažování na NUMA systémech, obsahují množství heuristiky (například pro zjištění statistik přístupů do paměti), zavádějí různé konstanty (například symbolizující výpočetní sílu\footnote{Příklad výpočetní síly určené konstantami CFS. Jeden procesor bez HT má hodnotu 1. Procesor který má jádro s HT má hodnotu výpočetní síly 1.1. Což je samozřejmě jen odhad a reálně takovou sílu má jen u určitých typů úloh.} skupin procesorů), jsou velice složité a dle mého názoru těžko pochopitelné. 
+Implementaci CFS plánovače lze rozdělit do dvou částí podle toho kdy jednotlivé algoritmy, ze kterých se CFS skládá, vznikly. Algoritmy vzniklé podle původního návrhu zabezpečovali plánování na systémech s jedním CPU a systémech SMP UMA. Algoritmy, které byly do CFS dopsány později, zajišťovaly plánování (a vyvažování) na NUMA systémech. Původní algoritmy nepoužívaly žádnou heuristiku, vypadají (i přes svou technickou náročnost) čitelně a čtením samotného kódu jsem rozuměl co kód dělá. Naopak implementace algoritmů přidaných do CFS v pozdějších jádrech, které zajištují plánování a vyvažování na NUMA systémech, obsahují množství heuristiky (například pro zjištění statistik přístupů do paměti), zavádějí různé konstanty (například symbolizující výpočetní sílu\footnote{Příklad výpočetní síly určené konstantami CFS. Jeden procesor bez HT má hodnotu 1. Procesor který má jádro s HT má hodnotu výpočetní síly 1.1. Což je samozřejmě jen odhad a reálně takovou sílu má jen u určitých typů úloh.} skupin procesorů), jsou velice složité a dle mého názoru těžko pochopitelné. Největší problém současného CFS plánovače vidím v tom, že jsou algoritmy pro NUMA vyvažování volány ze dvou míst k kódu a ty dokonce spouštejí vyvažovací logiku, která je rozílná. Z toho lze pochopit, proč docházelo k neustálé migraci dat úlohy, jak to vidíme v příkladu \ref{PerfBenchResult}.
 
 Plánování na systémech s jedním CPU dle našeho experimentu dopadají vždy dobře, plánovač v rámci plánování úloh na jednom CPU spravedlivě rozděluje běžícím úlohám procesorový čas.
 
@@ -2546,8 +2551,9 @@ V jádrech 3.10.0 bylo odstraněno chování, které jsme mohli vidět v kernele
 
 Nicméně v CFS plánovači na jádrech 3.10 nebyl odstraněn problém s vyvažováním úloh na NUMA systémech. V našem experimentu na prověření vyvažování na NUMA systému (viz kapitola \ref{PerfBenchResult}) jsme viděli problémy jaké způsobil zcela jednoduchý příklad. Plánovači tvrvalo přibližně 400 sekund než rozdělil dvě úlohy (včetně jejich dat) na dva NUMA uzly. Když uvážíme jak jednoduchý příklad CFS plánovač nebyl schopen uspokojivě zvládnout je snadné si domyslet jak by dopadly experimenty složitější například u úloh sdílející data, či vyvažování systému s více než dvěmi spuštěnými úlohami.
 
-Od vývojářů CFS plánovače jsem se dozvěděl, že v současnosti existuje projekt na přepsání plánovacích pravidel, který má odstranit nedostatek s vyvažováním úloh na NUMA systémech a již dopředu počítá s novými architekturami, které začínají prosazovat (ARM).
+Od vývojářů CFS plánovače jsem se dozvěděl, že v současnosti existuje projekt na přepsání plánovacích pravidel, který má odstranit nedostatek s vyvažováním úloh na NUMA systémech a již dopředu počítá s novými architekturami, které se začínají prosazovat (ARM).
 
+V úplném závěru bych chtěl zmínit to, že jsem byl velice nemile překvapen v jak špatném stavu jsou dokumenty popisující algoritmy CFS plánovače. Nebýt vydatné pomoci vývojářů CFS Radima Krčmáře, Rika van Riela, by tento dokument nemohl nikdy vzniknout. 
 
 \nocite{*}
 

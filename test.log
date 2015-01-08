@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  8 JAN 2015 13:29
+This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  8 JAN 2015 13:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1764,29 +1764,29 @@ Package pdftex.def Info: obrazky/timeWaitingOutOfCPU.png used on input line 244
 9.
 (pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
 
-<obrazky/totalTime.png, id=448, 903.375pt x 602.25pt>
+<obrazky/totalTime.png, id=446, 903.375pt x 602.25pt>
 File: obrazky/totalTime.png Graphic file (type png)
 
 <use obrazky/totalTime.png>
-Package pdftex.def Info: obrazky/totalTime.png used on input line 2458.
+Package pdftex.def Info: obrazky/totalTime.png used on input line 2457.
 (pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
  [49 <./obrazky/LinpackSumChart.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2490--2492
+Underfull \hbox (badness 10000) in paragraph at lines 2495--2497
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2493--2495
+Underfull \hbox (badness 10000) in paragraph at lines 2498--2500
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2496--2498
+Underfull \hbox (badness 10000) in paragraph at lines 2501--2503
 
  []
 
 [50 <./obrazky/timeWaitingOutOfCPU.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2507--2509
+Underfull \hbox (badness 10000) in paragraph at lines 2512--2514
 
  []
 
@@ -1794,29 +1794,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 2507--2509
 File: obrazky/PerfBenchResult.png Graphic file (type png)
 
 <use obrazky/PerfBenchResult.png>
-Package pdftex.def Info: obrazky/PerfBenchResult.png used on input line 2511.
+Package pdftex.def Info: obrazky/PerfBenchResult.png used on input line 2516.
 (pdftex.def)             Requested size: 385.44298pt x 216.81166pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2516--2518
+Underfull \hbox (badness 10000) in paragraph at lines 2521--2523
 
  []
 
 [51 <./obrazky/totalTime.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2519--2521
+Underfull \hbox (badness 10000) in paragraph at lines 2524--2526
 
  []
 
 [52 <./obrazky/PerfBenchResult.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2523--2525
+Underfull \hbox (badness 10000) in paragraph at lines 2528--2530
 
  []
 
 [53] [54
 
-]
+] [55]
 No file test.ind.
 
-Overfull \hbox (36.89862pt too wide) in paragraph at lines 2573--2575
+Overfull \hbox (36.89862pt too wide) in paragraph at lines 2579--2581
 \T1/pcr/m/n/12 http://www.linuxjournal.com/magazine/completely-fair-scheduler 
  []
 
@@ -1826,16 +1826,16 @@ This document will not have a glossary.
 
 
 AED: lastpage setting LastPage
-[55
+[56
 
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2584.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 2584.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2590.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 2590.
  (./test.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2584.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2584.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2590.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2590.
 
 
 LaTeX Warning: There were undefined references.
@@ -1848,11 +1848,11 @@ Package biblatex Warning: Please (re)run Biber on the file:
 Package logreq Info: Writing requests to 'test.run.xml'.
 \openout1 = `test.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2584.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2590.
  ) 
 Here is how much of TeX's memory you used:
- 23854 strings out of 495000
- 357470 string characters out of 6180380
+ 23855 strings out of 495000
+ 357477 string characters out of 6180380
  884695 words of memory out of 5000000
  26420 multiletter control sequences out of 15000+600000
  81098 words of font info for 73 fonts, out of 8000000 for 9000
@@ -1871,10 +1871,10 @@ usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/share/texlive
 /type1/public/lm/lmri12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/l
 m/lmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
 
-Output written on test.pdf (55 pages, 1342976 bytes).
+Output written on test.pdf (56 pages, 1344061 bytes).
 PDF statistics:
- 737 PDF objects out of 1000 (max. 8388607)
- 636 compressed objects within 7 object streams
- 165 named destinations out of 1000 (max. 500000)
+ 742 PDF objects out of 1000 (max. 8388607)
+ 640 compressed objects within 7 object streams
+ 166 named destinations out of 1000 (max. 500000)
  502 words of extra memory for PDF output out of 10000 (max. 10000000)
 
