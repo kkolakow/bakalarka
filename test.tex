@@ -2526,15 +2526,15 @@ Z grafu zobrazujícím vyžití paměti na jednotlivých NUMA uzlech (nalevo) vi
 \textbf{Výsledek}\newline
 
 \noindent
-Výsledek takto jednoduchého testu dopadl velice špatně. Místo toho aby plánovač umístil úlohy každou zvlášť na nějaký uzel a tam ho nechal po celou dobu běhu úlohy, neustále kopíruje data úlohy a migruje běžící úlohu z jednoho uzlu na druhý. Až v kolem 400 sekudny běhu dochází k rozdělení úloh a jejich dat na dva uzly. Tento příklad názorně ukazuje slabinu spučasného plánovače úloh a na tento konkrétní problém je reportován v reportovacím systému na hlášení chyb.
+Výsledek takto jednoduchého testu dopadl velice špatně. Místo toho aby plánovač umístil úlohy každou zvlášť na nějaký uzel a tam ho nechal po celou dobu běhu úlohy, neustále kopíruje data úlohy a migruje běžící úlohu z jednoho uzlu na druhý. Až kolem 400 sekundy běhu dochází k rozdělení úloh a jejich dat na dva uzly. Tento příklad názorně ukazuje slabinu současného plánovače úloh. Chyba je nahlášená v systému pro reportování chyb na adrese \verb#bugzilla.redhat.com#. 
 
 \subsubsection{Sumarizování výsledků testování}
 
 Plánování úloh na úrovni jedné fronty běžících úloh (na jednom CPU) funguje bez jakýchkoli problémů. Problémy s férovostí, se kterými jsme se setkali u CFS plánovače v jádrech 2.6.32, byly již v jádrech 3.10.0 odstraněny. Problém který není zatím vyřešen se týká vyvažování na NUMA systémech. Data úloh neustále migrují z jednoho uzlu na jiný, plánovači trvá dlouho než se rozhodne, kde jednotlivé úlohy umístí.
 
 \subsubsection{Doporučení na základě výsledků testování}
-
-V průběhu zkoumání implementace plánovače úloh jsem zjistil, že se vyvažování zátěže volá v kódu plánovače na dvou různých místech. Toto samotné by asi nebyl problém, kdyby na každém tomto místě nespouštěl plánovač pro vyvažování jinou logiku (jiné funkce, která každá dělá vyvažování jinak). Pak zřejmě dochází k tomu, že jeden kód vyvažování se snaží vyvážit systém po svém a druhý kód (který se mezitím spustí) mu vyvažování zhatí tím že začne s vyvažováním podle své logiky.
+XXX
+V průběhu zkoumání implementace plánovače úloh jsem zjistil, že se vyvažování zátěže volá v kódu plánovače na dvou různých místech (jednou periodicky při obsluze přerušení vyvolaného časovačem (kapitola \ref{tick}), podruhé když dojde k vyvolání výjímky při přístupu na uzamčené stránky paměti. Toto samotné by asi nebyl problém, kdyby na každém tomto místě nespouštěl plánovač pro vyvažování jinou logiku (jiné funkce, která každá dělá vyvažování jinak). Pak zřejmě dochází k tomu, že se jeden kód vyvažování snaží vyvážit systém po svém a druhý kód (který se mezitím spustí) mu vyvažování zhatí tím, že začne s vyvažováním podle své logiky. Dle výsledků příkladů a znalosti implementace se domnívám, že musí dojít k přepsání algoritmů pro vyvažování na NUMA systémech. Při konzultaci s Ing. Radimem Krčmářem jsme došli k závěru, že stav kdy jsou volány dvě různé logiky vyvažování z dvou míst v algoritmu plánovače je nežádoucí. 
  
 
 \section{Závěr}
@@ -2565,7 +2565,7 @@ V úplném závěru bych chtěl zmínit to, že jsem byl velice nemile překvape
   \bibitem{vseeker}{\em Volker Seeker:}
                {Process scheduling in Linux} \\ 
                \textit{University of Edinburgh \\
-               Critical Blue 2013 \\}
+		       Critical Blue 2013 \\}
 	       Zdroj obrázku \ref{domeny a skupiny}
 %	\hyperref[name]{}
 %	\href{http://criticalblue.com/news/wp-content/uploads/2013/12/linux\_scheduler\_notes\_final.pdf}{URL link to Process scheduling in Linux document}
