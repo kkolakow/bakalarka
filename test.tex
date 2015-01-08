@@ -9,7 +9,7 @@
 %  printversion,
   biblatex,
 %  language=english,
-  font=sans,
+%  font=sans,
   glossaries,
   index
 ]{kidiplom}
@@ -386,7 +386,7 @@ která zajištují vyvážení zátěže v případě, že máme je systém s v�
 
 \subsubsection{Voláním funkce schedule() syscallem nebo obsluhou přerušení}
 
-Funkce schedule() je volána obsluhou přerušení od časovače jak bylo vysvětleno v kapitole \ref{tick}. Dále je schedule() vyvolána v obsluze přerušení v různých částech jádra například v ovladačích.
+Funkce schedule() je volána obsluhou přerušení od časovače, jak bylo vysvětleno v kapitole \ref{tick}. Dále je schedule() vyvolána v obsluze přerušení v různých částech jádra například v ovladačích.
 
 Také mnoho syscallu volá funkci schedule(). Volání schedule() je obsaženo také v syscallu fork při vytvoření nové úlohy a syscallu exit při ukončení běžící úlohy.
 
@@ -1216,6 +1216,7 @@ Z funkce \verb#pick_next_task()# je volána funkce \verb#pick_next_entity()#, kt
 %
 %\end{lstlisting} 
 
+\newpage
 \subsection{Shrnutí}
 
 CFS je volán v době když dojde k vytvoření nové úlohy či probuzení stávající úlohy, usnutí úlohy, nebo když je vyvoláno jako obsluha časovače přerušení. Spočítá čas právě strávený úlohou na CPU, vynásobí ho koeficientem priority úlohy a přičte jej do \verb#p->se.vruntime#. Jestliže \verb#p->se.vruntime# poroste dostatečně a současně běžící úloha již není úlohou s nejmenší hodnotou vruntime, pak je spuštěna úloha, která je nejvíce nalevo v červeno-černého stromu. Úloha která právě běžela se vrátí zpátky do stromu. Toto není úplně přesné, jelikož CFS má nastavenou hodnotu granularity, o kterou maximálně může být větší vruntime běžící úlohy než vruntime úlohy úplně nalevo ve stromu. S granuralitou se počítá proto, aby z důvodu velmi malého rozdílu v hodnotě vruntime mezi úlohami nedocházelo k výměně obsahu a s tím souvisejícím negativním jevům jako zahozením dat ve vyrovnávací paměti atd.
@@ -2097,7 +2098,7 @@ Jelikož jsou algoritmy pro výběr a zátěže úloh značně rozdílné je tř
 Vyvažovací algoritmus na NUMA systémech je lepší si demonstrovat na příkladech. Plánovač sbírá statistiky přístupů jednotlivých úloh na NUMA uzly a ví také z front běžících úloh, kde je úloha umístěná. Na základě těchto informací dochází k rozmístění úloh na systému, tak jak je to demonstrováno v následujících příkladech. \\
 
 \noindent
-\textit{Příklad 1} na umístění úlohy na CPU a NUMA uzlu na kterém neběží žádné jiné úlohy
+\textbf{Příklad 1 na umístění úlohy na CPU a NUMA uzlu na kterém neběží žádné jiné úlohy}
 
 \begin{table}[h]
 \centering
@@ -2135,11 +2136,10 @@ Uzel 1 & 70\% & 40\% \\
 
 Z tabulky \ref{table2} a tabulky \ref{table3} je jasné, že přesun úlohy A na uzel 1 přinese zlepšení rychlosti přístupu k datům v operační paměti (kdežto přesun úlohy B na uzel 1 by vedl k opačnému výsledku).
 
-Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén, v tomto příkladě to znamená, po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy. Kdyby šlo o závislé úlohy, přístupy do segmentů pamětí by mohly mít stejné obě úlohy.
+Přesunem jedné úlohy z uzlu 0 na uzel 1 by byl vyřešen také problém s vyvážením. Je žádoucí, aby byly úlohy rozmístěné rovnoměrně na každé úrovni domén, v tomto příkladě to znamená, po jedné na úrovni NUMA uzlů. Tento příklad je zcela jednoduchým příkladem, kdy máme dvě nezávislé úlohy. Kdyby šlo o závislé úlohy, přístupy do segmentů pamětí by mohly mít stejné obě úlohy.\newline
 
-\newpage
 \noindent
-\textit{Příklad 2} na výměnu úloh na NUMA uzlech
+\textbf{Příklad 2 na výměnu úloh na NUMA uzlech}
 
 \begin{table}[h]
 \centering

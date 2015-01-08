@@ -46,7 +46,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.8}Aktualizace doby b\IeC {\v e}hu \IeC {\'u}lohy (vruntime)}{24}{subsection.4.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.9}Shrnut\IeC {\'\i }}{25}{subsection.4.9}
+\contentsline {subsection}{\numberline {4.9}Shrnut\IeC {\'\i }}{26}{subsection.4.9}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5}Vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i }}{27}{section.5}
 \defcounter {refsection}{0}\relax 
@@ -62,38 +62,38 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {5.1.5}V\IeC {\'y}b\IeC {\v e}r fronty pro novou \IeC {\'u}lohu}{31}{subsubsection.5.1.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}Numa vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i }}{32}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.2}Numa vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i }}{33}{subsection.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } NUMA vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i }}{37}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.3}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } NUMA vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i }}{38}{subsection.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.1}Periodick\IeC {\'e} spou\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i } p\IeC {\v r}i obsluze \IeC {\v c}asova\IeC {\v c}e p\IeC {\v r}eru\IeC {\v s}en\IeC {\'\i }}{37}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.1}Periodick\IeC {\'e} spou\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i } p\IeC {\v r}i obsluze \IeC {\v c}asova\IeC {\v c}e p\IeC {\v r}eru\IeC {\v s}en\IeC {\'\i }}{38}{subsubsection.5.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.2}Vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i } spou\IeC {\v s}t\IeC {\v e}n\IeC {\'e} jako o\IeC {\v s}et\IeC {\v r}en\IeC {\'\i } page fault v\IeC {\'y}jimky}{37}{subsubsection.5.3.2}
+\contentsline {subsubsection}{\numberline {5.3.2}Vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i } spou\IeC {\v s}t\IeC {\v e}n\IeC {\'e} jako o\IeC {\v s}et\IeC {\v r}en\IeC {\'\i } page fault v\IeC {\'y}jimky}{38}{subsubsection.5.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4}Logika vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i } na NUMA syst\IeC {\'e}mech v p\IeC {\v r}\IeC {\'\i }kladech}{39}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.4}Logika vyva\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i } na NUMA syst\IeC {\'e}mech v p\IeC {\v r}\IeC {\'\i }kladech}{40}{subsection.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Testov\IeC {\'a}n\IeC {\'\i }}{42}{section.6}
+\contentsline {section}{\numberline {6}Testov\IeC {\'a}n\IeC {\'\i }}{43}{section.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1}Testovac\IeC {\'\i } \IeC {\'u}loha}{42}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.1}Testovac\IeC {\'\i } \IeC {\'u}loha}{43}{subsection.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2}\IeC {\'U}rovn\IeC {\v e} testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nova\IeC {\v c}e}{42}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.2}\IeC {\'U}rovn\IeC {\v e} testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nova\IeC {\v c}e}{43}{subsection.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.1}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } fronty \IeC {\'u}loh na jednom j\IeC {\'a}dru}{42}{subsubsection.6.2.1}
+\contentsline {subsubsection}{\numberline {6.2.1}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } fronty \IeC {\'u}loh na jednom j\IeC {\'a}dru}{43}{subsubsection.6.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {6.2.1.1}P\IeC {\v r}\IeC {\'\i }klad na testov\IeC {\'a}n\IeC {\'\i } fronty \IeC {\'u}loh na jednom j\IeC {\'a}dru}{42}{paragraph.6.2.1.1}
+\contentsline {paragraph}{\numberline {6.2.1.1}P\IeC {\v r}\IeC {\'\i }klad na testov\IeC {\'a}n\IeC {\'\i } fronty \IeC {\'u}loh na jednom j\IeC {\'a}dru}{43}{paragraph.6.2.1.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.2.2}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na SMP UMA syst\IeC {\'e}mech}{45}{subsubsection.6.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.3}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na NUMA syst\IeC {\'e}mech}{45}{subsubsection.6.2.3}
+\contentsline {subsubsection}{\numberline {6.2.3}Testov\IeC {\'a}n\IeC {\'\i } pl\IeC {\'a}nov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}loh na NUMA syst\IeC {\'e}mech}{46}{subsubsection.6.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {6.2.3.1}P\IeC {\v r}\IeC {\'\i }klad na p\IeC {\v r}id\IeC {\v e}lov\IeC {\'a}n\IeC {\'\i } CPU \IeC {\v c}asu na NUMA syst\IeC {\'e}mu}{45}{paragraph.6.2.3.1}
+\contentsline {paragraph}{\numberline {6.2.3.1}P\IeC {\v r}\IeC {\'\i }klad na p\IeC {\v r}id\IeC {\v e}lov\IeC {\'a}n\IeC {\'\i } CPU \IeC {\v c}asu na NUMA syst\IeC {\'e}mu}{46}{paragraph.6.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad na pozorov\IeC {\'a}n\IeC {\'\i } um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy a jejich dat na NUMA syst\IeC {\'e}mu}{51}{paragraph.6.2.3.2}
+\contentsline {paragraph}{\numberline {6.2.3.2}P\IeC {\v r}\IeC {\'\i }klad na pozorov\IeC {\'a}n\IeC {\'\i } um\IeC {\'\i }st\IeC {\v e}n\IeC {\'\i } b\IeC {\v e}\IeC {\v z}\IeC {\'\i }c\IeC {\'\i } \IeC {\'u}lohy a jejich dat na NUMA syst\IeC {\'e}mu}{49}{paragraph.6.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.4}Sumarizov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{52}{subsubsection.6.2.4}
+\contentsline {subsubsection}{\numberline {6.2.4}Sumarizov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{50}{subsubsection.6.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.5}Doporu\IeC {\v c}en\IeC {\'\i } na z\IeC {\'a}klad\IeC {\v e} v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{52}{subsubsection.6.2.5}
+\contentsline {subsubsection}{\numberline {6.2.5}Doporu\IeC {\v c}en\IeC {\'\i } na z\IeC {\'a}klad\IeC {\v e} v\IeC {\'y}sledk\IeC {\r u} testov\IeC {\'a}n\IeC {\'\i }}{50}{subsubsection.6.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{53}{section.7}
+\contentsline {section}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{58}{section.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Bibliografie}{54}{section*.1}
+\contentsline {section}{Bibliografie}{59}{section*.1}

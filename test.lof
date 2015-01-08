@@ -16,26 +16,26 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {7}{\ignorespaces Sch\IeC {\'e}ma skupin a dom\IeC {\'e}n}}{28}{figure.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {8}{\ignorespaces Jednoduch\IeC {\'a} NUMA topologie}}{32}{figure.8}
+\contentsline {figure}{\numberline {8}{\ignorespaces Jednoduch\IeC {\'a} NUMA topologie}}{33}{figure.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9}{\ignorespaces Syst\IeC {\'e}m se slo\IeC {\v z}it\IeC {\v e}j\IeC {\v s}\IeC {\'\i } NUMA topologii}}{34}{figure.9}
+\contentsline {figure}{\numberline {9}{\ignorespaces Syst\IeC {\'e}m se slo\IeC {\v z}it\IeC {\v e}j\IeC {\v s}\IeC {\'\i } NUMA topologii}}{35}{figure.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {10}{\ignorespaces V\IeC {\'y}pis b\IeC {\v e}hu benchmarku linpack}}{43}{figure.10}
+\contentsline {figure}{\numberline {10}{\ignorespaces V\IeC {\'y}pis b\IeC {\v e}hu benchmarku linpack}}{51}{figure.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {11}{\ignorespaces Mpstat zkr\IeC {\'a}cen\IeC {\'y} sumarizovan\IeC {\'y} v\IeC {\'y}pis}}{44}{figure.11}
+\contentsline {figure}{\numberline {11}{\ignorespaces Mpstat zkr\IeC {\'a}cen\IeC {\'y} sumarizovan\IeC {\'y} v\IeC {\'y}pis}}{52}{figure.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12}{\ignorespaces Testovan\IeC {\'y} syst\IeC {\'e}m se \IeC {\v c}ty\IeC {\v r}mi NUMA uzly a 120 HT j\IeC {\'a}dry}}{46}{figure.12}
+\contentsline {figure}{\numberline {12}{\ignorespaces Testovan\IeC {\'y} syst\IeC {\'e}m se \IeC {\v c}ty\IeC {\v r}mi NUMA uzly a 120 HT j\IeC {\'a}dry}}{53}{figure.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {13}{\ignorespaces V\IeC {\'y}sledky linpacku na j\IeC {\'a}dru 2.6.32}}{47}{figure.13}
+\contentsline {figure}{\numberline {13}{\ignorespaces V\IeC {\'y}sledky linpacku na j\IeC {\'a}dru 2.6.32}}{54}{figure.13}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {14}{\ignorespaces V\IeC {\'y}sledky linpacku na j\IeC {\'a}dru 3.10.0}}{47}{figure.14}
+\contentsline {figure}{\numberline {14}{\ignorespaces V\IeC {\'y}sledky linpacku na j\IeC {\'a}dru 3.10.0}}{54}{figure.14}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {15}{\ignorespaces V\IeC {\'y}sledky ze dvou jader v jednom grafu}}{48}{figure.15}
+\contentsline {figure}{\numberline {15}{\ignorespaces V\IeC {\'y}sledky ze dvou jader v jednom grafu}}{55}{figure.15}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16}{\ignorespaces \IeC {\v C}as str\IeC {\'a}ven\IeC {\'y} mimo CPU}}{48}{figure.16}
+\contentsline {figure}{\numberline {16}{\ignorespaces \IeC {\v C}as str\IeC {\'a}ven\IeC {\'y} mimo CPU}}{55}{figure.16}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {17}{\ignorespaces Celkov\IeC {\'y} \IeC {\v c}as b\IeC {\v e}hu \IeC {\'u}loh}}{49}{figure.17}
+\contentsline {figure}{\numberline {17}{\ignorespaces Celkov\IeC {\'y} \IeC {\v c}as b\IeC {\v e}hu \IeC {\'u}loh}}{56}{figure.17}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {18}{\ignorespaces Mpstat zkr\IeC {\'a}cen\IeC {\'y} sumarizovan\IeC {\'y} v\IeC {\'y}pis}}{49}{figure.18}
+\contentsline {figure}{\numberline {18}{\ignorespaces Mpstat zkr\IeC {\'a}cen\IeC {\'y} sumarizovan\IeC {\'y} v\IeC {\'y}pis}}{56}{figure.18}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {19}{\ignorespaces Graf zn\IeC {\'a}zor\IeC {\v n}uj\IeC {\'\i }c\IeC {\'\i } sou\IeC {\v c}asn\IeC {\'y} b\IeC {\v e}h dvou \IeC {\'u}loh}}{51}{figure.19}
+\contentsline {figure}{\numberline {19}{\ignorespaces Graf zn\IeC {\'a}zor\IeC {\v n}uj\IeC {\'\i }c\IeC {\'\i } sou\IeC {\v c}asn\IeC {\'y} b\IeC {\v e}h dvou \IeC {\'u}loh}}{57}{figure.19}

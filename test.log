@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  8 JAN 2015 00:10
+This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2014.5.26)  8 JAN 2015 10:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -735,39 +735,40 @@ Package: supertabular 2004/02/20 v4.1e the supertabular environment
 Package: glossary-tree 2013/11/14 v4.0 (NLCT)
 \glstreeindent=\skip62
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/iwona/iwona.sty
-Package: iwona 2005/10/03 v.1.2 Iwona package (MW)
-\c@mv@iwona=\count151
-\c@mv@iwonabold=\count152
-LaTeX Font Info:    Overwriting symbol font `operators' in version `iwona'
-(Font)                  OT1/cmr/m/n --> OT1/iwonalm/m/n on input line 58.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `iwona'
-(Font)                  OML/cmm/m/it --> OML/iwonal/m/it on input line 59.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `iwona'
-(Font)                  OMS/cmsy/m/n --> OMS/iwonal/m/n on input line 60.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `iwona'
-(Font)                  OMX/cmex/m/n --> OMX/iwonal/m/n on input line 61.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `iwonabold'
-(Font)                  OT1/cmr/m/n --> OT1/iwonalm/b/n on input line 62.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `iwonabold'
-(Font)                  OML/cmm/m/it --> OML/iwonal/b/it on input line 63.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `iwonabold'
-(Font)                  OMS/cmsy/m/n --> OMS/iwonal/b/n on input line 64.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `iwonabol
-d'
-(Font)                  OMX/cmex/m/n --> OMX/iwonal/b/n on input line 65.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `iwona'
-(Font)                  OT1/cmr/bx/n --> OT1/iwonal/bx/n on input line 67.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `iwona'
-(Font)                  OT1/cmss/m/n --> OT1/iwonal/m/n on input line 68.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `iwona'
-(Font)                  OT1/cmr/m/it --> OT1/iwonal/m/it on input line 69.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `iwona'
-(Font)                  OT1/cmtt/m/n --> OT1/iwonal/m/n on input line 70.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `iwonabold'
-(Font)                  OT1/cmss/m/n --> OT1/iwonal/bx/n on input line 71.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `iwonabold'
-(Font)                  OT1/cmr/m/it --> OT1/iwonal/bx/it on input line 72.
+(/usr/share/texlive/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
@@ -775,12 +776,6 @@ Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
-)
-LaTeX Font Info:    Try loading font information for T1+iwonal on input line 10
-0.
-
-(/usr/share/texlive/texmf-dist/tex/latex/iwona/t1iwonal.fd
-File: t1iwonal.fd 2008/07/22 v0.995 font definition file for T1/iwonal (MW)
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
@@ -801,12 +796,12 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2011/10/22 v5.1d context-sensitive quotations
-\csq@reset=\count153
-\csq@gtype=\count154
-\csq@glevel=\count155
-\csq@qlevel=\count156
-\csq@maxlvl=\count157
-\csq@tshold=\count158
+\csq@reset=\count151
+\csq@gtype=\count152
+\csq@glevel=\count153
+\csq@qlevel=\count154
+\csq@maxlvl=\count155
+\csq@tshold=\count156
 \csq@ltx@everypar=\toks36
 
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
@@ -844,14 +839,14 @@ Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
-\c@tracingmulticols=\count159
+\c@tracingmulticols=\count157
 \mult@box=\box35
 \multicol@leftmargin=\dimen137
-\c@unbalance=\count160
-\c@collectmore=\count161
-\doublecol@number=\count162
-\multicoltolerance=\count163
-\multicolpretolerance=\count164
+\c@unbalance=\count158
+\c@collectmore=\count159
+\doublecol@number=\count160
+\multicoltolerance=\count161
+\multicolpretolerance=\count162
 \full@width=\dimen138
 \page@free=\dimen139
 \premulticols=\dimen140
@@ -881,21 +876,21 @@ Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
 \@tempa=\box56
 \@tempa=\box57
 \@tempa=\box58
-\c@columnbadness=\count165
-\c@finalcolumnbadness=\count166
+\c@columnbadness=\count163
+\c@finalcolumnbadness=\count164
 \last@try=\dimen142
 \multicolovershoot=\dimen143
 \multicolundershoot=\dimen144
 \mult@nat@firstbox=\box59
 \colbreak@box=\box60
-\multicol@sort@counter=\count167
+\multicol@sort@counter=\count165
 )
 \@indexfile=\write7
 \openout7 = `test.idx'.
 
 
 Writing index file test.idx
-\c@indexno=\count168
+\c@indexno=\count166
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2013/11/25 v2.8a programmable bibliographies (PK/JW/AB)
 
@@ -905,49 +900,49 @@ AB)
 
 (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count169
+\lrq@indent=\count167
 
 (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count170
-\c@listtotal=\count171
-\c@listcount=\count172
-\c@liststart=\count173
-\c@liststop=\count174
-\c@citecount=\count175
-\c@citetotal=\count176
-\c@multicitecount=\count177
-\c@multicitetotal=\count178
-\c@instcount=\count179
-\c@maxnames=\count180
-\c@minnames=\count181
-\c@maxitems=\count182
-\c@minitems=\count183
-\c@citecounter=\count184
-\c@savedcitecounter=\count185
-\c@uniquelist=\count186
-\c@uniquename=\count187
-\c@refsection=\count188
-\c@refsegment=\count189
-\c@maxextratitle=\count190
-\c@maxextratitleyear=\count191
-\c@maxextrayear=\count192
-\c@maxextraalpha=\count193
-\c@abbrvpenalty=\count194
-\c@highnamepenalty=\count195
-\c@lownamepenalty=\count196
-\c@maxparens=\count197
-\c@parenlevel=\count198
-\blx@tempcnta=\count199
-\blx@tempcntb=\count200
-\blx@tempcntc=\count201
-\blx@maxsection=\count202
-\blx@maxsegment@0=\count203
-\blx@notetype=\count204
-\blx@parenlevel@text=\count205
-\blx@parenlevel@foot=\count206
-\blx@sectionciteorder@0=\count207
+\c@tabx@nest=\count168
+\c@listtotal=\count169
+\c@listcount=\count170
+\c@liststart=\count171
+\c@liststop=\count172
+\c@citecount=\count173
+\c@citetotal=\count174
+\c@multicitecount=\count175
+\c@multicitetotal=\count176
+\c@instcount=\count177
+\c@maxnames=\count178
+\c@minnames=\count179
+\c@maxitems=\count180
+\c@minitems=\count181
+\c@citecounter=\count182
+\c@savedcitecounter=\count183
+\c@uniquelist=\count184
+\c@uniquename=\count185
+\c@refsection=\count186
+\c@refsegment=\count187
+\c@maxextratitle=\count188
+\c@maxextratitleyear=\count189
+\c@maxextrayear=\count190
+\c@maxextraalpha=\count191
+\c@abbrvpenalty=\count192
+\c@highnamepenalty=\count193
+\c@lownamepenalty=\count194
+\c@maxparens=\count195
+\c@parenlevel=\count196
+\blx@tempcnta=\count197
+\blx@tempcntb=\count198
+\blx@tempcntc=\count199
+\blx@maxsection=\count200
+\blx@maxsegment@0=\count201
+\blx@notetype=\count202
+\blx@parenlevel@text=\count203
+\blx@parenlevel@foot=\count204
+\blx@sectionciteorder@0=\count205
 \labelnumberwidth=\skip65
 \labelalphawidth=\skip66
 \shorthandwidth=\skip67
@@ -959,9 +954,9 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \bibhang=\skip73
 \blx@bcfin=\read1
 \blx@bcfout=\write8
-\c@mincomprange=\count208
-\c@maxcomprange=\count209
-\c@mincompwidth=\count210
+\c@mincomprange=\count206
+\c@maxcomprange=\count207
+\c@mincompwidth=\count208
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -970,73 +965,73 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'iso-numeric.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count211
-\c@savedafterword=\count212
-\c@annotator=\count213
-\c@savedannotator=\count214
-\c@author=\count215
-\c@savedauthor=\count216
-\c@bookauthor=\count217
-\c@savedbookauthor=\count218
-\c@commentator=\count219
-\c@savedcommentator=\count220
-\c@editor=\count221
-\c@savededitor=\count222
-\c@editora=\count223
-\c@savededitora=\count224
-\c@editorb=\count225
-\c@savededitorb=\count226
-\c@editorc=\count227
-\c@savededitorc=\count228
-\c@foreword=\count229
-\c@savedforeword=\count230
-\c@holder=\count231
-\c@savedholder=\count232
-\c@introduction=\count233
+\c@afterword=\count209
+\c@savedafterword=\count210
+\c@annotator=\count211
+\c@savedannotator=\count212
+\c@author=\count213
+\c@savedauthor=\count214
+\c@bookauthor=\count215
+\c@savedbookauthor=\count216
+\c@commentator=\count217
+\c@savedcommentator=\count218
+\c@editor=\count219
+\c@savededitor=\count220
+\c@editora=\count221
+\c@savededitora=\count222
+\c@editorb=\count223
+\c@savededitorb=\count224
+\c@editorc=\count225
+\c@savededitorc=\count226
+\c@foreword=\count227
+\c@savedforeword=\count228
+\c@holder=\count229
+\c@savedholder=\count230
+\c@introduction=\count231
+\c@savedintroduction=\count232
+\c@namea=\count233
 Normal \count register pool exhausted, switching to extended pool.
-\c@savedintroduction=\count277
-\c@namea=\count278
-\c@savednamea=\count279
-\c@nameb=\count280
-\c@savednameb=\count281
-\c@namec=\count282
-\c@savednamec=\count283
-\c@shortauthor=\count284
-\c@savedshortauthor=\count285
-\c@shorteditor=\count286
-\c@savedshorteditor=\count287
-\c@translator=\count288
-\c@savedtranslator=\count289
-\c@labelname=\count290
-\c@savedlabelname=\count291
-\c@institution=\count292
-\c@savedinstitution=\count293
-\c@lista=\count294
-\c@savedlista=\count295
-\c@listb=\count296
-\c@savedlistb=\count297
-\c@listc=\count298
-\c@savedlistc=\count299
-\c@listd=\count300
-\c@savedlistd=\count301
-\c@liste=\count302
-\c@savedliste=\count303
-\c@listf=\count304
-\c@savedlistf=\count305
-\c@location=\count306
-\c@savedlocation=\count307
-\c@organization=\count308
-\c@savedorganization=\count309
-\c@origlocation=\count310
-\c@savedoriglocation=\count311
-\c@origpublisher=\count312
-\c@savedorigpublisher=\count313
-\c@publisher=\count314
-\c@savedpublisher=\count315
-\c@language=\count316
-\c@savedlanguage=\count317
-\c@pageref=\count318
-\c@savedpageref=\count319
+\c@savednamea=\count277
+\c@nameb=\count278
+\c@savednameb=\count279
+\c@namec=\count280
+\c@savednamec=\count281
+\c@shortauthor=\count282
+\c@savedshortauthor=\count283
+\c@shorteditor=\count284
+\c@savedshorteditor=\count285
+\c@translator=\count286
+\c@savedtranslator=\count287
+\c@labelname=\count288
+\c@savedlabelname=\count289
+\c@institution=\count290
+\c@savedinstitution=\count291
+\c@lista=\count292
+\c@savedlista=\count293
+\c@listb=\count294
+\c@savedlistb=\count295
+\c@listc=\count296
+\c@savedlistc=\count297
+\c@listd=\count298
+\c@savedlistd=\count299
+\c@liste=\count300
+\c@savedliste=\count301
+\c@listf=\count302
+\c@savedlistf=\count303
+\c@location=\count304
+\c@savedlocation=\count305
+\c@organization=\count306
+\c@savedorganization=\count307
+\c@origlocation=\count308
+\c@savedoriglocation=\count309
+\c@origpublisher=\count310
+\c@savedorigpublisher=\count311
+\c@publisher=\count312
+\c@savedpublisher=\count313
+\c@language=\count314
+\c@savedlanguage=\count315
+\c@pageref=\count316
+\c@savedpageref=\count317
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -1048,13 +1043,13 @@ Package biblatex Info: ... file 'biblatex.def' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 
-\c@textcitecount=\count320
-\c@textcitetotal=\count321
-\c@textcitemaxnames=\count322
-\c@biburlnumpenalty=\count323
-\c@biburlucpenalty=\count324
-\c@biburllcpenalty=\count325
-\c@smartand=\count326
+\c@textcitecount=\count318
+\c@textcitetotal=\count319
+\c@textcitemaxnames=\count320
+\c@biburlnumpenalty=\count321
+\c@biburlucpenalty=\count322
+\c@biburllcpenalty=\count323
+\c@smartand=\count324
 )
 Package biblatex Info: Trying to load natbib compatibility...
 Package biblatex Info: ... file 'blx-natbib.def' found.
@@ -1128,7 +1123,7 @@ Package: amsthm 2004/08/06 v2.20
 (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thmtools.sty
 Package: thmtools 2012/05/04 v63
 \thmt@toks=\toks43
-\c@thmt@dummyctr=\count327
+\c@thmt@dummyctr=\count325
 
 (/usr/share/texlive/texmf-dist/tex/latex/thmtools/thm-patch.sty
 Package: thm-patch 2012/05/04 v63
@@ -1163,13 +1158,13 @@ Package thmtools Info: Key `qed' (with value `\qedsymbol ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
 (thmtools)             that uses `style=kiproofstyle' on input line 665.
-\c@definition=\count328
+\c@definition=\count326
 )
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
-\Gm@cnth=\count329
-\Gm@cntv=\count330
-\c@Gm@tempcnt=\count331
+\Gm@cnth=\count327
+\Gm@cntv=\count328
+\c@Gm@tempcnt=\count329
 \Gm@bindingoffset=\dimen145
 \Gm@wd@mp=\dimen146
 \Gm@odd@mp=\dimen147
@@ -1221,11 +1216,11 @@ Package: fancyvrb 2008/02/07
 
 Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
 <2008/02/07> (tvz)
-\FV@CodeLineNo=\count332
+\FV@CodeLineNo=\count330
 \FV@InFile=\read3
 \FV@TabBox=\box62
-\c@FancyVerbLine=\count333
-\FV@StepNumber=\count334
+\c@FancyVerbLine=\count331
+\FV@StepNumber=\count332
 \FV@OutFile=\write9
 )
 Package csquotes Info: Checking for multilingual support...
@@ -1268,18 +1263,22 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
 LaTeX Font Info:    ... okay on input line 54.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 54.
 LaTeX Font Info:    ... okay on input line 54.
- (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 54.
+ (/usr/share/texlive/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count335
+\scratchcounter=\count333
 \scratchdimen=\dimen158
 \scratchbox=\box63
-\nofMPsegments=\count336
-\nofMParguments=\count337
+\nofMPsegments=\count334
+\nofMParguments=\count335
 \everyMPshowfont=\toks50
-\MPscratchCnt=\count338
+\MPscratchCnt=\count336
 \MPscratchDim=\dimen159
-\MPnumerator=\count339
-\makeMPintoPDFobject=\count340
+\MPnumerator=\count337
+\makeMPintoPDFobject=\count338
 \everyMPtoPDFconversion=\toks51
 )
 \AtBeginShipoutBox=\box64
@@ -1290,12 +1289,12 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count341
+\c@section@level=\count339
 )
 LaTeX Info: Redefining \ref on input line 54.
 LaTeX Info: Redefining \pageref on input line 54.
 LaTeX Info: Redefining \nameref on input line 54.
-\c@lstlisting=\count342
+\c@lstlisting=\count340
 
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/dict/glossaries-dictionary-
 English.dict
@@ -1380,30 +1379,34 @@ File: graphics/UP_znak.pdf Graphic file (type pdf)
 <use graphics/UP_znak.pdf>
 Package pdftex.def Info: graphics/UP_znak.pdf used on input line 72.
 (pdftex.def)             Requested size: 101.59187pt x 101.59187pt.
-LaTeX Font Info:    Try loading font information for OT1+iwonalm on input line 
-72.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 72.
 
-(/usr/share/texlive/texmf-dist/tex/latex/iwona/ot1iwonalm.fd
-File: ot1iwonalm.fd 2005/10/05 v1.2 font definition file for OT1/iwonalm (MW)
+(/usr/share/texlive/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+iwonal on input line 7
-2.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 72.
 
-(/usr/share/texlive/texmf-dist/tex/latex/iwona/omliwonal.fd
-File: omliwonal.fd 2008/07/22 v0.995 font definition file for OML/iwonal (MW)
+(/usr/share/texlive/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+iwonal on input line 7
-2.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 72.
 
-(/usr/share/texlive/texmf-dist/tex/latex/iwona/omsiwonal.fd
-File: omsiwonal.fd 2008/07/22 v0.995 font definition file for OMS/iwonal (MW)
-)
-LaTeX Font Info:    Try loading font information for OMX+iwonal on input line 7
-2.
 
-(/usr/share/texlive/texmf-dist/tex/latex/iwona/omxiwonal.fd
-File: omxiwonal.fd 2008/07/22 v0.995 font definition file for OMX/iwonal (MW)
+(/usr/share/texlive/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 72.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 72.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 72.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 72.
 LaTeX Font Info:    Try loading font information for U+msa on input line 72.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1413,22 +1416,19 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 72.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 1292) in paragraph at lines 72--72
-[]|\T1/iwonal/m/n/12 Studijní obor: Apli-ko-vaná in-for-ma-tika,
- []
-
-[1
+) [1
 
 \openout3 = `test.ist'.
 
 {/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map} <./graphics/
-kititle-cz-nofont.pdf> <./graphics/UP_znak.pdf>] [2] [3
+kititle-cz-nofont.pdf> <./graphics/UP_znak.pdf>]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 72.
+ [2] [3
 
 ] [4
 
-] (./test.toc
-[5
+] (./test.toc [5
 
 
 ])
@@ -1439,7 +1439,8 @@ kititle-cz-nofont.pdf> <./graphics/UP_znak.pdf>] [2] [3
 \tf@lof=\write11
 \openout11 = `test.lof'.
 
- [7
+
+[7
 
 
 ] (./test.lot)
@@ -1449,8 +1450,8 @@ kititle-cz-nofont.pdf> <./graphics/UP_znak.pdf>] [2] [3
  [8
 
 ]
-Underfull \hbox (badness 5008) in paragraph at lines 81--82
-\T1/iwonal/m/n/12 slední sta-bilní já-dro s po-pi-so-va-nou im-ple-men-tací lze
+Underfull \hbox (badness 1205) in paragraph at lines 81--82
+\T1/lmr/m/n/12 Po-slední sta-bilní já-dro s po-pi-so-va-nou im-ple-men-tací lze
  stá-hout z ad-resy
  []
 
@@ -1463,14 +1464,30 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 ] [10
 
 ] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 134--135
-\T1/iwonal/m/n/12 který byl na-vr-ºen k °e-²ení mnoha pro-blém· 2.4 plá-no-va£e
-.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 128.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/lm/omslmr.fd
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 128.
+
+Underfull \hbox (badness 2158) in paragraph at lines 134--135
+\T1/lmr/m/n/12 O(1), který byl na-vr-ºen k °e-²ení mnoha pro-blém· 2.4 plá-no-v
+a£e.
  []
 
 [12
 
 ]
+Overfull \hbox (24.34352pt too wide) in paragraph at lines 143--144
+\T1/lmr/m/n/12 de-fi-no-vaná v []\T1/pcr/m/n/12 kernel/sched/core.c \T1/lmr/m/n
+/12 (v d°í-v¥j-²ích já-drech v []\T1/pcr/m/n/12 /kernel/sched.c\T1/lmr/m/n/12 )
+.
+ []
+
+
 Overfull \hbox (0.89864pt too wide) in paragraph at lines 245--245
 []\T1/pcr/m/n/12 if (prev->state && !(preempt_count() & PREEMPT_ACTIVE)) { 
  []
@@ -1478,13 +1495,18 @@ Overfull \hbox (0.89864pt too wide) in paragraph at lines 245--245
 [13
 
 ]
-Overfull \hbox (11.15535pt too wide) in paragraph at lines 303--305
-[]\T1/iwonal/m/n/12 Funkce []\T1/pcr/m/n/12 pick_next_task \T1/iwonal/m/n/12 je
- také im-ple-men-to-vána v []\T1/pcr/m/n/12 kernel/sched/core.c\T1/iwonal/m/n/1
-2 .
+Overfull \hbox (20.50307pt too wide) in paragraph at lines 303--305
+[]\T1/lmr/m/n/12 Funkce []\T1/pcr/m/n/12 pick_next_task \T1/lmr/m/n/12 je také 
+im-ple-men-to-vána v []\T1/pcr/m/n/12 kernel/sched/core.c\T1/lmr/m/n/12 .
  []
 
-<obrazky/kostraPlanovace.png, id=223, 413.545pt x 817.0525pt>
+
+Overfull \hbox (6.59651pt too wide) in paragraph at lines 309--310
+\T1/lmr/m/n/12 Jelikoº je v¥t-²ina úloh ob-slu-ho-vána po-mocí t°ídy []\T1/pcr/
+m/n/12 fair_sched_class\T1/lmr/m/n/12 , je zkratka
+ []
+
+<obrazky/kostraPlanovace.png, id=226, 413.545pt x 817.0525pt>
 File: obrazky/kostraPlanovace.png Graphic file (type png)
 
 <use obrazky/kostraPlanovace.png>
@@ -1496,37 +1518,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 332--335
  []
 
 
-Overfull \hbox (2.59712pt too wide) in paragraph at lines 341--343
-\T1/iwonal/m/n/12 vací t°íd¥ z £erveno-£erného stromu). Sníºí se hod-nota pro-m
-¥nné []\T1/pcr/m/n/12 nr_running
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 351--353
 
  []
 
 [16]
 Underfull \hbox (badness 10000) in paragraph at lines 376--377
-\T1/iwonal/m/n/12 P°eru²ení od £a-so-va£e pra-vi-deln¥ volá fuknci []\T1/pcr/m/
-n/12 scheduler_tick()
+\T1/lmr/m/n/12 P°eru²ení od £a-so-va£e pra-vi-deln¥ volá fuknci []\T1/pcr/m/n/1
+2 scheduler_tick()
  []
 
-[17] [18] <obrazky/idealProcessor.jpg, id=251, 361.35pt x 252.945pt>
+[17] [18] <obrazky/idealProcessor.jpg, id=254, 361.35pt x 252.945pt>
 File: obrazky/idealProcessor.jpg Graphic file (type jpg)
 
 <use obrazky/idealProcessor.jpg>
 Package pdftex.def Info: obrazky/idealProcessor.jpg used on input line 615.
 (pdftex.def)             Requested size: 361.34912pt x 252.94438pt.
 
-<obrazky/realProcessor.jpg, id=252, 416.30531pt x 283.0575pt>
+<obrazky/realProcessor.jpg, id=255, 416.30531pt x 283.0575pt>
 File: obrazky/realProcessor.jpg Graphic file (type jpg)
 
 <use obrazky/realProcessor.jpg>
 Package pdftex.def Info: obrazky/realProcessor.jpg used on input line 624.
 (pdftex.def)             Requested size: 353.86118pt x 240.59999pt.
  [19 <./obrazky/idealProcessor.jpg>]
-<obrazky/RBT_virtual_runtime.png, id=258, 338.48907pt x 216.07256pt>
+<obrazky/RBT_virtual_runtime.png, id=261, 338.48907pt x 216.07256pt>
 File: obrazky/RBT_virtual_runtime.png Graphic file (type png)
 
 <use obrazky/RBT_virtual_runtime.png>
@@ -1535,7 +1551,7 @@ Package pdftex.def Info: obrazky/RBT_virtual_runtime.png used on input line 636
 (pdftex.def)             Requested size: 338.48825pt x 216.07202pt.
  [20 <./obrazky/realProcessor.jpg>]
 [21 <./obrazky/RBT_virtual_runtime.png>]
-<obrazky/schedulerStructures.png, id=268, 405.01312pt x 327.47343pt>
+<obrazky/schedulerStructures.png, id=271, 405.01312pt x 327.47343pt>
 File: obrazky/schedulerStructures.png Graphic file (type png)
 
 <use obrazky/schedulerStructures.png>
@@ -1543,188 +1559,208 @@ Package pdftex.def Info: obrazky/schedulerStructures.png used on input line 697
 .
 (pdftex.def)             Requested size: 405.01212pt x 327.47264pt.
  [22]
-Overfull \hbox (5.17975pt too wide) in paragraph at lines 706--707
-\T1/iwonal/m/n/12 tu-rou, která ne-ob-sa-huje nic víc neº od-kaz na po-tomka a 
-barvu p°edka. En-tita []\T1/pcr/m/n/12 rb_node
+Overfull \hbox (7.61417pt too wide) in paragraph at lines 706--707
+\T1/lmr/m/n/12 Kaºdý uzel stromu je re-pre-zen-to-ván []\T1/pcr/m/n/12 rb_node 
+\T1/lmr/m/n/12 (z []\T1/pcr/m/n/12 /include/linux/rbtree.h\T1/lmr/m/n/12 )
  []
 
-[23 <./obrazky/schedulerStructures.png>] [24] [25] [26] [27
+
+Overfull \hbox (7.07741pt too wide) in paragraph at lines 706--707
+\T1/lmr/m/n/12 od-kaz a mnoho r·z-ných sta-tis-tic-kých dat. Nej-d·-le-ºi-t¥j²í
+ po-loº-kou []\T1/pcr/m/n/12 sched_entity
+ []
+
+[23 <./obrazky/schedulerStructures.png>] [24]
+Overfull \hbox (9.63516pt too wide) in paragraph at lines 933--934
+\T1/lmr/m/n/12 fronty b¥-ºí-cích úloh, nebo ak-ti-vo-va-ných kdyº se pro-bu-dil
+y v []\T1/pcr/m/n/12 try_to_wake_up()\T1/lmr/m/n/12 .
+ []
+
+
+Overfull \hbox (39.73747pt too wide) in paragraph at lines 933--934
+\T1/lmr/m/n/12 Ve fair plá-no-vací t°íd¥ jsou vo-lány []\T1/pcr/m/n/12 equeue_t
+ask_fair() \T1/lmr/m/n/12 a []\T1/pcr/m/n/12 dequeue_task_fair()
+ []
+
+
+Overfull \hbox (3.72124pt too wide) in paragraph at lines 1015--1016
+[]\T1/lmr/m/n/12 Funkce []\T1/pcr/m/n/12 schedule() \T1/lmr/m/n/12 volá funkci 
+[]\T1/pcr/m/n/12 pick_next_task() \T1/lmr/m/n/12 ur-£ité plá-no-vací t°ídy
+ []
+
+[25] [26] [27
 
 ]
-<obrazky/domenyAskupiny.jpeg, id=300, 729.47531pt x 365.86688pt>
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 1248.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 1248.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 1248.
+
+<obrazky/domenyAskupiny.jpeg, id=303, 729.47531pt x 365.86688pt>
 File: obrazky/domenyAskupiny.jpeg Graphic file (type jpg)
 
 <use obrazky/domenyAskupiny.jpeg>
-Package pdftex.def Info: obrazky/domenyAskupiny.jpeg used on input line 1250.
+Package pdftex.def Info: obrazky/domenyAskupiny.jpeg used on input line 1251.
 (pdftex.def)             Requested size: 386.62007pt x 193.90852pt.
- [28 <./obrazky/domenyAskupiny.jpeg>]
-Overfull \hbox (25.09851pt too wide) in paragraph at lines 1271--1272
-\T1/iwonal/m/n/12 vání. Jedná se o []\T1/pcr/m/n/12 sched_domain \T1/iwonal/m/n
-/12 ([]\T1/pcr/m/n/12 include/linux/sched.h\T1/iwonal/m/n/12 ) a pak []\T1/pcr/
-m/n/12 sched_group
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1366--1367
-\T1/iwonal/m/n/12 funkci []\T1/pcr/m/n/12 scheduler_tick() \T1/iwonal/m/n/12 ([
-]\T1/pcr/m/n/12 kernel/sched/core.c\T1/iwonal/m/n/12 ) vo-lá-ním
- []
-
-[29]
-Overfull \hbox (15.29863pt too wide) in paragraph at lines 1390--1390
+ [28 <./obrazky/domenyAskupiny.jpeg>] [29]
+Overfull \hbox (15.29863pt too wide) in paragraph at lines 1391--1391
 []\T1/pcr/m/n/12 static void run_rebalance_domains(struct softirq_action *h)[] 
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1402--1403
-[]\T1/pcr/m/n/12 load_balance()\T1/iwonal/m/n/12 , po-kud má daná do-ména na-st
-a-ve-nou pro-m¥n-nou
- []
-
-
-Overfull \hbox (6.30873pt too wide) in paragraph at lines 1504--1505
-[]\T1/iwonal/m/n/12 Funkce []\T1/pcr/m/n/12 load_balance() \T1/iwonal/m/n/12 vo
-lá funkci []\T1/pcr/m/n/12 find_busiest_group()\T1/iwonal/m/n/12 , která hledá
+Underfull \hbox (badness 10000) in paragraph at lines 1403--1404
+[]\T1/pcr/m/n/12 load_balance()\T1/lmr/m/n/12 , po-kud má daná do-ména na-sta-v
+e-nou pro-m¥n-nou
  []
 
 [30]
-Overfull \hbox (4.06778pt too wide) in paragraph at lines 1510--1511
-\T1/iwonal/m/n/12 pra-vi-dlech a není-li na-le-zena nej-ru²-n¥j²í sku-pina, []\
-T1/pcr/m/n/12 find_busiest_group() \T1/iwonal/m/n/12 hledá
+Overfull \hbox (7.88472pt too wide) in paragraph at lines 1511--1512
+\T1/lmr/m/n/12 vých pra-vi-dlech a není-li na-le-zena nej-ru²-n¥j²í sku-pina, [
+]\T1/pcr/m/n/12 find_busiest_group()
  []
 
 
-Overfull \hbox (6.41182pt too wide) in paragraph at lines 1737--1738
-[][]\T1/pcr/m/n/12 SD_BALANCE_EXEC \T1/iwonal/m/n/12 je ná-v¥²tí po-u-ºí-vané f
-unkci []\T1/pcr/m/n/12 sched_exec()\T1/iwonal/m/n/12 . Tato funkce
+Overfull \hbox (13.87775pt too wide) in paragraph at lines 1739--1740
+[][]\T1/pcr/m/n/12 SD_BALANCE_FORK \T1/lmr/m/n/12 je ná-v¥²tí po-u-ºí-vané ve f
+unkci []\T1/pcr/m/n/12 wake_up_new_task()\T1/lmr/m/n/12 .
  []
 
-
-Overfull \hbox (5.38391pt too wide) in paragraph at lines 1738--1739
-[][]\T1/pcr/m/n/12 SD_BALANCE_FORK \T1/iwonal/m/n/12 je ná-v¥²tí po-u-ºí-vané v
-e funkci []\T1/pcr/m/n/12 wake_up_new_task()\T1/iwonal/m/n/12 .
- []
-
-[31] <obrazky/numa-scheme.jpeg, id=324, 498.36188pt x 338.76563pt>
+[31] [32] <obrazky/numa-scheme.jpeg, id=333, 498.36188pt x 338.76563pt>
 File: obrazky/numa-scheme.jpeg Graphic file (type jpg)
 
 <use obrazky/numa-scheme.jpeg>
-Package pdftex.def Info: obrazky/numa-scheme.jpeg used on input line 1758.
+Package pdftex.def Info: obrazky/numa-scheme.jpeg used on input line 1759.
 (pdftex.def)             Requested size: 388.7207pt x 264.23611pt.
- [32 <./obrazky/numa-scheme.jpeg>]
-Overfull \hbox (0.89864pt too wide) in paragraph at lines 1774--1774
+ [33 <./obrazky/numa-scheme.jpeg>]
+Overfull \hbox (0.89864pt too wide) in paragraph at lines 1775--1775
 []\T1/pcr/m/n/12 node 1 cpus: 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29[] 
  []
 
 
-Overfull \hbox (0.89864pt too wide) in paragraph at lines 1777--1777
+Overfull \hbox (0.89864pt too wide) in paragraph at lines 1778--1778
 []\T1/pcr/m/n/12 node 2 cpus: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44[] 
  []
 
 
-Overfull \hbox (0.89864pt too wide) in paragraph at lines 1780--1780
+Overfull \hbox (0.89864pt too wide) in paragraph at lines 1781--1781
 []\T1/pcr/m/n/12 node 3 cpus: 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59[] 
  []
 
-<obrazky/numa-scheme-big-system.jpeg, id=331, 543.4999pt x 314.15326pt>
+<obrazky/numa-scheme-big-system.jpeg, id=340, 543.4999pt x 314.15326pt>
 File: obrazky/numa-scheme-big-system.jpeg Graphic file (type jpg)
 
 <use obrazky/numa-scheme-big-system.jpeg>
 Package pdftex.def Info: obrazky/numa-scheme-big-system.jpeg used on input line
- 1804.
+ 1805.
 (pdftex.def)             Requested size: 380.44733pt x 219.90578pt.
- [33] [34 <./obrazky/numa-scheme-big-system.jpeg>] [35] [36]
-Overfull \hbox (23.86641pt too wide) in paragraph at lines 1921--1923
-\T1/iwonal/m/n/12 hi-e-rar-chicky do-mény a vy-va-ºuje sku-piny v do-mén¥ po-mo
-cí vo-lání funkce []\T1/pcr/m/n/12 load_balance\T1/iwonal/m/n/12 .
+ [34] [35 <./obrazky/numa-scheme-big-system.jpeg>] [36] [37]
+Overfull \hbox (1.83607pt too wide) in paragraph at lines 1922--1924
+[]\T1/pcr/m/n/12 run_rebalance_domains \T1/lmr/m/n/12 volá funkci []\T1/pcr/m/n
+/12 rebalance_domains\T1/lmr/m/n/12 , která pro-chází
  []
 
-[37]
-Underfull \hbox (badness 10000) in paragraph at lines 2093--2094
 
+Overfull \hbox (44.15387pt too wide) in paragraph at lines 1922--1924
+\T1/lmr/m/n/12 hi-e-rar-chicky do-mény a vy-va-ºuje sku-piny v do-mén¥ po-mocí 
+vo-lání funkce []\T1/pcr/m/n/12 load_balance\T1/lmr/m/n/12 .
  []
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 2097--2098
+Underfull \hbox (badness 10000) in paragraph at lines 2094--2095
 
  []
 
 [39]
+Underfull \hbox (badness 10000) in paragraph at lines 2098--2099
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2139--2140
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[40]
 Underfull \hbox (badness 10000) in paragraph at lines 2212--2214
 
  []
 
-[40] [41]
+[41] [42]
 Underfull \hbox (badness 10000) in paragraph at lines 2244--2245
 
  []
 
-[42
+[43
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 2251--2252
 
  []
 
-[43]
+[44]
 Underfull \hbox (badness 10000) in paragraph at lines 2324--2326
 
  []
 
-[44]
+
 Underfull \hbox (badness 10000) in paragraph at lines 2376--2377
 
  []
 
-[45] <obrazky/lsTOPO-brickland.png, id=419, 2127.95pt x 2334.7225pt>
+[45] <obrazky/lsTOPO-brickland.png, id=424, 2127.95pt x 2334.7225pt>
 File: obrazky/lsTOPO-brickland.png Graphic file (type png)
 
 <use obrazky/lsTOPO-brickland.png>
 Package pdftex.def Info: obrazky/lsTOPO-brickland.png used on input line 2398.
 (pdftex.def)             Requested size: 383.01448pt x 420.23192pt.
- [46 <./obrazky/lsTOPO-brickland.png>]
+ [46]
 Underfull \hbox (badness 10000) in paragraph at lines 2408--2410
 
  []
 
-<obrazky/LinpackBaseChart.png, id=426, 1806.75pt x 1204.5pt>
+<obrazky/LinpackBaseChart.png, id=431, 1806.75pt x 1204.5pt>
 File: obrazky/LinpackBaseChart.png Graphic file (type png)
 
 <use obrazky/LinpackBaseChart.png>
 Package pdftex.def Info: obrazky/LinpackBaseChart.png used on input line 2416.
 (pdftex.def)             Requested size: 314.36646pt x 209.57764pt.
 
-<obrazky/LinpackTargetChart.png, id=427, 1806.75pt x 1204.5pt>
+<obrazky/LinpackTargetChart.png, id=432, 1806.75pt x 1204.5pt>
 File: obrazky/LinpackTargetChart.png Graphic file (type png)
 
 <use obrazky/LinpackTargetChart.png>
 Package pdftex.def Info: obrazky/LinpackTargetChart.png used on input line 2423
 .
 (pdftex.def)             Requested size: 314.36646pt x 209.57764pt.
- [47 <./obrazky/LinpackBaseChart.png> <./obrazky/LinpackTargetChart.png>]
-<obrazky/LinpackSumChart.png, id=435, 1806.75pt x 1204.5pt>
+
+<obrazky/LinpackSumChart.png, id=434, 1806.75pt x 1204.5pt>
 File: obrazky/LinpackSumChart.png Graphic file (type png)
 
 <use obrazky/LinpackSumChart.png>
 Package pdftex.def Info: obrazky/LinpackSumChart.png used on input line 2434.
 (pdftex.def)             Requested size: 298.10089pt x 198.73392pt.
 
-<obrazky/timeWaitingOutOfCPU.png, id=436, 903.375pt x 602.25pt>
+<obrazky/timeWaitingOutOfCPU.png, id=435, 903.375pt x 602.25pt>
 File: obrazky/timeWaitingOutOfCPU.png Graphic file (type png)
 
 <use obrazky/timeWaitingOutOfCPU.png>
 Package pdftex.def Info: obrazky/timeWaitingOutOfCPU.png used on input line 244
 3.
 (pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
- [48 <./obrazky/LinpackSumChart.png> <./obrazky/timeWaitingOutOfCPU.png>]
-<obrazky/totalTime.png, id=445, 903.375pt x 602.25pt>
+
+<obrazky/totalTime.png, id=438, 903.375pt x 602.25pt>
 File: obrazky/totalTime.png Graphic file (type png)
 
 <use obrazky/totalTime.png>
 Package pdftex.def Info: obrazky/totalTime.png used on input line 2452.
 (pdftex.def)             Requested size: 289.0859pt x 192.72392pt.
- [49 <./obrazky/totalTime.png>]
+ [47]
 Underfull \hbox (badness 10000) in paragraph at lines 2484--2486
 
  []
@@ -1739,12 +1775,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 2490--2492
 
  []
 
-[50]
+[48]
 Underfull \hbox (badness 10000) in paragraph at lines 2501--2503
 
  []
 
-<obrazky/PerfBenchResult.png, id=462, 1284.8pt x 722.7pt>
+<obrazky/PerfBenchResult.png, id=453, 1284.8pt x 722.7pt>
 File: obrazky/PerfBenchResult.png Graphic file (type png)
 
 <use obrazky/PerfBenchResult.png>
@@ -1760,12 +1796,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 2513--2515
 
  []
 
-[51 <./obrazky/PerfBenchResult.png>]
+[49]
 Underfull \hbox (badness 10000) in paragraph at lines 2517--2519
 
  []
 
-[52] [53
+[50] [51] [52] [53 <./obrazky/lsTOPO-brickland.png>] [54 <./obrazky/LinpackBase
+Chart.png> <./obrazky/LinpackTargetChart.png>] [55 <./obrazky/LinpackSumChart.p
+ng> <./obrazky/timeWaitingOutOfCPU.png>] [56 <./obrazky/totalTime.png>]
+[57 <./obrazky/PerfBenchResult.png>] [58
 
 ]
 No file test.ind.
@@ -1780,7 +1819,7 @@ This document will not have a glossary.
 
 
 AED: lastpage setting LastPage
-[54
+[59
 
 
 
@@ -1795,9 +1834,6 @@ Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2567.
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                test
 (biblatex)                and rerun LaTeX afterwards.
@@ -1808,24 +1844,30 @@ Package logreq Info: Writing requests to 'test.run.xml'.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2567.
  ) 
 Here is how much of TeX's memory you used:
- 23978 strings out of 495000
- 358972 string characters out of 6180380
- 884952 words of memory out of 5000000
- 26569 multiletter control sequences out of 15000+600000
- 86520 words of font info for 79 fonts, out of 8000000 for 9000
+ 23857 strings out of 495000
+ 357486 string characters out of 6180380
+ 894602 words of memory out of 5000000
+ 26420 multiletter control sequences out of 15000+600000
+ 84090 words of font info for 74 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  62i,9n,60p,2602b,1852s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/iwona/mi-iwona.enc}{/usr/share
-/texlive/texmf-dist/fonts/enc/dvips/iwona/sy-iwona.enc}{/usr/share/texlive/texm
-f-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvi
-ps/iwona/ec-iwona.enc}</usr/share/texlive/texmf-dist/fonts/type1/nowacki/iwona/
-iwonal.pfb></usr/share/texlive/texmf-dist/fonts/type1/nowacki/iwona/iwonali.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/nowacki/iwona/iwonam.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on test.pdf (54 pages, 1191217 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texli
+ve/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texlive/texmf-dist/f
+onts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/
+base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/lm/lmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/lm/lmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr17.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/lm/lmri12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/l
+m/lmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+
+Output written on test.pdf (59 pages, 1341613 bytes).
 PDF statistics:
- 704 PDF objects out of 1000 (max. 8388607)
- 611 compressed objects within 7 object streams
- 163 named destinations out of 1000 (max. 500000)
+ 749 PDF objects out of 1000 (max. 8388607)
+ 644 compressed objects within 7 object streams
+ 168 named destinations out of 1000 (max. 500000)
  502 words of extra memory for PDF output out of 10000 (max. 10000000)
 
